@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController"
+      spacing="20" alignment="CENTER" style="-fx-padding: 20;" styleClass="vbox"
+      stylesheets="@styles.css">
+
+    <!-- Button for Admin -->
+    <Button text="Admin" fx:id="adminButton" minWidth="200" minHeight="60" style="-fx-font-size: 18px; -fx-padding: 10;"/>
+
+    <!-- Button for Operator -->
+    <Button text="Operator" fx:id="operatorButton" minWidth="200" minHeight="60" style="-fx-font-size: 18px; -fx-padding: 10;"/>
+
+    <!-- Button for QA -->
+    <Button text="QA" fx:id="qaButton" minWidth="200" minHeight="60" style="-fx-font-size: 18px; -fx-padding: 10;"/>
+</VBox>
