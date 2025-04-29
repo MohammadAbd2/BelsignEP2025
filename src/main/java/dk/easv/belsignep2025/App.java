@@ -14,6 +14,7 @@ public class App extends Application {
         primaryStage.setTitle("Login Simulation");
         primaryStage.setScene(scene);
         primaryStage.show();
+        primaryStage.initStyle(StageStyle.UNDECORATED);
     }
 
     public static void main(String[] args) {
