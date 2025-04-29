@@ -12,29 +12,38 @@
 
 .title-bar {
     -fx-background-color: #004B88;
-    -fx-padding: 0 8;
-    -fx-alignment: CENTER_LEFT;
 }
 
 .title-text {
     -fx-text-fill: white;
     -fx-font-size: 12px;
     -fx-font-family: Helvetica;
+    -fx-alignment: CENTER_LEFT;
 }
 
 .title-button {
     -fx-background-color: transparent;
+    -fx-font-size: 12px;
     -fx-text-fill: white;
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
-    -fx-padding: 0 8;
+    -fx-padding: 0;
+    -fx-alignment: CENTER;
+    -fx-border-color: transparent;
     -fx-cursor: hand;
+    -fx-pref-width: 13;
+    -fx-pref-height: 19;
+    -fx-min-width: 13;
+    -fx-min-height: 19;
+    -fx-max-width: 13;
+    -fx-max-height: 19;
 }
+
+
+
 .title-button:hover {
     -fx-background-color: #0066AA;
 }
 
-.button {
+.button-123 {
     -fx-font-size: 24px;
     -fx-min-width: 245;
     -fx-min-height: 45;

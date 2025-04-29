@@ -2,6 +2,9 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Region?>
 
 <VBox xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="controllers.LoginController"
@@ -9,15 +12,18 @@
       stylesheets="@styles.css"
       styleClass="vbox">
 
-    <HBox fx:id="titleBar" styleClass="title-bar" prefHeight="22">
+    <HBox fx:id="titleBar" styleClass="title-bar"
+          prefHeight="22" alignment="TOP_CENTER"
+          spacing="4" style="-fx-padding: 0 6 0 10;">
+
         <Label text="QC_Belsign" styleClass="title-text" />
-        <Region HBox.hgrow="ALWAYS" />
+        <Region fx:id="spacer" HBox.hgrow="ALWAYS"/>
         <Button fx:id="minimizeButton" text="—" styleClass="title-button"/>
         <Button fx:id="closeButton" text="✕" styleClass="title-button"/>
     </HBox>
 
     <!-- Buttons -->
-    <Button text="Admin" fx:id="adminButton" minWidth="200" minHeight="60" style="-fx-font-size: 18px; -fx-padding: 10;"/>
-    <Button text="Operator" fx:id="operatorButton" minWidth="200" minHeight="60" style="-fx-font-size: 18px; -fx-padding: 10;"/>
-    <Button text="QA" fx:id="qaButton" minWidth="200" minHeight="60" style="-fx-font-size: 18px; -fx-padding: 10;"/>
+    <Button text="Admin" fx:id="adminButton" minWidth="200" minHeight="60" styleClass="button"/>
+    <Button text="Operator" fx:id="operatorButton" minWidth="200" minHeight="60" styleClass="button"/>
+    <Button text="QA" fx:id="qaButton" minWidth="200" minHeight="60" styleClass="button"/>
 </VBox>
