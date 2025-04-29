@@ -10,11 +10,14 @@
       fx:controller="controllers.LoginController"
       spacing="20" alignment="CENTER"
       stylesheets="@styles.css"
-      styleClass="vbox">
+      styleClass="vbox"
+      style="-fx-padding: 0;"
+      fillWidth="true">
 
     <HBox fx:id="titleBar" styleClass="title-bar"
           prefHeight="22" alignment="TOP_CENTER"
-          spacing="4" style="-fx-padding: 0 6 0 10;">
+          spacing="4" style="-fx-padding: 3 3 0 3;"
+          VBox.vgrow="NEVER">
 
         <Label text="QC_Belsign" styleClass="title-text" />
         <Region fx:id="spacer" HBox.hgrow="ALWAYS"/>
@@ -23,7 +26,7 @@
     </HBox>
 
     <!-- Buttons -->
-    <Button text="Admin" fx:id="adminButton" minWidth="200" minHeight="60" styleClass="button"/>
-    <Button text="Operator" fx:id="operatorButton" minWidth="200" minHeight="60" styleClass="button"/>
-    <Button text="QA" fx:id="qaButton" minWidth="200" minHeight="60" styleClass="button"/>
+    <Button text="Admin" fx:id="adminButton" minWidth="200" minHeight="60" styleClass="login-button"/>
+    <Button text="Operator" fx:id="operatorButton" minWidth="200" minHeight="60" styleClass="login-button"/>
+    <Button text="QA" fx:id="qaButton" minWidth="200" minHeight="60" styleClass="login-button"/>
 </VBox>
