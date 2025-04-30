@@ -11,8 +11,7 @@
       spacing="20" alignment="CENTER"
       stylesheets="@styles.css"
       styleClass="vbox"
-      style="-fx-padding: 0;"
-      fillWidth="true">
+      style="-fx-padding: 0;">
 
     <HBox fx:id="titleBar" styleClass="title-bar"
           prefHeight="22" alignment="TOP_CENTER"
@@ -25,8 +24,12 @@
         <Button fx:id="closeButton" text="✕" styleClass="title-button"/>
     </HBox>
 
-    <!-- Buttons -->
-    <Button text="Admin" fx:id="adminButton" minWidth="200" minHeight="60" styleClass="login-button"/>
-    <Button text="Operator" fx:id="operatorButton" minWidth="200" minHeight="60" styleClass="login-button"/>
-    <Button text="QA" fx:id="qaButton" minWidth="200" minHeight="60" styleClass="login-button"/>
+    <HBox VBox.vgrow="ALWAYS" alignment="CENTER">
+        <VBox alignment="CENTER" spacing="32">
+            <!-- Buttons -->
+            <Button text="Admin" fx:id="adminButton" minWidth="200" minHeight="60" styleClass="login-button"/>
+            <Button text="Operator" fx:id="operatorButton" minWidth="200" minHeight="60" styleClass="login-button"/>
+            <Button text="QA" fx:id="qaButton" minWidth="200" minHeight="60" styleClass="login-button"/>
+        </VBox>
+    </HBox>
 </VBox>

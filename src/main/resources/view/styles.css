@@ -1,6 +1,6 @@
 
 .root {
-    -fx-padding: 20;
+    -fx-padding: 0;
     -fx-alignment: center;
 }
 
@@ -8,6 +8,7 @@
     -fx-pref-width: 600;
     -fx-pref-height: 427;
     -fx-background-color: #F2F2F2;
+    -fx-padding: 0;
 }
 
 .title-bar {
@@ -31,10 +32,10 @@
     -fx-cursor: hand;
     -fx-pref-width: 13;
     -fx-pref-height: 19;
-    -fx-min-width: 13;
+    -fx-min-width: 20;
     -fx-min-height: 19;
-    -fx-max-width: 13;
-    -fx-max-height: 19;
+    -fx-max-width: 40;
+    -fx-max-height: 40;
 }
 
 
