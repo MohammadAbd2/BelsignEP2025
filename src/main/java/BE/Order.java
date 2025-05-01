@@ -15,11 +15,17 @@ public class Order {
         this.status = status;
     }
 
+    public Order(int id, String mohammad) {
+    }
+
     public int getId() {
         return id;
     }
     public String getOrderNumber() {
         return orderNumber;
+    }
+    public int getOrderId(){
+        return id;
     }
     public String getImage() {
         return image;

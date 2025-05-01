@@ -22,6 +22,7 @@ public class App extends Application {
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setScene(scene);
         primaryStage.show();
+        logger.displayOrders();
     }
 
     public static void main(String[] args) {
