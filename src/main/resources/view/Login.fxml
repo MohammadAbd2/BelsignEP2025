@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.Region?>
 
 <VBox xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="controllers.LoginController"
+      fx:controller="GUI.Controller.LoginController"
       spacing="20" alignment="CENTER"
-      stylesheets="@styles.css"
+      stylesheets="@../Css/styles.css"
       styleClass="vbox"
       style="-fx-padding: 0;">
 

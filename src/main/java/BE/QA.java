@@ -1,4 +1,4 @@
-package be;
+package BE;
 
 public class QA {
     private int id;

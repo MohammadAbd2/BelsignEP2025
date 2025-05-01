@@ -1,10 +1,10 @@
-package be;
+package BE;
 
-public class Operator {
+public class Admin {
     private int id;
     private String name;
 
-    public Operator(int id, String name) {
+    public Admin(int id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -25,6 +25,6 @@ public class Operator {
 
     @Override
     public String toString() {
-        return "Operator [id=" + id + ", name=" + name + "]";
+        return "Admin [id=" + id + ", name=" + name + "]";
     }
 }

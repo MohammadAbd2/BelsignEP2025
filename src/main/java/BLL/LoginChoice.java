@@ -1,8 +1,8 @@
-package bll;
+package BLL;
 
-import be.Admin;
-import be.Operator;
-import be.QA;
+import BE.Admin;
+import BE.Operator;
+import BE.QA;
 
 public class LoginChoice {
 
