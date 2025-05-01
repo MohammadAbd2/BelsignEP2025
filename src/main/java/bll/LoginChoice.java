@@ -6,9 +6,9 @@ import be.QA;
 
 public class LoginChoice {
 
-    private final Admin admin = new Admin();      // Represents admin role
-    private final Operator operator = new Operator();  // Represents operator role
-    private final QA qa = new QA();                // Represents qc role
+    private final Admin admin = new Admin(1 , "Admin User");      // Represents admin role
+    private final Operator operator = new Operator(2 , "Operator User");  // Represents operator role
+    private final QA qa = new QA(3 , "QA User");                // Represents qc role
 
     public void adminLogin() {
         System.out.println("Logged in as Admin.");
