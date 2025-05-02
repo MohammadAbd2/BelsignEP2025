@@ -1,13 +1,14 @@
 package GUI.Controller;
 
-import BLL.LoginChoice;
+
+import GUI.Model.MLLoginController;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class LoginController {
-    private final LoginChoice loginChoice = new LoginChoice();
+    private final MLLoginController loginChoice = new MLLoginController();
 
     @FXML private Button adminButton;
 
