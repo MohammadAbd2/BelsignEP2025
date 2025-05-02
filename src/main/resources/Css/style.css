@@ -1,0 +1,418 @@
+/*
+---------------
+loginPage
+---------------
+*/
+
+
+/* General Styles */
+* {
+    -fx-text-fill: #FFFFFF;  /* Set default text color for all elements */
+}
+
+/* Header Styles */
+#Header {
+    -fx-background-image: url("/img/background_image.png");  /* Background image for the Header */
+}
+
+#navbar *:hover {
+    -fx-cursor: pointer;
+}
+
+
+
+#navbar Button {
+    -fx-padding : 25px;
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: x-large;
+}
+
+#navbar *:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.25);
+    -fx-cursor: hand !important;
+}
+
+
+/* Profile Picture Styles */
+#profile_pic {
+    -fx-background-radius: 50%;  /* Circular background */
+    -fx-border-radius: 50%;  /* Circular border */
+    -fx-border-color: white;  /* White border color */
+    -fx-border-width: 2px;  /* Border width */
+}
+#profileImagePane{
+    -fx-padding: 14px 0px 0px 15px;
+    -fx-background-color: null !important;
+}
+TextField{
+    -fx-text-fill: rgba(39, 36, 36, 0.82);
+}
+PasswordField{
+    -fx-text-fill: rgba(39, 36, 36, 0.82);
+}
+.scroll-pane {
+    -fx-background-color: linear-gradient(to bottom, rgba(229, 188, 54, 0.9), #0d82ad);
+    -fx-fit-to-width: true;
+    -fx-fit-to-height: false;
+    -fx-hbar-policy: never;
+    -fx-vbar-policy: always;
+}
+
+#EventTitle{
+    -fx-fit-to-width: true;
+    -fx-min-width: 100%;
+}
+
+/* Style the viewport inside the ScrollPane */
+.scroll-pane .viewport {
+    -fx-background-color: linear-gradient(
+            from 0% 0% to 100% 0%,
+            #17A69D 18%,
+            #006AC6 54%,
+            #005CAC 69%,
+            #6B4ECA 100%
+    );
+    -fx-background-radius: 10px; /* Rounded corners for viewport */
+
+}
+
+
+#ticketContasiner{
+    -fx-border-width: 1px;
+    -fx-border-color: linear-gradient(
+            from 0% 0% to 100% 0%,
+            #dcd413 18%,
+            #005CAC 54%,
+            #006AC6 69%,
+            #17A69D 100%
+    );;
+    -fx-border-radius: 16px;
+    -fx-padding: 0px 0px 0px 150px !important;
+    -fx-background-color: linear-gradient(
+            from 0% 0% to 100% 0%,
+            #17A69D 18%,
+            #006AC6 54%,
+            #005CAC 69%,
+            #6B4ECA 100%
+    );
+
+}
+
+/* Customize the scrollbar track */
+.scroll-pane .scroll-bar:vertical {
+    -fx-background-color: transparent;
+}
+
+/* Style the scrollbar thumb (the moving part) */
+.scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: rgba(100, 100, 100, 0.6); /* Semi-transparent scrollbar */
+    -fx-background-radius: 6px;
+}
+
+.scroll-pane .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: linear-gradient(to bottom, #e5bc36, #0d82ad);
+}
+
+/* Hide the horizontal scrollbar completely */
+.scroll-pane .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-height: 0;
+}
+
+/* Gradient Background */
+.root {
+    -fx-background-color: linear-gradient(to right, #87CEFA, #6A0DAD);
+    -fx-border-color: rgba(255, 255, 255, 0.2);
+    -fx-border-width: 0px;
+    -fx-border-radius: 15px;
+}
+
+.input-field {
+    -fx-background-color: rgba(255, 255, 255, 0.8);
+    -fx-text-fill: #333;
+    -fx-font-size: 14px;
+    -fx-padding: 8px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+.ticket-area {
+    -fx-background-color: rgba(245, 245, 245, 0.9);
+    -fx-text-fill: #000;
+    -fx-font-size: 13px;
+    -fx-padding: 10px;
+    -fx-border-color: #aaa;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+}
+
+.buy-button {
+    -fx-background-color: linear-gradient(to bottom, #00BFFF, #1E90FF);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0.5, 0, 1);
+}
+
+.buy-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #1E90FF, #00BFFF);
+}
+
+/*
+---------------
+loginPage / createAccPage
+---------------
+*/
+
+#loginPageContent Label {
+    -fx-text-fill: rgba(229, 188, 54, 0.9) !important;
+}
+
+
+.text-field, .password-field {
+    -fx-background-radius: 10;
+    -fx-background-color: white;
+    -fx-padding: 8;
+    -fx-font-size: 14px;
+    -fx-border-color: transparent;
+}
+
+.login-button {
+    -fx-background-color: #333333;
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-padding: 10 20 10 20;
+    -fx-background-radius: 0;
+    -fx-border-color: transparent;
+}
+
+.hyperlink {
+    -fx-text-fill: white !important;
+    -fx-font-size: 13px;
+}
+
+.hyperlink:hover {
+    -fx-text-fill: rgba(39, 36, 36, 0.82) !important;
+    -fx-text-decoration: none !important;
+}
+
+
+/*
+---------------
+eventsContainer
+---------------
+*/
+
+VBox Button {
+    -fx-background-radius: 10;
+    -fx-background-color: #F5F5F5;
+    -fx-text-fill: #757575;
+}
+
+VBox Button:hover {
+    -fx-cursor: hand;
+}
+
+
+#eventsContainer {
+    -fx-background-color: #333333;
+}
+#eventsContainer VBox{
+    -fx-background-color: transparent;
+}
+#searchBox {
+    -fx-background-color: #333333;
+}
+
+/*
+---------------
+eventsPage
+---------------
+*/
+
+#rootPane {
+    -fx-background-color: #0077DF;
+}
+
+#RegularTicketPane {
+    -fx-background-color: #000000;
+}
+#RegularBox {
+    -fx-background-color: #3C557B;
+}
+
+#RegularTxtArea {
+    -fx-control-inner-background: #3C557B;
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+
+}
+
+#VipBox {
+    -fx-background-color: #00192F;
+    -fx-border-color: #E5C100;
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+
+}
+
+
+
+#VipTxtArea {
+    -fx-control-inner-background: #00192F;
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFD700;
+}
+
+#heartLabel {
+    -fx-font-size: 20px;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+}
+
+#eventNameContainer {
+    -fx-background-color: #0077DF;
+    -fx-text-fill: white;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+#eventInfoContainer {
+    -fx-background-color: #0077DF;
+    -fx-text-fill: white;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+
+#eventAboutContainer {
+    -fx-control-inner-background: #0077DF;
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-border-color: #0077DF;
+    -fx-border-width: 2px;
+}
+
+
+#vipButton {
+    -fx-background-color: #2C2C2C;
+    -fx-text-fill: #FFD700;
+    -fx-background-radius: 8px;
+
+    -fx-cursor: hand;
+}
+
+#RegularButton {
+    -fx-background-color: #2C2C2C;
+    -fx-background-radius: 8px;
+
+    -fx-cursor: hand;
+}
+.TicketFields{
+    -fx-background-color: linear-gradient(
+            from 0% 0% to 100% 0%,
+            rgba(23, 166, 157, 0.3) 18%,
+            rgba(0, 106, 198, 0.3) 54%,
+            rgba(0, 92, 172, 0.3) 69%,
+            rgba(107, 78, 202, 0.3) 100%
+    );
+    -fx-border-radius: 16px;
+    -fx-border-color:  linear-gradient(
+            from 0% 0% to 100% 0%,
+            rgba(229, 133, 54, 0.9) 18%,
+            rgba(213, 179, 24, 0.83) 54%,
+            rgba(106, 210, 8, 0.71) 69%,
+            rgb(9, 201, 161) 100%
+    );
+    -fx-font-size: 16px !important;
+    -fx-border-width: 1px;
+}
+#eventNameField{
+    -fx-border-width: 2px 1px 1px 1px !important;
+}
+#qrcode{
+    -fx-border-width: 1px 1px 2px 1px !important;
+}
+
+.TicketButtons {
+    -fx-min-width: 130px !important;
+    -fx-min-height: 40px !important;
+    -fx-background-color: linear-gradient(
+            from 70% 56% to 100% 17% ,
+            #DF6800,
+            #ECB07E,
+            #40DAFD);
+    -fx-text-fill: white;
+
+}
+
+/*
+---------------
+General Ticket Style
+---------------
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro:wght@400;700&display=swap');
+
+/* Main ticket container */
+.ticket {
+    -fx-background-color: linear-gradient(
+            from 0% 0% to 100% 0%,
+            #17A69D 18%,
+            #006AC6 54%,
+            #005CAC 69%,
+            #6B4ECA 100%
+    ) ;
+    -fx-background-radius: 16;
+    -fx-padding: 20;
+    -fx-pref-width: 440px;
+    -fx-pref-height: 200px;
+    -fx-font-family: 'Source Serif Pro';
+    -fx-border-width: 1px;
+    -fx-border-color: black;
+}
+
+/* Global label styles */
+.title, .type, .datetime, .location, .notes, .guidance {
+    -fx-text-fill: #100808C6;
+    -fx-font-family: 'Source Serif Pro';
+}
+
+/* Title style */
+.title {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+}
+
+/* Ticket type */
+.type {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+/* Date, location, etc. */
+.datetime, .location {
+    -fx-font-size: 16px;
+}
+
+/* Notes and guidance */
+.notes, .guidance {
+    -fx-wrap-text: true;
+    -fx-font-size: 14px;
+    -fx-padding: 5 10 5 10;
+    -fx-max-width: 200px;
+}
+
+/* QR placeholder (optional decoration) */
+#qrPlaceholder {
+    -fx-arc-width: 12;
+    -fx-arc-height: 12;
+    -fx-fill: black;
+}
