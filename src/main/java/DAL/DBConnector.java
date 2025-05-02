@@ -4,7 +4,7 @@ import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class DBConnector {
+public class DBConnector implements IDBConnector {
 
     private final SQLServerDataSource ds;
     private Connection connection;
@@ -22,6 +22,7 @@ public class DBConnector {
     }
 
     // Method to get a database connection
+    @Override
     public Connection getConnection() throws SQLException {
         if (connection == null || connection.isClosed()) {
             try {
@@ -45,6 +46,7 @@ public class DBConnector {
     }
 
     // Method to close the connection
+    @Override
     public void closeConnection() {
         if (connection != null) {
             try {

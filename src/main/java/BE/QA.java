@@ -1,30 +1,7 @@
 package BE;
 
-public class QA {
-    private int id;
-    private String name;
-
+public class QA extends User {
     public QA(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public int getId() {
-        return id;
-    }
-    public String getName() {
-        return name;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "QA [id=" + id + ", name=" + name + "]";
+        super(id, name, "qa");
     }
 }
