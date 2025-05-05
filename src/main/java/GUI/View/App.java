@@ -34,23 +34,20 @@ public class App extends Application {
         SceneManager.loadSceneAsParent("/View/Login.fxml");
         SceneManager.loadScene("loginPage", "/View/Login.fxml");
         SceneManager.loadScene("navBar", "/View/navbar.fxml");
-        Logger.displayOrders();
+        //Logger.displayOrders();
 
-        LogAnalyzer.RegisterLog("New order added: Order #1234", 1); //  INFO
-        LogAnalyzer.RegisterLog("Order deletion attempt", 2); //  WARNING
-        LogAnalyzer.RegisterLog("Database connection failed", 3); //  ERROR
+        Logger.RegisterLog("New order added: Order #1234", 1); //  INFO
+        Logger.RegisterLog("Order deletion attempt", 2); //  WARNING
+        Logger.RegisterLog("Database connection failed", 3); //  ERROR
 
 
-        List<String> infoLogs = LogAnalyzer.getInfoLogs();
-        List<String> warningLogs = LogAnalyzer.getWarningLogs();
-        List<String> errorLogs = LogAnalyzer.getErrorLogs();
+        List<String> infoLogs = Logger.displayLogsByType(1);
+        List<String> warningLogs = Logger.displayLogsByType(2);
+        List<String> errorLogs = Logger.displayLogsByType(3);
 
-        System.out.println(infoLogs);
-        System.out.println(warningLogs);
-        System.out.println(errorLogs);
-
-        OrderService orderService = new OrderService();
-        Logger.displayLogsByType(2);
+        System.out.println("There is " + infoLogs.size() + " Info messages");
+        System.out.println("There is " +  warningLogs.size() + " Warning messages");
+        System.out.println("There is " + errorLogs.size() + " Error messages");
 
 
     }

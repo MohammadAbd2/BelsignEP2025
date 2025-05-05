@@ -38,24 +38,26 @@ public class Logger {
 
     }
 
-    public static void displayLogsByType(int AlertType) {
-        if(AlertType < 0 || AlertType >= 3) {
-            switch (AlertType){
-                case 1 : {
-                    LogAnalyzer.getLogsByType("Info");
-                break;
-                }
-                case 2 : {
-                    LogAnalyzer.getLogsByType("Warning");
-                    break;
-                }
-                case 3 : {
-                    LogAnalyzer.getLogsByType("Error");
-                    break;
-                }
+    public static List<String> displayLogsByType(int AlertType) {
+        if (AlertType < 1 || AlertType > 3) {  // تحقق من أن AlertType بين 1 و 3
+            System.out.println("You need to select a valid alert type!!");
+            return null;  // إرجاع null في حالة عدم تطابق AlertType
+        }
 
+        switch (AlertType) {
+            case 1: {
+                return LogAnalyzer.getLogsByType("INFO");  // get all Info logs
             }
-
+            case 2: {
+                return LogAnalyzer.getLogsByType("WARNING");  // get all warnings logs
+            }
+            case 3: {
+                return LogAnalyzer.getLogsByType("SEVERE");  // Severe or error
+            }
+            default: {
+                return null;  // if not exist return null
+            }
         }
     }
+
 }
