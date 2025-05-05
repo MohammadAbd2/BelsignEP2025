@@ -31,7 +31,6 @@ public class App extends Application {
         SceneManager.loadSceneAsParent("/View/Login.fxml");
         SceneManager.loadScene("loginPage", "/View/Login.fxml");
         SceneManager.loadScene("navBar", "/View/navbar.fxml");
-        SceneManager.switchScene("navBar");
         Logger.displayOrders();
 
         OrderService orderService = new OrderService();

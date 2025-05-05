@@ -5,29 +5,36 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 
 <VBox xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="GUI.Controller.LoginController"
-      spacing="20" alignment="CENTER"
+      fx:id="body"
+      spacing="10" alignment="CENTER"
       stylesheets="@../Css/styles.css"
       styleClass="vbox"
       style="-fx-padding: 0;">
 
     <HBox fx:id="titleBar" styleClass="title-bar"
-          prefHeight="22" alignment="TOP_CENTER"
-          spacing="4" style="-fx-padding: 3 3 0 3;"
+          prefHeight="35" alignment="TOP_CENTER"
+          spacing="4"
           VBox.vgrow="NEVER">
 
-        <Label text="QC_Belsign" styleClass="title-text" />
+        <Label fx:id="Title" text="Qc_Belsign Application" styleClass="title-text" />
         <Region fx:id="spacer" HBox.hgrow="ALWAYS"/>
-        <Button fx:id="minimizeButton" text="—" styleClass="title-button"/>
-        <Button fx:id="closeButton" text="✕" styleClass="title-button"/>
+        <Button fx:id="minimizeButton" text="-" styleClass="title-button"/>
+        <Button fx:id="closeButton" text="X" styleClass="title-button">
+        </Button>
     </HBox>
 
-    <HBox VBox.vgrow="ALWAYS" alignment="CENTER">
-        <VBox alignment="CENTER" spacing="32">
+    <HBox  VBox.vgrow="ALWAYS" alignment="CENTER">
+        <VBox alignment="CENTER" spacing="20">
+            <ImageView fx:id="Logo" fitHeight="150" fitWidth="150">
+                <Image url="/Img/BELMAN_Logo.png" />
+            </ImageView>
             <!-- Buttons -->
-            <Button text="Admin" fx:id="adminButton" minWidth="200" minHeight="60" styleClass="login-button"/>
+            <Button text="Admin" fx:id="adminButton" minWidth="200" minHeight="60" styleClass="login-button" onAction="#adminLogin"/>
             <Button text="Operator" fx:id="operatorButton" minWidth="200" minHeight="60" styleClass="login-button"/>
             <Button text="QA" fx:id="qaButton" minWidth="200" minHeight="60" styleClass="login-button"/>
         </VBox>

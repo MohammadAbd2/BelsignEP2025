@@ -6,10 +6,12 @@
 
 .vbox {
     -fx-pref-width: 600;
-    -fx-pref-height: 427;
+    -fx-pref-height: 450;
     -fx-background-color: #F2F2F2;
     -fx-padding: 0;
 }
+
+
 
 .title-bar {
     -fx-background-color: #004B88;
@@ -17,26 +19,31 @@
 
 .title-text {
     -fx-text-fill: white;
-    -fx-font-size: 12px;
+    -fx-font-size: 20px;
     -fx-font-family: Helvetica;
-    -fx-alignment: CENTER_LEFT;
+    -fx-alignment: center;
 }
+
+
 
 .title-button {
     -fx-background-color: transparent;
-    -fx-font-size: 12px;
+    -fx-font-size: 16px;
     -fx-text-fill: white;
     -fx-padding: 0;
     -fx-alignment: CENTER;
     -fx-border-color: transparent;
     -fx-cursor: hand;
-    -fx-pref-width: 13;
-    -fx-pref-height: 19;
-    -fx-min-width: 20;
-    -fx-min-height: 19;
+    -fx-pref-width: 22;
+    -fx-pref-height: 17;
+    -fx-min-width: 35;
+    -fx-min-height: 17;
     -fx-max-width: 40;
     -fx-max-height: 40;
 }
+
+
+
 
 
 
@@ -51,5 +58,12 @@
     -fx-padding: 10;
     -fx-font-family: 'Helvetica';
     -fx-text-fill: #ECF2FB;
-    -fx-background-color: #575757;
+    -fx-background-color: #1e92e0;
+}
+.login-button:hover {
+    -fx-cursor: hand;
+}
+
+#body {
+    -fx-background-color: linear-gradient(to right, #0375AA 0%, #0074D9 21%, #0E63AE 69%, #005092 100%);
 }
