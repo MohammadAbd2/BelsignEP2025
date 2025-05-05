@@ -3,7 +3,7 @@ package DAL;
 import BE.User;
 import java.util.List;
 
-public interface IUserDB {
+public interface IUserDB extends IDBConnector {
     User createUser(User user);
     User getUserById(int id);
     List<User> getAllUsersByRole(String role);
