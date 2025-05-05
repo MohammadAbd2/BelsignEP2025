@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.ScrollPane?>
 
-<VBox stylesheets="@/Css/style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.NavbarController">
+<VBox stylesheets="@/Css/oldStyle.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.NavbarController">
     <!-- Header with Image on Left and Navbar on Right -->
     <HBox fx:id="Header" alignment="CENTER_LEFT" >
 
