@@ -1,5 +1,6 @@
 package GUI.View;
 
+import BLL.LoggerBLL.LogAnalyzer;
 import BLL.OrderService;
 import GUI.Controller.LoginController;
 import GUI.Model.Logger;
@@ -9,6 +10,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+import java.util.List;
 
 
 public class App extends Application {
@@ -33,8 +36,22 @@ public class App extends Application {
         SceneManager.loadScene("navBar", "/View/navbar.fxml");
         Logger.displayOrders();
 
+        LogAnalyzer.RegisterLog("New order added: Order #1234", 1); //  INFO
+        LogAnalyzer.RegisterLog("Order deletion attempt", 2); //  WARNING
+        LogAnalyzer.RegisterLog("Database connection failed", 3); //  ERROR
+
+
+        List<String> infoLogs = LogAnalyzer.getInfoLogs();
+        List<String> warningLogs = LogAnalyzer.getWarningLogs();
+        List<String> errorLogs = LogAnalyzer.getErrorLogs();
+
+        System.out.println(infoLogs);
+        System.out.println(warningLogs);
+        System.out.println(errorLogs);
+
         OrderService orderService = new OrderService();
-        System.out.println(orderService.loadOrders());
+        Logger.displayLogsByType(2);
+
 
     }
 

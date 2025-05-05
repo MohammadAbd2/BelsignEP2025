@@ -40,4 +40,67 @@ public class LogAnalyzer {
 
         return recentOrders;
     }
+
+    public static void RegisterLog(String log, int alertType) {
+        if (alertType < 1 || alertType > 3) {
+            System.out.println("You need to select a valid alert type!!");
+            return;
+        }
+
+        if (log == null || log.isEmpty()) {
+            System.out.println("Log should not be empty!");
+            return;
+        }
+
+        switch (alertType) {
+            case 1:
+                loggerManager.logInfo(log);
+                System.out.println("Register Info Log: " + log);
+                break;
+            case 2:
+                loggerManager.logWarning(log);
+                System.out.println("Register Warning Log: " + log);
+                break;
+            case 3:
+                loggerManager.logError(log);
+                System.out.println("Register Error Log: " + log);
+                break;
+        }
+    }
+
+
+    public static List<String> getLogsByType(String logType) {
+        List<String> logs = new ArrayList<>();
+        Path logFilePath = Paths.get("logs", "QC_Belsign.log");
+
+        if (!Files.exists(logFilePath)) {
+            System.out.println("Log file does not exist.");
+            return logs;
+        }
+
+        try (BufferedReader reader = Files.newBufferedReader(logFilePath)) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.contains(logType)) {
+                    logs.add(line);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return logs;
+    }
+
+    public static List<String> getInfoLogs() {
+        return getLogsByType("INFO");
+    }
+
+    public static List<String> getWarningLogs() {
+        return getLogsByType("WARNING");
+    }
+
+    public static List<String> getErrorLogs() {
+        return getLogsByType("ERROR");
+    }
 }

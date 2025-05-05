@@ -1,0 +1,6 @@
+May 05, 2025 2:06:53 P.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: New order added: Order #1234
+May 05, 2025 2:06:53 P.M. BLL.LoggerBLL.loggerManager logWarning
+WARNING: Order deletion attempt
+May 05, 2025 2:06:53 P.M. BLL.LoggerBLL.loggerManager logError
+SEVERE: Database connection failed
