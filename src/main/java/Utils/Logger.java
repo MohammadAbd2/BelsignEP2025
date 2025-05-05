@@ -10,7 +10,7 @@ public class Logger {
 
     public static void displayOrders() {
         // Create a new order
-        Order newOrder = new Order(12, "mohammad");
+        Order newOrder = new Order(12);
         OrderService service = new OrderService();
         //service.createOrder(newOrder);
 
