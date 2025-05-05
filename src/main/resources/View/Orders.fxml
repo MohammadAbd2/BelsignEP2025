@@ -1,106 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<FlowPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1028.0" style="-fx-background-color: #0E63AE;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="590.0" prefWidth="1018.0" style="-fx-background-color: #0E63AE;">
-         <children>
-            <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="1018.0" style="-fx-background-color: #0E63AE;">
-               <children>
-                  <ImageView fitHeight="50.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Img/back-button.png" />
-                     </image>
-                  </ImageView>
-                  <Region prefHeight="50.0" prefWidth="340.0" />
-                  <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="QC Belsign Report Application" textAlignment="JUSTIFY" textFill="WHITE">
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <BorderPane prefWidth="1018.0">
-               <left>
-                  <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="60.0" style="-fx-background-color: #0E63AE;" BorderPane.alignment="CENTER">
-                     <children>
-                        <Region prefHeight="60.0" prefWidth="15.0" />
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Img/BELMAN_Logo.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </HBox>
-               </left>
-               <right>
-                  <HBox prefHeight="60.0" spacing="10.0" BorderPane.alignment="CENTER">
-                     <children>
-                        <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="80.0" text="Orders" />
-                        <Button mnemonicParsing="false" prefHeight="60.0" prefWidth="80.0" text="Admin" />
-                        <Region prefHeight="60.0" prefWidth="45.0" />
-                        <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Img/profile_avatar.png" />
-                           </image>
-                        </ImageView>
-                        <Region layoutX="191.0" layoutY="10.0" prefHeight="60.0" prefWidth="42.0" />
-                     </children>
-                  </HBox>
-               </right>
-            </BorderPane>
-            <BorderPane prefHeight="40.0">
-               <left>
-                  <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" style="-fx-background-color: #0E63AE;" BorderPane.alignment="CENTER">
-                     <children>
-                        <TextField prefHeight="40.0" prefWidth="180.0" promptText="Search Order..." style="-fx-background-color: white; -fx-background-radius: 50;" />
-                     </children>
-                  </HBox>
-               </left>
-               <right>
-                  <HBox prefHeight="100.0" spacing="20.0" BorderPane.alignment="CENTER">
-                     <children>
-                        <Label prefHeight="40.0" text="Status:" />
-                        <Button mnemonicParsing="false" text="Completed" />
-                        <Button layoutX="52.0" layoutY="10.0" mnemonicParsing="false" text="Pending" />
-                        <Button layoutX="106.0" layoutY="10.0" mnemonicParsing="false" text="Rejected" />
-                     </children>
-                  </HBox>
-               </right>
-            </BorderPane>
-            <GridPane prefHeight="390.0" prefWidth="1018.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-            </GridPane>
-            <HBox prefHeight="50.0" prefWidth="1018.0" />
-         </children>
-      </VBox>
-   </children>
-   <padding>
-      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-   </padding>
-</FlowPane>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="eventsContainer" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="dk.easv.mohammadabd.ems.GUI.Controller.EventsController" >
+
+
+    <TextField fx:id="searchBox" promptText="Search events..." />
+
+
+    <VBox alignment="CENTER_RIGHT" spacing="5">
+        <Button fx:id="sortByButton" text="Sort By" />
+        <Button fx:id="priceLowerButton" text="Price: Lower" />
+        <Button fx:id="priceHighestButton" text="Price: Highest" />
+        <Button fx:id="latestButton" text="Latest" />
+    </VBox>
+
+
+    <FlowPane fx:id="eventsFlowPane" hgap="10" vgap="10"  />
+
+</VBox>

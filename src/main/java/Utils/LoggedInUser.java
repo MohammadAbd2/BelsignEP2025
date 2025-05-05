@@ -18,4 +18,4 @@ public class LoggedInUser {
     public boolean isAuthenticated() {
         return isAuthenticated;
     }
-}
+    }

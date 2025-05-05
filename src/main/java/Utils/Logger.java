@@ -1,21 +1,21 @@
-package GUI.View;
+package Utils;
 
 import BE.Order;
-import BLL.orderService;
-import BLL.logAnalyzer;
+import BLL.OrderService;
+import BLL.LogAnalyzer;
 
 import java.util.List;
 
-public class logger {
+public class Logger {
 
     public static void displayOrders() {
         // Create a new order
         Order newOrder = new Order(12, "mohammad");
-        orderService service = new orderService();
+        OrderService service = new OrderService();
         //service.createOrder(newOrder);
 
         // Fetch and display logs for orders added within the last week
-        List<String> recentLogs = logAnalyzer.getOrdersAddedInLastWeek();
+        List<String> recentLogs = LogAnalyzer.getOrdersAddedInLastWeek();
         for (String log : recentLogs) {
             System.out.println(log);
         }

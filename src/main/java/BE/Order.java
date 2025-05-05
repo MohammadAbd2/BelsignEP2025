@@ -15,8 +15,10 @@ public class Order {
         this.status = status;
     }
 
-    public Order(int id, String mohammad) {
+    public Order(int id) {
     }
+
+
 
     public int getId() {
         return id;
