@@ -1,6 +1,7 @@
-package DAL;
+package DAL.Interfaces;
 
 import BE.User;
+
 import java.util.List;
 
 public interface IUserDB extends IDBConnector {

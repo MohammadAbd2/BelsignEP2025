@@ -2,7 +2,7 @@ package GUI.View;
 
 import BLL.OrderService;
 import GUI.Controller.LoginController;
-import Utils.Logger;
+import GUI.Model.Logger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

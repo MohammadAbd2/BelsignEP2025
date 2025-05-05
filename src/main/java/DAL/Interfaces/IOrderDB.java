@@ -1,9 +1,10 @@
-package DAL;
+package DAL.Interfaces;
 
 import BE.Order;
+
 import java.util.List;
 
-public interface IOrderDB extends IDBConnector   {
+public interface IOrderDB extends IDBConnector {
     Order createOrder(Order order);
     Order getOrderById(int orderId);
     List<Order> getAllOrders();

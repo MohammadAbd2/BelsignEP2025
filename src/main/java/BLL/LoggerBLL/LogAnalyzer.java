@@ -1,4 +1,4 @@
-package BLL;
+package BLL.LoggerBLL;
 
 import java.io.*;
 import java.nio.file.*;

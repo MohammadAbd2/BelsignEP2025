@@ -1,12 +1,12 @@
-May 01, 2025 11:42:44 A.M. BLL.loggerManager logInfo
+May 01, 2025 11:42:44 A.M. BLL.LoggerBLL.loggerManager logInfo
 INFO: Order created: ID = 0, by user: 0
-May 01, 2025 11:42:44 A.M. BLL.loggerManager logInfo
+May 01, 2025 11:42:44 A.M. BLL.LoggerBLL.loggerManager logInfo
 INFO: ORDER_ADDED | ID: 0 | User: 0 | Time: 2025-05-01T11:42:44.472309800
-May 01, 2025 11:48:20 A.M. BLL.loggerManager logInfo
+May 01, 2025 11:48:20 A.M. BLL.LoggerBLL.loggerManager logInfo
 INFO: Order created: ID = 0, by user: 0
-May 01, 2025 11:48:20 A.M. BLL.loggerManager logInfo
+May 01, 2025 11:48:20 A.M. BLL.LoggerBLL.loggerManager logInfo
 INFO: ORDER_ADDED | ID: 0 | User: 0 | Time: 2025-05-01T11:48:20.059315300
-May 01, 2025 11:52:18 A.M. BLL.loggerManager logInfo
+May 01, 2025 11:52:18 A.M. BLL.LoggerBLL.loggerManager logInfo
 INFO: Order created: ID = 0, by user: 0
-May 01, 2025 11:52:18 A.M. BLL.loggerManager logInfo
+May 01, 2025 11:52:18 A.M. BLL.LoggerBLL.loggerManager logInfo
 INFO: ORDER_ADDED | ID: 0 | User: 0 | Time: 2025-05-01T11:52:18.856918500

@@ -1,6 +1,8 @@
 package DAL;
 
 import BE.QCReport;
+import DAL.Interfaces.IQCReportDB;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

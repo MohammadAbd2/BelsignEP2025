@@ -1,6 +1,7 @@
-package DAL;
+package DAL.Interfaces;
 
 import BE.QCReport;
+
 import java.util.List;
 
 public interface IQCReportDB extends IDBConnector {

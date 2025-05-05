@@ -1,4 +1,4 @@
-package DAL;
+package DAL.Interfaces;
 
 import java.sql.Connection;
 import java.sql.SQLException;

@@ -1,5 +1,6 @@
 package DAL;
 
+import DAL.Interfaces.IDBConnector;
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import java.sql.Connection;
 import java.sql.SQLException;

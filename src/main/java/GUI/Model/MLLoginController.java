@@ -1,7 +1,7 @@
 
 package GUI.Model;
 
-import BLL.LoginChoice;
+import BLL.LoginBLL.LoginChoice;
 public class MLLoginController {
     public LoginChoice loginChoice = new LoginChoice();
 
