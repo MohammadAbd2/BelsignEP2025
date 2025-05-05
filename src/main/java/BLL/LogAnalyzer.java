@@ -5,7 +5,7 @@ import java.nio.file.*;
 import java.time.*;
 import java.util.*;
 
-public class logAnalyzer {
+public class LogAnalyzer {
 
     public static List<String> getOrdersAddedInLastWeek() {
         List<String> recentOrders = new ArrayList<>();

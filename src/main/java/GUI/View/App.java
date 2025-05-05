@@ -1,7 +1,8 @@
 package GUI.View;
 
-import GUI.View.SceneManager;
+import BLL.OrderService;
 import GUI.Controller.LoginController;
+import Utils.Logger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -31,7 +32,11 @@ public class App extends Application {
         SceneManager.loadScene("loginPage", "/View/Login.fxml");
         SceneManager.loadScene("navBar", "/View/navbar.fxml");
         SceneManager.switchScene("navBar");
-        logger.displayOrders();
+        Logger.displayOrders();
+
+        OrderService orderService = new OrderService();
+        System.out.println(orderService.loadOrders());
+
     }
 
     public static void main(String[] args) {
