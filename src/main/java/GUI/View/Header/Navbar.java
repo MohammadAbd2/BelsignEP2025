@@ -1,6 +1,7 @@
 package GUI.View.Header;
 
 
+import GUI.View.SceneManager;
 import Utils.LoggedInUser;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -56,6 +57,8 @@ public class Navbar {
             if (tabContainer instanceof HBox tabs) {
                 tabs.getChildren().removeIf(node -> node != homeTab);
             }
+            SceneManager.loadScene("Login", "/View/Login.fxml");
+            SceneManager.switchScene("Login");
         }
 
         return navbarRoot;

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+        fx:controller="GUI.Controller.OperatorPageController"
+        stylesheets="@../Css/styles.css">
+    <HBox fx:id="titleBar" styleClass="title-bar"
+          prefHeight="35" alignment="TOP_CENTER"
+          spacing="4"
+          VBox.vgrow="NEVER">
+
+        <Label fx:id="Title" text="Qc_Belsign Application" styleClass="title-text" />
+        <Region fx:id="spacer" HBox.hgrow="ALWAYS"/>
+        <Button fx:id="minimizeButton" text="-" styleClass="title-button" onAction="#minimizeStage"/>
+        <Button fx:id="closeButton" text="X" styleClass="title-button" onAction="#closeStage">
+        </Button>
+    </HBox>
+
+
+
+    <VBox spacing="20" BorderPane.alignment="CENTER">
+        <SplitPane orientation="HORIZONTAL" dividerPositions="0.4">
+            <!-- Left Image Grid -->
+            <VBox spacing="10">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+                <TilePane fx:id="imageGrid"
+                          prefColumns="2"
+                          hgap="10" vgap="10"
+                          prefTileWidth="200" prefTileHeight="150"
+                          minWidth="420" minHeight="320"
+                          maxWidth="420" maxHeight="320">
+                    <StackPane fx:id="addImagePlaceholder">
+                        <Region styleClass="image-placeholder" prefWidth="200" prefHeight="150"/>
+                        <Label text="+" styleClass="add-label" onMouseClicked="#handleAddImage"/>
+                    </StackPane>
+                </TilePane>
+            </VBox>
+
+    <!-- Right Form -->
+            <VBox spacing="10">
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+                <TextField promptText="Order Number" />
+                <TextArea fx:id="notesArea" promptText="Notes" prefHeight="100"/>
+                <ComboBox fx:id="statusComboBox" promptText="Order Status"/>
+            </VBox>
+        </SplitPane>
+
+<!-- Status and Card Section -->
+        <VBox spacing="10">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+    <!-- Search and Filter Bar -->
+            <HBox spacing="10">
+                <TextField fx:id="searchField" promptText="Search" HBox.hgrow="ALWAYS"/>
+                <Label text="Status:"/>
+                <Button text="Completed : 23" styleClass="status-completed"/>
+                <Button text="Pending : ?" styleClass="status-pending"/>
+                <Button text="Rejected : 4" styleClass="status-rejected"/>
+            </HBox>
+
+    <!-- Cards Grid -->
+            <TilePane fx:id="cardGrid" prefColumns="5" hgap="10" vgap="10">
+                <VBox styleClass="card">
+                    <ImageView fitHeight="100" fitWidth="100"/>
+                    <Label text="Name of the part"/>
+                    <Label text="Order_id : 0407-8196" styleClass="card-order-id"/>
+                    <ImageView fx:id="statusIcon" fitHeight="16" fitWidth="16"/>
+                </VBox>
+            </TilePane>
+
+    <!-- Pagination -->
+            <HBox spacing="5" alignment="CENTER">
+                <Button text="&lt;"/>
+                <Button text="1"/>
+                <Button text="2"/>
+                <Button text="3"/>
+                <Button text="&gt;"/>
+            </HBox>
+        </VBox>
+    </VBox>
+
+</VBox>

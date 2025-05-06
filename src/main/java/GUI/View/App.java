@@ -1,8 +1,5 @@
 package GUI.View;
 
-import BLL.LoggerBLL.LogAnalyzer;
-import BLL.OrderService;
-import GUI.Controller.LoginController;
 import GUI.Model.Logger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -24,10 +21,6 @@ public class App extends Application {
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setScene(scene);
         primaryStage.show();
-
-        // loading the controller
-        LoginController controller = loader.getController();
-        controller.setStage(primaryStage);
 
         // start using the Scenemanger
         SceneManager.setStage(primaryStage);

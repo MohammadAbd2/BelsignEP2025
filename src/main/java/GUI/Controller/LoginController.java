@@ -3,7 +3,9 @@ package GUI.Controller;
 
 import GUI.Model.MLLoginController;
 import GUI.View.SceneManager;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
@@ -31,10 +33,41 @@ public class LoginController {
     @FXML
     public void initialize() {
         // Set up button actions
-        adminButton.setOnAction(e -> loginChoice.adminLogin());
-        operatorButton.setOnAction(e -> loginChoice.operatorLogin());
+        adminButton.setOnAction(e -> {
+            try {
+                loginChoice.adminLogin();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
+
+        operatorButton.setOnAction(e -> {
+            try {
+                loginChoice.operatorLogin();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         qaButton.setOnAction(e -> loginChoice.qaLogin());
 
+
+        // Variables to store initial mouse position
+        final double[] xOffset = {0};
+        final double[] yOffset = {0};
+
+// Record the current mouse position on press
+        titleBar.setOnMousePressed(event -> {
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            xOffset[0] = stage.getX() - event.getScreenX();
+            yOffset[0] = stage.getY() - event.getScreenY();
+        });
+
+// Update the stage position on drag
+        titleBar.setOnMouseDragged(event -> {
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setX(event.getScreenX() + xOffset[0]);
+            stage.setY(event.getScreenY() + yOffset[0]);
+        });
     }
 
     @FXML
@@ -45,25 +78,26 @@ public class LoginController {
 
     }
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
+    @FXML
+    public void operatorLogin() throws IOException {
+        loginChoice.operatorLogin();
+        SceneManager.loadScene("operator", "/View/OperatorPage.fxml");
+        SceneManager.switchScene("operator");
 
-        minimizeButton.setOnAction(e -> stage.setIconified(true));
-        closeButton.setOnAction(e -> stage.close());
-
-        final Delta dragDelta = new Delta();
-        titleBar.setOnMousePressed(e -> {
-            dragDelta.x = e.getSceneX();
-            dragDelta.y = e.getSceneY();
-        });
-        titleBar.setOnMouseDragged(e -> {
-            stage.setX(e.getScreenX() - dragDelta.x);
-            stage.setY(e.getScreenY() - dragDelta.y);
-        });
     }
 
-    private static class Delta {
-        double x, y;
+
+
+    public void closeStage(ActionEvent event) {
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
+
+    public void minimizeStage(ActionEvent event) {
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setIconified(true);
+    }
+
+
 }
 

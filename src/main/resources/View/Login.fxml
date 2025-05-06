@@ -23,8 +23,8 @@
 
         <Label fx:id="Title" text="Qc_Belsign Application" styleClass="title-text" />
         <Region fx:id="spacer" HBox.hgrow="ALWAYS"/>
-        <Button fx:id="minimizeButton" text="➖" styleClass="title-button"/>
-        <Button fx:id="closeButton" text="❌" styleClass="title-button">
+        <Button fx:id="minimizeButton" text="-" styleClass="title-button" onAction="#minimizeStage"/>
+        <Button fx:id="closeButton" text="X" styleClass="title-button" onAction="#closeStage">
         </Button>
     </HBox>
 
