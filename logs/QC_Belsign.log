@@ -36,6 +36,12 @@ May 05, 2025 2:20:15 P.M. BLL.LoggerBLL.loggerManager logWarning
 WARNING: Order deletion attempt
 May 05, 2025 2:20:15 P.M. BLL.LoggerBLL.loggerManager logError
 SEVERE: Database connection failed
+máj 06, 2025 10:03:58 AM BLL.LoggerBLL.loggerManager logInfo
+INFO: New order added: Order #1234
+máj 06, 2025 10:03:58 AM BLL.LoggerBLL.loggerManager logWarning
+WARNING: Order deletion attempt
+máj 06, 2025 10:03:58 AM BLL.LoggerBLL.loggerManager logError
+SEVERE: Database connection failed
 May 05, 2025 2:21:03 P.M. BLL.LoggerBLL.loggerManager logInfo
 INFO: New order added: Order #1234
 May 05, 2025 2:21:03 P.M. BLL.LoggerBLL.loggerManager logWarning
@@ -179,4 +185,28 @@ INFO: New order added: Order #1234
 May 06, 2025 10:51:19 A.M. BLL.LoggerBLL.loggerManager logWarning
 WARNING: Order deletion attempt
 May 06, 2025 10:51:19 A.M. BLL.LoggerBLL.loggerManager logError
+SEVERE: Database connection failed
+máj 06, 2025 11:25:08 AM BLL.LoggerBLL.loggerManager logInfo
+INFO: New order added: Order #1234
+máj 06, 2025 11:25:08 AM BLL.LoggerBLL.loggerManager logWarning
+WARNING: Order deletion attempt
+máj 06, 2025 11:25:08 AM BLL.LoggerBLL.loggerManager logError
+SEVERE: Database connection failed
+máj 06, 2025 11:26:58 AM BLL.LoggerBLL.loggerManager logInfo
+INFO: New order added: Order #1234
+máj 06, 2025 11:26:58 AM BLL.LoggerBLL.loggerManager logWarning
+WARNING: Order deletion attempt
+máj 06, 2025 11:26:58 AM BLL.LoggerBLL.loggerManager logError
+SEVERE: Database connection failed
+máj 06, 2025 11:27:14 AM BLL.LoggerBLL.loggerManager logInfo
+INFO: New order added: Order #1234
+máj 06, 2025 11:27:14 AM BLL.LoggerBLL.loggerManager logWarning
+WARNING: Order deletion attempt
+máj 06, 2025 11:27:14 AM BLL.LoggerBLL.loggerManager logError
+SEVERE: Database connection failed
+máj 06, 2025 11:29:08 AM BLL.LoggerBLL.loggerManager logInfo
+INFO: New order added: Order #1234
+máj 06, 2025 11:29:08 AM BLL.LoggerBLL.loggerManager logWarning
+WARNING: Order deletion attempt
+máj 06, 2025 11:29:08 AM BLL.LoggerBLL.loggerManager logError
 SEVERE: Database connection failed

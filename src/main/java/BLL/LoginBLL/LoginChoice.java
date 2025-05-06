@@ -27,8 +27,14 @@ public class LoginChoice {
         // Additional logic for admin-specific access can go here
     }
 
-    public void operatorLogin() {
+    public void operatorLogin() throws IOException {
+        LoggedInUser.setLoggedInRole("Operator");
+        UserSession.setLoggedIn(true);
+
+        SceneManager.loadScene("operator", "/View/OperatorPage.fxml");
+        SceneManager.switchScene("operator");
         System.out.println("Logged in as Operator.");
+        Logger.displayOrders();
         // Additional logic for operator-specific access can go here
     }
 

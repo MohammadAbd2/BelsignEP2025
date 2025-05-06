@@ -14,7 +14,7 @@ public class MLLoginController {
         loginChoice.adminLogin();
     }
 
-    public void operatorLogin(){
+    public void operatorLogin() throws IOException {
         LoggedInUser.setAuthenticated(true);
         loginChoice.operatorLogin();
     }

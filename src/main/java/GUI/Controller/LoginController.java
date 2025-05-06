@@ -40,7 +40,14 @@ public class LoginController {
                 throw new RuntimeException(ex);
             }
         });
-        operatorButton.setOnAction(e -> loginChoice.operatorLogin());
+
+        operatorButton.setOnAction(e -> {
+            try {
+                loginChoice.operatorLogin();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         qaButton.setOnAction(e -> loginChoice.qaLogin());
 
     }
@@ -50,6 +57,14 @@ public class LoginController {
         loginChoice.adminLogin();
         SceneManager.loadScene("navBar", "/navbar.fxml");
         SceneManager.switchScene("navBar");
+
+    }
+
+    @FXML
+    public void operatorLogin() throws IOException {
+        loginChoice.operatorLogin();
+        SceneManager.loadScene("operator", "/View/OperatorPage.fxml");
+        SceneManager.switchScene("operator");
 
     }
 
