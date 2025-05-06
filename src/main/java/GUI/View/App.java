@@ -25,10 +25,6 @@ public class App extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        // loading the controller
-        LoginController controller = loader.getController();
-        controller.setStage(primaryStage);
-
         // start using the Scenemanger
         SceneManager.setStage(primaryStage);
         SceneManager.loadSceneAsParent("/View/Login.fxml");

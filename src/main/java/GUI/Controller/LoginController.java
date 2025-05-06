@@ -32,7 +32,6 @@ public class LoginController {
 
     @FXML
     public void initialize() {
-        setStage(this.stage);
         // Set up button actions
         adminButton.setOnAction(e -> {
             try {
@@ -54,21 +53,7 @@ public class LoginController {
 
     }
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
 
-        minimizeButton.setOnAction(e -> stage.setIconified(true));
-
-        final Delta dragDelta = new Delta();
-        titleBar.setOnMousePressed(e -> {
-            dragDelta.x = e.getSceneX();
-            dragDelta.y = e.getSceneY();
-        });
-        titleBar.setOnMouseDragged(e -> {
-            stage.setX(e.getScreenX() - dragDelta.x);
-            stage.setY(e.getScreenY() - dragDelta.y);
-        });
-    }
 
     public void closeStage(ActionEvent event) {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -80,8 +65,6 @@ public class LoginController {
         stage.setIconified(true);
     }
 
-    private static class Delta {
-        double x, y;
-    }
+
 }
 
