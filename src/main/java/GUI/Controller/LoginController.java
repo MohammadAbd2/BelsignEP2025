@@ -3,7 +3,9 @@ package GUI.Controller;
 
 import GUI.Model.MLLoginController;
 import GUI.View.SceneManager;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
@@ -30,8 +32,15 @@ public class LoginController {
 
     @FXML
     public void initialize() {
+        setStage(this.stage);
         // Set up button actions
-        adminButton.setOnAction(e -> loginChoice.adminLogin());
+        adminButton.setOnAction(e -> {
+            try {
+                loginChoice.adminLogin();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
         operatorButton.setOnAction(e -> loginChoice.operatorLogin());
         qaButton.setOnAction(e -> loginChoice.qaLogin());
 
@@ -49,7 +58,6 @@ public class LoginController {
         this.stage = stage;
 
         minimizeButton.setOnAction(e -> stage.setIconified(true));
-        closeButton.setOnAction(e -> stage.close());
 
         final Delta dragDelta = new Delta();
         titleBar.setOnMousePressed(e -> {
@@ -60,6 +68,16 @@ public class LoginController {
             stage.setX(e.getScreenX() - dragDelta.x);
             stage.setY(e.getScreenY() - dragDelta.y);
         });
+    }
+
+    public void closeStage(ActionEvent event) {
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
+    }
+
+    public void minimizeStage(ActionEvent event) {
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setIconified(true);
     }
 
     private static class Delta {

@@ -32,7 +32,8 @@ public class NavbarController {
     @FXML
     private ImageView profile_pic;
 
-    public void initialize() {
+    public void initialize() throws IOException {
+
         // Load profile image
         Image image = new Image(getClass().getResource("/img/profile_picture.png").toExternalForm());
         profile_pic.setImage(image);
@@ -49,194 +50,34 @@ public class NavbarController {
 
 
     public void OrderTab(ActionEvent event) {
-        try {
-            // declaration of the variables
-            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            VBox Application = new VBox();
-            VBox WindowBox = new VBox();
-            VBox rootContainer = new VBox();
-            VBox Body  = new VBox();
 
-            // Sort the VBox to fit with the style and Application
-
-            Application.getChildren().add(WindowBox);
-            rootContainer.getChildren().add(Navbar.loadNavbar());
-
-            //add the new component here bellow
-
-
-
-            // create and add the ScrollPane
-            ScrollPane scrollPane = new ScrollPane();
-            scrollPane.setContent(Body);
-            scrollPane.setFitToWidth(true);
-            scrollPane.setFitToHeight(true);
-            scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-            scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-            scrollPane.getStyleClass().add("scroll-pane");
-            rootContainer.getChildren().add(scrollPane);
-
-            //render & set the new Scene to the Stage
-            Application.getChildren().add(rootContainer);
-            Scene currentScene = currentStage.getScene();
-            currentScene.setRoot(Application);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void OperatorTab(ActionEvent event) {
-        try {
-            // Get current stage
-            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-            // === Root layout ===
-            VBox rootContainer = new VBox();
-
-
-            Node navbar = Navbar.loadNavbar(); // Assuming this returns a Node
-
-            rootContainer.getChildren().add(navbar);
-
-            // === Ticket Page ===
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/dk/easv/mohammadabd/ems/ticketPage.fxml"));
-            Node ticketPage = loader.load();
-
-            VBox body = new VBox(ticketPage);
-            body.setSpacing(10);
-
-            // === Scrollable Content ===
-            ScrollPane scrollPane = new ScrollPane(body);
-            scrollPane.setFitToWidth(true);
-            scrollPane.setFitToHeight(true);
-            scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-            scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-            scrollPane.getStyleClass().add("scroll-pane");
-
-            rootContainer.getChildren().add(scrollPane);
-
-            // === Set to current scene ===
-            Scene currentScene = currentStage.getScene();
-            currentScene.setRoot(rootContainer);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 
 
     public void QCTab(ActionEvent event) {
-        try {
-            // declaration of the variables
-            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            VBox Application = new VBox();
-            VBox WindowBox = new VBox();
-            VBox rootContainer = new VBox();
-            VBox Body  = new VBox();
 
-            // Sort the VBox to fit with the style and Application
-            Application.getChildren().add(WindowBox);
-            rootContainer.getChildren().add(Navbar.loadNavbar());
-
-            //add the new component here bellow
-
-
-            // create and add the ScrollPane
-            ScrollPane scrollPane = new ScrollPane();
-            scrollPane.setContent(Body);
-            scrollPane.setFitToWidth(true);
-            scrollPane.setFitToHeight(true);
-            scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-            scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-            scrollPane.getStyleClass().add("scroll-pane");
-            rootContainer.getChildren().add(scrollPane);
-
-            //render & set the new Scene to the Stage
-            Application.getChildren().add(rootContainer);
-            Scene currentScene = currentStage.getScene();
-            currentScene.setRoot(Application);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public void AdminTab(ActionEvent event) {
-        try {
-            // declaration of the variables
-            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            VBox Application = new VBox();
-            VBox WindowBox = new VBox();
-            VBox rootContainer = new VBox();
-            VBox Body  = new VBox();
 
-            // Sort the VBox to fit with the style and Application
-            Application.getChildren().add(WindowBox);
-            rootContainer.getChildren().add(Navbar.loadNavbar());
-
-            //add the new component here bellow
-
-
-            // create and add the ScrollPane
-            ScrollPane scrollPane = new ScrollPane();
-            scrollPane.setContent(Body);
-            scrollPane.setFitToWidth(true);
-            scrollPane.setFitToHeight(true);
-            scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-            scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-            scrollPane.getStyleClass().add("scroll-pane");
-            rootContainer.getChildren().add(scrollPane);
-
-            //render & set the new Scene to the Stage
-            Application.getChildren().add(rootContainer);
-            Scene currentScene = currentStage.getScene();
-            currentScene.setRoot(Application);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
 
-    public void ProfileTab(javafx.scene.input.MouseEvent event) {
-        Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        if(currentStage == SceneManager.getStage() && Objects.equals(SceneManager.getCurrentSceneName(), "navBar")){
-            SceneManager.switchScene("loginPage");
-        }else{
-            SceneManager.switchScene("navBar");
-        }
+    public void ProfileTab(javafx.scene.input.MouseEvent event) throws IOException {
 
-//        SceneManager.switchScene("loginPage");
-//        try {
-//            // declaration of the variables
-//            VBox Application = new VBox();
-//            VBox WindowBox = new VBox();
-//            VBox rootContainer = new VBox();
-//            VBox Body  = new VBox();
-//
-//            // Sort the VBox to fit with the style and Application
-//            rootContainer.getChildren().add(Navbar.loadNavbar());
-//
-//            //add the new component here bellow
-//
-//
-//
-//
-//            // create and add the ScrollPane
-//            ScrollPane scrollPane = new ScrollPane();
-//            scrollPane.setContent(Body);
-//            scrollPane.setFitToWidth(true);
-//            scrollPane.setFitToHeight(true);
-//            scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-//            scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-//            scrollPane.getStyleClass().add("scroll-pane");
-//            rootContainer.getChildren().add(scrollPane);
-//
-//            //render & set the new Scene to the Stage
-//            Application.getChildren().add(rootContainer);
-//            Scene currentScene = currentStage.getScene();
-//            currentScene.setRoot(Application);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+    if(LoggedInUser.getInstance().isAuthenticated()){
+        LoggedInUser.setAuthenticated(false);
+        SceneManager.loadScene("Login", "/View/Login.fxml");
+        SceneManager.switchScene("Login");
+    }else{
+        LoggedInUser.setAuthenticated(true);
+        SceneManager.loadScene("Navbar", "/View/navbar.fxml");
+        SceneManager.switchScene("Navbar");
+    }
     }
 }
