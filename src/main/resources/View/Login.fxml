@@ -1,42 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="GUI.Controller.LoginController"
-      fx:id="body"
-      spacing="10" alignment="CENTER"
-      stylesheets="@../Css/styles.css"
-      styleClass="vbox"
-      style="-fx-padding: 0;">
+<VBox fx:id="body" alignment="CENTER" spacing="10" style="-fx-padding: 0;" styleClass="vbox" stylesheets="@../Css/styles.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="GUI.Controller.LoginController">
 
-    <HBox fx:id="titleBar" styleClass="title-bar"
-          prefHeight="35" alignment="TOP_CENTER"
-          spacing="4"
-          VBox.vgrow="NEVER">
+    <HBox fx:id="titleBar" alignment="TOP_CENTER" prefHeight="35" spacing="4" styleClass="title-bar" VBox.vgrow="NEVER">
 
-        <Label fx:id="Title" text="Qc_Belsign Application" styleClass="title-text" />
-        <Region fx:id="spacer" HBox.hgrow="ALWAYS"/>
-        <Button fx:id="minimizeButton" text="➖" styleClass="title-button" onAction="#minimizeStage"/>
-        <Button fx:id="closeButton" text="❌" styleClass="title-button" onAction="#closeStage">
+        <Label fx:id="Title" styleClass="title-text" text="Qc_Belsign Application" />
+        <Region fx:id="spacer" HBox.hgrow="ALWAYS" />
+        <Button fx:id="minimizeButton" onAction="#minimizeStage" styleClass="title-button" text="➖" />
+        <Button fx:id="closeButton" onAction="#closeStage" styleClass="title-button" text="❌">
         </Button>
     </HBox>
 
-    <HBox  VBox.vgrow="ALWAYS" alignment="CENTER">
+    <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
         <VBox alignment="CENTER" spacing="20">
-            <ImageView fx:id="Logo" fitHeight="150" fitWidth="150">
-                <Image url="/Img/BELMAN_Logo.png" />
-            </ImageView>
+         <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../Img/BELMAN_Logo.png" />
+            </image>
+         </ImageView>
+
             <!-- Buttons -->
-            <Button text="Admin" fx:id="adminButton" minWidth="200" minHeight="60" styleClass="login-button" onAction="#adminLogin"/>
-            <Button text="Operator" fx:id="operatorButton" minWidth="200" minHeight="60" styleClass="login-button"/>
-            <Button text="QA" fx:id="qaButton" minWidth="200" minHeight="60" styleClass="login-button"/>
+            <Button fx:id="adminButton" minHeight="60" minWidth="200" onAction="#adminLogin" styleClass="login-button" text="Admin" />
+            <Button fx:id="operatorButton" minHeight="60" minWidth="200" styleClass="login-button" text="Operator" />
+            <Button fx:id="qaButton" minHeight="60" minWidth="200" styleClass="login-button" text="QA" />
         </VBox>
     </HBox>
 </VBox>
