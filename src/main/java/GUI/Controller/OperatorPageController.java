@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -28,6 +29,7 @@ public class OperatorPageController {
     @FXML private TextArea notesArea;
 
     @FXML private TilePane imageGrid;
+    @FXML private StackPane addImagePlaceholder;
     @FXML private TilePane cardGrid;
 
     @FXML private HBox titleBar;
@@ -40,31 +42,29 @@ public class OperatorPageController {
     // Called after FXML is loaded
     @FXML
     public void initialize() {
+        addImagePlaceholder.setOnMouseClicked(e -> handleAddImage());
         if (statusComboBox != null) {
             statusComboBox.getItems().addAll("Pending", "Completed", "In Progress");
         } else {
             System.out.println("Error: statusComboBox is null!");
         }
-
-
     }
 
     @FXML
     private void handleAddImage() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
-
-        File file = fileChooser.showOpenDialog(stage);
-
+        fileChooser.setTitle("Choose an Image");
+        File file = fileChooser.showOpenDialog(null);
         if (file != null) {
-            // Create an ImageView and load the image into it
             Image image = new Image(file.toURI().toString());
             ImageView imageView = new ImageView(image);
             imageView.setFitWidth(200);
             imageView.setFitHeight(150);
+            imageView.setPreserveRatio(true);
 
-            // Add the ImageView to the image grid (TilePane)
+            imageGrid.getChildren().remove(addImagePlaceholder);
             imageGrid.getChildren().add(imageView);
+            imageGrid.getChildren().add(addImagePlaceholder);
         }
     }
 

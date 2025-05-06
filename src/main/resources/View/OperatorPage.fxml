@@ -30,17 +30,20 @@
                 <padding>
                     <Insets top="10" right="10" bottom="10" left="10"/>
                 </padding>
-                <TilePane fx:id="imageGrid"
+                <ScrollPane fitToHeight="false" fitToWidth="true" prefHeight="330" prefWidth="470"
+                            hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" pannable="false">
+                    <TilePane fx:id="imageGrid"
                           prefColumns="2"
                           hgap="10" vgap="10"
                           prefTileWidth="200" prefTileHeight="150"
                           minWidth="420" minHeight="320"
-                          maxWidth="420" maxHeight="320">
-                    <StackPane fx:id="addImagePlaceholder">
+                          orientation="HORIZONTAL">
+                    <StackPane fx:id="addImagePlaceholder" onMouseClicked="#handleAddImage">
                         <Region styleClass="image-placeholder" prefWidth="200" prefHeight="150"/>
-                        <Label text="+" styleClass="add-label" onMouseClicked="#handleAddImage"/>
+                        <Label text="+" styleClass="add-label"/>
                     </StackPane>
                 </TilePane>
+                </ScrollPane>
             </VBox>
 
     <!-- Right Form -->
