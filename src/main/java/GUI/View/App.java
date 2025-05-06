@@ -1,8 +1,5 @@
 package GUI.View;
 
-import BLL.LoggerBLL.LogAnalyzer;
-import BLL.OrderService;
-import GUI.Controller.LoginController;
 import GUI.Model.Logger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
