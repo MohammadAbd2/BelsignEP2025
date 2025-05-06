@@ -42,7 +42,20 @@
     -fx-max-height: 40;
 }
 
+/* Add Image "+" Placeholder */
+.image-placeholder {
+    -fx-background-color: #cccccc;
+    -fx-border-color: #999;
+    -fx-border-style: dashed;
+    -fx-border-width: 2;
+    -fx-border-radius: 8;
+}
 
+.add-label {
+    -fx-font-size: 48pt;
+    -fx-text-fill: #555;
+    -fx-alignment: center;
+}
 
 
 

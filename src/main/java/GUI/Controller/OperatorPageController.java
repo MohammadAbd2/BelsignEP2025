@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
@@ -45,21 +46,25 @@ public class OperatorPageController {
             System.out.println("Error: statusComboBox is null!");
         }
 
+
     }
 
     @FXML
     private void handleAddImage() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg"));
 
-        File file = fileChooser.showOpenDialog(new Stage());
+        File file = fileChooser.showOpenDialog(stage);
 
         if (file != null) {
-            // Add to image grid
-            ImageView newImg = new ImageView(file.toURI().toString());
-            newImg.setFitWidth(200);
-            newImg.setFitHeight(150);
-            imageGrid.getChildren().add(imageGrid.getChildren().size() - 1, newImg);
+            // Create an ImageView and load the image into it
+            Image image = new Image(file.toURI().toString());
+            ImageView imageView = new ImageView(image);
+            imageView.setFitWidth(200);
+            imageView.setFitHeight(150);
+
+            // Add the ImageView to the image grid (TilePane)
+            imageGrid.getChildren().add(imageView);
         }
     }
 
