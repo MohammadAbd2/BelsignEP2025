@@ -52,8 +52,13 @@
                     <Insets top="10" right="10" bottom="10" left="10"/>
                 </padding>
                 <TextField promptText="Order Number" />
-                <TextArea fx:id="notesArea" promptText="Notes" prefHeight="100"/>
-                <ComboBox fx:id="statusComboBox" promptText="Order Status"/>
+                <TextArea fx:id="notesArea" promptText="Notes"/>
+                <HBox spacing="10">
+                    <ComboBox fx:id="statusComboBox" promptText="Order Status"/>
+                    <Button  fx:id="saveButton" text="Save" styleClass="inline-button"/>
+                    <Button  fx:id="editButton" text="Edit" styleClass="inline-button"/>
+                </HBox>
+
             </VBox>
         </SplitPane>
 

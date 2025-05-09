@@ -11,7 +11,15 @@
     -fx-padding: 0;
 }
 
+.inline-button {
+    -fx-pref-width: 50px; /* Can be adjusted based on design needs */
+}
 
+
+
+#notesArea{
+    -fx-pref-height: 280px;
+}
 
 .title-bar {
     -fx-background-color: #004B88;
