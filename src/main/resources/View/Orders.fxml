@@ -1,26 +1,229 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox fx:id="eventsContainer" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="dk.easv.mohammadabd.ems.GUI.Controller.EventsController" >
+<VBox spacing="20" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
 
+    <!-- Top: Filter Bar -->
+    <BorderPane>
+        <left>
+            <TextField promptText="Search..." />
+        </left>
+        <right>
+            <HBox spacing="10">
+                <Label style="-fx-font-weight: bold;" text="Status:" />
+                <Button style="-fx-background-radius: 5;" text="New : 13">
+               <font>
+                  <Font name="Helvetica" size="11.0" />
+               </font></Button>
+                <Button style="-fx-background-radius: 5;" text="Approved : 21">
+               <font>
+                  <Font name="Helvetica" size="11.0" />
+               </font></Button>
+                <Button style="-fx-background-radius: 5;" text="Pending : 7" >
+                <font>
+                    <Font name="Helvetica" size="11.0" />
+                </font></Button>
+                <Button style="-fx-background-radius: 5;" text="Rejected : 4" >
+                <font>
+                    <Font name="Helvetica" size="11.0" />
+                </font></Button>
+            </HBox>
+        </right>
+    </BorderPane>
 
-    <TextField fx:id="searchBox" promptText="Search events..." />
+    <!-- Middle: Orders Grid -->
+    <GridPane hgap="20.0" vgap="20">
 
+        <children>
 
-    <VBox alignment="CENTER_RIGHT" spacing="5">
-        <Button fx:id="sortByButton" text="Sort By" />
-        <Button fx:id="priceLowerButton" text="Price: Lower" />
-        <Button fx:id="priceHighestButton" text="Price: Highest" />
-        <Button fx:id="latestButton" text="Latest" />
-    </VBox>
+            <!-- GridPane (0,0) -->
+            <VBox alignment="TOP_CENTER" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <ImageView fitHeight="100.0" fitWidth="100.0" preserveRatio="true">
+                    <image>
+                        <Image url="@../Img/BELMAN_Logo.png" />
+                    </image>
+                </ImageView>
+                <VBox>
+                    <children>
+                        <Label text="PVC Pipe" />
+                        <Label text="ID: 0457-8876" />
+                    </children>
+                </VBox>
+            </VBox>
 
+            <!-- GridPane (1,0) -->
+            <VBox alignment="TOP_CENTER" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <ImageView fitHeight="100.0" fitWidth="100.0" preserveRatio="true">
+                    <image>
+                        <Image url="@../Img/BELMAN_Logo.png" />
+                    </image>
+                </ImageView>
+                <VBox>
+                    <children>
+                        <Label text="Steel Pipe" />
+                        <Label text="ID: 0983-7745" />
+                    </children>
+                </VBox>
+            </VBox>
 
-    <FlowPane fx:id="eventsFlowPane" hgap="10" vgap="10"  />
+            <!-- GridPane (2,0) -->
+            <VBox alignment="TOP_CENTER" spacing="10" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                <ImageView fitHeight="100.0" fitWidth="100.0" preserveRatio="true">
+                    <image>
+                        <Image url="@../Img/BELMAN_Logo.png" />
+                    </image>
+                </ImageView>
+                <VBox>
+                    <children>
+                        <Label text="Cast Iron Pipe" />
+                        <Label text="ID: 0711-3498" />
+                    </children>
+                </VBox>
+            </VBox>
+
+            <!-- GridPane (3,0) -->
+            <VBox alignment="TOP_CENTER" spacing="10" GridPane.columnIndex="3" GridPane.rowIndex="0">
+                <ImageView fitHeight="100.0" fitWidth="100.0" preserveRatio="true">
+                    <image>
+                        <Image url="@../Img/BELMAN_Logo.png" />
+                    </image>
+                </ImageView>
+                <VBox>
+                    <children>
+                        <Label text="Copper Pipe" />
+                        <Label text="ID: 0824-2983" />
+                    </children>
+                </VBox>
+            </VBox>
+
+            <!-- GridPane (4,0) -->
+            <VBox alignment="TOP_CENTER" spacing="10" GridPane.columnIndex="4" GridPane.rowIndex="0">
+                <ImageView fitHeight="100.0" fitWidth="100.0" preserveRatio="true">
+                    <image>
+                        <Image url="@../Img/BELMAN_Logo.png" />
+                    </image>
+                </ImageView>
+                <VBox>
+                    <children>
+                        <Label text="Aluminum Pipe" />
+                        <Label text="ID: 0629-1023" />
+                    </children>
+                </VBox>
+            </VBox>
+
+            <!-- Row 1 -->
+
+            <!-- GridPane (0,1) -->
+            <VBox alignment="TOP_CENTER" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                <ImageView fitHeight="100.0" fitWidth="100.0" preserveRatio="true">
+                    <image>
+                        <Image url="@../Img/BELMAN_Logo.png" />
+                    </image>
+                </ImageView>
+                <VBox>
+                    <children>
+                        <Label text="PEX Pipe" />
+                        <Label text="ID: 0194-8210" />
+                    </children>
+                </VBox>
+            </VBox>
+
+            <!-- GridPane (1,1) -->
+            <VBox alignment="TOP_CENTER" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <ImageView fitHeight="100.0" fitWidth="100.0" preserveRatio="true">
+                    <image>
+                        <Image url="@../Img/BELMAN_Logo.png" />
+                    </image>
+                </ImageView>
+                <VBox>
+                    <children>
+                        <Label text="Concrete Pipe" />
+                        <Label text="ID: 0221-3746" />
+                    </children>
+                </VBox>
+            </VBox>
+
+            <!-- GridPane (2,1) -->
+            <VBox alignment="TOP_CENTER" spacing="10" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                <ImageView fitHeight="100.0" fitWidth="100.0" preserveRatio="true">
+                    <image>
+                        <Image url="@../Img/BELMAN_Logo.png" />
+                    </image>
+                </ImageView>
+                <VBox>
+                    <children>
+                        <Label text="Galvanized Pipe" />
+                        <Label text="ID: 0398-1127" />
+                    </children>
+                </VBox>
+            </VBox>
+
+            <!-- GridPane (3,1) -->
+            <VBox alignment="TOP_CENTER" spacing="10" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                <ImageView fitHeight="100.0" fitWidth="100.0" preserveRatio="true">
+                    <image>
+                        <Image url="@../Img/BELMAN_Logo.png" />
+                    </image>
+                </ImageView>
+                <VBox>
+                    <children>
+                        <Label text="ABS Pipe" />
+                        <Label text="ID: 0449-7342" />
+                    </children>
+                </VBox>
+            </VBox>
+
+            <!-- GridPane (4,1) -->
+            <VBox alignment="TOP_CENTER" spacing="10" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                <ImageView fitHeight="100.0" fitWidth="100.0" preserveRatio="true">
+                    <image>
+                        <Image url="@../Img/BELMAN_Logo.png" />
+                    </image>
+                </ImageView>
+                <VBox>
+                    <children>
+                        <Label text="Plastic Pipe" />
+                        <Label text="ID: 0538-9824" />
+                    </children>
+                </VBox>
+            </VBox>
+        </children>
+      <columnConstraints>
+          <ColumnConstraints percentWidth="20" />
+          <ColumnConstraints percentWidth="20" />
+          <ColumnConstraints percentWidth="20" />
+          <ColumnConstraints percentWidth="20" />
+          <ColumnConstraints percentWidth="20" />
+      </columnConstraints>
+      <rowConstraints>
+         <RowConstraints />
+         <RowConstraints />
+      </rowConstraints>
+    </GridPane>
+
+    <!-- Bottom: Page Navigation -->
+    <HBox alignment="CENTER" spacing="10">
+        <Button style="-fx-background-radius: 5;" text="&lt;" /> <!-- Use "<" directly in Scene Builder -->
+        <Button style="-fx-background-radius: 5;" text="1" />
+        <Button style="-fx-background-radius: 5;" text="2" />
+        <Button style="-fx-background-radius: 5;" text="3" />
+        <Button style="-fx-background-radius: 5;" text="&gt;" /> <!-- Use ">" directly in Scene Builder -->
+    </HBox>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
 
 </VBox>
