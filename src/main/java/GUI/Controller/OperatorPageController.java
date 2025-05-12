@@ -116,7 +116,7 @@ public class OperatorPageController {
 
                 // Create trash icon (make sure the path is correct)
                 ImageView trashIcon = new ImageView(new Image(getClass().getResourceAsStream("/Img/trash.png")));
-                trashIcon.setFitWidth(35);
+                trashIcon.setFitWidth(25);
                 trashIcon.setFitHeight(20);
                 trashIcon.setStyle("-fx-background-color: #033678;");
 
@@ -126,6 +126,7 @@ public class OperatorPageController {
 
                 // StackPane to hold the image and the trash icon
                 StackPane imageContainer = new StackPane(imageView, trashIcon);
+                trashIcon.setOpacity(0);
 
                 // Show trash icon when mouse hovers over the image
                 imageContainer.setOnMouseEntered(e -> {
@@ -142,12 +143,6 @@ public class OperatorPageController {
                     imageView.setOpacity(1);
                     imageContainer.setStyle("-fx-cursor: pointer");
                 });
-
-                // Handle click on trash icon
-//                trashIcon.setOnMouseClicked(e -> {
-//                    e.consume(); // Prevent event from propagating to the image
-//                    handleRemoveImage(imageContainer);
-//                });
 
                 // Add the image container to the grid
                 imageGrid.getChildren().remove(addImagePlaceholder);
