@@ -11,7 +11,15 @@
     -fx-padding: 0;
 }
 
+.inline-button {
+    -fx-pref-width: 50px; /* Can be adjusted based on design needs */
+}
 
+
+
+#notesArea{
+    -fx-pref-height: 280px;
+}
 
 .title-bar {
     -fx-background-color: #004B88;
@@ -79,4 +87,38 @@
 
 #body {
     -fx-background-color: linear-gradient(to right, #0375AA 0%, #0074D9 21%, #0E63AE 69%, #005092 100%);
+}
+
+/*
+---------------
+Orders
+---------------
+*/
+
+*{
+    -fx-text-fill: #FFFFFF;
+}
+
+#ordersBody{
+    -fx-background-color: linear-gradient(to right, #0375AA 0%, #0074D9 21%, #0E63AE 69%, #005092 100%);
+}
+
+#ordersNew{
+    -fx-background-color: linear-gradient(from 70% 70% to 100% 100%, #0095FF 0%, #0077CC 100%);
+}
+
+#ordersApproved{
+    -fx-background-color: linear-gradient(from 70% 70% to 100% 100%, #00DF0B 33%, #3EE8CB 66%, #37C1B1 66%);
+}
+
+#ordersPending{
+    -fx-background-color: linear-gradient(to right, #FC8924 0%, #D1A8A8 100%);
+}
+
+#ordersRejected {
+    -fx-background-color: linear-gradient(from 0% 70% to 100% 30%, #F61616 0%, #DDD3D3 100%);}
+
+
+.ordersPageNav{
+    -fx-background-color: #009EF4 !important;
 }
