@@ -1,5 +1,7 @@
 package GUI.Controller;
 
+import com.gluonhq.attach.camera.CameraService;
+import com.gluonhq.attach.camera.CameraService.PhotoHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -14,6 +16,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import java.io.InputStream;
+import java.util.Optional;
 
 import java.io.File;
 
@@ -70,22 +74,35 @@ public class OperatorPageController {
 
     @FXML
     private void handleAddImage() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Choose an Image");
-        File file = fileChooser.showOpenDialog(null);
-        if (file != null) {
-            Image image = new Image(file.toURI().toString());
-            ImageView imageView = new ImageView(image);
-            imageView.setFitWidth(200);
-            imageView.setFitHeight(150);
-            imageView.setPreserveRatio(true);
+        Optional<CameraService> cameraService = CameraService.create();
+        if (cameraService.isPresent()) {
+            cameraService.get().startPhotoCapture(new PhotoHandler() {
+                @Override
+                public void onPhotoCaptured(InputStream photoInputStream) {
+                    Image image = new Image(photoInputStream);
+                    ImageView imageView = new ImageView(image);
+                    imageView.setFitWidth(200);
+                    imageView.setFitHeight(150);
+                    imageView.setPreserveRatio(true);
 
-            imageGrid.getChildren().remove(addImagePlaceholder);
-            imageGrid.getChildren().add(imageView);
-            imageGrid.getChildren().add(addImagePlaceholder);
+                    // UI updates must happen on the FX thread
+                    javafx.application.Platform.runLater(() -> {
+                        imageGrid.getChildren().remove(addImagePlaceholder);
+                        imageGrid.getChildren().add(imageView);
+                        imageGrid.getChildren().add(addImagePlaceholder);
+                    });
+                }
+
+                @Override
+                public void onError(String message, Exception exception) {
+                    System.err.println("Camera error: " + message);
+                    exception.printStackTrace();
+                }
+            });
+        } else {
+            System.out.println("Camera service is not available on this platform.");
         }
     }
-
 
     public void closeStage(ActionEvent event) {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
