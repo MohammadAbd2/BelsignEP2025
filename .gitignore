@@ -37,5 +37,5 @@ build/
 ### Mac OS ###
 .DS_Store
 
-
-./QC_Belsign.log
+logs/QC_Belsign.log
+QC_Belsign.log

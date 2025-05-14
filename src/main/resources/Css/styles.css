@@ -97,6 +97,7 @@ Orders
 
 *{
     -fx-text-fill: #FFFFFF;
+    -fx-font-family: 'Helvetica';
 }
 
 #ordersBody{
