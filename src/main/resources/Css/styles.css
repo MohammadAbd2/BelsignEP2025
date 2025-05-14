@@ -1,9 +1,55 @@
+ .label, .button, .text, .list-cell, .table-cell, .text-field, .text-area {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-family: 'Helvetica';
+    -fx-font-size: 16px;
+}
 
+
+*{
+    -fx-text-fill: #FFFFFF;
+}
 .root {
     -fx-padding: 0;
     -fx-alignment: center;
 }
 
+ TextField {
+     -fx-background-color: rgba(0, 80, 146, 0.23);
+     -fx-border-radius: 25;
+ }
+
+ .combo-box {
+     -fx-background-radius: 5;
+     -fx-border-radius: 5;
+     -fx-background-color: rgba(0, 80, 146, 0.23);
+     -fx-text-fill: white;
+ }
+ .combo-box .arrow {
+     -fx-background-color: white;
+ }
+ /* لتغيير خلفية القائمة المنسدلة نفسها */
+ .combo-box-popup .list-view {
+     -fx-background-color: rgba(0, 80, 146, 0.23);
+ }
+
+ /* لتعديل عناصر القائمة */
+ .combo-box .list-cell {
+     -fx-background-color: transparent;
+     -fx-text-fill: white;
+ }
+
+ .combo-box .list-cell:hover {
+     -fx-background-color: rgba(0, 80, 146, 0.35);
+ }
+
+ .combo-box .list-cell:selected {
+     -fx-background-color: rgba(0, 80, 146, 0.5);
+ }
+
+ .adminSeButtons{
+     -fx-background-color: rgba(49, 49, 49, 0.84);
+     -fx-text-fill: white;
+ }
 .body{
     -fx-background-color: linear-gradient(from 0% 70% to 100% 30%, #0375AA 0%, #04529d 100%, #0E63AE 100%, #005092 70% );
 
@@ -17,6 +63,11 @@
 
 .inline-button {
     -fx-pref-width: 50px; /* Can be adjusted based on design needs */
+}
+#searchBox{
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: rgba(0, 0, 0, 0.23);
+    -fx-prompt-text-fill: rgba(255, 255, 255, 0.75);
 }
 
 custom-scroll-pane {
@@ -139,10 +190,7 @@ Orders
 ---------------
 */
 
-*{
-    -fx-text-fill: #FFFFFF;
-    -fx-font-family: 'Helvetica';
-}
+
 
 #ordersBody{
     -fx-background-color: linear-gradient(to right, #0375AA 0%, #0074D9 21%, #0E63AE 69%, #005092 100%);
@@ -161,7 +209,7 @@ Orders
 }
 
 #ordersRejected {
-    -fx-background-color: linear-gradient(from 0% 70% to 100% 30%, #F61616 0%, #DDD3D3 100%);}
+    -fx-background-color: linear-gradient(from 0% 70% to 100% 30%, #F61616 0%, #fb7575 100%);}
 
 
 
