@@ -14,25 +14,10 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
-import javafx.embed.swing.SwingFXUtils;
-import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.stage.FileChooser;
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-
-
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
 public class OperatorPageController {
 
     @FXML private ImageView logoImage;
@@ -158,7 +143,7 @@ public class OperatorPageController {
         }
     }
 
-@FXML
+    @FXML
     public void handleRemoveImage(StackPane imageContainer) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Remove Image");
@@ -175,6 +160,8 @@ public class OperatorPageController {
             }
         });
     }
+
+
 
 
 

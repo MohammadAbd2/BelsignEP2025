@@ -4,6 +4,10 @@
     -fx-alignment: center;
 }
 
+.body{
+    -fx-background-color: linear-gradient(from 0% 70% to 100% 30%, #0375AA 0%, #04529d 100%, #0E63AE 100%, #005092 70% );
+
+}
 .vbox {
     -fx-pref-width: 600;
     -fx-pref-height: 450;
@@ -13,6 +17,46 @@
 
 .inline-button {
     -fx-pref-width: 50px; /* Can be adjusted based on design needs */
+}
+
+custom-scroll-pane {
+    -fx-background-color: linear-gradient(to right, #0375AA 0%, #0074D9 21%, #0E63AE 69%, #005092 100%);
+
+}
+
+.scroll-pane {
+     -fx-background-color: transparent;
+ }
+
+/* الشريط العمودي */
+.scroll-pane .scroll-bar:vertical,
+.scroll-pane .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}
+
+/* تلوين الـ thumb فقط */
+.scroll-pane .scroll-bar:vertical .thumb,
+.scroll-pane .scroll-bar:horizontal .thumb {
+    -fx-background-color: linear-gradient(to right, #0375AA 0%, #0074D9 21%, #0E63AE 69%, #005092 100%);
+    -fx-background-radius: 5px;
+}
+
+/* إزالة المسار الخلفي */
+.scroll-pane .scroll-bar .track {
+    -fx-background-color: transparent;
+}
+
+/* إزالة أزرار الأسهم */
+.scroll-pane .increment-button,
+.scroll-pane .decrement-button,
+.scroll-pane .increment-arrow,
+.scroll-pane .decrement-arrow {
+    -fx-background-color: transparent;
+    -fx-shape: "";
+    -fx-padding: 0;
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
 }
 
 
@@ -119,6 +163,36 @@ Orders
 #ordersRejected {
     -fx-background-color: linear-gradient(from 0% 70% to 100% 30%, #F61616 0%, #DDD3D3 100%);}
 
+
+
+#navigationBar{
+    -fx-background-color: linear-gradient(from 0% 70% to 100% 30%, #0375AA 0%, #04529d 100%, #0E63AE 100%, #005092 70% );
+}
+
+
+#navbar Button {
+    -fx-padding : 25px;
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+#navbar *:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.25);
+    -fx-cursor: hand !important;
+}
+
+
+/* Profile Picture Styles */
+#profile_pic {
+    -fx-background-radius: 50%;  /* Circular background */
+    -fx-border-radius: 50%;  /* Circular border */
+    -fx-border-color: white;  /* White border color */
+    -fx-border-width: 2px;  /* Border width */
+}
+#profileImagePane{
+    -fx-padding: 14px 0px 0px 15px;
+    -fx-background-color: null !important;
+}
 
 .ordersPageNav{
     -fx-background-color: #009EF4 !important;

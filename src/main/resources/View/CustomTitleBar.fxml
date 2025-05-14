@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+            stylesheets="@/Css/styles.css"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="GUI.Controller.CustomTitleBarController"
+            >
+
+    <HBox fx:id="titleBar" alignment="TOP_CENTER" prefHeight="35" spacing="4" styleClass="title-bar" VBox.vgrow="NEVER">
+
+        <Label fx:id="Title" styleClass="title-text" text="Qc_Belsign Application" />
+        <Region fx:id="spacer" HBox.hgrow="ALWAYS" />
+        <Button fx:id="minimizeButton" onAction="#minimizeStage" styleClass="title-button" text="➖" />
+        <Button fx:id="closeButton" onAction="#closeStage" styleClass="title-button" text="❌">
+        </Button>
+    </HBox>
+
+</VBox>
