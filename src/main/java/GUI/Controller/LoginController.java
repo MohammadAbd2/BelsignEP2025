@@ -22,13 +22,9 @@ public class LoginController {
 
     @FXML private Button qaButton;
 
-    @FXML private Button minimizeButton;
 
-    @FXML private Button closeButton;
 
-    @FXML private HBox titleBar;
 
-    private Stage stage;
 
     @FXML
     public void initialize() {
@@ -51,23 +47,6 @@ public class LoginController {
         qaButton.setOnAction(e -> loginChoice.qaLogin());
 
 
-        // Variables to store initial mouse position
-        final double[] xOffset = {0};
-        final double[] yOffset = {0};
-
-// Record the current mouse position on press
-        titleBar.setOnMousePressed(event -> {
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            xOffset[0] = stage.getX() - event.getScreenX();
-            yOffset[0] = stage.getY() - event.getScreenY();
-        });
-
-// Update the stage position on drag
-        titleBar.setOnMouseDragged(event -> {
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setX(event.getScreenX() + xOffset[0]);
-            stage.setY(event.getScreenY() + yOffset[0]);
-        });
     }
 
     @FXML
@@ -88,15 +67,6 @@ public class LoginController {
 
 
 
-    public void closeStage(ActionEvent event) {
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
-    }
-
-    public void minimizeStage(ActionEvent event) {
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setIconified(true);
-    }
 
 
 }
