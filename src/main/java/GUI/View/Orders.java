@@ -110,7 +110,7 @@ public class Orders {
         orderImage.setFitWidth(160);
         orderImage.setFitHeight(120);
 
-        Text orderDescription = new Text("Description : " + order.getOrderId() + order.getOrderNumber());
+        Text orderDescription = new Text("Description : " + order.getId() + order.getOrderNumber());
 
         orderCard.getChildren().addAll(orderImage, orderDescription);
         return orderCard;

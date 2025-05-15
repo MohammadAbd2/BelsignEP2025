@@ -14,12 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderPageController {
-
-    @FXML
-    public VBox ordersList;
-    @FXML
-    private VBox ordersBody;
-
     @FXML
     private TextField searchField;
 
@@ -36,7 +30,7 @@ public class OrderPageController {
     private Button ordersRejected;
 
     @FXML
-    private GridPane ordersGrid; // You'll need to assign fx:id to the GridPane in FXML
+    private GridPane ordersGrid;
 
     public void initialize() {
         System.out.println("OrderPageController initialized!");
@@ -49,24 +43,37 @@ public class OrderPageController {
 
         searchField.setOnKeyReleased(e -> filterByText(searchField.getText()));
 
-
-        // TODO: change to fetch from DB
+        // Get the orders and populate the grid
         List<Order> orders = getSampleOrders();
+        populateOrdersGrid(orders);
+    }
 
-        for (Order order : orders) {
+    private void populateOrdersGrid(List<Order> orders) {
+        // Clear existing items
+        ordersGrid.getChildren().clear();
+
+        // Create 5x2 grid
+        int columns = 5;
+        int rows = 2;
+
+        for (int i = 0; i < (columns * rows); i++) {
             try {
+                // Calculate grid position
+                int column = i % columns;
+                int row = i / columns;
+
                 // Load the OrderCard.fxml layout
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OrderCard.fxml"));
                 Node orderCard = loader.load();
 
-                // Get the controller for the loaded FXML
+                // Get the controller and set the order data (might be null)
                 OrderCardController controller = loader.getController();
-
-                // Pass the Order object to the card
+                Order order = (i < orders.size()) ? orders.get(i) : null;
                 controller.setOrderData(order);
 
-                // Add the card to the VBox
-                ordersList.getChildren().add(orderCard);
+                // Add to grid at calculated position
+                ordersGrid.add(orderCard, column, row);
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -74,11 +81,18 @@ public class OrderPageController {
     }
 
     private List<Order> getSampleOrders() {
-        List<Order> orders = new ArrayList<>();
-        // Sample data
-        orders.add(new Order(1, "Order #001", "", "", "new"));
-        orders.add(new Order(2, "Order #002", "", "", "approved"));
-        orders.add(new Order(3, "Order #003", "", "", "pending"));
+        List<Order> orders = new ArrayList<>(10); // Initialize with capacity of 10
+        // Pre-fill the list with 10 null elements
+        for (int i = 0; i < 10; i++) {
+            orders.add(null);
+        }
+
+        // Add actual orders at specific positions (indices 0-9)
+        orders.set(0, new Order(1, "Order #001", "", "", "new", "Sample Product 1", null));
+        orders.set(1, new Order(2, "Order #002", "", "", "approved", "Sample Product 2", null));
+        orders.set(2, new Order(3, "Order #003", "", "", "pending", "Sample Product 3", null));
+
+        // The remaining positions (3-9) will stay null, creating empty spaces in the grid
         return orders;
     }
 

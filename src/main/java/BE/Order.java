@@ -6,51 +6,66 @@ public class Order {
     private String image;
     private String notes;
     private String status;
+    private String productName;
+    private String statusIcon;
 
-    public Order(int id, String orderNumber, String image, String notes, String status) {
+    public Order(int id, String orderNumber, String image, String notes, String status, String productName, String statusIcon) {
         this.id = id;
         this.orderNumber = orderNumber;
         this.image = image;
         this.notes = notes;
         this.status = status;
+        this.productName = productName;
+        this.statusIcon = statusIcon;
     }
 
     public Order(int id) {
     }
 
+    public Order(int id, String orderNumber, String image, String notes, String status) {
 
+    }
 
     public int getId() {
         return id;
     }
+
     public String getOrderNumber() {
         return orderNumber;
     }
-    public int getOrderId(){
-        return id;
-    }
+
     public String getImage() {
         return image;
     }
+
     public String getNotes() {
         return notes;
     }
+
     public String getStatus() {
         return status;
+    }
+
+    public String getProductName() {
+        return productName;
     }
 
     public void setId(int id) {
         this.id = id;
     }
+
     public void setOrderNumber(String orderNumber) {
         this.orderNumber = orderNumber;
     }
+
     public void setImage(String image) {
         this.image = image;
     }
+
     public void setNotes(String notes) {
         this.notes = notes;
     }
+
     public void setStatus(String status) {
         this.status = status;
     }
