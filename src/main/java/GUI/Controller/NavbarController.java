@@ -1,6 +1,7 @@
 package GUI.Controller;
 
 import GUI.View.*;
+import Utils.UserSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -31,7 +32,7 @@ public class NavbarController {
 
         // Apply circular clipping
         Circle clip = new Circle(profile_pic.getFitWidth() / 1.2, profile_pic.getFitHeight() / 1.7,
-                Math.min(profile_pic.getFitWidth(), profile_pic.getFitHeight()) / 2.4);
+                Math.min(profile_pic.getFitWidth(), profile_pic.getFitHeight()) / 2.11);
         profile_pic.setClip(clip);
 
 
@@ -40,8 +41,17 @@ public class NavbarController {
 
 
 
-    public void OrderTab(ActionEvent event) {
+    public void OrderTab(ActionEvent event) throws IOException {
+        UserSession.setLoggedIn(true);
 
+        List<String> scenes = List.of(
+                "customTitleBar",
+                "navBar",
+                "orderPage"
+        );
+
+        SceneManager.composeScene(scenes, "composedOrderPage");
+        SceneManager.switchScene("composedOrderPage");
     }
 
     public void OperatorTab(ActionEvent event) {
