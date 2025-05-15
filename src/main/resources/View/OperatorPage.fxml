@@ -16,59 +16,53 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <FlowPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.OperatorPageController">
    <children>
         <SplitPane dividerPositions="0.4" orientation="HORIZONTAL">
             <!-- Left Image Grid -->
             <VBox>
-                <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" pannable="false" vbarPolicy="AS_NEEDED" VBox.vgrow="ALWAYS">
-               <GridPane gridLinesVisible="true">
-                  <columnConstraints>
-                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="40.0" />
-                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="60.0" prefWidth="100.0" />
-                  </columnConstraints>
-                  <rowConstraints>
-                     <RowConstraints minHeight="10.0" percentHeight="20.0" vgrow="SOMETIMES" />
-                     <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  </rowConstraints>
-                  <children>
-                       <StackPane fx:id="addImagePlaceholder" onMouseClicked="#handleAddImage" GridPane.columnIndex="1">
-                           <Label styleClass="add-label" text="+" />
-                       </StackPane>
-                     <StackPane fx:id="addImagePlaceholder1" layoutX="87.0" layoutY="10.0" onMouseClicked="#handleAddImage" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                        <children>
-                           <Label styleClass="add-label" text="+" />
-                        </children>
-                     </StackPane>
-                     <StackPane fx:id="addImagePlaceholder11" layoutX="10.0" layoutY="10.0" onMouseClicked="#handleAddImage" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                        <children>
-                           <Label styleClass="add-label" text="+" />
-                        </children>
-                     </StackPane>
-                     <StackPane fx:id="addImagePlaceholder111" layoutX="10.0" layoutY="10.0" onMouseClicked="#handleAddImage" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                        <children>
-                           <Label styleClass="add-label" text="+" />
-                        </children>
-                     </StackPane>
-                     <StackPane fx:id="addImagePlaceholder1111" layoutX="10.0" layoutY="10.0" onMouseClicked="#handleAddImage" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                        <children>
-                           <Label styleClass="add-label" text="+" />
-                        </children>
-                     </StackPane>
-                     <Label text="Front:" GridPane.halignment="CENTER" />
-                     <Label text="Back:" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-                     <Label text="Right:" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                     <Label text="Left:" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-                     <Label text="Top:" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-                  </children>
-               </GridPane>
+                <ScrollPane fitToWidth="true" hbarPolicy="NEVER" pannable="true" prefHeight="274.0" prefWidth="326.0">
+                    <GridPane fx:id="imageGrid" gridLinesVisible="true" maxHeight="Infinity" maxWidth="Infinity">
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="40.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="60.0" prefWidth="100.0" />
+                        </columnConstraints>
+                        <rowConstraints>
+                            <RowConstraints minHeight="10.0" percentHeight="20.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        </rowConstraints>
+                        <StackPane fx:id="frontImagePane" onMouseClicked="#handleAddImage" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <Label styleClass="add-label" text="+" />
+                        </StackPane>
+
+                        <StackPane fx:id="backImagePane" onMouseClicked="#handleAddImage" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <Label styleClass="add-label" text="+" />
+                        </StackPane>
+
+                        <StackPane fx:id="rightImagePane" onMouseClicked="#handleAddImage" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                            <Label styleClass="add-label" text="+" />
+                        </StackPane>
+
+                        <StackPane fx:id="leftImagePane" onMouseClicked="#handleAddImage" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                            <Label styleClass="add-label" text="+" />
+                        </StackPane>
+
+                        <StackPane fx:id="topImagePane" onMouseClicked="#handleAddImage" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                            <Label styleClass="add-label" text="+" />
+                        </StackPane>
+
+                        <Label text="Front:" GridPane.halignment="CENTER" />
+                        <Label text="Back:" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                        <Label text="Right:" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                        <Label text="Left:" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                        <Label text="Top:" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
+                    </GridPane>
                 </ScrollPane>
             </VBox>
-      
+
       <!-- Right Form -->
             <VBox spacing="10">
                 <padding>
@@ -81,7 +75,7 @@
                     <Button fx:id="saveButton" styleClass="inline-button" text="Save" />
                     <Button fx:id="editButton" styleClass="inline-button" text="Edit" />
                 </HBox>
-      
+
             </VBox>
         </SplitPane>
    </children>

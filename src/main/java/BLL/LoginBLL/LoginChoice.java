@@ -3,6 +3,7 @@ package BLL.LoginBLL;
 import BE.Admin;
 import BE.Operator;
 import BE.QA;
+import GUI.Controller.NavbarController;
 import GUI.Model.Logger;
 import GUI.View.SceneManager;
 import Utils.LoggedInUser;
@@ -20,15 +21,16 @@ public class LoginChoice {
     public void adminLogin() throws IOException {
         LoggedInUser.setLoggedInRole("Admin");
         UserSession.setLoggedIn(true);
+        NavbarController.setNavbarStatus();
         List<String> scenes = List.of(
                 "customTitleBar",
                 "navBar",
                 "adminPage"
         );
-
         SceneManager.composeScene(scenes, "composedAdminPage");
         SceneManager.switchScene("composedAdminPage");
         System.out.println("Logged in as Admin.");
+
          Logger.displayOrders();
         // Additional logic for admin-specific access can go here
     }
@@ -36,7 +38,7 @@ public class LoginChoice {
     public void operatorLogin() throws IOException {
         LoggedInUser.setLoggedInRole("Operator");
         UserSession.setLoggedIn(true);
-
+        NavbarController.setNavbarStatus();
         List<String> scenes = List.of(
                 "customTitleBar",
                 "navBar",
@@ -53,7 +55,7 @@ public class LoginChoice {
     public void qaLogin() throws IOException {
         LoggedInUser.setLoggedInRole("QA");
         UserSession.setLoggedIn(true);
-
+        NavbarController.setNavbarStatus();
         List<String> scenes = List.of(
                 "customTitleBar",
                 "navBar",
