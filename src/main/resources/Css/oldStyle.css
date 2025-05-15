@@ -8,13 +8,14 @@ loginPage
 /* General Styles */
 * {
     -fx-text-fill: #FFFFFF;  /* Set default text color for all elements */
+
 }
 
-/* Header Styles */
-#Header {
-    -fx-background-image: url("/img/background_image.png");  /* Background image for the Header */
-}
 
+
+#navigationBar{
+    -fx-background-color: linear-gradient(from 0% 70% to 100% 30%, #0375AA 0%, #04529d 100%, #0E63AE 100%, #005092 70% );
+}
 #navbar *:hover {
     -fx-cursor: pointer;
 }

@@ -9,6 +9,7 @@ import Utils.LoggedInUser;
 import Utils.UserSession;
 
 import java.io.IOException;
+import java.util.List;
 
 public class LoginChoice {
 
@@ -19,9 +20,14 @@ public class LoginChoice {
     public void adminLogin() throws IOException {
         LoggedInUser.setLoggedInRole("Admin");
         UserSession.setLoggedIn(true);
+        List<String> scenes = List.of(
+                "customTitleBar",
+                "navBar",
+                "adminPage"
+        );
 
-        SceneManager.loadScene("Main", "/View/navbar.fxml");
-        SceneManager.switchScene("Main");
+        SceneManager.composeScene(scenes, "composedAdminPage");
+        SceneManager.switchScene("composedAdminPage");
         System.out.println("Logged in as Admin.");
          Logger.displayOrders();
         // Additional logic for admin-specific access can go here

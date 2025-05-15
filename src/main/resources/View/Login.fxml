@@ -10,14 +10,6 @@
 
 <VBox fx:id="body" alignment="CENTER" spacing="10" style="-fx-padding: 0;" styleClass="vbox" stylesheets="@../Css/styles.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="GUI.Controller.LoginController">
 
-    <HBox fx:id="titleBar" alignment="TOP_CENTER" prefHeight="35" spacing="4" styleClass="title-bar" VBox.vgrow="NEVER">
-
-        <Label fx:id="Title" styleClass="title-text" text="Qc_Belsign Application" />
-        <Region fx:id="spacer" HBox.hgrow="ALWAYS" />
-        <Button fx:id="minimizeButton" onAction="#minimizeStage" styleClass="title-button" text="➖" />
-        <Button fx:id="closeButton" onAction="#closeStage" styleClass="title-button" text="❌">
-        </Button>
-    </HBox>
 
     <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
         <VBox alignment="CENTER" spacing="20">

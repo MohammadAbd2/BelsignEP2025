@@ -1,8 +1,0 @@
-ay 01, 2025 11:34:09 A.M. BLL.LoggerBLL.loggerManager logInfo
-INFO: Order created: ID = 0, by user: 0
-May 01, 2025 11:34:09 A.M. BLL.LoggerBLL.loggerManager logInfo
-INFO: ORDER_ADDED | ID: 0 | User: 0 | Time: 2025-05-01T11:34:09.669070600
-May 01, 2025 11:34:28 A.M. BLL.LoggerBLL.loggerManager logInfo
-INFO: Order created: ID = 0, by user: 0
-May 01, 2025 11:34:29 A.M. BLL.LoggerBLL.loggerManager logInfo
-INFO: ORDER_ADDED | ID: 0 | User: 0 | Time: 2025-01-01T11:34:29.021399300
