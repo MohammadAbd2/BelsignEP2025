@@ -15,20 +15,18 @@ public class App extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Login.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        primaryStage.initStyle(StageStyle.UNDECORATED);
-        primaryStage.setScene(scene);
-        primaryStage.show();
 
         // start using the Scenemanger
         SceneManager.setStage(primaryStage);
         SceneManager.loadSceneAsParent("/View/Login.fxml");
         SceneManager.loadScene("customTitleBar", "/View/CustomTitleBar.fxml");
-        SceneManager.loadScene("loginPage", "/View/Login.fxml");
         SceneManager.loadScene("navBar", "/View/navbar.fxml");
+        SceneManager.loadScene("loginPage", "/View/Login.fxml");
         SceneManager.loadScene("adminPage", "/View/Admin.fxml");
+        SceneManager.loadScene("operatorPage", "/View/OperatorPage.fxml");
+        SceneManager.loadScene("QC", "/View/QA.fxml");
+
+
         //Logger.displayOrders();
 
         Logger.RegisterLog("New order added: Order #1234", 1); //  INFO
@@ -45,6 +43,20 @@ public class App extends Application {
         System.out.println("There is " + errorLogs.size() + " Error messages");
 
 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Login.fxml"));
+        Parent root = loader.load();
+        Scene scene = new Scene(root);
+        primaryStage.initStyle(StageStyle.UNDECORATED);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
+        List<String> loginScenes = List.of(
+                "customTitleBar",
+                "loginPage"
+        );
+
+        SceneManager.composeScene(loginScenes, "ComposedLogin");
+        SceneManager.switchScene("ComposedLogin");
     }
 
     public static void main(String[] args) {
