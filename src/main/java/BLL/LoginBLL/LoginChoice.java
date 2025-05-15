@@ -31,7 +31,7 @@ public class LoginChoice {
         LoggedInUser.setLoggedInRole("Operator");
         UserSession.setLoggedIn(true);
 
-        SceneManager.loadScene("operator", "/View/OperatorPage.fxml");
+        SceneManager.loadScene("operator", "/View/Orders.fxml");
         SceneManager.switchScene("operator");
         System.out.println("Logged in as Operator.");
         Logger.displayOrders();

@@ -7,8 +7,8 @@
 <?import javafx.geometry.Insets?>
 
 <VBox xmlns:fx="http://javafx.com/fxml"
-        fx:controller="GUI.Controller.OperatorPageController"
-        stylesheets="@../Css/styles.css">
+      fx:controller="GUI.Controller.OperatorPageController"
+      stylesheets="@../Css/styles.css">
     <HBox fx:id="titleBar" styleClass="title-bar"
           prefHeight="35" alignment="TOP_CENTER"
           spacing="4"
@@ -33,20 +33,20 @@
                 <ScrollPane fitToHeight="false" fitToWidth="true" prefHeight="330" prefWidth="470"
                             hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" pannable="false">
                     <TilePane fx:id="imageGrid"
-                          prefColumns="2"
-                          hgap="10" vgap="10"
-                          prefTileWidth="200" prefTileHeight="150"
-                          minWidth="420" minHeight="320"
-                          orientation="HORIZONTAL">
-                    <StackPane fx:id="addImagePlaceholder" onMouseClicked="#handleAddImage">
-                        <Region styleClass="image-placeholder" prefWidth="200" prefHeight="150"/>
-                        <Label text="+" styleClass="add-label"/>
-                    </StackPane>
-                </TilePane>
+                              prefColumns="2"
+                              hgap="10" vgap="10"
+                              prefTileWidth="200" prefTileHeight="150"
+                              minWidth="420" minHeight="320"
+                              orientation="HORIZONTAL">
+                        <StackPane fx:id="addImagePlaceholder" onMouseClicked="#handleAddImage">
+                            <Region styleClass="image-placeholder" prefWidth="200" prefHeight="150"/>
+                            <Label text="+" styleClass="add-label"/>
+                        </StackPane>
+                    </TilePane>
                 </ScrollPane>
             </VBox>
 
-    <!-- Right Form -->
+            <!-- Right Form -->
             <VBox spacing="10">
                 <padding>
                     <Insets top="10" right="10" bottom="10" left="10"/>
@@ -62,12 +62,12 @@
             </VBox>
         </SplitPane>
 
-<!-- Status and Card Section -->
+        <!-- Status and Card Section -->
         <VBox spacing="10">
             <padding>
                 <Insets top="10" right="10" bottom="10" left="10"/>
             </padding>
-    <!-- Search and Filter Bar -->
+            <!-- Search and Filter Bar -->
             <HBox spacing="10">
                 <TextField fx:id="searchField" promptText="Search" HBox.hgrow="ALWAYS"/>
                 <Label text="Status:"/>
@@ -76,7 +76,7 @@
                 <Button text="Rejected : 4" styleClass="status-rejected"/>
             </HBox>
 
-    <!-- Cards Grid -->
+            <!-- Cards Grid -->
             <TilePane fx:id="cardGrid" prefColumns="5" hgap="10" vgap="10">
                 <VBox styleClass="card">
                     <ImageView fitHeight="100" fitWidth="100"/>
@@ -86,7 +86,7 @@
                 </VBox>
             </TilePane>
 
-    <!-- Pagination -->
+            <!-- Pagination -->
             <HBox spacing="5" alignment="CENTER">
                 <Button text="&lt;"/>
                 <Button text="1"/>
