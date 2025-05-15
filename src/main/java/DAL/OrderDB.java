@@ -17,7 +17,7 @@ public class OrderDB implements IOrderDB {
 
     @Override
     public Order createOrder(Order order) {
-        String sql = "INSERT INTO QC_Belsign_schema.[order] (orderNumber, image, notes, status) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO QC_Belsign_schema.[order] (orderNumber, image, notes, status, name) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = dbConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -25,6 +25,8 @@ public class OrderDB implements IOrderDB {
             stmt.setString(2, order.getImage());
             stmt.setString(3, order.getNotes());
             stmt.setString(4, order.getStatus());
+            stmt.setString(5, order.getOrder_name());
+
             stmt.executeUpdate();
 
             ResultSet rs = stmt.getGeneratedKeys();
@@ -51,10 +53,11 @@ public class OrderDB implements IOrderDB {
             if (rs.next()) {
                 return new Order(
                         rs.getInt("id"),
-                        rs.getString("orderNumber"),
+                        rs.getString("order_number"),
                         rs.getString("image"),
                         rs.getString("notes"),
                         rs.getString("status")
+                        , rs.getString("order_name")
                 );
             }
 
@@ -78,7 +81,9 @@ public class OrderDB implements IOrderDB {
                         rs.getString("order_number"),
                         rs.getString("image"),
                         rs.getString("notes"),
-                        rs.getString("status")
+                        rs.getString("status"),
+                        rs.getString("order_name")
+
                 ));
             }
 
@@ -90,7 +95,7 @@ public class OrderDB implements IOrderDB {
 
     @Override
     public void updateOrder(Order order) {
-        String sql = "UPDATE QC_Belsign_schema.[order] SET orderNumber = ?, image = ?, notes = ?, status = ? WHERE id = ?";
+        String sql = "UPDATE QC_Belsign_schema.[order] SET orderNumber = ?, image = ?, notes = ?, status = ?,  WHERE id = ?";
         try (Connection conn = dbConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
