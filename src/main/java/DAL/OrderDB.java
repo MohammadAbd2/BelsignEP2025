@@ -17,7 +17,7 @@ public class OrderDB implements IOrderDB {
 
     @Override
     public Order createOrder(Order order) {
-        String sql = "INSERT INTO QC_Belsign_schema.[order] (orderNumber, image, notes, status, name) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO QC_Belsign_schema.[order] (orderNumber, image, notes, status, order_name) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = dbConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -82,7 +82,7 @@ public class OrderDB implements IOrderDB {
                         rs.getString("image"),
                         rs.getString("notes"),
                         rs.getString("status"),
-                        rs.getString("order_name")
+                        rs.getString("name")
 
                 ));
             }
@@ -95,7 +95,7 @@ public class OrderDB implements IOrderDB {
 
     @Override
     public void updateOrder(Order order) {
-        String sql = "UPDATE QC_Belsign_schema.[order] SET orderNumber = ?, image = ?, notes = ?, status = ?,  WHERE id = ?";
+        String sql = "UPDATE QC_Belsign_schema.[order] SET orderNumber = ?, image = ?, notes = ?, status = ?, order_name = ?,  WHERE id = ?";
         try (Connection conn = dbConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -104,6 +104,7 @@ public class OrderDB implements IOrderDB {
             stmt.setString(3, order.getNotes());
             stmt.setString(4, order.getStatus());
             stmt.setInt(5, order.getId());
+            stmt.setString(6, order.getOrder_name());
             stmt.executeUpdate();
 
         } catch (SQLException e) {

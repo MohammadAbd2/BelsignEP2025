@@ -38,8 +38,11 @@ public class OrderCardController {
             return;
         }
 
-        // Set the product name and ID
-        productName.setText(order.getOrder_number());
+        // Set the product name, order number and ID
+        String displayText = order.getOrder_name() != null ?
+                order.getOrder_name() + " (" + order.getOrder_number() + ")" :
+                order.getOrder_number();
+        productName.setText(displayText);
         productId.setText("ID: " + order.getId());
 
         // Set the main product image

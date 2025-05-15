@@ -6,24 +6,28 @@ public class Order {
     private String image;
     private String notes;
     private String status;
-    private String productName;
+    private String order_name;
     private String statusIcon;
 
-    public Order(int id, String order_number, String image, String notes, String status, String productName, String statusIcon) {
+    public Order(int id, String order_number, String image, String notes, String status, String name) {
         this.id = id;
         this.order_number = order_number;
         this.image = image;
         this.notes = notes;
         this.status = status;
-        this.productName = productName;
-        this.statusIcon = statusIcon;
+        this.order_name = order_name;
     }
 
     public Order(int id) {
+        this.id = id;
     }
 
     public Order(int id, String order_number, String image, String notes, String status) {
-
+        this.id = id;
+        this.order_number = order_number;
+        this.image = image;
+        this.notes = notes;
+        this.status = status;
     }
 
     public int getId() {
@@ -46,8 +50,8 @@ public class Order {
         return status;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getOrder_name() {
+        return order_name;
     }
 
     public void setId(int id) {
@@ -70,6 +74,10 @@ public class Order {
         this.status = status;
     }
 
+    public void setOrder_name(String order_name) {
+        this.order_name = order_name;
+    }
+
     public String getStatusIcon() {
         if (status == null) return "default.png";
 
@@ -90,6 +98,6 @@ public class Order {
     @Override
     public String toString() {
         return "Order [id=" + id + ", orderNumber=" + order_number + ", image=" + image + ", notes=" + notes
-                + ", status=" + status + "]";
+                + ", status=" + status + ", orderName=" + order_name + "]";
     }
 }
