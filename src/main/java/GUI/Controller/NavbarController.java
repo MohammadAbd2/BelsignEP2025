@@ -1,24 +1,14 @@
 package GUI.Controller;
 
 import GUI.View.*;
-import GUI.View.Header.Navbar;
-import Utils.LoggedInUser;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
-import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.util.List;
-import java.util.Objects;
 
 public class NavbarController {
     @FXML
@@ -36,11 +26,11 @@ public class NavbarController {
     public void initialize() throws IOException {
 
         // Load profile image
-        Image image = new Image(getClass().getResource("/img/profile_picture.png").toExternalForm());
+        Image image = new Image(getClass().getResource("/img/logout.png").toExternalForm());
         profile_pic.setImage(image);
 
         // Apply circular clipping
-        Circle clip = new Circle(profile_pic.getFitWidth() / 2, profile_pic.getFitHeight() / 2.5,
+        Circle clip = new Circle(profile_pic.getFitWidth() / 1.2, profile_pic.getFitHeight() / 1.7,
                 Math.min(profile_pic.getFitWidth(), profile_pic.getFitHeight()) / 2.4);
         profile_pic.setClip(clip);
 
