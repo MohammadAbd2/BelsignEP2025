@@ -55,6 +55,23 @@ public class Order {
         this.status = status;
     }
 
+    public String getStatusIcon() {
+        if (status == null) return "default.png";
+
+        switch (status.toLowerCase()) {
+            case "approved":
+                return "check.png";
+            case "pending":
+                return "hourglass.png";
+            case "rejected":
+                return "delete.png";
+            case "new":
+                return "star.png";
+            default:
+                return "default.png";
+        }
+    }
+
     @Override
     public String toString() {
         return "Order [id=" + id + ", orderNumber=" + orderNumber + ", image=" + image + ", notes=" + notes

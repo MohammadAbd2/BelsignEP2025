@@ -16,13 +16,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<FlowPane alignment="CENTER" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<FlowPane fx:controller="GUI.Controller.OrderPageController" alignment="CENTER" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <VBox fx:id="ordersBody" spacing="20" stylesheets="@/Css/styles.css">
 
         <!-- Top: Filter Bar -->
         <BorderPane>
             <left>
-                <TextField promptText="Search..." />
+                <TextField fx:id="searchField" promptText="Search..." />
             </left>
             <right>
                 <HBox spacing="10">
@@ -52,7 +52,7 @@
         </BorderPane>
 
         <!-- Middle: Orders Grid -->
-        <GridPane hgap="20.0" vgap="20">
+        <GridPane fx:id="ordersGrid" hgap="20.0" vgap="20">
 
             <columnConstraints>
                 <ColumnConstraints percentWidth="20" />
@@ -66,168 +66,15 @@
                 <RowConstraints />
             </rowConstraints>
 
-            <!-- GridPane (0,0) -->
-            <VBox alignment="TOP_CENTER" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                <StackPane>
-                    <ImageView fitHeight="100.0" fitWidth="100.0" preserveRatio="true">
-                        <Image url="@../Img/BELMAN_Logo.png" />
-                    </ImageView>
-                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" preserveRatio="true" StackPane.alignment="TOP_RIGHT">
-                        <Image url="@../Img/check.png" />
-                    </ImageView>
-                </StackPane>
-                <VBox>
-                    <Label text="PVC Pipe" />
-                    <Label text="ID: 0457-8876" />
-                </VBox>
-            </VBox>
-
-            <!-- GridPane (1,0) -->
-            <VBox alignment="TOP_CENTER" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                <StackPane>
-                    <ImageView fitHeight="100.0" fitWidth="100.0" preserveRatio="true">
-                        <Image url="@../Img/BELMAN_Logo.png" />
-                    </ImageView>
-                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" preserveRatio="true" StackPane.alignment="TOP_RIGHT">
-                        <Image url="@../Img/star.png" />
-                    </ImageView>
-                </StackPane>
-                <VBox>
-                    <Label text="Steel Pipe" />
-                    <Label text="ID: 0983-7745" />
-                </VBox>
-            </VBox>
-
-            <!-- GridPane (2,0) -->
-            <VBox alignment="TOP_CENTER" spacing="10" GridPane.columnIndex="2" GridPane.rowIndex="0">
-                <StackPane>
-                    <ImageView fitHeight="100.0" fitWidth="100.0" preserveRatio="true">
-                        <Image url="@../Img/BELMAN_Logo.png" />
-                    </ImageView>
-                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" preserveRatio="true" StackPane.alignment="TOP_RIGHT">
-                        <Image url="@../Img/delete.png" />
-                    </ImageView>
-                </StackPane>
-                <VBox>
-                    <Label text="Cast Iron Pipe" />
-                    <Label text="ID: 0711-3498" />
-                </VBox>
-            </VBox>
-
-            <!-- GridPane (3,0) -->
-            <VBox alignment="TOP_CENTER" spacing="10" GridPane.columnIndex="3" GridPane.rowIndex="0">
-                <StackPane>
-                    <ImageView fitHeight="100.0" fitWidth="100.0" preserveRatio="true">
-                        <Image url="@../Img/BELMAN_Logo.png" />
-                    </ImageView>
-                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" preserveRatio="true" StackPane.alignment="TOP_RIGHT">
-                        <Image url="@../Img/delete.png" />
-                    </ImageView>
-                </StackPane>
-                <VBox>
-                    <Label text="Copper Pipe" />
-                    <Label text="ID: 0824-2983" />
-                </VBox>
-            </VBox>
-
-            <!-- GridPane (4,0) -->
-            <VBox alignment="TOP_CENTER" spacing="10" GridPane.columnIndex="4" GridPane.rowIndex="0">
-                <StackPane>
-                    <ImageView fitHeight="100.0" fitWidth="100.0" preserveRatio="true">
-                        <Image url="@../Img/BELMAN_Logo.png" />
-                    </ImageView>
-                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" preserveRatio="true" StackPane.alignment="TOP_RIGHT">
-                        <Image url="@../Img/hourglass.png" />
-                    </ImageView>
-                </StackPane>
-                <VBox>
-                    <Label text="Aluminum Pipe" />
-                    <Label text="ID: 0629-1023" />
-                </VBox>
-            </VBox>
-
-            <!-- Row 1 -->
-
-            <!-- GridPane (0,1) -->
-            <VBox alignment="TOP_CENTER" spacing="10" GridPane.columnIndex="0" GridPane.rowIndex="1">
-                <StackPane>
-                    <ImageView fitHeight="100.0" fitWidth="100.0" preserveRatio="true">
-                        <Image url="@../Img/BELMAN_Logo.png" />
-                    </ImageView>
-                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" preserveRatio="true" StackPane.alignment="TOP_RIGHT">
-                        <Image url="@../Img/star.png" />
-                    </ImageView>
-                </StackPane>
-                <VBox>
-                    <Label text="PEX Pipe" />
-                    <Label text="ID: 0194-8210" />
-                </VBox>
-            </VBox>
-
-            <!-- GridPane (1,1) -->
-            <VBox alignment="TOP_CENTER" spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                <StackPane>
-                    <ImageView fitHeight="100.0" fitWidth="100.0" preserveRatio="true">
-                        <Image url="@../Img/BELMAN_Logo.png" />
-                    </ImageView>
-                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" preserveRatio="true" StackPane.alignment="TOP_RIGHT">
-                        <Image url="@../Img/check.png" />
-                    </ImageView>
-                </StackPane>
-                <VBox>
-                    <Label text="Concrete Pipe" />
-                    <Label text="ID: 0221-3746" />
-                </VBox>
-            </VBox>
-
-            <!-- GridPane (2,1) -->
-            <VBox alignment="TOP_CENTER" spacing="10" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                <StackPane>
-                    <ImageView fitHeight="100.0" fitWidth="100.0" preserveRatio="true">
-                        <Image url="@../Img/BELMAN_Logo.png" />
-                    </ImageView>
-                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" preserveRatio="true" StackPane.alignment="TOP_RIGHT">
-                        <Image url="@../Img/hourglass.png" />
-                    </ImageView>
-                </StackPane>
-                <VBox>
-                    <Label text="Galvanized Pipe" />
-                    <Label text="ID: 0398-1127" />
-                </VBox>
-            </VBox>
-
-            <!-- GridPane (3,1) -->
-            <VBox alignment="TOP_CENTER" spacing="10" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                <StackPane>
-                    <ImageView fitHeight="100.0" fitWidth="100.0" preserveRatio="true">
-                        <Image url="@../Img/BELMAN_Logo.png" />
-                    </ImageView>
-                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" preserveRatio="true" StackPane.alignment="TOP_RIGHT">
-                        <Image url="@../Img/hourglass.png" />
-                    </ImageView>
-                </StackPane>
-                <VBox>
-                    <Label text="ABS Pipe" />
-                    <Label text="ID: 0449-7342" />
-                </VBox>
-            </VBox>
-
-            <!-- GridPane (4,1) -->
-            <VBox alignment="TOP_CENTER" spacing="10" GridPane.columnIndex="4" GridPane.rowIndex="1">
-                <StackPane>
-                    <ImageView fitHeight="100.0" fitWidth="100.0" preserveRatio="true">
-                        <Image url="@../Img/BELMAN_Logo.png" />
-                    </ImageView>
-                    <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="10.0" layoutY="10.0" preserveRatio="true" StackPane.alignment="TOP_RIGHT">
-                        <Image url="@../Img/check.png" />
-                    </ImageView>
-                </StackPane>
-                <VBox>
-                    <Label text="Plastic Pipe" />
-                    <Label text="ID: 0538-9824" />
-                </VBox>
-            </VBox>
         </GridPane>
+
+        <VBox spacing="10" alignment="TOP_CENTER">
+
+            <!-- Container for static OrderCards -->
+            <VBox fx:id="ordersList" spacing="10" alignment="TOP_CENTER">
+                <!-- OrderCards will be added programmatically here -->
+            </VBox>
+        </VBox>
 
         <!-- Bottom: Page Navigation -->
         <HBox alignment="CENTER" spacing="10">

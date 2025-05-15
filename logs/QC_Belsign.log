@@ -840,3 +840,45 @@ máj 15, 2025 8:22:20 AM BLL.LoggerBLL.loggerManager logWarning
 WARNING: Order deletion attempt
 máj 15, 2025 8:22:20 AM BLL.LoggerBLL.loggerManager logError
 SEVERE: Database connection failed
+máj 15, 2025 9:13:02 AM BLL.LoggerBLL.loggerManager logInfo
+INFO: New order added: Order #1234
+máj 15, 2025 9:13:02 AM BLL.LoggerBLL.loggerManager logWarning
+WARNING: Order deletion attempt
+máj 15, 2025 9:13:02 AM BLL.LoggerBLL.loggerManager logError
+SEVERE: Database connection failed
+máj 15, 2025 9:16:22 AM BLL.LoggerBLL.loggerManager logInfo
+INFO: New order added: Order #1234
+máj 15, 2025 9:16:22 AM BLL.LoggerBLL.loggerManager logWarning
+WARNING: Order deletion attempt
+máj 15, 2025 9:16:22 AM BLL.LoggerBLL.loggerManager logError
+SEVERE: Database connection failed
+máj 15, 2025 9:17:23 AM BLL.LoggerBLL.loggerManager logInfo
+INFO: New order added: Order #1234
+máj 15, 2025 9:17:23 AM BLL.LoggerBLL.loggerManager logWarning
+WARNING: Order deletion attempt
+máj 15, 2025 9:17:23 AM BLL.LoggerBLL.loggerManager logError
+SEVERE: Database connection failed
+máj 15, 2025 9:18:20 AM BLL.LoggerBLL.loggerManager logInfo
+INFO: New order added: Order #1234
+máj 15, 2025 9:18:20 AM BLL.LoggerBLL.loggerManager logWarning
+WARNING: Order deletion attempt
+máj 15, 2025 9:18:20 AM BLL.LoggerBLL.loggerManager logError
+SEVERE: Database connection failed
+máj 15, 2025 9:18:44 AM BLL.LoggerBLL.loggerManager logInfo
+INFO: New order added: Order #1234
+máj 15, 2025 9:18:44 AM BLL.LoggerBLL.loggerManager logWarning
+WARNING: Order deletion attempt
+máj 15, 2025 9:18:44 AM BLL.LoggerBLL.loggerManager logError
+SEVERE: Database connection failed
+máj 15, 2025 9:19:30 AM BLL.LoggerBLL.loggerManager logInfo
+INFO: New order added: Order #1234
+máj 15, 2025 9:19:30 AM BLL.LoggerBLL.loggerManager logWarning
+WARNING: Order deletion attempt
+máj 15, 2025 9:19:30 AM BLL.LoggerBLL.loggerManager logError
+SEVERE: Database connection failed
+máj 15, 2025 9:23:38 AM BLL.LoggerBLL.loggerManager logInfo
+INFO: New order added: Order #1234
+máj 15, 2025 9:23:38 AM BLL.LoggerBLL.loggerManager logWarning
+WARNING: Order deletion attempt
+máj 15, 2025 9:23:38 AM BLL.LoggerBLL.loggerManager logError
+SEVERE: Database connection failed
