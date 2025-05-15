@@ -42,7 +42,6 @@ public class App extends Application {
         System.out.println("There is " +  warningLogs.size() + " Warning messages");
         System.out.println("There is " + errorLogs.size() + " Error messages");
 
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Login.fxml"));
         Parent root = loader.load();
         Scene scene = new Scene(root);
@@ -54,7 +53,6 @@ public class App extends Application {
                 "customTitleBar",
                 "loginPage"
         );
-
         SceneManager.composeScene(loginScenes, "ComposedLogin");
         SceneManager.switchScene("ComposedLogin");
     }

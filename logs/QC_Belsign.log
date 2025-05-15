@@ -972,3 +972,31 @@ máj 15, 2025 10:44:54 AM BLL.LoggerBLL.loggerManager logWarning
 WARNING: Order deletion attempt
 máj 15, 2025 10:44:54 AM BLL.LoggerBLL.loggerManager logError
 SEVERE: Database connection failed
+May 15, 2025 11:30:33 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: New order added: Order #1234
+May 15, 2025 11:30:33 A.M. BLL.LoggerBLL.loggerManager logWarning
+WARNING: Order deletion attempt
+May 15, 2025 11:30:33 A.M. BLL.LoggerBLL.loggerManager logError
+SEVERE: Database connection failed
+May 15, 2025 11:30:53 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: New order added: Order #1234
+May 15, 2025 11:30:53 A.M. BLL.LoggerBLL.loggerManager logWarning
+WARNING: Order deletion attempt
+May 15, 2025 11:30:53 A.M. BLL.LoggerBLL.loggerManager logError
+SEVERE: Database connection failed
+May 15, 2025 11:33:41 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: New order added: Order #1234
+May 15, 2025 11:33:41 A.M. BLL.LoggerBLL.loggerManager logWarning
+WARNING: Order deletion attempt
+May 15, 2025 11:33:41 A.M. BLL.LoggerBLL.loggerManager logError
+SEVERE: Database connection failed
+May 15, 2025 11:34:15 A.M. BLL.LoggerBLL.loggerManager logError
+SEVERE: Failed to load the image, image type not supported!
+May 15, 2025 11:34:30 A.M. BLL.LoggerBLL.loggerManager logError
+SEVERE: Failed to load the image, image type not supported!
+May 15, 2025 11:36:50 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: New order added: Order #1234
+May 15, 2025 11:36:50 A.M. BLL.LoggerBLL.loggerManager logWarning
+WARNING: Order deletion attempt
+May 15, 2025 11:36:50 A.M. BLL.LoggerBLL.loggerManager logError
+SEVERE: Database connection failed

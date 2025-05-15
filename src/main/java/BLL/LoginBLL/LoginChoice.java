@@ -37,15 +37,32 @@ public class LoginChoice {
         LoggedInUser.setLoggedInRole("Operator");
         UserSession.setLoggedIn(true);
 
-        SceneManager.loadScene("operator", "/View/Orders.fxml");
-        SceneManager.switchScene("operator");
+        List<String> scenes = List.of(
+                "customTitleBar",
+                "navBar",
+                "operatorPage"
+        );
+
+        SceneManager.composeScene(scenes, "composedOperatorPage");
+        SceneManager.switchScene("composedOperatorPage");
         System.out.println("Logged in as Operator.");
         Logger.displayOrders();
         // Additional logic for operator-specific access can go here
     }
 
-    public void qaLogin() {
-        System.out.println("Logged in as QA.");
-        // Additional logic for QA-specific access can go here
+    public void qaLogin() throws IOException {
+        LoggedInUser.setLoggedInRole("QA");
+        UserSession.setLoggedIn(true);
+
+        List<String> scenes = List.of(
+                "customTitleBar",
+                "navBar",
+                "QC"
+        );
+
+        SceneManager.composeScene(scenes, "composedQCPage");
+        SceneManager.switchScene("composedQCPage");
+        System.out.println("Logged in as QC.");
+        Logger.displayOrders();
     }
 }
