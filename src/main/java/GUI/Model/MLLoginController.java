@@ -19,7 +19,7 @@ public class MLLoginController {
         loginChoice.operatorLogin();
     }
 
-    public void qaLogin(){
+    public void qaLogin() throws IOException {
         LoggedInUser.setAuthenticated(true);
         loginChoice.qaLogin();
     }
