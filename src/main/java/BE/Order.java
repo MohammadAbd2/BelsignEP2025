@@ -2,16 +2,16 @@ package BE;
 
 public class Order {
     private int id;
-    private String orderNumber;
+    private String order_number;
     private String image;
     private String notes;
     private String status;
     private String productName;
     private String statusIcon;
 
-    public Order(int id, String orderNumber, String image, String notes, String status, String productName, String statusIcon) {
+    public Order(int id, String order_number, String image, String notes, String status, String productName, String statusIcon) {
         this.id = id;
-        this.orderNumber = orderNumber;
+        this.order_number = order_number;
         this.image = image;
         this.notes = notes;
         this.status = status;
@@ -22,7 +22,7 @@ public class Order {
     public Order(int id) {
     }
 
-    public Order(int id, String orderNumber, String image, String notes, String status) {
+    public Order(int id, String order_number, String image, String notes, String status) {
 
     }
 
@@ -30,8 +30,8 @@ public class Order {
         return id;
     }
 
-    public String getOrderNumber() {
-        return orderNumber;
+    public String getOrder_number() {
+        return order_number;
     }
 
     public String getImage() {
@@ -54,8 +54,8 @@ public class Order {
         this.id = id;
     }
 
-    public void setOrderNumber(String orderNumber) {
-        this.orderNumber = orderNumber;
+    public void setOrder_number(String order_number) {
+        this.order_number = order_number;
     }
 
     public void setImage(String image) {
@@ -89,7 +89,7 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order [id=" + id + ", orderNumber=" + orderNumber + ", image=" + image + ", notes=" + notes
+        return "Order [id=" + id + ", orderNumber=" + order_number + ", image=" + image + ", notes=" + notes
                 + ", status=" + status + "]";
     }
 }

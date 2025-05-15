@@ -1,19 +1,21 @@
 package GUI.Controller;
 
 import BE.Order;
+import DAL.OrderDB;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
 import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class OrderPageController {
+    private OrderDB orderDB;
+
     @FXML
     private TextField searchField;
 
@@ -32,6 +34,10 @@ public class OrderPageController {
     @FXML
     private GridPane ordersGrid;
 
+    public OrderPageController() {
+        orderDB = new OrderDB();
+    }
+
     public void initialize() {
         System.out.println("OrderPageController initialized!");
 
@@ -43,66 +49,104 @@ public class OrderPageController {
 
         searchField.setOnKeyReleased(e -> filterByText(searchField.getText()));
 
-        // Get the orders and populate the grid
-        List<Order> orders = getSampleOrders();
+        // Debug print before loading orders
+        System.out.println("About to load orders...");
+        loadOrders();
+        System.out.println("Orders loaded and displayed");
+    }
+
+    private void loadOrders() {
+        List<Order> orders = orderDB.getAllOrders();
+        System.out.println("Number of orders loaded from DB: " + orders.size());
+
+        // Print first few orders to verify data
+        orders.stream().limit(3).forEach(order ->
+                System.out.println("Order: ID=" + order.getId() +
+                        ", Number=" + order.getOrder_number() +
+                        ", Status=" + order.getStatus())
+        );
+
         populateOrdersGrid(orders);
     }
 
     private void populateOrdersGrid(List<Order> orders) {
-        // Clear existing items
-        ordersGrid.getChildren().clear();
+        try {
+            System.out.println("Starting to populate grid");
+            // Clear existing items
+            ordersGrid.getChildren().clear();
 
-        // Create 5x2 grid
-        int columns = 5;
-        int rows = 2;
+            // Create 5x2 grid
+            int columns = 5;
+            int rows = 2;
+            int maxCards = columns * rows;
 
-        for (int i = 0; i < (columns * rows); i++) {
-            try {
-                // Calculate grid position
-                int column = i % columns;
-                int row = i / columns;
+            // Limit the number of orders to prevent overflow
+            List<Order> displayOrders = orders.stream()
+                    .limit(maxCards)
+                    .collect(Collectors.toList());
 
-                // Load the OrderCard.fxml layout
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OrderCard.fxml"));
-                Node orderCard = loader.load();
+            System.out.println("Displaying " + displayOrders.size() + " orders out of " + orders.size() + " total");
 
-                // Get the controller and set the order data (might be null)
-                OrderCardController controller = loader.getController();
-                Order order = (i < orders.size()) ? orders.get(i) : null;
-                controller.setOrderData(order);
+            for (int i = 0; i < maxCards; i++) {
+                try {
+                    // Calculate grid position
+                    int column = i % columns;
+                    int row = i / columns;
 
-                // Add to grid at calculated position
-                ordersGrid.add(orderCard, column, row);
+                    System.out.println("Loading card for position: row=" + row + ", column=" + column);
 
-            } catch (IOException e) {
-                e.printStackTrace();
+                    // Load the OrderCard.fxml layout
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OrderCard.fxml"));
+                    Node orderCard = loader.load();
+
+                    // Get the controller and set the order data (might be null)
+                    OrderCardController controller = loader.getController();
+                    Order order = (i < displayOrders.size()) ? displayOrders.get(i) : null;
+
+                    if (order != null) {
+                        System.out.println("Setting order data for card: " + order.getOrder_number());
+                    }
+
+                    controller.setOrderData(order);
+
+                    // Add to grid at calculated position
+                    ordersGrid.add(orderCard, column, row);
+
+                } catch (IOException e) {
+                    System.err.println("Error loading OrderCard.fxml: " + e.getMessage());
+                    e.printStackTrace();
+                }
             }
+            System.out.println("Grid population completed");
+
+        } catch (Exception e) {
+            System.err.println("Unexpected error in populateOrdersGrid: " + e.getMessage());
+            e.printStackTrace();
         }
-    }
-
-    private List<Order> getSampleOrders() {
-        List<Order> orders = new ArrayList<>(10); // Initialize with capacity of 10
-        // Pre-fill the list with 10 null elements
-        for (int i = 0; i < 10; i++) {
-            orders.add(null);
-        }
-
-        // Add actual orders at specific positions (indices 0-9)
-        orders.set(0, new Order(1, "Order #001", "", "", "new", "Sample Product 1", null));
-        orders.set(1, new Order(2, "Order #002", "", "", "approved", "Sample Product 2", null));
-        orders.set(2, new Order(3, "Order #003", "", "", "pending", "Sample Product 3", null));
-
-        // The remaining positions (3-9) will stay null, creating empty spaces in the grid
-        return orders;
     }
 
     private void filterByStatus(String status) {
         System.out.println("Filtering by status: " + status);
-        // TODO: Implement filter logic
+        List<Order> allOrders = orderDB.getAllOrders();
+        List<Order> filteredOrders = allOrders.stream()
+                .filter(order -> order.getStatus().equalsIgnoreCase(status))
+                .collect(Collectors.toList());
+        System.out.println("Found " + filteredOrders.size() + " orders with status: " + status);
+        populateOrdersGrid(filteredOrders);
     }
 
     private void filterByText(String text) {
+        if (text == null || text.trim().isEmpty()) {
+            loadOrders();
+            return;
+        }
+
         System.out.println("Filtering by text: " + text);
-        // TODO: Implement search filter
+        List<Order> allOrders = orderDB.getAllOrders();
+        List<Order> filteredOrders = allOrders.stream()
+                .filter(order -> order.getOrder_number().toLowerCase().contains(text.toLowerCase()))
+                .collect(Collectors.toList());
+        System.out.println("Found " + filteredOrders.size() + " orders matching text: " + text);
+        populateOrdersGrid(filteredOrders);
     }
 }

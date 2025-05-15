@@ -2,14 +2,14 @@ package BE;
 
 public class QCReport {
     private int id;
-    private String orderNumber;
+    private String order_number;
     private String email;
     private String image;
     private String notes;
 
-    public QCReport(int id, String orderNumber, String email, String image, String notes) {
+    public QCReport(int id, String order_number, String email, String image, String notes) {
         this.id = id;
-        this.orderNumber = orderNumber;
+        this.order_number = order_number;
         this.email = email;
         this.image = image;
         this.notes = notes;
@@ -18,8 +18,8 @@ public class QCReport {
     public int getId() {
         return id;
     }
-    public String getOrderNumber() {
-        return orderNumber;
+    public String getOrder_number() {
+        return order_number;
     }
     public String getEmail() {
         return email;
@@ -34,8 +34,8 @@ public class QCReport {
     public void setId(int id) {
         this.id = id;
     }
-    public void setOrderNumber(String orderNumber) {
-        this.orderNumber = orderNumber;
+    public void setOrder_number(String order_number) {
+        this.order_number = order_number;
     }
     public void setEmail(String email) {
         this.email = email;
@@ -49,7 +49,7 @@ public class QCReport {
 
     @Override
     public String toString() {
-        return "QCReport [id=" + id + ", orderNumber=" + orderNumber + ", email=" + email + ", image=" + image
+        return "QCReport [id=" + id + ", orderNumber=" + order_number + ", email=" + email + ", image=" + image
                 + ", notes=" + notes + "]";
     }
 }

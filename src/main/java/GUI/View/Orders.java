@@ -17,10 +17,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Random;
 
 
 public class Orders {
@@ -110,7 +107,7 @@ public class Orders {
         orderImage.setFitWidth(160);
         orderImage.setFitHeight(120);
 
-        Text orderDescription = new Text("Description : " + order.getId() + order.getOrderNumber());
+        Text orderDescription = new Text("Description : " + order.getId() + order.getOrder_number());
 
         orderCard.getChildren().addAll(orderImage, orderDescription);
         return orderCard;

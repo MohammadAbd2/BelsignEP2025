@@ -39,7 +39,7 @@ public class OrderCardController {
         }
 
         // Set the product name and ID
-        productName.setText(order.getOrderNumber());
+        productName.setText(order.getOrder_number());
         productId.setText("ID: " + order.getId());
 
         // Set the main product image
@@ -56,7 +56,7 @@ public class OrderCardController {
 
         // Use the existing getStatusIcon method
         String statusIconPath = "/Img/" + order.getStatusIcon();
-        statusIcon.setImage(new Image(getClass().getResource(statusIconPath).toExternalForm()));
+        //statusIcon.setImage(new Image(getClass().getResource(statusIconPath).toExternalForm()));
     }
 
 
