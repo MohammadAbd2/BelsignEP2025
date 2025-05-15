@@ -21,7 +21,7 @@ public class QCReportDB implements IQCReportDB {
         try (Connection conn = dbConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            stmt.setString(1, report.getOrderNumber());
+            stmt.setString(1, report.getOrder_number());
             stmt.setString(2, report.getEmail());
             stmt.setString(3, report.getImage());
             stmt.setString(4, report.getNotes());
@@ -93,7 +93,7 @@ public class QCReportDB implements IQCReportDB {
         try (Connection conn = dbConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, report.getOrderNumber());
+            stmt.setString(1, report.getOrder_number());
             stmt.setString(2, report.getEmail());
             stmt.setString(3, report.getImage());
             stmt.setString(4, report.getNotes());

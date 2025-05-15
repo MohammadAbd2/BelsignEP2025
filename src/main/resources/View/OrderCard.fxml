@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+
+<VBox fx:id="containerVBox" alignment="TOP_CENTER" spacing="10" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="GUI.Controller.OrderCardController">
+    <StackPane fx:id="imageStack">
+        <ImageView fx:id="productImage" fitHeight="100.0" fitWidth="100.0" preserveRatio="true">
+            <Image url="@../Img/BELMAN_Logo.png" />
+        </ImageView>
+        <ImageView fx:id="statusIcon" fitHeight="20.0" fitWidth="20.0"
+                   StackPane.alignment="TOP_RIGHT" preserveRatio="true"/>
+    </StackPane>
+    <VBox>
+        <Label fx:id="productName" />
+        <Label fx:id="productId" />
+    </VBox>
+</VBox>

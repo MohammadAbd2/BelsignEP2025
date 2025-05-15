@@ -17,6 +17,7 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 public class NavbarController {
@@ -70,14 +71,13 @@ public class NavbarController {
 
     public void ProfileTab(javafx.scene.input.MouseEvent event) throws IOException {
 
-    if(LoggedInUser.getInstance().isAuthenticated()){
-        LoggedInUser.setAuthenticated(false);
-        SceneManager.loadScene("Login", "/View/Login.fxml");
-        SceneManager.switchScene("Login");
-    }else{
-        LoggedInUser.setAuthenticated(true);
-        SceneManager.loadScene("Navbar", "/View/navbar.fxml");
-        SceneManager.switchScene("Navbar");
-    }
+        List<String> loginScenes = List.of(
+                "customTitleBar",
+                "loginPage"
+        );
+
+        SceneManager.composeScene(loginScenes, "ComposedLogin");
+        SceneManager.switchScene("ComposedLogin");
+
     }
 }

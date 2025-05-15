@@ -21,7 +21,7 @@ public class OrderDB implements IOrderDB {
         try (Connection conn = dbConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            stmt.setString(1, order.getOrderNumber());
+            stmt.setString(1, order.getOrder_number());
             stmt.setString(2, order.getImage());
             stmt.setString(3, order.getNotes());
             stmt.setString(4, order.getStatus());
@@ -75,7 +75,7 @@ public class OrderDB implements IOrderDB {
             while (rs.next()) {
                 orders.add(new Order(
                         rs.getInt("id"),
-                        rs.getString("orderNumber"),
+                        rs.getString("order_number"),
                         rs.getString("image"),
                         rs.getString("notes"),
                         rs.getString("status")
@@ -94,7 +94,7 @@ public class OrderDB implements IOrderDB {
         try (Connection conn = dbConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, order.getOrderNumber());
+            stmt.setString(1, order.getOrder_number());
             stmt.setString(2, order.getImage());
             stmt.setString(3, order.getNotes());
             stmt.setString(4, order.getStatus());

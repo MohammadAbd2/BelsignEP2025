@@ -44,7 +44,13 @@ public class LoginController {
                 throw new RuntimeException(ex);
             }
         });
-        qaButton.setOnAction(e -> loginChoice.qaLogin());
+        qaButton.setOnAction(e -> {
+            try {
+                loginChoice.qaLogin();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        });
 
 
     }
