@@ -41,7 +41,7 @@
             <Button fx:id="AdminTabId" text="Admin" onAction="#AdminTab" />
 
             <StackPane fx:id="profileImagePane" alignment="CENTER" onMouseClicked="#ProfileTab">
-                <ImageView fx:id="profile_pic" fitHeight="65.0" fitWidth="61.0"/>
+                <ImageView fx:id="profile_pic" fitHeight="55.0" fitWidth="61.0"/>
             </StackPane>
         </HBox>
 
