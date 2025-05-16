@@ -46,10 +46,6 @@ public class OrderCardController {
         productName.setText(displayText);
         productId.setText("ID: " + order.getId());
 
-        // Debug log the order status
-        System.out.println("Order " + order.getId() + " status: " + order.getStatus());
-
-
         // Set the main product image
         productImage.setFitHeight(100.0);
         productImage.setFitWidth(100.0);
@@ -57,8 +53,8 @@ public class OrderCardController {
         productImage.setImage(new Image(getClass().getResource("/Img/BELMAN_Logo.png").toExternalForm()));
 
         String status = order.getStatus();
-        if (status == null || status.isEmpty() || status.equalsIgnoreCase("default")) {
-            // Create a "NEW" label instead of showing an icon
+        if (status == null || status.isEmpty() || status.equalsIgnoreCase("new")) {
+            // Create a "NEW" label for new or null status
             Label newLabel = new Label("NEW");
             newLabel.setStyle("-fx-background-color: #4CAF50; " + // Green background
                     "-fx-text-fill: white; " +           // White text
@@ -70,14 +66,15 @@ public class OrderCardController {
             // Remove any existing status icon
             statusIcon.setVisible(false);
 
-            // Add the label to the StackPane
-            if (!imageStack.getChildren().contains(newLabel)) {
-                imageStack.getChildren().add(newLabel);
-                StackPane.setAlignment(newLabel, javafx.geometry.Pos.TOP_RIGHT);
-                StackPane.setMargin(newLabel, new Insets(5, 5, 0, 0));
-            }
+            // Remove any existing labels
+            imageStack.getChildren().removeIf(node -> node instanceof Label);
+
+            // Add the new label to the StackPane
+            imageStack.getChildren().add(newLabel);
+            StackPane.setAlignment(newLabel, javafx.geometry.Pos.TOP_RIGHT);
+            StackPane.setMargin(newLabel, new Insets(5, 5, 0, 0));
         } else {
-            // Handle other status icons as before
+            // Handle other status icons
             try {
                 String statusIconPath = "/Img/" + order.getStatusIcon();
                 Image statusImage = new Image(getClass().getResource(statusIconPath).toExternalForm());
