@@ -33,6 +33,9 @@ public class NavbarController {
             // Load profile image
             Image image = new Image(getClass().getResource("/img/logout.png").toExternalForm());
             profile_pic.setImage(image);
+            profile_pic.setFitWidth(30);  // Set your desired width
+            profile_pic.setFitHeight(30);
+
 
             // Apply circular clipping
             Circle clip = new Circle(
