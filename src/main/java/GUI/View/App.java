@@ -20,10 +20,9 @@ public class App extends Application {
         SceneManager.setStage(primaryStage);
         SceneManager.loadSceneAsParent("/View/Login.fxml");
         SceneManager.loadScene("customTitleBar", "/View/CustomTitleBar.fxml");
-        SceneManager.loadScene("navBar", "/View/navbar.fxml");
         SceneManager.loadScene("loginPage", "/View/Login.fxml");
         SceneManager.loadScene("adminPage", "/View/Admin.fxml");
-        SceneManager.loadScene("operatorPage", "/View/OperatorPage.fxml");
+        SceneManager.loadScene("operatorPage", "/View/Operator.fxml");
         SceneManager.loadScene("QC", "/View/QA.fxml");
         SceneManager.loadScene("orderPage", "/View/Orders.fxml");
 

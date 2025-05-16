@@ -3,13 +3,8 @@ package GUI.Controller;
 
 import GUI.Model.MLLoginController;
 import GUI.View.SceneManager;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -66,7 +61,7 @@ public class LoginController {
     @FXML
     public void operatorLogin() throws IOException {
         loginChoice.operatorLogin();
-        SceneManager.loadScene("operator", "/View/OperatorPage.fxml");
+        SceneManager.loadScene("operator", "/View/Operator.fxml");
         SceneManager.switchScene("operator");
 
     }

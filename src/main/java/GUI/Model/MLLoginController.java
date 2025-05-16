@@ -2,6 +2,7 @@
 package GUI.Model;
 
 import BLL.LoginBLL.LoginChoice;
+import GUI.View.SceneManager;
 import Utils.LoggedInUser;
 
 import java.io.IOException;

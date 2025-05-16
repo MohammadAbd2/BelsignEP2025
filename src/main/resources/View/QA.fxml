@@ -54,7 +54,7 @@
                         <Cursor fx:constant="HAND"/>
                      </cursor>
                   </Button>
-                  <Button fx:id="ordersRejected" maxHeight="1.7976931348623157E308"
+                  <Button fx:id="ordersApproved" maxHeight="1.7976931348623157E308"
                           maxWidth="1.7976931348623157E308" style="-fx-background-radius: 5;" text="Approved">
                      <font>
                         <Font size="13.0"/>
