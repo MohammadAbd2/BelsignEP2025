@@ -18,17 +18,20 @@ public class NavbarController {
     @FXML
     private Button OrderTabId;
     @FXML
-    private static Button OperatorTabId;
+    private Button OperatorTabId;
     @FXML
-    private static Button QCTabId;
+    private Button QCTabId;
     @FXML
-    private static Button AdminTabId;
+    private Button AdminTabId;
 
     @FXML
     private ImageView profile_pic;
 
     @FXML
     public void initialize() {
+        System.out.println("Initialize Navbar");
+        System.out.println("Authenticated: " + LoggedInUser.isAuthenticated());
+
         try {
             // Load profile image
             Image image = new Image(getClass().getResource("/img/logout.png").toExternalForm());
@@ -49,67 +52,90 @@ public class NavbarController {
         }
     }
 
-    public static void setNavbarStatus() {
-        if (!LoggedInUser.isAuthenticated()) {
-            return;
-        }
+    public void setNavbarStatus() {
+        if (!LoggedInUser.isAuthenticated()) return;
 
-        System.out.println("Authenticated: " + LoggedInUser.isAuthenticated());
-        System.out.println("Role: " + LoggedInUser.getLoggedInRole());
+        String role = LoggedInUser.getLoggedInRole();
+        System.out.println("Role: " + role);
 
-        // Hide all tabs initially with null safety
+        // Hide all first
         if (OperatorTabId != null) OperatorTabId.setVisible(false);
         if (QCTabId != null) QCTabId.setVisible(false);
         if (AdminTabId != null) AdminTabId.setVisible(false);
 
-        // Show tab based on role
-        String role = LoggedInUser.getLoggedInRole();
+
         switch (role) {
-            case "Admin":
-                if (AdminTabId != null) AdminTabId.setVisible(true);
-                break;
-            case "Operator":
-                if (OperatorTabId != null) OperatorTabId.setVisible(true);
-                break;
-            case "QC":
-                if (QCTabId != null) QCTabId.setVisible(true);
-                break;
-            default:
-                System.out.println("Unknown role: " + role);
+            case "Admin" -> {
+                OrderTabId.setVisible(true);
+                OrderTabId.setManaged(true);
+
+                OperatorTabId.setVisible(false);
+                OperatorTabId.setManaged(false);
+
+                QCTabId.setVisible(false);
+                QCTabId.setManaged(false);
+
+                AdminTabId.setVisible(true);
+                AdminTabId.setManaged(true);
+            }
+
+            case "Operator" -> {
+                OrderTabId.setVisible(true);
+                OrderTabId.setManaged(true);
+
+                OperatorTabId.setVisible(true);
+                OperatorTabId.setManaged(true);
+
+                QCTabId.setVisible(false);
+                QCTabId.setManaged(false);
+
+                AdminTabId.setVisible(false);
+                AdminTabId.setManaged(false);
+            }
+
+            case "QA" -> {
+                OrderTabId.setVisible(true);
+                OrderTabId.setManaged(true);
+
+                OperatorTabId.setVisible(false);
+                OperatorTabId.setManaged(false);
+
+                QCTabId.setVisible(true);
+                QCTabId.setManaged(true);
+
+                AdminTabId.setVisible(false);
+                AdminTabId.setManaged(false);
+            }
         }
     }
 
+    // Navigation Handlers (no change)
     public void OrderTab(ActionEvent event) throws IOException {
         UserSession.setLoggedIn(true);
         SceneManager.composeScene(List.of("customTitleBar", "navBar", "orderPage"), "composedOrderPage");
         SceneManager.switchScene("composedOrderPage");
-        setNavbarStatus();
     }
 
     public void OperatorTab(ActionEvent event) throws IOException {
         UserSession.setLoggedIn(true);
         SceneManager.composeScene(List.of("customTitleBar", "navBar", "operatorPage"), "composedOperatorPage");
         SceneManager.switchScene("composedOperatorPage");
-        setNavbarStatus();
     }
 
     public void QCTab(ActionEvent event) throws IOException {
         UserSession.setLoggedIn(true);
         SceneManager.composeScene(List.of("customTitleBar", "navBar", "QC"), "composedQCPage");
         SceneManager.switchScene("composedQCPage");
-        setNavbarStatus();
     }
 
     public void AdminTab(ActionEvent event) throws IOException {
         UserSession.setLoggedIn(true);
         SceneManager.composeScene(List.of("customTitleBar", "navBar", "adminPage"), "composedAdminPage");
         SceneManager.switchScene("composedAdminPage");
-        setNavbarStatus();
     }
 
     public void ProfileTab(javafx.scene.input.MouseEvent event) throws IOException {
         SceneManager.composeScene(List.of("customTitleBar", "loginPage"), "ComposedLogin");
         SceneManager.switchScene("ComposedLogin");
-        setNavbarStatus();
     }
 }
