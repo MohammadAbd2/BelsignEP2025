@@ -6,11 +6,39 @@ import DAL.OrderDB;
 import Utils.LoggedInUser;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class OrderService {
     OrderDB orderDB = new OrderDB();
+    List<Order> filteredOrders = new ArrayList<>();
     public List<Order> loadOrders() {
+        switch (LoggedInUser.getLoggedInRole()){
+
+            case "Operator": {
+                orderDB.getAllOrders().stream().filter(order -> {
+                    if(Objects.equals(order.getStatus(), "New")){
+                        filteredOrders.add(order);
+
+                    } else if (Objects.equals(order.getStatus(), "Rejected")) {
+                        filteredOrders.add(order);
+                    }
+                    System.out.println("FilteredOrders are : " + filteredOrders);
+                    return true;
+                });
+            }
+            case "QC": {
+                orderDB.getAllOrders().stream().filter(order -> {
+                    if(Objects.equals(order.getStatus(), "Pending")){
+                        filteredOrders.add(order);
+                    }
+                    return true;
+                });
+
+            }
+        }
+
         return orderDB.getAllOrders();
     }
 
