@@ -1,13 +1,133 @@
- .label, .button, .text, .list-cell, .table-cell, .text-field, .text-area {
+/*
+---------------
+ALL
+---------------
+*/
+
+*{
     -fx-text-fill: #FFFFFF;
     -fx-font-family: 'Helvetica';
     -fx-font-size: 16px;
 }
 
 
-*{
+/*
+---------------
+Admin
+---------------
+*/
+
+#searchBox{
     -fx-text-fill: #FFFFFF;
+    -fx-background-color: rgba(0, 0, 0, 0.23);
+    -fx-prompt-text-fill: rgba(255, 255, 255, 0.75);
 }
+
+#adminAdmin{
+    -fx-background-color: linear-gradient(from 70% 70% to 100% 100%, #00DF0B 33%, #3EE8CB 66%, #37C1B1 66%);
+}
+
+#adminQA{
+    -fx-background-color: linear-gradient(to right, #FC8924 0%, #D1A8A8 100%);
+}
+
+#adminOperator {
+    -fx-background-color: linear-gradient(from 0% 70% to 100% 30%, #F61616 0%, #fb7575 100%);
+}
+
+
+/*
+---------------
+CustomTitleBar
+---------------
+*/
+
+/*
+---------------
+Login
+---------------
+*/
+#body {
+    -fx-background-color: linear-gradient(to right, #0375AA 0%, #0074D9 21%, #0E63AE 69%, #005092 100%);
+}
+
+.body{
+    -fx-background-color: linear-gradient(from 0% 70% to 100% 30%, #0375AA 0%, #04529d 100%, #0E63AE 100%, #005092 70% );
+}
+
+
+/*
+---------------
+navbar
+---------------
+*/
+
+#navigationBar{
+    -fx-background-color: linear-gradient(from 0% 70% to 100% 30%, #0375AA 0%, #04529d 100%, #0E63AE 100%, #005092 70% );
+}
+
+#profileImagePane{
+    -fx-padding: 14px 0px 0px 15px;
+    -fx-background-color: null !important;
+}
+
+/*
+---------------
+OperatorPage
+---------------
+*/
+
+#notesArea{
+    -fx-pref-height: 280px;
+}
+
+
+/*
+---------------
+OrderCard
+---------------
+*/
+/*
+---------------
+Orders
+---------------
+*/
+
+#ordersBody{
+    -fx-background-color: linear-gradient(to right, #0375AA 0%, #0074D9 21%, #0E63AE 69%, #005092 100%);
+}
+
+#ordersNew{
+    -fx-background-color: linear-gradient(from 70% 70% to 100% 100%, #0095FF 0%, #0077CC 100%);
+}
+
+#ordersApproved{
+    -fx-background-color: linear-gradient(from 70% 70% to 100% 100%, #00DF0B 33%, #3EE8CB 66%, #37C1B1 66%);
+}
+
+#ordersPending{
+    -fx-background-color: linear-gradient(to right, #FC8924 0%, #D1A8A8 100%);
+}
+
+#ordersRejected {
+    -fx-background-color: linear-gradient(from 0% 70% to 100% 30%, #F61616 0%, #fb7575 100%);
+}
+
+
+/*
+---------------
+QA
+---------------
+*/
+
+/*
+---------------
+OTHERS
+---------------
+*/
+
+
+
 .root {
     -fx-padding: 0;
     -fx-alignment: center;
@@ -27,12 +147,11 @@
  .combo-box .arrow {
      -fx-background-color: white;
  }
- /* لتغيير خلفية القائمة المنسدلة نفسها */
+
  .combo-box-popup .list-view {
      -fx-background-color: rgba(0, 80, 146, 0.23);
  }
 
- /* لتعديل عناصر القائمة */
  .combo-box .list-cell {
      -fx-background-color: transparent;
      -fx-text-fill: white;
@@ -50,10 +169,7 @@
      -fx-background-color: rgba(49, 49, 49, 0.84);
      -fx-text-fill: white;
  }
-.body{
-    -fx-background-color: linear-gradient(from 0% 70% to 100% 30%, #0375AA 0%, #04529d 100%, #0E63AE 100%, #005092 70% );
 
-}
 .vbox {
     -fx-pref-width: 600;
     -fx-pref-height: 450;
@@ -64,11 +180,7 @@
 .inline-button {
     -fx-pref-width: 50px; /* Can be adjusted based on design needs */
 }
-#searchBox{
-    -fx-text-fill: #FFFFFF;
-    -fx-background-color: rgba(0, 0, 0, 0.23);
-    -fx-prompt-text-fill: rgba(255, 255, 255, 0.75);
-}
+
 
 custom-scroll-pane {
     -fx-background-color: linear-gradient(to right, #0375AA 0%, #0074D9 21%, #0E63AE 69%, #005092 100%);
@@ -79,25 +191,21 @@ custom-scroll-pane {
      -fx-background-color: transparent;
  }
 
-/* الشريط العمودي */
 .scroll-pane .scroll-bar:vertical,
 .scroll-pane .scroll-bar:horizontal {
     -fx-background-color: transparent;
 }
 
-/* تلوين الـ thumb فقط */
 .scroll-pane .scroll-bar:vertical .thumb,
 .scroll-pane .scroll-bar:horizontal .thumb {
     -fx-background-color: linear-gradient(to right, #0375AA 0%, #0074D9 21%, #0E63AE 69%, #005092 100%);
     -fx-background-radius: 5px;
 }
 
-/* إزالة المسار الخلفي */
 .scroll-pane .scroll-bar .track {
     -fx-background-color: transparent;
 }
 
-/* إزالة أزرار الأسهم */
 .scroll-pane .increment-button,
 .scroll-pane .decrement-button,
 .scroll-pane .increment-arrow,
@@ -112,9 +220,6 @@ custom-scroll-pane {
 
 
 
-#notesArea{
-    -fx-pref-height: 280px;
-}
 
 .title-bar {
     -fx-background-color: #004B88;
@@ -180,42 +285,13 @@ custom-scroll-pane {
     -fx-cursor: hand;
 }
 
-#body {
-    -fx-background-color: linear-gradient(to right, #0375AA 0%, #0074D9 21%, #0E63AE 69%, #005092 100%);
-}
-
-/*
----------------
-Orders
----------------
-*/
 
 
 
-#ordersBody{
-    -fx-background-color: linear-gradient(to right, #0375AA 0%, #0074D9 21%, #0E63AE 69%, #005092 100%);
-}
-
-#ordersNew{
-    -fx-background-color: linear-gradient(from 70% 70% to 100% 100%, #0095FF 0%, #0077CC 100%);
-}
-
-#ordersApproved{
-    -fx-background-color: linear-gradient(from 70% 70% to 100% 100%, #00DF0B 33%, #3EE8CB 66%, #37C1B1 66%);
-}
-
-#ordersPending{
-    -fx-background-color: linear-gradient(to right, #FC8924 0%, #D1A8A8 100%);
-}
-
-#ordersRejected {
-    -fx-background-color: linear-gradient(from 0% 70% to 100% 30%, #F61616 0%, #fb7575 100%);}
 
 
 
-#navigationBar{
-    -fx-background-color: linear-gradient(from 0% 70% to 100% 30%, #0375AA 0%, #04529d 100%, #0E63AE 100%, #005092 70% );
-}
+
 
 
 #navbar Button {
@@ -237,10 +313,7 @@ Orders
     -fx-border-color: white;  /* White border color */
     -fx-border-width: 2px;  /* Border width */
 }
-#profileImagePane{
-    -fx-padding: 14px 0px 0px 15px;
-    -fx-background-color: null !important;
-}
+
 
 .ordersPageNav{
     -fx-background-color: #009EF4 !important;

@@ -145,7 +145,7 @@
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <Button fx:id="ordersApproved"  style="-fx-background-radius: 5;" text="Admin">
+                  <Button fx:id="adminAdmin"  style="-fx-background-radius: 5;" text="Admin">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -153,7 +153,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="ordersPending"  style="-fx-background-radius: 5;" text="QA">
+                  <Button fx:id="adminQA"  style="-fx-background-radius: 5;" text="QA">
                      <font>
                         <Font size="13.0" />
                      </font>
@@ -161,7 +161,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="ordersRejected"  style="-fx-background-radius: 5;" text="Operator">
+                  <Button fx:id="adminOperator"  style="-fx-background-radius: 5;" text="Operator">
                      <font>
                         <Font size="13.0" />
                      </font>
