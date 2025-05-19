@@ -8,8 +8,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.shape.Circle;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -32,15 +30,10 @@ public class NavbarController {
         try {
             // Load profile image
             Image image = new Image(getClass().getResource("/img/logout.png").toExternalForm());
+            profile_pic.setFitHeight(20);
+            profile_pic.setFitWidth(20);
             profile_pic.setImage(image);
 
-            // Apply circular clipping
-            Circle clip = new Circle(
-                    profile_pic.getFitWidth() / 1.2,
-                    profile_pic.getFitHeight() / 1.7,
-                    Math.min(profile_pic.getFitWidth(), profile_pic.getFitHeight()) / 2.11
-            );
-            profile_pic.setClip(clip);
 
             setNavbarStatus();
 
