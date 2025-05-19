@@ -15,7 +15,7 @@ import java.net.URL;
 public class Navbar {
 
 
-    private static final String NAVBAR_FXML = "/View/navbar.fxml";
+    private static final String NAVBAR_FXML = "/View/NavBar.fxml";
     private static final String CSS_PATH = "/css/styles.css";
     private static final String LOGO_PATH = "/Img/BELMAN_Logo.png";
     private static final String PROFILE_PIC_PATH = "/Img/profile_picture.png";

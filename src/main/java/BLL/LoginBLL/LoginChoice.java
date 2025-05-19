@@ -21,7 +21,7 @@ public class LoginChoice {
     public void adminLogin() throws IOException {
         LoggedInUser.setLoggedInRole("Admin");
         UserSession.setLoggedIn(true);
-        SceneManager.loadScene("navBar", "/View/navbar.fxml");
+        SceneManager.loadScene("navBar", "/View/NavBar.fxml");
         List<String> scenes = List.of(
                 "customTitleBar",
                 "navBar",
@@ -38,7 +38,7 @@ public class LoginChoice {
     public void operatorLogin() throws IOException {
         LoggedInUser.setLoggedInRole("Operator");
         UserSession.setLoggedIn(true);
-        SceneManager.loadScene("navBar", "/View/navbar.fxml");
+        SceneManager.loadScene("navBar", "/View/NavBar.fxml");
         List<String> scenes = List.of(
                 "customTitleBar",
                 "navBar",
@@ -55,7 +55,7 @@ public class LoginChoice {
     public void qaLogin() throws IOException {
         LoggedInUser.setLoggedInRole("QA");
         UserSession.setLoggedIn(true);
-        SceneManager.loadScene("navBar", "/View/navbar.fxml");
+        SceneManager.loadScene("navBar", "/View/NavBar.fxml");
         List<String> scenes = List.of(
                 "customTitleBar",
                 "navBar",

@@ -53,7 +53,7 @@ public class LoginController {
     @FXML
     public void adminLogin() throws IOException {
         loginChoice.adminLogin();
-        SceneManager.loadScene("navBar", "/navbar.fxml");
+        SceneManager.loadScene("navBar", "/NavBar.fxml");
         SceneManager.switchScene("navBar");
 
     }
