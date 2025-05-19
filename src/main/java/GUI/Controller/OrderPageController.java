@@ -1,6 +1,7 @@
 package GUI.Controller;
 
 import BE.Order;
+import BLL.OrderService;
 import DAL.OrderDB;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -65,6 +66,8 @@ public class OrderPageController {
                         ", Number=" + order.getOrder_number() +
                         ", Status=" + order.getStatus())
         );
+
+
 
         populateOrdersGrid(orders);
     }

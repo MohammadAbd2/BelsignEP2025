@@ -2,6 +2,7 @@ package GUI.Controller;
 
 import BE.Order;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -34,7 +35,7 @@ public class OrderCardController {
             productName.setText("");
             productId.setText("");
             productImage.setImage(null);
-            statusIcon.setImage(null);
+            statusIcon.setVisible(false);
             return;
         }
 
@@ -51,17 +52,51 @@ public class OrderCardController {
         productImage.setPreserveRatio(true);
         productImage.setImage(new Image(getClass().getResource("/Img/BELMAN_Logo.png").toExternalForm()));
 
-        // Set the status icon
-        statusIcon.setFitHeight(20.0);
-        statusIcon.setFitWidth(20.0);
-        statusIcon.setPreserveRatio(true);
-        StackPane.setAlignment(statusIcon, javafx.geometry.Pos.TOP_RIGHT);
+        String status = order.getStatus();
+        if (status == null || status.isEmpty() || status.equalsIgnoreCase("new")) {
+            // Create a "NEW" label for new or null status
+            Label newLabel = new Label("NEW");
+            newLabel.setStyle("-fx-background-color: #4CAF50; " + // Green background
+                    "-fx-text-fill: white; " +           // White text
+                    "-fx-padding: 2 5 2 5; " +          // Small padding
+                    "-fx-font-size: 10; " +             // Small font
+                    "-fx-font-weight: bold; " +         // Bold text
+                    "-fx-background-radius: 3;");        // Rounded corners
 
-        // Use the existing getStatusIcon method
-        String statusIconPath = "/Img/" + order.getStatusIcon();
-        //statusIcon.setImage(new Image(getClass().getResource(statusIconPath).toExternalForm()));
+            // Remove any existing status icon
+            statusIcon.setVisible(false);
+
+            // Remove any existing labels
+            imageStack.getChildren().removeIf(node -> node instanceof Label);
+
+            // Add the new label to the StackPane
+            imageStack.getChildren().add(newLabel);
+            StackPane.setAlignment(newLabel, javafx.geometry.Pos.TOP_RIGHT);
+            StackPane.setMargin(newLabel, new Insets(5, 5, 0, 0));
+        } else {
+            // Handle other status icons
+            try {
+                String statusIconPath = "/Img/" + order.getStatusIcon();
+                Image statusImage = new Image(getClass().getResource(statusIconPath).toExternalForm());
+                statusIcon.setImage(statusImage);
+                statusIcon.setFitHeight(20.0);
+                statusIcon.setFitWidth(20.0);
+                statusIcon.setPreserveRatio(true);
+
+                // Make sure the status icon is visible and properly positioned
+                statusIcon.setVisible(true);
+                StackPane.setAlignment(statusIcon, javafx.geometry.Pos.TOP_RIGHT);
+                StackPane.setMargin(statusIcon, new Insets(5, 5, 0, 0));
+
+                // Remove any existing "NEW" label if it exists
+                imageStack.getChildren().removeIf(node -> node instanceof Label);
+
+            } catch (Exception e) {
+                System.err.println("Error loading status icon for order " + order.getId() + ": " + e.getMessage());
+                statusIcon.setVisible(false);
+            }
+        }
     }
-
 
     @FXML
     private void handleClick(javafx.scene.input.MouseEvent event) {

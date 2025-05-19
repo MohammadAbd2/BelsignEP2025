@@ -9,7 +9,7 @@ public class Order {
     private String order_name;
     private String statusIcon;
 
-    public Order(int id, String order_number, String image, String notes, String status, String name) {
+    public Order(int id, String order_number, String image, String notes, String status, String order_name) {
         this.id = id;
         this.order_number = order_number;
         this.image = image;
