@@ -81,6 +81,7 @@ public class Order {
     public String getStatusIcon() {
         if (status == null) return "default.png";
 
+        // Use equals() instead of == for String comparison
         switch (status.toLowerCase()) {
             case "approved":
                 return "check.png";

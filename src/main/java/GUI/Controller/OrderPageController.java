@@ -60,12 +60,13 @@ public class OrderPageController {
         List<Order> orders = orderDB.getAllOrders();
         System.out.println("Number of orders loaded from DB: " + orders.size());
 
-        // Print first few orders to verify data
-        orders.stream().limit(3).forEach(order ->
-                System.out.println("Order: ID=" + order.getId() +
-                        ", Number=" + order.getOrder_number() +
-                        ", Status=" + order.getStatus())
+        // Add more detailed logging for status
+        orders.forEach(order ->
+                System.out.println("Loaded order ID: " + order.getId() +
+                        ", Number: " + order.getOrder_number() +
+                        ", Status: " + order.getStatus())
         );
+
 
 
 

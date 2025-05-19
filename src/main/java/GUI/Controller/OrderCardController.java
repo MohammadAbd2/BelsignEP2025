@@ -53,7 +53,10 @@ public class OrderCardController {
         productImage.setImage(new Image(getClass().getResource("/Img/BELMAN_Logo.png").toExternalForm()));
 
         String status = order.getStatus();
-        if (status == null || status.isEmpty() || status.equalsIgnoreCase("new")) {
+        System.out.println("Setting status for order " + order.getId() + ": " + status); // Debug log
+
+        if (status == null || status.isEmpty()) {
+            status = "New";
             // Create a "NEW" label for new or null status
             Label newLabel = new Label("NEW");
             newLabel.setStyle("-fx-background-color: #4CAF50; " + // Green background
