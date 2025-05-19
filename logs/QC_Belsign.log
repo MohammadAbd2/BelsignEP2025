@@ -1308,3 +1308,21 @@ May 16, 2025 1:34:02 P.M. BLL.LoggerBLL.loggerManager logWarning
 WARNING: Order deletion attempt
 May 16, 2025 1:34:02 P.M. BLL.LoggerBLL.loggerManager logError
 SEVERE: Database connection failed
+May 16, 2025 1:36:52 P.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: New order added: Order #1234
+May 16, 2025 1:36:52 P.M. BLL.LoggerBLL.loggerManager logWarning
+WARNING: Order deletion attempt
+May 16, 2025 1:36:52 P.M. BLL.LoggerBLL.loggerManager logError
+SEVERE: Database connection failed
+May 19, 2025 10:05:16 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: New order added: Order #1234
+May 19, 2025 10:05:16 A.M. BLL.LoggerBLL.loggerManager logWarning
+WARNING: Order deletion attempt
+May 19, 2025 10:05:16 A.M. BLL.LoggerBLL.loggerManager logError
+SEVERE: Database connection failed
+May 19, 2025 10:09:12 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: New order added: Order #1234
+May 19, 2025 10:09:12 A.M. BLL.LoggerBLL.loggerManager logWarning
+WARNING: Order deletion attempt
+May 19, 2025 10:09:12 A.M. BLL.LoggerBLL.loggerManager logError
+SEVERE: Database connection failed
