@@ -55,16 +55,17 @@ public class OrderCardController {
         String status = order.getStatus();
         System.out.println("Setting status for order " + order.getId() + ": " + status); // Debug log
 
-        if (status == null || status.isEmpty()) {
-            status = "New";
-            // Create a "NEW" label for new or null status
+        if (status == null || status.isEmpty() || status.equalsIgnoreCase("new")) {
+            // Create a "NEW" label
             Label newLabel = new Label("NEW");
-            newLabel.setStyle("-fx-background-color: #4CAF50; " + // Green background
+            newLabel.setStyle(
+                    "-fx-background-color: linear-gradient(from 70% 70% to 100% 100%, #0095FF 0%, #0077CC 100%); " + // Green background
                     "-fx-text-fill: white; " +           // White text
                     "-fx-padding: 2 5 2 5; " +          // Small padding
                     "-fx-font-size: 10; " +             // Small font
                     "-fx-font-weight: bold; " +         // Bold text
                     "-fx-background-radius: 3;");        // Rounded corners
+
 
             // Remove any existing status icon
             statusIcon.setVisible(false);

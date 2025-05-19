@@ -113,6 +113,17 @@ Orders
     -fx-background-color: linear-gradient(from 0% 70% to 100% 30%, #F61616 0%, #fb7575 100%);
 }
 
+#ordersGrid {
+    -fx-pref-width: 100%;
+    -fx-max-width: infinity;
+}
+
+#containerVBox {
+    -fx-pref-width: 100%;
+    -fx-max-width: infinity;
+}
+
+
 
 /*
 ---------------

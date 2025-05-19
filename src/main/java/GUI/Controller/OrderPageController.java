@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.util.List;
@@ -102,15 +103,17 @@ public class OrderPageController {
     private void populateOrdersGrid(List<Order> orders) {
         try {
             System.out.println("Starting to populate grid");
-            // Clear existing items
             ordersGrid.getChildren().clear();
 
-            // Create 5x2 grid
             int columns = 5;
             int rows = 2;
             int maxCards = columns * rows;
 
-            // Limit the number of orders to prevent overflow
+            // Set fixed width for the grid
+            ordersGrid.setMinWidth(1160);
+            ordersGrid.setPrefWidth(1160);
+            ordersGrid.setMaxWidth(1160);
+
             List<Order> displayOrders = orders.stream()
                     .limit(maxCards)
                     .collect(Collectors.toList());
@@ -119,17 +122,12 @@ public class OrderPageController {
 
             for (int i = 0; i < maxCards; i++) {
                 try {
-                    // Calculate grid position
                     int column = i % columns;
                     int row = i / columns;
 
-                    System.out.println("Loading card for position: row=" + row + ", column=" + column);
-
-                    // Load the OrderCard.fxml layout
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OrderCard.fxml"));
-                    Node orderCard = loader.load();
+                    VBox orderCard = loader.load();  // Load as VBox since we know the root element is VBox
 
-                    // Get the controller and set the order data (might be null)
                     OrderCardController controller = loader.getController();
                     Order order = (i < displayOrders.size()) ? displayOrders.get(i) : null;
 
@@ -138,8 +136,6 @@ public class OrderPageController {
                     }
 
                     controller.setOrderData(order);
-
-                    // Add to grid at calculated position
                     ordersGrid.add(orderCard, column, row);
 
                 } catch (IOException e) {
@@ -154,6 +150,7 @@ public class OrderPageController {
             e.printStackTrace();
         }
     }
+
 
     private void updatePaginationControls() {
         int totalPages = (int) Math.ceil((double) currentOrders.size() / ordersPerPage);

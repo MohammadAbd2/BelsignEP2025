@@ -79,9 +79,10 @@ public class Order {
     }
 
     public String getStatusIcon() {
-        if (status == null) return "default.png";
+        if (status == null || status.isEmpty() || status.equalsIgnoreCase("new")) {
+            return null; // This will trigger the "NEW" label creation in setOrderData
+        }
 
-        // Use equals() instead of == for String comparison
         switch (status.toLowerCase()) {
             case "approved":
                 return "check.png";
@@ -89,12 +90,11 @@ public class Order {
                 return "hourglass.png";
             case "rejected":
                 return "delete.png";
-            case "new":
-                return "star.png";
             default:
                 return "default.png";
         }
     }
+
 
     @Override
     public String toString() {
