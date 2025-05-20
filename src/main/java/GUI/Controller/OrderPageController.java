@@ -59,8 +59,23 @@ public class OrderPageController {
         orderDB = new OrderDB();
     }
 
+    private void updateStatusLabels() {
+        int newCount = orderDB.countOrdersByStatus("New");
+        int approvedCount = orderDB.countOrdersByStatus("Approved");
+        int pendingCount = orderDB.countOrdersByStatus("Pending");
+        int rejectedCount = orderDB.countOrdersByStatus("Rejected");
+
+        ordersNew.setText("New : " + newCount);
+        ordersApproved.setText("Approved : " + approvedCount);
+        ordersPending.setText("Pending : " + pendingCount);
+        ordersRejected.setText("Rejected : " + rejectedCount);
+    }
+
     public void initialize() {
         System.out.println("OrderPageController initialized!");
+
+        // Update status labels with actual counts
+        updateStatusLabels();
 
         // Hook up filter actions
         ordersNew.setOnAction(e -> filterByStatus("new"));
@@ -95,6 +110,7 @@ public class OrderPageController {
                         ", Status: " + order.getStatus())
         );
 
+        updateStatusLabels();
         updatePaginationControls();
         displayCurrentPage();
     }
@@ -241,5 +257,4 @@ public class OrderPageController {
         updatePaginationControls();
         displayCurrentPage();
     }
-
 }

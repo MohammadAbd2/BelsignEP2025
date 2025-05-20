@@ -102,15 +102,15 @@ Orders
 }
 
 #ordersApproved{
-    -fx-background-color: linear-gradient(from 70% 70% to 100% 100%, #00DF0B 33%, #3EE8CB 66%, #37C1B1 66%);
+    -fx-background-color: linear-gradient(from 70% 70% to 100% 100%, #00DF0B 0%, #00B222 100%);
 }
 
 #ordersPending{
-    -fx-background-color: linear-gradient(to right, #FC8924 0%, #D1A8A8 100%);
+    -fx-background-color: linear-gradient(from 70% 70% to 100% 100%, #FCA000 0%, #DC6919 100%);
 }
 
 #ordersRejected {
-    -fx-background-color: linear-gradient(from 0% 70% to 100% 30%, #F61616 0%, #fb7575 100%);
+    -fx-background-color: linear-gradient(from 70% 70% to 100% 100%, #FF4A3D 0%, #F61616 100%);
 }
 
 #ordersGrid {
