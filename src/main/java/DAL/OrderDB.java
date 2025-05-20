@@ -185,4 +185,22 @@ public class OrderDB implements IOrderDB {
             e.printStackTrace();
         }
     }
+    
+    // Add this new method to OrderDB class
+    public int countOrdersByStatus(String status) {
+        String sql = "SELECT COUNT(*) FROM QC_Belsign_schema.[order] WHERE status = ?";
+        try (Connection conn = dbConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setString(1, normalizeStatus(status));
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error counting orders by status: " + e.getMessage());
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }
