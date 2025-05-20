@@ -56,9 +56,8 @@ public class OrderDB implements IOrderDB {
 
 
     private String normalizeStatus(String status) {
-        if (status == null) return null;
-        String normalized = status.toLowerCase();
-        return normalized.substring(0, 1).toUpperCase() + normalized.substring(1);
+        if (status == null) return "New";
+        return status.substring(0, 1).toUpperCase() + status.substring(1).toLowerCase();
     }
 
     @Override

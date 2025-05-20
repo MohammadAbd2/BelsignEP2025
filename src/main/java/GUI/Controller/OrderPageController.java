@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,6 +17,10 @@ import java.util.stream.Collectors;
 
 public class OrderPageController {
     private OrderDB orderDB;
+    private int currentPage = 1;
+    private int ordersPerPage = 10; // 5 columns × 2 rows
+    private List<Order> currentOrders; // Store current filter state
+
 
     @FXML
     private TextField searchField;
@@ -31,6 +36,21 @@ public class OrderPageController {
 
     @FXML
     private Button ordersRejected;
+
+    @FXML
+    private Button prevButton;
+
+    @FXML
+    private Button nextButton;
+
+    @FXML
+    private Button page1Button;
+
+    @FXML
+    private Button page2Button;
+
+    @FXML
+    private Button page3Button;
 
     @FXML
     private GridPane ordersGrid;
@@ -50,6 +70,14 @@ public class OrderPageController {
 
         searchField.setOnKeyReleased(e -> filterByText(searchField.getText()));
 
+        // Setup pagination controls
+        prevButton.setOnAction(e -> goToPreviousPage());
+        nextButton.setOnAction(e -> goToNextPage());
+        page1Button.setOnAction(e -> goToPage(1));
+        page2Button.setOnAction(e -> goToPage(2));
+        page3Button.setOnAction(e -> goToPage(3));
+
+
         // Debug print before loading orders
         System.out.println("About to load orders...");
         loadOrders();
@@ -57,33 +85,35 @@ public class OrderPageController {
     }
 
     private void loadOrders() {
-        List<Order> orders = orderDB.getAllOrders();
-        System.out.println("Number of orders loaded from DB: " + orders.size());
+        currentOrders = orderDB.getAllOrders();
+        System.out.println("Number of orders loaded from DB: " + currentOrders.size());
 
-        // Print first few orders to verify data
-        orders.stream().limit(3).forEach(order ->
-                System.out.println("Order: ID=" + order.getId() +
-                        ", Number=" + order.getOrder_number() +
-                        ", Status=" + order.getStatus())
+        // Add more detailed logging for status
+        currentOrders.forEach(order ->
+                System.out.println("Loaded order ID: " + order.getId() +
+                        ", Number: " + order.getOrder_number() +
+                        ", Status: " + order.getStatus())
         );
 
-
-
-        populateOrdersGrid(orders);
+        updatePaginationControls();
+        displayCurrentPage();
     }
+
 
     private void populateOrdersGrid(List<Order> orders) {
         try {
             System.out.println("Starting to populate grid");
-            // Clear existing items
             ordersGrid.getChildren().clear();
 
-            // Create 5x2 grid
             int columns = 5;
             int rows = 2;
             int maxCards = columns * rows;
 
-            // Limit the number of orders to prevent overflow
+            // Set fixed width for the grid
+            ordersGrid.setMinWidth(1160);
+            ordersGrid.setPrefWidth(1160);
+            ordersGrid.setMaxWidth(1160);
+
             List<Order> displayOrders = orders.stream()
                     .limit(maxCards)
                     .collect(Collectors.toList());
@@ -92,17 +122,12 @@ public class OrderPageController {
 
             for (int i = 0; i < maxCards; i++) {
                 try {
-                    // Calculate grid position
                     int column = i % columns;
                     int row = i / columns;
 
-                    System.out.println("Loading card for position: row=" + row + ", column=" + column);
-
-                    // Load the OrderCard.fxml layout
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OrderCard.fxml"));
-                    Node orderCard = loader.load();
+                    VBox orderCard = loader.load();  // Load as VBox since we know the root element is VBox
 
-                    // Get the controller and set the order data (might be null)
                     OrderCardController controller = loader.getController();
                     Order order = (i < displayOrders.size()) ? displayOrders.get(i) : null;
 
@@ -111,8 +136,6 @@ public class OrderPageController {
                     }
 
                     controller.setOrderData(order);
-
-                    // Add to grid at calculated position
                     ordersGrid.add(orderCard, column, row);
 
                 } catch (IOException e) {
@@ -128,28 +151,95 @@ public class OrderPageController {
         }
     }
 
+
+    private void updatePaginationControls() {
+        int totalPages = (int) Math.ceil((double) currentOrders.size() / ordersPerPage);
+
+        prevButton.setDisable(currentPage <= 1);
+        nextButton.setDisable(currentPage >= totalPages);
+
+        // Update page buttons
+        page1Button.setDisable(false);
+        page2Button.setDisable(false);
+        page3Button.setDisable(false);
+
+        // Highlight current page
+        String defaultStyle = "-fx-background-radius: 5;";
+        String selectedStyle = defaultStyle + "-fx-background-color: #0066AA;";
+
+        page1Button.setStyle(currentPage == 1 ? selectedStyle : defaultStyle);
+        page2Button.setStyle(currentPage == 2 ? selectedStyle : defaultStyle);
+        page3Button.setStyle(currentPage == 3 ? selectedStyle : defaultStyle);
+
+        // Update visibility
+        page1Button.setVisible(totalPages >= 1);
+        page2Button.setVisible(totalPages >= 2);
+        page3Button.setVisible(totalPages >= 3);
+    }
+
+    private void displayCurrentPage() {
+        int startIndex = (currentPage - 1) * ordersPerPage;
+        int endIndex = Math.min(startIndex + ordersPerPage, currentOrders.size());
+
+        List<Order> pageOrders = currentOrders.subList(startIndex, endIndex);
+        populateOrdersGrid(pageOrders);
+
+        // Log pagination info
+        System.out.println("Displaying page " + currentPage +
+                " (items " + (startIndex + 1) + "-" + endIndex +
+                " of " + currentOrders.size() + ")");
+    }
+
+    private void goToPage(int page) {
+        int totalPages = (int) Math.ceil((double) currentOrders.size() / ordersPerPage);
+        if (page >= 1 && page <= totalPages) {
+            currentPage = page;
+            updatePaginationControls();
+            displayCurrentPage();
+        }
+    }
+
+    private void goToPreviousPage() {
+        if (currentPage > 1) {
+            currentPage--;
+            updatePaginationControls();
+            displayCurrentPage();
+        }
+    }
+
+    private void goToNextPage() {
+        int totalPages = (int) Math.ceil((double) currentOrders.size() / ordersPerPage);
+        if (currentPage < totalPages) {
+            currentPage++;
+            updatePaginationControls();
+            displayCurrentPage();
+        }
+    }
+
     private void filterByStatus(String status) {
         System.out.println("Filtering by status: " + status);
         List<Order> allOrders = orderDB.getAllOrders();
-        List<Order> filteredOrders = allOrders.stream()
+        currentOrders = allOrders.stream()
                 .filter(order -> order.getStatus().equalsIgnoreCase(status))
                 .collect(Collectors.toList());
-        System.out.println("Found " + filteredOrders.size() + " orders with status: " + status);
-        populateOrdersGrid(filteredOrders);
+        currentPage = 1; // Reset to first page when filtering
+        updatePaginationControls();
+        displayCurrentPage();
     }
+
 
     private void filterByText(String text) {
         if (text == null || text.trim().isEmpty()) {
-            loadOrders();
-            return;
+            currentOrders = orderDB.getAllOrders();
+        } else {
+            List<Order> allOrders = orderDB.getAllOrders();
+            currentOrders = allOrders.stream()
+                    .filter(order -> order.getOrder_number().toLowerCase().contains(text.toLowerCase()))
+                    .collect(Collectors.toList());
         }
-
-        System.out.println("Filtering by text: " + text);
-        List<Order> allOrders = orderDB.getAllOrders();
-        List<Order> filteredOrders = allOrders.stream()
-                .filter(order -> order.getOrder_number().toLowerCase().contains(text.toLowerCase()))
-                .collect(Collectors.toList());
-        System.out.println("Found " + filteredOrders.size() + " orders matching text: " + text);
-        populateOrdersGrid(filteredOrders);
+        currentPage = 1; // Reset to first page when filtering
+        updatePaginationControls();
+        displayCurrentPage();
     }
+
 }
