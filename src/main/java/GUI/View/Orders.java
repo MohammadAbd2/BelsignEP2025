@@ -5,6 +5,7 @@ import BLL.OrderService;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -23,7 +24,6 @@ import java.util.List;
 public class Orders {
     static OrderService orderService = new OrderService();
     public static VBox loadOrdersComponent() {
-
         VBox mainContainer = new VBox();
         mainContainer.setPadding(new Insets(15));
         mainContainer.setPrefWidth(700);
@@ -80,9 +80,13 @@ public class Orders {
 
         List<Order> orders = orderService.loadOrders();
         for (Order order : orders) {
-            orderPane.getChildren().add(createorderCard(order));
-        }
+            Node orderCard = createorderCard(order);
 
+            orderCard.setOnMouseEntered(e -> orderCard.setStyle("-fx-cursor: hand;"));
+            orderCard.setOnMouseExited(e -> orderCard.setStyle("-fx-cursor: default;"));
+
+            orderPane.getChildren().add(orderCard);
+        }
         scrollPane.setContent(orderPane);
         mainContainer.getChildren().addAll(topBar, scrollPane);
         mainContainer.setStyle("-fx-background-color: linear-gradient(to right, #87CEFA, #0b48cd, #0d80ad);");
@@ -98,7 +102,6 @@ public class Orders {
         orderCard.setPadding(new Insets(10));
         orderCard.setPrefWidth(160);
         orderCard.setAlignment(Pos.CENTER);
-
         orderCard.setOnMouseClicked(orderclicked -> {
             System.out.println("order Clicked" + order);
 
