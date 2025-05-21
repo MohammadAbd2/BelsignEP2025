@@ -2,6 +2,7 @@ package GUI.View;
 
 import BE.Order;
 import BLL.OrderService;
+import Utils.LoggedInUser;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -80,12 +81,15 @@ public class Orders {
 
         List<Order> orders = orderService.loadOrders();
         for (Order order : orders) {
+            // create the order card
             Node orderCard = createorderCard(order);
 
-            orderCard.setOnMouseEntered(e -> orderCard.setStyle("-fx-cursor: hand;"));
-            orderCard.setOnMouseExited(e -> orderCard.setStyle("-fx-cursor: default;"));
-
+            // add the order to the order pane
             orderPane.getChildren().add(orderCard);
+
+            // change the scene to QC or operator once clicking on the order
+
+
         }
         scrollPane.setContent(orderPane);
         mainContainer.getChildren().addAll(topBar, scrollPane);
