@@ -28,18 +28,18 @@ public class App extends Application {
 
         //Logger.displayOrders();
 
-        Logger.RegisterLog("New order added: Order #1234", 1); //  INFO
-        Logger.RegisterLog("Order deletion attempt", 2); //  WARNING
-        Logger.RegisterLog("Database connection failed", 3); //  ERROR
+        //Logger.RegisterLog("New order added: Order #1234", 1); //  INFO
+        //Logger.RegisterLog("Order deletion attempt", 2); //  WARNING
+        //Logger.RegisterLog("Database connection failed", 3); //  ERROR
 
 
-        List<String> infoLogs = Logger.displayLogsByType(1);
-        List<String> warningLogs = Logger.displayLogsByType(2);
-        List<String> errorLogs = Logger.displayLogsByType(3);
+        //List<String> infoLogs = Logger.displayLogsByType(1);
+        //List<String> warningLogs = Logger.displayLogsByType(2);
+        //List<String> errorLogs = Logger.displayLogsByType(3);
 
-        System.out.println("There is " + infoLogs.size() + " Info messages");
-        System.out.println("There is " +  warningLogs.size() + " Warning messages");
-        System.out.println("There is " + errorLogs.size() + " Error messages");
+        //System.out.println("There is " + infoLogs.size() + " Info messages");
+        //System.out.println("There is " +  warningLogs.size() + " Warning messages");
+        //System.out.println("There is " + errorLogs.size() + " Error messages");
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Login.fxml"));
         Parent root = loader.load();

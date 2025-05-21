@@ -3,6 +3,7 @@ package GUI.Controller;
 import BE.Order;
 import BLL.OrderService;
 import DAL.OrderDB;
+import Utils.LoggedInUser;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -110,10 +111,13 @@ public class OrderPageController {
                         ", Status: " + order.getStatus())
         );
 
+
+
         updateStatusLabels();
         updatePaginationControls();
         displayCurrentPage();
     }
+
 
 
     private void populateOrdersGrid(List<Order> orders) {
@@ -126,14 +130,14 @@ public class OrderPageController {
             int maxCards = columns * rows;
 
             // Set fixed width for the grid
-            ordersGrid.setMinWidth(1160);
-            ordersGrid.setPrefWidth(1160);
-            ordersGrid.setMaxWidth(1160);
+            ordersGrid.setMinWidth(870);
+            ordersGrid.setPrefWidth(880);
+//            ordersGrid.setMaxWidth(1160);
+            ordersGrid.setMinHeight(350);
 
             List<Order> displayOrders = orders.stream()
                     .limit(maxCards)
-                    .collect(Collectors.toList());
-
+                    .toList();
             System.out.println("Displaying " + displayOrders.size() + " orders out of " + orders.size() + " total");
 
             for (int i = 0; i < maxCards; i++) {
@@ -152,8 +156,20 @@ public class OrderPageController {
                     }
 
                     controller.setOrderData(order);
-                    ordersGrid.add(orderCard, column, row);
+                    orderCard.setOnMouseClicked(e -> {
+                        switch (LoggedInUser.getLoggedInRole()){
+                            case "Operator": {
+                                System.out.println("Operator Clicked on order card");
+                            break;
+                            }
+                            case "QA" : {
+                                System.out.println("QC Clicked on order card");
+                            break;
+                            }
+                        };
+                    });
 
+                    ordersGrid.add(orderCard, column, row);
                 } catch (IOException e) {
                     System.err.println("Error loading OrderCard.fxml: " + e.getMessage());
                     e.printStackTrace();

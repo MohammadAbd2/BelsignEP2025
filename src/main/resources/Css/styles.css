@@ -63,7 +63,7 @@ navbar
 */
 
 #navigationBar{
-    -fx-background-color: linear-gradient(from 0% 70% to 100% 30%, #0375AA 0%, #04529d 100%, #0E63AE 100%, #005092 70% );
+    -fx-background-color: linear-gradient(from 0% 70% to 100% 30%, rgb(3, 98, 170) 0%, #04529d 100%, #0E63AE 100%, #005092 70% );
 }
 
 #profileImagePane{
@@ -100,28 +100,47 @@ Orders
 #ordersNew{
     -fx-background-color: linear-gradient(from 70% 70% to 100% 100%, #0095FF 0%, #0077CC 100%);
 }
+#ordersNew:hover{
+    -fx-cursor: hand;
+}
 
 #ordersApproved{
     -fx-background-color: linear-gradient(from 70% 70% to 100% 100%, #00DF0B 0%, #00B222 100%);
+}
+#ordersApproved:hover{
+    -fx-cursor: hand;
 }
 
 #ordersPending{
     -fx-background-color: linear-gradient(from 70% 70% to 100% 100%, #FCA000 0%, #DC6919 100%);
 }
+#ordersPending:hover{
+    -fx-cursor: hand;
+}
+
 
 #ordersRejected {
     -fx-background-color: linear-gradient(from 70% 70% to 100% 100%, #FF4A3D 0%, #F61616 100%);
 }
 
+#ordersRejected:hover {
+    -fx-cursor: hand;
+}
+
+
 #ordersGrid {
     -fx-pref-width: 100%;
     -fx-max-width: infinity;
+
 }
 
 #containerVBox {
     -fx-pref-width: 100%;
     -fx-max-width: infinity;
+    -fx-cursor: hand;
 }
+
+
 
 
 
@@ -299,12 +318,6 @@ custom-scroll-pane {
 
 
 
-
-
-
-
-
-
 #navbar Button {
     -fx-padding : 25px;
     -fx-background-color: transparent;
@@ -328,4 +341,6 @@ custom-scroll-pane {
 
 .ordersPageNav{
     -fx-background-color: #009EF4 !important;
+    -fx-cursor: hand;
+    -fx-pref-width: 35;
 }
