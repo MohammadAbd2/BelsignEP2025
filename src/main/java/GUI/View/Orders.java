@@ -2,7 +2,6 @@ package GUI.View;
 
 import BE.Order;
 import BLL.OrderService;
-import Utils.LoggedInUser;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -113,12 +112,9 @@ public class Orders {
         ImageView orderImage = new ImageView(new Image("/img/logo.png"));
         orderImage.setFitWidth(160);
         orderImage.setFitHeight(120);
-
         Text orderDescription = new Text("Description : " + order.getId() + order.getOrder_number());
-
         orderCard.getChildren().addAll(orderImage, orderDescription);
         return orderCard;
     }
-
 
 }

@@ -1,21 +1,16 @@
 package GUI.View;
-
-import GUI.Model.Logger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import java.util.List;
 
 
 public class App extends Application {
-
     @Override
     public void start(Stage primaryStage) throws Exception {
-
         // start using the Scenemanger
         SceneManager.setStage(primaryStage);
         SceneManager.loadSceneAsParent("/View/Login.fxml");
@@ -52,6 +47,7 @@ public class App extends Application {
                 "customTitleBar",
                 "loginPage"
         );
+
         SceneManager.composeScene(loginScenes, "ComposedLogin");
         SceneManager.switchScene("ComposedLogin");
     }
