@@ -38,6 +38,7 @@ public class LoginChoice {
     public void operatorLogin() throws IOException {
         LoggedInUser.setLoggedInRole("Operator");
         UserSession.setLoggedIn(true);
+
         SceneManager.loadScene("navBar", "/View/NavBar.fxml");
         List<String> scenes = List.of(
                 "customTitleBar",
