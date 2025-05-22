@@ -1,71 +1,75 @@
 package BLL.LoginBLL;
 
-import BE.Admin;
-import BE.Operator;
-import BE.QA;
-import GUI.Controller.NavbarController;
-import GUI.Model.Logger;
 import GUI.View.SceneManager;
 import Utils.LoggedInUser;
 import Utils.UserSession;
+import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.List;
 
 public class LoginChoice {
 
-//    private final Admin admin = new Admin(1 , "Admin User");      // Represents admin role
-//    private final Operator operator = new Operator(2 , "Operator User");  // Represents operator role
-//    private final QA qa = new QA(3 , "QA User");                // Represents qc role
-
+    // Login for Admin
     public void adminLogin() throws IOException {
         LoggedInUser.setLoggedInRole("Admin");
         UserSession.setLoggedIn(true);
-        SceneManager.loadScene("navBar", "/View/NavBar.fxml");
-        List<String> scenes = List.of(
-                "customTitleBar",
-                "navBar",
-                "adminPage"
-        );
-        SceneManager.composeScene(scenes, "composedAdminPage");
-        SceneManager.switchScene("composedAdminPage");
-        System.out.println("Logged in as Admin.");
 
-         Logger.displayOrders();
-        // Additional logic for admin-specific access can go here
+        VBox combinedLayout = new VBox();
+        combinedLayout.getChildren().addAll(
+            SceneManager.loadSceneAsParent("/View/TitleBar.fxml"),
+            SceneManager.loadSceneAsParent("/View/NavBar.fxml"),
+            SceneManager.loadSceneAsParent("/View/Admin.fxml")
+        );
+
+        setDynamicScene(combinedLayout);
+        System.out.println("Logged in as Admin. Scenes dynamically displayed.");
     }
 
+    // Login for Operator
     public void operatorLogin() throws IOException {
         LoggedInUser.setLoggedInRole("Operator");
         UserSession.setLoggedIn(true);
 
-        SceneManager.loadScene("navBar", "/View/NavBar.fxml");
-        List<String> scenes = List.of(
-                "customTitleBar",
-                "navBar",
-                "operatorPage"
+        VBox combinedLayout = new VBox();
+        combinedLayout.getChildren().addAll(
+            SceneManager.loadSceneAsParent("/View/TitleBar.fxml"),
+            SceneManager.loadSceneAsParent("/View/NavBar.fxml"),
+            SceneManager.loadSceneAsParent("/View/Orders.fxml")
         );
 
-        SceneManager.composeScene(scenes, "composedOperatorPage");
-        SceneManager.switchScene("composedOperatorPage");
-        System.out.println("Logged in as Operator.");
-        Logger.displayOrders();
-        // Additional logic for operator-specific access can go here
+        setDynamicScene(combinedLayout);
+        System.out.println("Logged in as Operator. Scenes dynamically displayed.");
     }
 
+    // Login for QA/QC
     public void qaLogin() throws IOException {
         LoggedInUser.setLoggedInRole("QA");
         UserSession.setLoggedIn(true);
-        SceneManager.loadScene("navBar", "/View/NavBar.fxml");
-        List<String> scenes = List.of(
-                "customTitleBar",
-                "navBar",
-                "QC"
+
+        VBox combinedLayout = new VBox();
+        combinedLayout.getChildren().addAll(
+            SceneManager.loadSceneAsParent("/View/TitleBar.fxml"),
+            SceneManager.loadSceneAsParent("/View/NavBar.fxml"),
+            SceneManager.loadSceneAsParent("/View/QA.fxml")
         );
 
-        SceneManager.composeScene(scenes, "composedQCPage");
-        SceneManager.switchScene("composedQCPage");
-        System.out.println("Logged in as QC.");
-        Logger.displayOrders();
+        setDynamicScene(combinedLayout);
+        System.out.println("Logged in as QA. Scenes dynamically displayed.");
+    }
+
+    // Helper to dynamically set a scene and adjust the stage size
+    private void setDynamicScene(VBox layout) {
+        Stage stage = SceneManager.getStage();
+
+        Scene scene = new Scene(layout);
+        stage.setScene(scene);
+        stage.sizeToScene();
+
+        stage.setMinWidth(layout.prefWidth(-1) > 0 ? layout.prefWidth(-1) : 600);
+        stage.setMinHeight(layout.prefHeight(-1) > 0 ? layout.prefHeight(-1) : 400);
+
+        stage.show();
     }
 }

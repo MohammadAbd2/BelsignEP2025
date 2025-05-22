@@ -33,7 +33,7 @@ public class CustomTitleBar extends HBox {
 
         // Add components to title bar
         this.getChildren().addAll(spacer, minimizeBtn, closeBtn);
-        this.setStyle("-fx-padding: 5px; -fx-background-color: linear-gradient(to right, #87CEFA, #6A0DAD, #FFD700);");
+        this.setStyle("-fx-padding: 5px;");
 
         // Make Window Draggable
         this.setOnMousePressed(event -> {
