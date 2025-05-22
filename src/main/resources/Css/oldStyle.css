@@ -42,7 +42,7 @@ loginPage
     -fx-border-color: white;  /* White border color */
     -fx-border-width: 2px;  /* Border width */
 }
-#profileImagePane{
+#logOut{
     -fx-padding: 14px 0px 0px 15px;
     -fx-background-color: null !important;
 }

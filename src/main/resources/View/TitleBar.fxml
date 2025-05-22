@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
@@ -13,5 +14,8 @@
         <Button fx:id="minimizeButton" onAction="#minimizeStage" styleClass="title-button" text="➖" />
         <Button fx:id="closeButton" onAction="#closeStage" styleClass="title-button" text="❌">
         </Button>
+      <padding>
+         <Insets left="10.0" />
+      </padding>
     </HBox>
 </VBox>
