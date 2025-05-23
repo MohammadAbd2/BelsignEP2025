@@ -9,7 +9,7 @@
 
 <!-- Header with Image on Left and Navbar on Right -->
 
-<BorderPane fx:id="navigationBar" stylesheets="@../Css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.NavbarController">
+<BorderPane fx:id="navigationBar" stylesheets="@/Css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.NavbarController">
      <padding>
          <Insets left="10.0" right="10.0" />
      </padding>

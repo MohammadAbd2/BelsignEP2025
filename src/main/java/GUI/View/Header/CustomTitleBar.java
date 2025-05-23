@@ -18,9 +18,10 @@ public class CustomTitleBar extends HBox {
         Button minimizeBtn = new Button("🟡");  // O for Minimize
         Button closeBtn = new Button("❌");  // X for Close
 
-        // Button Styles
-        minimizeBtn.setStyle("-fx-background-color: transparent; -fx-font-size: 14px;");
-        closeBtn.setStyle("-fx-background-color: transparent; -fx-font-size: 14px;");
+        // Apply CSS classes
+        minimizeBtn.getStyleClass().add("title-bar-button");
+        closeBtn.getStyleClass().add("title-bar-button");
+        this.getStyleClass().addAll("title-bar", "transparent-background");
 
         // Button Actions
         minimizeBtn.setOnAction(e -> stage.setIconified(true));

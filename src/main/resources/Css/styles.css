@@ -10,6 +10,37 @@ ALL
     -fx-font-size: 16px;
 }
 
+.search-field {
+    -fx-background-color: white;
+}
+
+.transparent-background {
+    -fx-background-color: transparent;
+}
+
+.sort-button {
+    -fx-background-color: #DF6800;
+    -fx-text-fill: white;
+}
+
+.scroll-pane {
+    -fx-background-color: #0abae0 !important;
+}
+
+.gradient-background {
+    -fx-background-color: linear-gradient(to right, #87CEFA, #0b48cd, #0d80ad);
+}
+
+.status-label {
+    -fx-font-weight: bold;
+}
+
+.order-button {
+    -fx-background-radius: 5;
+    -fx-text-fill: white;
+    -fx-font-family: "Helvetica";
+    -fx-font-size: 11.0;
+}
 
 /*
 ---------------
@@ -42,6 +73,15 @@ CustomTitleBar
 ---------------
 */
 
+.title-bar {
+    -fx-padding: 5px;
+}
+
+.title-bar-button {
+    -fx-background-color: transparent;
+    -fx-font-size: 14px;
+}
+
 /*
 ---------------
 Login
@@ -69,6 +109,11 @@ navbar
 #logOut{
     -fx-padding: 14px 0px 0px 15px;
     -fx-background-color: null !important;
+}
+
+.nav-button {
+    -fx-background-radius: 5;
+    -fx-padding: 10 10 10 10;
 }
 
 /*
