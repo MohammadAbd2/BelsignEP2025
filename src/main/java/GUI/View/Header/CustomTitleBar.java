@@ -49,5 +49,6 @@ public class CustomTitleBar extends HBox {
         // Change cursor when hovering over the title bar
         this.setOnMouseEntered(e -> this.setCursor(Cursor.HAND));
         this.setOnMouseExited(e -> this.setCursor(Cursor.DEFAULT));
+        this.getStyleClass().add("custom-title-bar");
     }
 }

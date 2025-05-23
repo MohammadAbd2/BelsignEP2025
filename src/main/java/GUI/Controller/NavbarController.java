@@ -107,28 +107,66 @@ public class NavbarController {
 
     // Navigation Handlers (no change)
     public void OrderTab(ActionEvent event) throws IOException {
-        UserSession.setLoggedIn(true);
-        SceneManager.composeScene(List.of("customTitleBar", "navBar", "orderPage"), "composedOrderPage");
-        SceneManager.switchScene("composedOrderPage");
+        // Load all required components
+        SceneManager.loadScene("customTitleBar", "/View/TitleBar.fxml");
+        SceneManager.loadScene("navbar", "/View/Navbar.fxml");
+        SceneManager.loadScene("orderPage", "/View/Orders.fxml");
+
+        // Compose them in order
+        List<String> scenes = List.of(
+                "customTitleBar",
+                "navbar",
+                "orderPage"
+        );
+        SceneManager.composeScene(scenes, "ComposedOrders");
+        SceneManager.switchScene("ComposedOrders");
     }
 
     public void OperatorTab(ActionEvent event) throws IOException {
-        UserSession.setLoggedIn(true);
-        SceneManager.composeScene(List.of("customTitleBar", "navBar", "operatorPage"), "composedOperatorPage");
-        SceneManager.switchScene("composedOperatorPage");
+        // Load all required components
+        SceneManager.loadScene("customTitleBar", "/View/TitleBar.fxml");
+        SceneManager.loadScene("navbar", "/View/Navbar.fxml");
+        SceneManager.loadScene("operatorPage", "/View/Operator.fxml");
+
+        List<String> scenes = List.of(
+                "customTitleBar",
+                "navbar",
+                "operatorPage"
+        );
+        SceneManager.composeScene(scenes, "ComposedOperator");
+        SceneManager.switchScene("ComposedOperator");
     }
 
     public void QCTab(ActionEvent event) throws IOException {
-        UserSession.setLoggedIn(true);
-        SceneManager.composeScene(List.of("customTitleBar", "navBar", "QC"), "composedQCPage");
-        SceneManager.switchScene("composedQCPage");
+        // Load all required components
+        SceneManager.loadScene("customTitleBar", "/View/TitleBar.fxml");
+        SceneManager.loadScene("navbar", "/View/Navbar.fxml");
+        SceneManager.loadScene("QCPage", "/View/QA.fxml");
+
+        List<String> scenes = List.of(
+                "customTitleBar",
+                "navbar",
+                "QCPage"
+        );
+        SceneManager.composeScene(scenes, "ComposedQC");
+        SceneManager.switchScene("ComposedQC");
     }
 
     public void AdminTab(ActionEvent event) throws IOException {
-        UserSession.setLoggedIn(true);
-        SceneManager.composeScene(List.of("customTitleBar", "navBar", "adminPage"), "composedAdminPage");
-        SceneManager.switchScene("composedAdminPage");
+        // Load all required components
+        SceneManager.loadScene("customTitleBar", "/View/TitleBar.fxml");
+        SceneManager.loadScene("navbar", "/View/Navbar.fxml");
+        SceneManager.loadScene("adminPage", "/View/Admin.fxml");
+
+        List<String> scenes = List.of(
+                "customTitleBar",
+                "navbar",
+                "adminPage"
+        );
+        SceneManager.composeScene(scenes, "ComposedAdmin");
+        SceneManager.switchScene("ComposedAdmin");
     }
+
 
     public void ProfileTab(javafx.scene.input.MouseEvent event) throws IOException {
         SceneManager.composeScene(List.of("customTitleBar", "loginPage"), "ComposedLogin");

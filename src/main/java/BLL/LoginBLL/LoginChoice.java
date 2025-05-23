@@ -8,6 +8,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
 
 public class LoginChoice {
 
@@ -16,60 +17,59 @@ public class LoginChoice {
         LoggedInUser.setLoggedInRole("Admin");
         UserSession.setLoggedIn(true);
 
-        VBox combinedLayout = new VBox();
-        combinedLayout.getChildren().addAll(
-            SceneManager.loadSceneAsParent("/View/TitleBar.fxml"),
-            SceneManager.loadSceneAsParent("/View/NavBar.fxml"),
-            SceneManager.loadSceneAsParent("/View/Admin.fxml")
-        );
+        // Load all required components
+        SceneManager.loadScene("customTitleBar", "/View/TitleBar.fxml");
+        SceneManager.loadScene("navbar", "/View/Navbar.fxml");
+        SceneManager.loadScene("adminPage", "/View/Admin.fxml");
 
-        setDynamicScene(combinedLayout);
-        System.out.println("Logged in as Admin. Scenes dynamically displayed.");
+        // Compose them in order
+        List<String> loginScenes = List.of(
+                "customTitleBar",
+                "navbar",
+                "adminPage"
+        );
+        SceneManager.composeScene(loginScenes, "ComposedAdmin");
+        SceneManager.switchScene("ComposedAdmin");
     }
+
+
 
     // Login for Operator
     public void operatorLogin() throws IOException {
         LoggedInUser.setLoggedInRole("Operator");
         UserSession.setLoggedIn(true);
 
-        VBox combinedLayout = new VBox();
-        combinedLayout.getChildren().addAll(
-            SceneManager.loadSceneAsParent("/View/TitleBar.fxml"),
-            SceneManager.loadSceneAsParent("/View/NavBar.fxml"),
-            SceneManager.loadSceneAsParent("/View/Orders.fxml")
+        SceneManager.loadScene("customTitleBar", "/View/TitleBar.fxml");
+        SceneManager.loadScene("navbar", "/View/Navbar.fxml");
+        SceneManager.loadScene("orderPage", "/View/Orders.fxml");
+
+        List<String> loginScenes = List.of(
+                "customTitleBar",
+                "navbar",
+                "orderPage"
         );
 
-        setDynamicScene(combinedLayout);
-        System.out.println("Logged in as Operator. Scenes dynamically displayed.");
+        SceneManager.composeScene(loginScenes, "ComposedOrders");
+        SceneManager.switchScene("ComposedOrders");
     }
+
 
     // Login for QA/QC
     public void qaLogin() throws IOException {
         LoggedInUser.setLoggedInRole("QA");
         UserSession.setLoggedIn(true);
 
-        VBox combinedLayout = new VBox();
-        combinedLayout.getChildren().addAll(
-            SceneManager.loadSceneAsParent("/View/TitleBar.fxml"),
-            SceneManager.loadSceneAsParent("/View/NavBar.fxml"),
-            SceneManager.loadSceneAsParent("/View/QA.fxml")
+        SceneManager.loadScene("customTitleBar", "/View/TitleBar.fxml");
+        SceneManager.loadScene("navbar", "/View/Navbar.fxml");
+        SceneManager.loadScene("orderPage", "/View/Orders.fxml");
+
+        List<String> loginScenes = List.of(
+                "customTitleBar",
+                "navbar",
+                "orderPage"
         );
 
-        setDynamicScene(combinedLayout);
-        System.out.println("Logged in as QA. Scenes dynamically displayed.");
-    }
-
-    // Helper to dynamically set a scene and adjust the stage size
-    private void setDynamicScene(VBox layout) {
-        Stage stage = SceneManager.getStage();
-
-        Scene scene = new Scene(layout);
-        stage.setScene(scene);
-        stage.sizeToScene();
-
-        stage.setMinWidth(layout.prefWidth(-1) > 0 ? layout.prefWidth(-1) : 600);
-        stage.setMinHeight(layout.prefHeight(-1) > 0 ? layout.prefHeight(-1) : 400);
-
-        stage.show();
+        SceneManager.composeScene(loginScenes, "ComposedOrders");
+        SceneManager.switchScene("ComposedOrders");
     }
 }
