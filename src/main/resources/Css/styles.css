@@ -74,9 +74,6 @@ OperatorPage
 ---------------
 */
 
-#notesArea{
-    -fx-pref-height: 280px;
-}
 
 
 /*
@@ -206,6 +203,7 @@ OTHERS
 
 .inline-button {
     -fx-pref-width: 100px; /* Can be adjusted based on design needs */
+    -fx-background-color: #434242;
 }
 
 
@@ -329,4 +327,37 @@ custom-scroll-pane {
     -fx-background-color: #009EF4 !important;
     -fx-cursor: hand;
     -fx-pref-width: 35;
+}
+
+.image-pane {
+    -fx-pref-width: 300;
+    -fx-pref-height: 270;
+    -fx-min-height: 130;
+    -fx-border-color: rgba(4, 83, 176, 0.3);
+    -fx-border-width: 2;
+    -fx-background-color: rgba(29, 97, 185, 0.48);
+    -fx-border-radius: 8;
+    -fx-alignment: center;
+}
+
+.image-pane:hover {
+    -fx-cursor: hand;
+}
+
+.custom-text-area {
+    -fx-background-color: transparent;
+}
+
+.custom-text-area .content {
+    -fx-background-color: linear-gradient(to right, #0375AA 0%, #0074D9 21%, #0E63AE 69%, #005092 100%);
+    -fx-text-fill: white;
+}
+
+.custom-text-area .scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+.custom-text-area .text {
+    -fx-fill: white;
 }
