@@ -117,18 +117,21 @@ public class NavbarController {
 
     public void OperatorTab(ActionEvent event) throws IOException {
         UserSession.setLoggedIn(true);
+        SceneManager.loadScene("navBar", "/View/NavBar.fxml");
         SceneManager.composeScene(List.of("navBar", "operatorPage"), "composedOperatorPage");
         SceneManager.switchScene("composedOperatorPage");
     }
 
     public void QCTab(ActionEvent event) throws IOException {
         UserSession.setLoggedIn(true);
+        SceneManager.loadScene("navBar", "/View/NavBar.fxml");
         SceneManager.composeScene(List.of("navBar", "QC"), "composedQCPage");
         SceneManager.switchScene("composedQCPage");
     }
 
     public void AdminTab(ActionEvent event) throws IOException {
         UserSession.setLoggedIn(true);
+        SceneManager.loadScene("navBar", "/View/NavBar.fxml");
         SceneManager.composeScene(List.of("navBar", "adminPage"), "composedAdminPage");
         SceneManager.switchScene("composedAdminPage");
     }
