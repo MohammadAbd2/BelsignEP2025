@@ -110,6 +110,7 @@ public class NavbarController {
     // Navigation Handlers (no change)
     public void OrderTab(ActionEvent event) throws IOException {
         UserSession.setLoggedIn(true);
+        SceneManager.loadScene("navBar", "/View/NavBar.fxml");
         SceneManager.composeScene(List.of("navBar", "orderPage"), "composedOrderPage");
         SceneManager.switchScene("composedOrderPage");
     }
