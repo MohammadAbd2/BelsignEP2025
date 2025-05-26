@@ -216,7 +216,7 @@ public class OrderPageController {
                             }
                             case "QA" : {
                                 try {
-                                    OrderViewController.setOrder(order);
+                                    QAController.setSelectedOrder(order);
 
                                     SceneManager.loadScene("customTitleBar", "/View/TitleBar.fxml");
                                     SceneManager.loadScene("navbar", "/View/Navbar.fxml");
