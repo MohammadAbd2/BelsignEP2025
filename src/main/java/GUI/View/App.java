@@ -1,55 +1,38 @@
 package GUI.View;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import java.util.List;
 
+import javafx.application.Application;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
 
 public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // start using the Scenemanger
+        // Set the stage globally
         SceneManager.setStage(primaryStage);
-        SceneManager.loadSceneAsParent("/View/Login.fxml");
-        SceneManager.loadScene("customTitleBar", "/View/TitleBar.fxml");
+
+
+        // Load your scenes normally (only the ones you actually use)
         SceneManager.loadScene("loginPage", "/View/Login.fxml");
         SceneManager.loadScene("adminPage", "/View/Admin.fxml");
         SceneManager.loadScene("operatorPage", "/View/Operator.fxml");
         SceneManager.loadScene("QC", "/View/QA.fxml");
         SceneManager.loadScene("orderPage", "/View/Orders.fxml");
 
-        //Logger.displayOrders();
+        // Switch to login scene as the first screen
+        SceneManager.switchScene("loginPage");
 
-        //Logger.RegisterLog("New order added: Order #1234", 1); //  INFO
-        //Logger.RegisterLog("Order deletion attempt", 2); //  WARNING
-        //Logger.RegisterLog("Database connection failed", 3); //  ERROR
+        // Responsive logic (no multiple stages)
+        double screenWidth = Screen.getPrimary().getBounds().getWidth();
+        double screenHeight = Screen.getPrimary().getBounds().getHeight();
 
+        if (screenWidth <= 1280 && screenHeight <= 800) {
+            primaryStage.setFullScreen(true);
+        } else {
+            primaryStage.setMaximized(true);
+        }
 
-        //List<String> infoLogs = Logger.displayLogsByType(1);
-        //List<String> warningLogs = Logger.displayLogsByType(2);
-        //List<String> errorLogs = Logger.displayLogsByType(3);
-
-        //System.out.println("There is " + infoLogs.size() + " Info messages");
-        //System.out.println("There is " +  warningLogs.size() + " Warning messages");
-        //System.out.println("There is " + errorLogs.size() + " Error messages");
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Login.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        primaryStage.initStyle(StageStyle.UNDECORATED);
-        primaryStage.setScene(scene);
+        primaryStage.setTitle("QC_Belsign Application");
         primaryStage.show();
-
-        List<String> loginScenes = List.of(
-                "customTitleBar",
-                "loginPage"
-        );
-
-        SceneManager.composeScene(loginScenes, "ComposedLogin");
-        SceneManager.switchScene("ComposedLogin");
     }
 
     public static void main(String[] args) {

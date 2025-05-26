@@ -7,7 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -21,9 +21,10 @@ public class NavbarController {
     private Button QCTabId;
     @FXML
     private Button AdminTabId;
-
     @FXML
-    private ImageView profile_pic;
+    private Button LogoutTabId;
+
+
 
     @FXML
     public void initialize() {
@@ -31,16 +32,6 @@ public class NavbarController {
         System.out.println("Authenticated: " + LoggedInUser.isAuthenticated());
 
         try {
-            // Load profile image
-            Image image = new Image(getClass().getResource("/img/logout.png").toExternalForm());
-            profile_pic.setFitHeight(20);
-            profile_pic.setFitWidth(20);
-            profile_pic.setImage(image);
-            profile_pic.setFitWidth(30);  // Set your desired width
-            profile_pic.setFitHeight(30);
-
-
-
             setNavbarStatus();
 
         } catch (Exception e) {
@@ -58,6 +49,8 @@ public class NavbarController {
         if (OperatorTabId != null) OperatorTabId.setVisible(false);
         if (QCTabId != null) QCTabId.setVisible(false);
         if (AdminTabId != null) AdminTabId.setVisible(false);
+        if (LogoutTabId != null) LogoutTabId.setVisible(false);
+
 
 
         switch (role) {
@@ -73,6 +66,9 @@ public class NavbarController {
 
                 AdminTabId.setVisible(true);
                 AdminTabId.setManaged(true);
+
+                LogoutTabId.setVisible(true);
+                LogoutTabId.setManaged(true);
             }
 
             case "Operator" -> {
@@ -87,6 +83,9 @@ public class NavbarController {
 
                 AdminTabId.setVisible(false);
                 AdminTabId.setManaged(false);
+
+                LogoutTabId.setVisible(true);
+                LogoutTabId.setManaged(true);
             }
 
             case "QA" -> {
@@ -101,6 +100,9 @@ public class NavbarController {
 
                 AdminTabId.setVisible(false);
                 AdminTabId.setManaged(false);
+
+                LogoutTabId.setVisible(true);
+                LogoutTabId.setManaged(true);
             }
         }
     }
@@ -108,30 +110,30 @@ public class NavbarController {
     // Navigation Handlers (no change)
     public void OrderTab(ActionEvent event) throws IOException {
         UserSession.setLoggedIn(true);
-        SceneManager.composeScene(List.of("customTitleBar", "navBar", "orderPage"), "composedOrderPage");
+        SceneManager.composeScene(List.of("navBar", "orderPage"), "composedOrderPage");
         SceneManager.switchScene("composedOrderPage");
     }
 
     public void OperatorTab(ActionEvent event) throws IOException {
         UserSession.setLoggedIn(true);
-        SceneManager.composeScene(List.of("customTitleBar", "navBar", "operatorPage"), "composedOperatorPage");
+        SceneManager.composeScene(List.of("navBar", "operatorPage"), "composedOperatorPage");
         SceneManager.switchScene("composedOperatorPage");
     }
 
     public void QCTab(ActionEvent event) throws IOException {
         UserSession.setLoggedIn(true);
-        SceneManager.composeScene(List.of("customTitleBar", "navBar", "QC"), "composedQCPage");
+        SceneManager.composeScene(List.of("navBar", "QC"), "composedQCPage");
         SceneManager.switchScene("composedQCPage");
     }
 
     public void AdminTab(ActionEvent event) throws IOException {
         UserSession.setLoggedIn(true);
-        SceneManager.composeScene(List.of("customTitleBar", "navBar", "adminPage"), "composedAdminPage");
+        SceneManager.composeScene(List.of("navBar", "adminPage"), "composedAdminPage");
         SceneManager.switchScene("composedAdminPage");
     }
 
-    public void ProfileTab(javafx.scene.input.MouseEvent event) throws IOException {
-        SceneManager.composeScene(List.of("customTitleBar", "loginPage"), "ComposedLogin");
+    public void LogoutTab(ActionEvent event) throws IOException {
+        SceneManager.composeScene(List.of("loginPage"), "ComposedLogin");
         SceneManager.switchScene("ComposedLogin");
     }
 }

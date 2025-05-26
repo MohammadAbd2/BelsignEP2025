@@ -64,13 +64,6 @@
 
         </GridPane>
 
-        <VBox spacing="10" alignment="TOP_CENTER">
-            <!-- Container for static OrderCards -->
-            <VBox fx:id="ordersList" spacing="10" alignment="TOP_CENTER">
-                <!-- OrderCards will be added programmatically here -->
-            </VBox>
-        </VBox>
-
         <!-- Bottom: Page Navigation -->
         <HBox alignment="CENTER" spacing="10">
             <Button fx:id="prevButton" style="-fx-background-radius: 5;" styleClass="ordersPageNav" text="&lt;">

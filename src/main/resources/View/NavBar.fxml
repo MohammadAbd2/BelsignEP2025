@@ -33,9 +33,7 @@
              <Button fx:id="OperatorTabId" onAction="#OperatorTab" text="Operator" />
              <Button fx:id="QCTabId" onAction="#QCTab" text="QA" />
              <Button fx:id="AdminTabId" onAction="#AdminTab" text="Admin" />
-             <HBox fx:id="logOut" alignment="CENTER" onMouseClicked="#ProfileTab">
-                 <ImageView fx:id="profile_pic" nodeOrientation="INHERIT" />
-             </HBox>
+             <Button fx:id="LogoutTabId" onAction="#LogoutTab" layoutX="336.0" layoutY="11.0" text="Log Out" />
              <padding>
             <Insets left="10.0" right="10.0" />
          </padding>

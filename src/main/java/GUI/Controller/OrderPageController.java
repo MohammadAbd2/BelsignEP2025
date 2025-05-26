@@ -1,13 +1,11 @@
 package GUI.Controller;
 
 import BE.Order;
-import BLL.OrderService;
 import DAL.OrderDB;
 import GUI.View.SceneManager;
 import Utils.LoggedInUser;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -161,7 +159,6 @@ public class OrderPageController {
                             case "Operator": {
                                 try {
                                     System.out.println("Operator Clicked on order card");
-                                    SceneManager.loadScene("customTitleBar", "/View/TitleBar.fxml");
                                     SceneManager.loadScene("navbar", "/View/Navbar.fxml");
                                     SceneManager.loadScene("operatorPage", "/View/Operator.fxml");
                                     SceneManager.loadScene("QC", "/View/QA.fxml");
@@ -181,7 +178,6 @@ public class OrderPageController {
                             case "QA" : {
                                 try {
                                     System.out.println("QC Clicked on order card");
-                                    SceneManager.loadScene("customTitleBar", "/View/TitleBar.fxml");
                                     SceneManager.loadScene("navbar", "/View/Navbar.fxml");
                                     SceneManager.loadScene("QCPage", "/View/QA.fxml");
                                     List<String> loginScenes = List.of(

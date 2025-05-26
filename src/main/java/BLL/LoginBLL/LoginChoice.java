@@ -1,9 +1,5 @@
 package BLL.LoginBLL;
 
-import BE.Admin;
-import BE.Operator;
-import BE.QA;
-import GUI.Controller.NavbarController;
 import GUI.Model.Logger;
 import GUI.View.SceneManager;
 import Utils.LoggedInUser;
@@ -23,7 +19,6 @@ public class LoginChoice {
         UserSession.setLoggedIn(true);
         SceneManager.loadScene("navBar", "/View/NavBar.fxml");
         List<String> scenes = List.of(
-                "customTitleBar",
                 "navBar",
                 "adminPage"
         );
@@ -40,7 +35,6 @@ public class LoginChoice {
         UserSession.setLoggedIn(true);
         SceneManager.loadScene("navBar", "/View/NavBar.fxml");
         List<String> scenes = List.of(
-                "customTitleBar",
                 "navBar",
                 "operatorPage"
         );
@@ -57,7 +51,6 @@ public class LoginChoice {
         UserSession.setLoggedIn(true);
         SceneManager.loadScene("navBar", "/View/NavBar.fxml");
         List<String> scenes = List.of(
-                "customTitleBar",
                 "navBar",
                 "QC"
         );
