@@ -18,9 +18,10 @@ public class CustomTitleBar extends HBox {
         Button minimizeBtn = new Button("🟡");  // O for Minimize
         Button closeBtn = new Button("❌");  // X for Close
 
-        // Button Styles
-        minimizeBtn.setStyle("-fx-background-color: transparent; -fx-font-size: 14px;");
-        closeBtn.setStyle("-fx-background-color: transparent; -fx-font-size: 14px;");
+        // Apply CSS classes
+        minimizeBtn.getStyleClass().add("title-bar-button");
+        closeBtn.getStyleClass().add("title-bar-button");
+        this.getStyleClass().addAll("title-bar", "transparent-background");
 
         // Button Actions
         minimizeBtn.setOnAction(e -> stage.setIconified(true));
@@ -33,7 +34,7 @@ public class CustomTitleBar extends HBox {
 
         // Add components to title bar
         this.getChildren().addAll(spacer, minimizeBtn, closeBtn);
-        this.setStyle("-fx-padding: 5px; -fx-background-color: linear-gradient(to right, #87CEFA, #6A0DAD, #FFD700);");
+        this.setStyle("-fx-padding: 5px;");
 
         // Make Window Draggable
         this.setOnMousePressed(event -> {
@@ -49,5 +50,6 @@ public class CustomTitleBar extends HBox {
         // Change cursor when hovering over the title bar
         this.setOnMouseEntered(e -> this.setCursor(Cursor.HAND));
         this.setOnMouseExited(e -> this.setCursor(Cursor.DEFAULT));
+        this.getStyleClass().add("custom-title-bar");
     }
 }

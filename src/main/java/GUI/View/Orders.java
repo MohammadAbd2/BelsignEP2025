@@ -25,6 +25,7 @@ public class Orders {
     static OrderService orderService = new OrderService();
     public static VBox loadOrdersComponent() {
         VBox mainContainer = new VBox();
+        mainContainer.getStyleClass().add("gradient-background");
         mainContainer.setPadding(new Insets(15));
         mainContainer.setPrefWidth(700);
         mainContainer.setAlignment(Pos.TOP_RIGHT);
@@ -39,17 +40,15 @@ public class Orders {
 
         // TextField for searching orders
         TextField searchBox = new TextField();
-        searchBox.setStyle("-fx-background-color: white;");
-        searchBox.setPromptText("Search orders...");
-        searchBox.setPrefWidth(300);
-
+        searchBox.getStyleClass().add("search-field");
 
         // Filter options
         HBox filterBox = new HBox(10);
-        filterBox.setStyle("-fx-background-color: transparent;");
-        filterBox.setAlignment(Pos.TOP_RIGHT);
+        filterBox.getStyleClass().add("transparent-background");
+
         Button sortByBtn = new Button("Sort By");
-        sortByBtn.setStyle("-fx-background-color: #DF6800; -fx-text-fill: white;");
+        sortByBtn.getStyleClass().add("sort-button");
+
         Button priceLowBtn = new Button("Price: Lower");
         Button priceHighBtn = new Button("Price: Highest");
         Button latestBtn = new Button("Latest");
@@ -65,7 +64,7 @@ public class Orders {
 
         // ScrollPane to hold the order cards
         ScrollPane scrollPane = new ScrollPane();
-        scrollPane.setStyle("-fx-background-color: #0abae0 !important;");
+        scrollPane.getStyleClass().add("scroll-pane");
         scrollPane.setFitToWidth(true);
         scrollPane.setPrefHeight(600);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
@@ -73,7 +72,7 @@ public class Orders {
 
         // FlowPane to display orders
         FlowPane orderPane = new FlowPane();
-        orderPane.setStyle("-fx-background-color: linear-gradient(to right, #87CEFA, #0b48cd, #0d80ad);");
+        orderPane.getStyleClass().add("gradient-background");
         orderPane.setHgap(20);
         orderPane.setVgap(20);
         orderPane.setPrefWrapLength(600);
@@ -100,7 +99,7 @@ public class Orders {
 
     public static VBox createorderCard(Order order) {
         VBox orderCard = new VBox();
-        orderCard.setStyle("-fx-background-color: transparent;");
+        orderCard.getStyleClass().add("transparent-background");
         orderCard.setSpacing(8);
         orderCard.setPadding(new Insets(10));
         orderCard.setPrefWidth(160);

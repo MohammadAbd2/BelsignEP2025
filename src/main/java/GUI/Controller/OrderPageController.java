@@ -12,6 +12,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -100,8 +101,44 @@ public class OrderPageController {
     }
 
     private void loadOrders() {
-        currentOrders = orderDB.getAllOrders();
-        System.out.println("Number of orders loaded from DB: " + currentOrders.size());
+        List<Order> allOrders = orderDB.getAllOrders();
+        String userRole = LoggedInUser.getLoggedInRole();
+
+        if (userRole == null) {
+            currentOrders = allOrders;
+            System.out.println("No user role found, showing all orders");
+            updateStatusLabels();
+            updatePaginationControls();
+            displayCurrentPage();
+            return;
+        }
+
+        // Filter orders based on role
+        switch (userRole) {
+            case "Operator" -> {
+                // Operators can only see New and Rejected orders
+                currentOrders = allOrders.stream()
+                        .filter(order ->
+                                order.getStatus().equalsIgnoreCase("New") ||
+                                        order.getStatus().equalsIgnoreCase("Rejected"))
+                        .collect(Collectors.toList());
+            }
+            case "QA" -> {
+                // QA can see Pending and Approved orders
+                currentOrders = allOrders.stream()
+                        .filter(order ->
+                                order.getStatus().equalsIgnoreCase("Pending") ||
+                                        order.getStatus().equalsIgnoreCase("Approved"))
+                        .collect(Collectors.toList());
+            }
+            case "Admin" -> {
+                // Admin can see all orders
+                currentOrders = allOrders;
+            }
+            default -> currentOrders = new ArrayList<>();
+        }
+
+        System.out.println("Number of orders loaded for " + userRole + ": " + currentOrders.size());
 
         // Add more detailed logging for status
         currentOrders.forEach(order ->
@@ -110,12 +147,11 @@ public class OrderPageController {
                         ", Status: " + order.getStatus())
         );
 
-
-
         updateStatusLabels();
         updatePaginationControls();
         displayCurrentPage();
     }
+
 
 
 
