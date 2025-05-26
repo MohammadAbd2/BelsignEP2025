@@ -1,25 +1,73 @@
 package GUI.Controller;
 
-import BE.QCReport;
+import BE.Order;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class QCReportController {
-
-    @FXML private ImageView frontImage, backImage, leftImage, rightImage, topImage;
+    @FXML private Label orderNumberLabel;
+    @FXML private Label dateSentLabel;
+    @FXML private Label qaLabel;
     @FXML private TextArea notesArea;
+    @FXML private ImageView frontImage;
+    @FXML private ImageView backImage;
+    @FXML private ImageView leftImage;
+    @FXML private ImageView rightImage;
+    @FXML private ImageView topImage;
 
-    public void setReport(QCReport report) {
-        // TODO: Replace dummy images when image loading is implemented
-        Image placeholder = new Image("/images/placeholder.png"); // Or whatever default you have
-        frontImage.setImage(placeholder);
-        backImage.setImage(placeholder);
-        leftImage.setImage(placeholder);
-        rightImage.setImage(placeholder);
-        topImage.setImage(placeholder);
-
-        notesArea.setText(report.getNotes());
+    @FXML
+    public void initialize() {
+        Order order = QAController.getSelectedOrder();
+        String qaName = QAController.getQaName();  // Get the QA name
+        
+        if (order != null) {
+            orderNumberLabel.setText("Order " + order.getOrder_number() + " Report");
+            
+            LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            dateSentLabel.setText(now.format(formatter));
+            
+            // Set QA name from the input field
+            qaLabel.setText(qaName != null ? qaName : "");
+            
+            notesArea.setText(order.getNotes());
+            notesArea.setEditable(false);
+            
+            updateImages(order.getImage());
+        }
+    }
+    
+    private void updateImages(String basePath) {
+        if (basePath == null) return;
+        
+        try {
+            ClassLoader classLoader = getClass().getClassLoader();
+            
+            loadImage(frontImage, basePath + "/front.png", classLoader);
+            loadImage(backImage, basePath + "/back.png", classLoader);
+            loadImage(leftImage, basePath + "/left.png", classLoader);
+            loadImage(rightImage, basePath + "/right.png", classLoader);
+            loadImage(topImage, basePath + "/top.png", classLoader);
+        } catch (Exception e) {
+            System.err.println("Error loading images: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    private void loadImage(ImageView imageView, String path, ClassLoader classLoader) {
+        if (imageView != null) {
+            try {
+                Image image = new Image(classLoader.getResourceAsStream(path));
+                imageView.setImage(image);
+            } catch (Exception e) {
+                System.err.println("Failed to load image: " + path);
+            }
+        }
     }
 }

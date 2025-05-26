@@ -19,11 +19,8 @@ import java.io.File;
 import java.io.IOException;
 
 public class QAController {
-    private static Order selectedOrder;
-    private OrderDB orderDB;
-
     @FXML private TextField orderNumberField;
-    @FXML private TextField partStatusField;
+    @FXML private TextField qaNameField;
     @FXML private TextField orderStatusField;
     @FXML private TextArea notesArea;
     @FXML private ImageView frontImage;
@@ -38,6 +35,10 @@ public class QAController {
     @FXML private Button rejectButton;
     @FXML private Button sendButton;
 
+    private static Order selectedOrder;
+    private static String qaName;
+    private OrderDB orderDB;
+
     @FXML
     public void initialize() {
         orderDB = new OrderDB();
@@ -51,9 +52,10 @@ public class QAController {
     }
 
     private void setupButtonHandlers() {
-        if (previewButton != null) {
-            previewButton.setOnAction(event -> openQCReport());
-        }
+        previewButton.setOnAction(event -> {
+            qaName = qaNameField.getText().trim(); // Store the QA name before opening preview
+            openQCReport();
+        });
         
         if (downloadButton != null) {
             downloadButton.setOnAction(event -> handleDownload());
@@ -83,15 +85,13 @@ public class QAController {
         }
     }
 
-    public static void setSelectedOrder(Order order) {
-        selectedOrder = order;
-    }
-
     private void openQCReport() {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/View/QCReport.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/QCReport.fxml"));
+            Parent root = loader.load();
+
             Stage stage = new Stage();
-            stage.setTitle("QC Report Preview");
+            stage.setTitle("QC Report Preview - Order " + selectedOrder.getOrder_number());
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
@@ -218,5 +218,18 @@ public class QAController {
         alert.setTitle(title);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+
+    // Move the getters to the bottom
+    public static Order getSelectedOrder() {
+        return selectedOrder;
+    }
+
+    public static String getQaName() {
+        return qaName;
+    }
+
+    public static void setSelectedOrder(Order order) {
+        selectedOrder = order;
     }
 }
