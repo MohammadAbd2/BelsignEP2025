@@ -201,7 +201,6 @@ public class OrderPageController {
                                     SceneManager.loadScene("operatorPage", "/View/Operator.fxml");
                                     SceneManager.loadScene("QC", "/View/QA.fxml");
                                     List<String> loginScenes = List.of(
-                                            "customTitleBar",
                                             "navbar",
                                             "operatorPage"
                                     );
@@ -218,12 +217,10 @@ public class OrderPageController {
                                     System.out.println("QC Clicked on order card");
                                     QAController.setSelectedOrder(order);
 
-                                    SceneManager.loadScene("customTitleBar", "/View/TitleBar.fxml");
                                     SceneManager.loadScene("navbar", "/View/Navbar.fxml");
                                     SceneManager.loadScene("QCPage", "/View/QA.fxml");
 
                                     List<String> loginScenes = List.of(
-                                            "customTitleBar",
                                             "navbar",
                                             "QCPage"
                                     );

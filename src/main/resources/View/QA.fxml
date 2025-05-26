@@ -8,172 +8,178 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<FlowPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="body" stylesheets="@../Css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.QAController">
-   <padding>
-      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-   </padding>
-   <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0">
-      <HBox alignment="CENTER" spacing="5.0">
-         <padding>
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="body" stylesheets="@../Css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.QAController">
+   <center>
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0">
+         <HBox alignment="CENTER" spacing="5.0">
+            <padding>
+               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </padding>
+            <VBox alignment="CENTER" spacing="5.0">
+               <Label text="Front" />
+               <ImageView fx:id="frontImage" fitHeight="200.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+                  <Image url="@../Img/example/exampleFront.png" />
+               </ImageView>
+            </VBox>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <VBox alignment="CENTER" spacing="5.0">
+               <Label text="Back" />
+               <ImageView fx:id="backImage" fitHeight="200.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+                  <Image url="@../Img/example/exampleBack.png" />
+               </ImageView>
+            </VBox>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <VBox alignment="CENTER" spacing="5.0">
+               <Label text="Right" />
+               <ImageView fx:id="rightImage" fitHeight="200.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+                  <Image url="@../Img/example/exampleRight.png" />
+               </ImageView>
+            </VBox>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <VBox alignment="CENTER" spacing="5.0">
+               <Label text="Left" />
+               <ImageView fx:id="leftImage" fitHeight="200.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+                  <Image url="@../Img/example/exampleLeft.png" />
+               </ImageView>
+            </VBox>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <VBox alignment="CENTER" spacing="5.0">
+               <Label text="Top" />
+               <ImageView fx:id="topImage" fitHeight="200.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+                  <Image url="@../Img/example/exampleTop.png" />
+               </ImageView>
+            </VBox>
+         </HBox>
+         <Separator />
+         <GridPane hgap="10.0">
+            <columnConstraints>
+               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+               <ColumnConstraints hgrow="SOMETIMES" />
+               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+               <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" />
+               <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" />
+               <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" />
+               <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" />
+               <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" />
+               <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" />
+            </rowConstraints>
+            <padding>
+               <Insets bottom="5.0" left="5.0" right="5.0" />
+            </padding>
+            <Label text="Order Number:" GridPane.halignment="LEFT">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label text="Notes:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label text="Order Status:" GridPane.halignment="LEFT" GridPane.rowIndex="2">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="notesArea" promptText="'Notes for Customer'" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="3" GridPane.rowSpan="3">
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </TextArea>
+            <TextField fx:id="orderNumberField" editable="false" GridPane.rowIndex="1">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="orderStatusField" editable="false" text="Pending" GridPane.rowIndex="3">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </TextField>
+            <Separator orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowSpan="6" GridPane.valignment="CENTER" />
+            <Label text="QA Name:" GridPane.rowIndex="4">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label text="Customer Email:" GridPane.columnIndex="2">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="orderNumberField2" GridPane.rowIndex="5">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="orderNumberField1" promptText="JohnDoe123@mail.com" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </TextField>
+         </GridPane>
+         <Separator />
+         <HBox spacing="15.0">
+            <VBox alignment="CENTER" spacing="15.0" HBox.hgrow="ALWAYS">
+               <Button fx:id="previewButton" mnemonicParsing="false" prefWidth="125.0" text="Preview">
+                  <graphic>
+                     <ImageView fitHeight="11.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../Img/preview.png" />
+                     </ImageView>
+                  </graphic>
+               </Button>
+               <Button mnemonicParsing="false" prefWidth="125.0" text="Download">
+                  <graphic>
+                     <ImageView fitHeight="11.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../Img/download.png" />
+                     </ImageView>
+                  </graphic>
+               </Button>
+            </VBox>
+            <Separator orientation="VERTICAL" />
+            <VBox alignment="CENTER" spacing="15.0" HBox.hgrow="ALWAYS">
+               <Button mnemonicParsing="false" prefWidth="125.0" text="Approve">
+                  <graphic>
+                     <ImageView fitHeight="11.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../Img/like.png" />
+                     </ImageView>
+                  </graphic>
+               </Button>
+               <Button mnemonicParsing="false" prefWidth="125.0" text="Reject">
+                  <graphic>
+                     <ImageView fitHeight="11.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../Img/dislike.png" />
+                     </ImageView>
+                  </graphic>
+               </Button>
+            </VBox>
+            <Separator orientation="VERTICAL" />
+            <VBox alignment="CENTER" spacing="15.0" HBox.hgrow="ALWAYS">
+               <Button mnemonicParsing="false" prefWidth="125.0" text="Send">
+                  <graphic>
+                     <ImageView fitHeight="11.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../Img/send.png" />
+                     </ImageView>
+                  </graphic>
+               </Button>
+            </VBox>
+         </HBox>
+         <BorderPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding>
-         <VBox alignment="CENTER" spacing="5.0">
-            <Label text="Front" />
-            <ImageView fx:id="frontImage" fitHeight="200.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
-               <Image url="@../Img/example/exampleFront.png" />
-            </ImageView>
-         </VBox>
-         <Separator orientation="VERTICAL" prefHeight="200.0" />
-         <VBox alignment="CENTER" spacing="5.0">
-            <Label text="Back" />
-            <ImageView fx:id="backImage" fitHeight="200.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
-               <Image url="@../Img/example/exampleBack.png" />
-            </ImageView>
-         </VBox>
-         <Separator orientation="VERTICAL" prefHeight="200.0" />
-         <VBox alignment="CENTER" spacing="5.0">
-            <Label text="Right" />
-            <ImageView fx:id="rightImage" fitHeight="200.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
-               <Image url="@../Img/example/exampleRight.png" />
-            </ImageView>
-         </VBox>
-         <Separator orientation="VERTICAL" prefHeight="200.0" />
-         <VBox alignment="CENTER" spacing="5.0">
-            <Label text="Left" />
-            <ImageView fx:id="leftImage" fitHeight="200.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
-               <Image url="@../Img/example/exampleLeft.png" />
-            </ImageView>
-         </VBox>
-         <Separator orientation="VERTICAL" prefHeight="200.0" />
-         <VBox alignment="CENTER" spacing="5.0">
-            <Label text="Top" />
-            <ImageView fx:id="topImage" fitHeight="200.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
-               <Image url="@../Img/example/exampleTop.png" />
-            </ImageView>
-         </VBox>
-      </HBox>
-      <Separator />
-      <GridPane hgap="10.0">
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" />
-            <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" />
-            <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" />
-            <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" />
-            <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" />
-            <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" />
-         </rowConstraints>
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" />
-         </padding>
-         <Label text="Order Number:" GridPane.halignment="LEFT">
-            <font>
-               <Font size="14.0" />
-            </font>
-         </Label>
-         <Label text="Notes:" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2">
-            <font>
-               <Font size="14.0" />
-            </font>
-         </Label>
-         <Label text="Order Status:" GridPane.halignment="LEFT" GridPane.rowIndex="2">
-            <font>
-               <Font size="14.0" />
-            </font>
-         </Label>
-         <TextArea fx:id="notesArea" promptText="'Notes for Customer'" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="3" GridPane.rowSpan="3">
-            <GridPane.margin>
-               <Insets right="10.0" />
-            </GridPane.margin></TextArea>
-         <TextField fx:id="orderNumberField" editable="false" GridPane.rowIndex="1">
-            <font>
-               <Font size="13.0" />
-            </font>
-         </TextField>
-         <TextField fx:id="orderStatusField" editable="false" text="Pending" GridPane.rowIndex="3">
-            <font>
-               <Font size="13.0" />
-            </font>
-         </TextField>
-         <Separator orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowSpan="6" GridPane.valignment="CENTER" />
-         <Label text="QA Name:" GridPane.rowIndex="4">
-            <font>
-               <Font size="14.0" />
-            </font>
-         </Label>
-         <Label text="Customer Email:" GridPane.columnIndex="2">
-            <font>
-               <Font size="14.0" />
-            </font>
-         </Label>
-         <TextField fx:id="orderNumberField2" GridPane.rowIndex="5">
-            <font>
-               <Font size="13.0" />
-            </font>
-         </TextField>
-         <TextField fx:id="orderNumberField1" promptText="JohnDoe123@mail.com" GridPane.columnIndex="2" GridPane.rowIndex="1">
-            <font>
-               <Font size="13.0" />
-            </font>
-         </TextField>
-      </GridPane>
-      <Separator />
-      <HBox spacing="15.0">
-         <VBox alignment="CENTER" spacing="15.0" HBox.hgrow="ALWAYS">
-            <Button fx:id="previewButton" mnemonicParsing="false" prefWidth="125.0" text="Preview">
-               <graphic>
-                  <ImageView fitHeight="11.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
-                     <Image url="@../Img/preview.png" />
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button mnemonicParsing="false" prefWidth="125.0" text="Download">
-               <graphic>
-                  <ImageView fitHeight="11.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
-                     <Image url="@../Img/download.png" />
-                  </ImageView>
-               </graphic>
-            </Button>
-         </VBox>
-         <Separator orientation="VERTICAL" />
-         <VBox alignment="CENTER" spacing="15.0" HBox.hgrow="ALWAYS">
-            <Button mnemonicParsing="false" prefWidth="125.0" text="Approve">
-               <graphic>
-                  <ImageView fitHeight="11.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
-                     <Image url="@../Img/like.png" />
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button mnemonicParsing="false" prefWidth="125.0" text="Reject">
-               <graphic>
-                  <ImageView fitHeight="11.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
-                     <Image url="@../Img/dislike.png" />
-                  </ImageView>
-               </graphic>
-            </Button>
-         </VBox>
-         <Separator orientation="VERTICAL" />
-         <VBox alignment="CENTER" spacing="15.0" HBox.hgrow="ALWAYS">
-            <Button mnemonicParsing="false" prefWidth="125.0" text="Send">
-               <graphic>
-                  <ImageView fitHeight="11.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
-                     <Image url="@../Img/send.png" />
-                  </ImageView>
-               </graphic>
-            </Button>
-         </VBox>
-      </HBox>
-   </VBox>
-</FlowPane>
+         </BorderPane.margin>
+      </VBox>
+   </center>
+   <padding>
+      <Insets top="10.0" />
+   </padding>
+</BorderPane>
