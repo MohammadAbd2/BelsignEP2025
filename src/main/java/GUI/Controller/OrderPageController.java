@@ -216,10 +216,12 @@ public class OrderPageController {
                             }
                             case "QA" : {
                                 try {
-                                    System.out.println("QC Clicked on order card");
+                                    OrderViewController.setOrder(order);
+
                                     SceneManager.loadScene("customTitleBar", "/View/TitleBar.fxml");
                                     SceneManager.loadScene("navbar", "/View/Navbar.fxml");
                                     SceneManager.loadScene("QCPage", "/View/QA.fxml");
+
                                     List<String> loginScenes = List.of(
                                             "customTitleBar",
                                             "navbar",
