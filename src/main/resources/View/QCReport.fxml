@@ -34,7 +34,7 @@
                   </HBox>
                </left>
                <center>
-                  <Label alignment="CENTER" contentDisplay="CENTER" text="Order 295-5930 Report" BorderPane.alignment="CENTER">
+                  <Label fx:id="orderNumberLabel" alignment="CENTER" contentDisplay="CENTER" text="Order 295-5930 Report" BorderPane.alignment="CENTER">
                      <font>
                         <Font name="Helvetica" size="20.0" />
                      </font>
@@ -47,14 +47,14 @@
                            <Label text="Date Sent:" GridPane.columnIndex="0">
                                <font><Font name="Helvetica" size="12.0" /></font>
                            </Label>
-                           <Label text="20/5/2025" GridPane.columnIndex="1">
+                           <Label fx:id="dateSentLabel" text="" GridPane.columnIndex="1">
                                <font><Font name="Helvetica" size="12.0" /></font>
                            </Label>
 
                            <Label text="Quality Assurance:" GridPane.columnIndex="0" GridPane.rowIndex="1">
                                <font><Font name="Helvetica" size="12.0" /></font>
                            </Label>
-                           <Label text="John Doe" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <Label fx:id="qaLabel"  GridPane.columnIndex="1" GridPane.rowIndex="1">
                                <font><Font name="Helvetica" size="12.0" /></font>
                            </Label>
                        </children>

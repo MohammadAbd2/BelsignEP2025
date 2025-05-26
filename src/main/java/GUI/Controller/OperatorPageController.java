@@ -37,7 +37,7 @@ public class OperatorPageController {
     @FXML private HBox titleBar;
     @FXML private Button minimizeButton;
     @FXML private Button closeButton;
-    @FXML private javafx.scene.layout.AnchorPane operatorAnchorPane;
+    @FXML private javafx.scene.layout.BorderPane operatorAnchorPane;
 
     private Stage stage;
 
@@ -50,13 +50,7 @@ public class OperatorPageController {
         } else {
             System.out.println("Error: statusComboBox is null!");
         }
-        double screenHeight = Screen.getPrimary().getBounds().getHeight();
-        double screenWidth = Screen.getPrimary().getBounds().getWidth();
 
-        double verticalPadding = screenHeight * 0.05; // 5% height
-        double horizontalPadding = screenWidth * 0.05; // 5% width
-
-        operatorAnchorPane.setPadding(new Insets(verticalPadding, horizontalPadding, verticalPadding, horizontalPadding));
 
     }
 
