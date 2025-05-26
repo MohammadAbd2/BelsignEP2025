@@ -10,36 +10,8 @@ ALL
     -fx-font-size: 16px;
 }
 
-.search-field {
-    -fx-background-color: white;
-}
-
-.transparent-background {
-    -fx-background-color: transparent;
-}
-
-.sort-button {
-    -fx-background-color: #DF6800;
-    -fx-text-fill: white;
-}
-
-.scroll-pane {
-    -fx-background-color: #0abae0 !important;
-}
-
-.gradient-background {
-    -fx-background-color: linear-gradient(to right, #87CEFA, #0b48cd, #0d80ad);
-}
-
-.status-label {
-    -fx-font-weight: bold;
-}
-
-.order-button {
-    -fx-background-radius: 5;
-    -fx-text-fill: white;
-    -fx-font-family: "Helvetica";
-    -fx-font-size: 11.0;
+.body{
+    -fx-background-color: linear-gradient(from 0% 70% to 100% 30%, #0375AA 0%, #04529d 100%, #0E63AE 100%, #005092 70% );
 }
 
 /*
@@ -67,20 +39,6 @@ Admin
 }
 
 
-/*
----------------
-CustomTitleBar
----------------
-*/
-
-.title-bar {
-    -fx-padding: 5px;
-}
-
-.title-bar-button {
-    -fx-background-color: transparent;
-    -fx-font-size: 14px;
-}
 
 /*
 ---------------
@@ -91,9 +49,7 @@ Login
     -fx-background-color: linear-gradient(to right, #0375AA 0%, #0074D9 21%, #0E63AE 69%, #005092 100%);
 }
 
-.body{
-    -fx-background-color: linear-gradient(from 0% 70% to 100% 30%, #0375AA 0%, #04529d 100%, #0E63AE 100%, #005092 70% );
-}
+
 
 
 /*
@@ -104,16 +60,12 @@ navbar
 
 #navigationBar{
     -fx-background-color: linear-gradient(from 0% 70% to 100% 30%, rgb(3, 98, 170) 0%, #04529d 100%, #0E63AE 100%, #005092 70% );
+    -fx-max-height: 10px;
 }
 
 #logOut{
     -fx-padding: 14px 0px 0px 15px;
     -fx-background-color: null !important;
-}
-
-.nav-button {
-    -fx-background-radius: 5;
-    -fx-padding: 10 10 10 10;
 }
 
 /*
@@ -253,7 +205,7 @@ OTHERS
 }
 
 .inline-button {
-    -fx-pref-width: 50px; /* Can be adjusted based on design needs */
+    -fx-pref-width: 100px; /* Can be adjusted based on design needs */
 }
 
 
@@ -336,7 +288,7 @@ custom-scroll-pane {
 
 .add-label {
     -fx-font-size: 48pt;
-    -fx-text-fill: #555;
+    -fx-text-fill: #ffffff;
     -fx-alignment: center;
 }
 
@@ -361,8 +313,6 @@ custom-scroll-pane {
 }
 
 
-
-
 #navbar Button {
     -fx-padding : 25px;
     -fx-background-color: transparent;
@@ -372,20 +322,6 @@ custom-scroll-pane {
 #navbar *:hover {
     -fx-background-color: rgba(255, 255, 255, 0.25);
     -fx-cursor: hand !important;
-}
-
-#logOut:hover {
-    -fx-background-color: rgba(255, 255, 255, 0.25);
-    -fx-cursor: hand !important;
-}
-
-
-/* Profile Picture Styles */
-#profile_pic {
-    -fx-background-radius: 50%;  /* Circular background */
-    -fx-border-radius: 50%;  /* Circular border */
-    -fx-border-color: white;  /* White border color */
-    -fx-border-width: 2px;  /* Border width */
 }
 
 

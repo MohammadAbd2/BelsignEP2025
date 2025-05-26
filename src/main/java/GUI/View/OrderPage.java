@@ -1,6 +1,5 @@
 package GUI.View;
 
-import GUI.View.Header.CustomTitleBar;
 import GUI.View.Header.Navbar;
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
@@ -23,8 +22,6 @@ public class  OrderPage {
             VBox Body = new VBox();
 
             // Sort the VBox to fit with the style and Application
-            CustomTitleBar customTitleBar = new CustomTitleBar(currentStage);
-            WindowBox.getChildren().add(customTitleBar);
             Application.getChildren().add(WindowBox);
             rootContainer.getChildren().add(Navbar.loadNavbar());
 

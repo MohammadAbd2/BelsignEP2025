@@ -1,10 +1,10 @@
 package GUI.View;
 
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -19,6 +19,7 @@ public class SceneManager {
     private static Stage primaryStage;
     private static final Map<String, Parent> scenes = new HashMap<>();
     private static String currentSceneName;
+    private static Scene scene;
 
     public static void setStage(Stage stage) {
         primaryStage = stage;
@@ -28,6 +29,7 @@ public class SceneManager {
         return primaryStage;
     }
 
+    // Load reusable FXML components into memory
     public static void loadScene(String name, String fxmlPath) throws IOException {
         URL fxmlUrl = SceneManager.class.getResource(fxmlPath);
         if (fxmlUrl == null) {
@@ -39,7 +41,7 @@ public class SceneManager {
         Parent root = fxmlLoader.load();
         scenes.put(name, root);
     }
-
+    // Switch the main root of the Scene
     public static void switchScene(String name) {
         if (primaryStage == null) {
             System.err.println("Error: Primary stage is not set.");
@@ -52,54 +54,46 @@ public class SceneManager {
             return;
         }
 
-        primaryStage.setScene(new Scene(root));
-        primaryStage.show();
+        if (scene == null) {
+            scene = new Scene(root);
+            primaryStage.setScene(scene);
+        } else {
+            scene.setRoot(root);
+        }
+        // Wait until layout is calculated before applying size
+        Platform.runLater(() -> {
+            double minWidth = root.minWidth(-1);
+            double minHeight = root.minHeight(-1);
+
+            primaryStage.setMinWidth(minWidth);
+            primaryStage.setMinHeight(minHeight);
+        });
         currentSceneName = name;
     }
 
-    public static Parent loadSceneAsParent(String fxmlPath) throws IOException {
-        URL fxmlUrl = SceneManager.class.getResource(fxmlPath);
-        if (fxmlUrl == null) {
-            System.err.println("Error: FXML file not found at " + fxmlPath);
-            return null;
+// Compose scene using vertical VBox for simpler layout (used by NavbarController)
+    public static Parent composeScene(List<String> sceneNames, String composedSceneName) {
+        VBox root = new VBox();
+        root.setPrefSize(primaryStage.getWidth(), primaryStage.getHeight());
+        root.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+        VBox.setVgrow(root, Priority.ALWAYS);
+
+        for (String name : sceneNames) {
+            Parent content = scenes.get(name);
+            if (content == null) {
+                System.err.println("Error: Scene '" + name + "' is not loaded.");
+                continue;
+            }
+
+            VBox.setVgrow(content, Priority.ALWAYS);  // Let it grow inside VBox
+            root.getChildren().add(content);
         }
 
-        FXMLLoader fxmlLoader = new FXMLLoader(fxmlUrl);
-        return fxmlLoader.load();
+        scenes.put(composedSceneName, root);
+        return root;
     }
 
-    // New method to get current scene name
     public static String getCurrentSceneName() {
         return currentSceneName;
-    }
-
-    // New method to dynamically compose a scene with a list of scenes to add
-    public static void composeScene(List<String> sceneNames, String composedSceneName) throws IOException {
-        // Create a BorderPane layout to compose the scenes
-        VBox rootLayout = new VBox();
-
-        // Loop through the list of scene names to get their FXML and content
-        for (int i = 0; i < sceneNames.size(); i++) {
-            String sceneName = sceneNames.get(i);
-
-            // Load the scene if not already loaded
-            if (!scenes.containsKey(sceneName)) {
-                System.err.println("Error: Scene '" + sceneName + "' is not loaded.");
-                continue;
-            }
-
-            Parent sceneContent = scenes.get(sceneName);
-
-            if (sceneContent == null) {
-                System.err.println("Error: Scene '" + sceneName + "' could not be loaded.");
-                continue;
-            }
-
-            rootLayout.getChildren().add(sceneContent);
-            // You can add more conditions if you have more areas to place content
-        }
-
-        // Put the composed scene into the scenes map
-        scenes.put(composedSceneName, rootLayout);
     }
 }

@@ -1,5 +1,10 @@
 package BLL.LoginBLL;
 
+import BE.Admin;
+import BE.Operator;
+import BE.QA;
+import GUI.Controller.NavbarController;
+import GUI.Model.Logger;
 import GUI.View.SceneManager;
 import Utils.LoggedInUser;
 import Utils.UserSession;
@@ -18,13 +23,11 @@ public class LoginChoice {
         UserSession.setLoggedIn(true);
 
         // Load all required components
-        SceneManager.loadScene("customTitleBar", "/View/TitleBar.fxml");
         SceneManager.loadScene("navbar", "/View/Navbar.fxml");
         SceneManager.loadScene("adminPage", "/View/Admin.fxml");
 
         // Compose them in order
         List<String> loginScenes = List.of(
-                "customTitleBar",
                 "navbar",
                 "adminPage"
         );
@@ -39,12 +42,10 @@ public class LoginChoice {
         LoggedInUser.setLoggedInRole("Operator");
         UserSession.setLoggedIn(true);
 
-        SceneManager.loadScene("customTitleBar", "/View/TitleBar.fxml");
         SceneManager.loadScene("navbar", "/View/Navbar.fxml");
         SceneManager.loadScene("orderPage", "/View/Orders.fxml");
 
         List<String> loginScenes = List.of(
-                "customTitleBar",
                 "navbar",
                 "orderPage"
         );
@@ -59,12 +60,10 @@ public class LoginChoice {
         LoggedInUser.setLoggedInRole("QA");
         UserSession.setLoggedIn(true);
 
-        SceneManager.loadScene("customTitleBar", "/View/TitleBar.fxml");
         SceneManager.loadScene("navbar", "/View/Navbar.fxml");
         SceneManager.loadScene("orderPage", "/View/Orders.fxml");
 
         List<String> loginScenes = List.of(
-                "customTitleBar",
                 "navbar",
                 "orderPage"
         );

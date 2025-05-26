@@ -197,7 +197,6 @@ public class OrderPageController {
                             case "Operator": {
                                 try {
                                     System.out.println("Operator Clicked on order card");
-                                    SceneManager.loadScene("customTitleBar", "/View/TitleBar.fxml");
                                     SceneManager.loadScene("navbar", "/View/Navbar.fxml");
                                     SceneManager.loadScene("operatorPage", "/View/Operator.fxml");
                                     SceneManager.loadScene("QC", "/View/QA.fxml");
@@ -216,6 +215,7 @@ public class OrderPageController {
                             }
                             case "QA" : {
                                 try {
+                                    System.out.println("QC Clicked on order card");
                                     QAController.setSelectedOrder(order);
 
                                     SceneManager.loadScene("customTitleBar", "/View/TitleBar.fxml");
