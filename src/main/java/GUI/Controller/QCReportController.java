@@ -14,7 +14,7 @@ public class QCReportController {
     @FXML private Label orderNumberLabel;
     @FXML private Label dateSentLabel;
     @FXML private Label qaLabel;
-    @FXML private TextArea notesArea;
+    @FXML private Label notesLabel;
     @FXML private ImageView frontImage;
     @FXML private ImageView backImage;
     @FXML private ImageView leftImage;
@@ -36,8 +36,7 @@ public class QCReportController {
             // Set QA name from the input field
             qaLabel.setText(qaName != null ? qaName : "");
             
-            notesArea.setText(order.getNotes());
-            notesArea.setEditable(false);
+            notesLabel.setText(order.getNotes());
             
             updateImages(order.getImage());
         }
