@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
@@ -27,16 +28,16 @@ public class OrdersController {
     private TextField searchField;
 
     @FXML
-    private Button ordersNew;
+    private ToggleButton ordersNew;
 
     @FXML
-    private Button ordersApproved;
+    private ToggleButton ordersApproved;
 
     @FXML
-    private Button ordersPending;
+    private ToggleButton ordersPending;
 
     @FXML
-    private Button ordersRejected;
+    private ToggleButton ordersRejected;
 
     @FXML
     private Button prevButton;
@@ -79,10 +80,11 @@ public class OrdersController {
         updateStatusLabels();
 
         // Hook up filter actions
-        ordersNew.setOnAction(e -> filterByStatus("new"));
-        ordersApproved.setOnAction(e -> filterByStatus("approved"));
-        ordersPending.setOnAction(e -> filterByStatus("pending"));
-        ordersRejected.setOnAction(e -> filterByStatus("rejected"));
+        ordersNew.setOnAction(e -> applyFilters());
+        ordersApproved.setOnAction(e -> applyFilters());
+        ordersPending.setOnAction(e -> applyFilters());
+        ordersRejected.setOnAction(e -> applyFilters());
+
 
         searchField.setOnKeyReleased(e -> filterByText(searchField.getText()));
 
@@ -98,6 +100,31 @@ public class OrdersController {
         System.out.println("About to load orders...");
         loadOrders();
         System.out.println("Orders loaded and displayed");
+    }
+
+    private void applyFilters() {
+        List<Order> allOrders = orderDB.getAllOrders();
+        List<Order> filteredOrders = new ArrayList<>();
+
+        if (!ordersNew.isSelected() && !ordersApproved.isSelected() &&
+                !ordersPending.isSelected() && !ordersRejected.isSelected()) {
+            // No filter selected: show all
+            filteredOrders = allOrders;
+        } else {
+            for (Order order : allOrders) {
+                if ((ordersNew.isSelected() && order.getStatus().equalsIgnoreCase("new")) ||
+                        (ordersApproved.isSelected() && order.getStatus().equalsIgnoreCase("approved")) ||
+                        (ordersPending.isSelected() && order.getStatus().equalsIgnoreCase("pending")) ||
+                        (ordersRejected.isSelected() && order.getStatus().equalsIgnoreCase("rejected"))) {
+                    filteredOrders.add(order);
+                }
+            }
+        }
+
+        currentOrders = filteredOrders;
+        currentPage = 1;
+        updatePaginationControls();
+        displayCurrentPage();
     }
 
     private void loadOrders() {
@@ -188,6 +215,7 @@ public class OrdersController {
                     if (order != null) {
                         System.out.println("Setting order data for card: " + order.getOrder_number());
                     }
+                    orderCard.setStyle("-fx-border-color: rgba(4,108,191,0.98); -fx-border-width: 1px; -fx-border-style: solid; ");
 
                     controller.setOrderData(order);
                     orderCard.setOnMouseClicked(e -> {
