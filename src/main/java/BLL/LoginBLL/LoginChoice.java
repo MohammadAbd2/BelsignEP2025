@@ -55,7 +55,7 @@ public class LoginChoice {
     }
 
 
-    // Login for QA/QC
+    // Login for QA
     public void qaLogin() throws IOException {
         LoggedInUser.setLoggedInRole("QA");
         UserSession.setLoggedIn(true);

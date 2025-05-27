@@ -7,7 +7,7 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/23.0.1"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="GUI.Controller.OperatorPageController"
+            fx:controller="GUI.Controller.OperatorController"
             fx:id="operatorAnchorPane"
             prefWidth="800.0" prefHeight="600.0"
             stylesheets="@/Css/styles.css"
@@ -15,7 +15,7 @@
 
     <!-- CENTER: Scrollable image grid -->
     <center>
-        <ScrollPane fitToWidth="true" fitToHeight="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED">
+        <ScrollPane fitToWidth="true" fitToHeight="true" hbarPolicy="NEVER">
             <GridPane fx:id="imageGrid" hgap="10.0" vgap="10.0" styleClass="body">
                 <padding>
                     <Insets top="10.0" right="10.0" bottom="10.0" left="10.0"/>
@@ -67,7 +67,7 @@
 
             <TextField fx:id="orderNumberField" editable="false" promptText="Order Number"/>
 
-            <HBox spacing="15.0" alignment="TOP_LEFT">
+            <HBox spacing="15.0">
                 <TextArea fx:id="notesArea"
                           promptText="Note from QA"
                           HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS"

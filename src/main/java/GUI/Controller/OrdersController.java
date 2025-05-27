@@ -1,13 +1,11 @@
 package GUI.Controller;
 
 import BE.Order;
-import BLL.OrderService;
 import DAL.OrderDB;
 import GUI.View.SceneManager;
 import Utils.LoggedInUser;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -18,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class OrderPageController {
+public class OrdersController {
     private OrderDB orderDB;
     private int currentPage = 1;
     private int ordersPerPage = 10; // 5 columns × 2 rows
@@ -58,7 +56,7 @@ public class OrderPageController {
     @FXML
     private GridPane ordersGrid;
 
-    public OrderPageController() {
+    public OrdersController() {
         orderDB = new OrderDB();
     }
 
@@ -75,7 +73,7 @@ public class OrderPageController {
     }
 
     public void initialize() {
-        System.out.println("OrderPageController initialized!");
+        System.out.println("OrdersController initialized!");
 
         // Update status labels with actual counts
         updateStatusLabels();
@@ -199,7 +197,7 @@ public class OrderPageController {
                                     System.out.println("Operator Clicked on order card");
                                     SceneManager.loadScene("navbar", "/View/Navbar.fxml");
                                     SceneManager.loadScene("operatorPage", "/View/Operator.fxml");
-                                    SceneManager.loadScene("QC", "/View/QA.fxml");
+                                    SceneManager.loadScene("QA", "/View/QA.fxml");
                                     List<String> loginScenes = List.of(
                                             "navbar",
                                             "operatorPage"
@@ -214,18 +212,18 @@ public class OrderPageController {
                             }
                             case "QA" : {
                                 try {
-                                    System.out.println("QC Clicked on order card");
+                                    System.out.println("QA Clicked on order card");
                                     QAController.setSelectedOrder(order);
 
                                     SceneManager.loadScene("navbar", "/View/Navbar.fxml");
-                                    SceneManager.loadScene("QCPage", "/View/QA.fxml");
+                                    SceneManager.loadScene("QA", "/View/QA.fxml");
 
                                     List<String> loginScenes = List.of(
                                             "navbar",
-                                            "QCPage"
+                                            "QA"
                                     );
-                                    SceneManager.composeScene(loginScenes, "ComposedQC");
-                                    SceneManager.switchScene("ComposedQC");
+                                    SceneManager.composeScene(loginScenes, "ComposedQA");
+                                    SceneManager.switchScene("ComposedQA");
                                 } catch (IOException ex) {
                                     throw new RuntimeException(ex);
                                 }

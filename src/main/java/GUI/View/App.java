@@ -15,7 +15,7 @@ public class App extends Application {
         SceneManager.loadScene("loginPage", "/View/Login.fxml");
         SceneManager.loadScene("adminPage", "/View/Admin.fxml");
         SceneManager.loadScene("operatorPage", "/View/Operator.fxml");
-        SceneManager.loadScene("QC", "/View/QA.fxml");
+        SceneManager.loadScene("QA", "/View/QA.fxml");
         SceneManager.loadScene("orderPage", "/View/Orders.fxml");
 
         // Switch to login scene as the first screen

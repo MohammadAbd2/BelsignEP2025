@@ -85,7 +85,7 @@ public class Orders {
             // add the order to the order pane
             orderPane.getChildren().add(orderCard);
 
-            // change the scene to QC or operator once clicking on the order
+            // change the scene to QA or operator once clicking on the order
 
 
         }

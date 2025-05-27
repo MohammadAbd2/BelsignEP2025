@@ -6,8 +6,6 @@ import Utils.UserSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import java.io.IOException;
 import java.util.List;
 
@@ -18,7 +16,7 @@ public class NavbarController {
     @FXML
     private Button OperatorTabId;
     @FXML
-    private Button QCTabId;
+    private Button QATabId;
     @FXML
     private Button AdminTabId;
     @FXML
@@ -47,7 +45,7 @@ public class NavbarController {
 
         // Hide all first
         if (OperatorTabId != null) OperatorTabId.setVisible(false);
-        if (QCTabId != null) QCTabId.setVisible(false);
+        if (QATabId != null) QATabId.setVisible(false);
         if (AdminTabId != null) AdminTabId.setVisible(false);
         if (LogoutTabId != null) LogoutTabId.setVisible(false);
 
@@ -61,8 +59,8 @@ public class NavbarController {
                 OperatorTabId.setVisible(false);
                 OperatorTabId.setManaged(false);
 
-                QCTabId.setVisible(false);
-                QCTabId.setManaged(false);
+                QATabId.setVisible(false);
+                QATabId.setManaged(false);
 
                 AdminTabId.setVisible(true);
                 AdminTabId.setManaged(true);
@@ -71,32 +69,15 @@ public class NavbarController {
                 LogoutTabId.setManaged(true);
             }
 
-            case "Operator" -> {
-                OrderTabId.setVisible(true);
-                OrderTabId.setManaged(true);
-
-                OperatorTabId.setVisible(true);
-                OperatorTabId.setManaged(true);
-
-                QCTabId.setVisible(false);
-                QCTabId.setManaged(false);
-
-                AdminTabId.setVisible(false);
-                AdminTabId.setManaged(false);
-
-                LogoutTabId.setVisible(true);
-                LogoutTabId.setManaged(true);
-            }
-
-            case "QA" -> {
+            case "Operator", "QA" -> {
                 OrderTabId.setVisible(true);
                 OrderTabId.setManaged(true);
 
                 OperatorTabId.setVisible(false);
                 OperatorTabId.setManaged(false);
 
-                QCTabId.setVisible(true);
-                QCTabId.setManaged(true);
+                QATabId.setVisible(false);
+                QATabId.setManaged(false);
 
                 AdminTabId.setVisible(false);
                 AdminTabId.setManaged(false);
@@ -122,11 +103,11 @@ public class NavbarController {
         SceneManager.switchScene("composedOperatorPage");
     }
 
-    public void QCTab(ActionEvent event) throws IOException {
+    public void QATab(ActionEvent event) throws IOException {
         UserSession.setLoggedIn(true);
         SceneManager.loadScene("navBar", "/View/NavBar.fxml");
-        SceneManager.composeScene(List.of("navBar", "QC"), "composedQCPage");
-        SceneManager.switchScene("composedQCPage");
+        SceneManager.composeScene(List.of("navBar", "QA"), "composedQAPage");
+        SceneManager.switchScene("composedQAPage");
     }
 
     public void AdminTab(ActionEvent event) throws IOException {

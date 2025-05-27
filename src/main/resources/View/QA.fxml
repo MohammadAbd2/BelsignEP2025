@@ -131,14 +131,14 @@
          <Separator />
          <HBox spacing="15.0">
             <VBox alignment="CENTER" spacing="15.0" HBox.hgrow="ALWAYS">
-               <Button fx:id="previewButton" mnemonicParsing="false" prefWidth="125.0" text="Preview">
+               <Button fx:id="previewButton" mnemonicParsing="false" prefWidth="125.0" styleClass="inline-button" text="Preview">
                   <graphic>
                      <ImageView fitHeight="11.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
                         <Image url="@../Img/preview.png" />
                      </ImageView>
                   </graphic>
                </Button>
-               <Button mnemonicParsing="false" prefWidth="125.0" text="Download">
+               <Button mnemonicParsing="false" prefWidth="125.0" styleClass="inline-button" text="Download">
                   <graphic>
                      <ImageView fitHeight="11.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
                         <Image url="@../Img/download.png" />
@@ -148,14 +148,14 @@
             </VBox>
             <Separator orientation="VERTICAL" />
             <VBox alignment="CENTER" spacing="15.0" HBox.hgrow="ALWAYS">
-               <Button fx:id="approveButton" mnemonicParsing="false" prefWidth="125.0" text="Approve">
+               <Button fx:id="approveButton" mnemonicParsing="false" prefWidth="125.0" styleClass="inline-button" text="Approve">
                   <graphic>
                      <ImageView fitHeight="11.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
                         <Image url="@../Img/like.png" />
                      </ImageView>
                   </graphic>
                </Button>
-               <Button fx:id="rejectButton" mnemonicParsing="false" prefWidth="125.0" text="Reject">
+               <Button fx:id="rejectButton" mnemonicParsing="false" prefWidth="125.0" styleClass="inline-button" text="Reject">
                   <graphic>
                      <ImageView fitHeight="11.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
                         <Image url="@../Img/dislike.png" />
@@ -165,7 +165,7 @@
             </VBox>
             <Separator orientation="VERTICAL" />
             <VBox alignment="CENTER" spacing="15.0" HBox.hgrow="ALWAYS">
-               <Button mnemonicParsing="false" prefWidth="125.0" text="Send">
+               <Button mnemonicParsing="false" prefWidth="125.0" styleClass="inline-button" text="Send">
                   <graphic>
                      <ImageView fitHeight="11.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
                         <Image url="@../Img/send.png" />

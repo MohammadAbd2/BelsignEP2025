@@ -17,12 +17,10 @@
      <!-- Left -->
      <left>
          <ImageView fx:id="logo" fitHeight="70.0" fitWidth="70.0">
-             <image>
-                 <Image url="@/Img/BELMAN_Logo.png" />
-             </image>
              <BorderPane.margin>
-                 <Insets left="15.0" />
+                 <Insets left="15.0"/>
              </BorderPane.margin>
+             <Image url="@/Img/BELMAN_Logo.png"/>
          </ImageView>
      </left>
 
@@ -31,7 +29,7 @@
          <HBox fx:id="navbar" alignment="CENTER_RIGHT" spacing="10">
              <Button fx:id="OrderTabId" onAction="#OrderTab" text="Orders" />
              <Button fx:id="OperatorTabId" onAction="#OperatorTab" text="Operator" />
-             <Button fx:id="QCTabId" onAction="#QCTab" text="QA" />
+             <Button fx:id="QATabId" onAction="#QATab" text="QA" />
              <Button fx:id="AdminTabId" onAction="#AdminTab" text="Admin" />
              <Button fx:id="LogoutTabId" onAction="#LogoutTab" layoutX="336.0" layoutY="11.0" text="Log Out" />
              <padding>

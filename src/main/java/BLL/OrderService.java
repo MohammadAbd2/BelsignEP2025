@@ -4,7 +4,6 @@ import BE.Order;
 import BLL.LoggerBLL.loggerManager;
 import DAL.OrderDB;
 import Utils.LoggedInUser;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +27,7 @@ public class OrderService {
                     return true;
                 });
             }
-            case "QC": {
+            case "QA": {
                 orderDB.getAllOrders().stream().filter(order -> {
                     if(Objects.equals(order.getStatus(), "Pending")){
                         filteredOrders.add(order);

@@ -14,6 +14,10 @@ ALL
     -fx-background-color: linear-gradient(from 0% 70% to 100% 30%, #0375AA 0%, #04529d 100%, #0E63AE 100%, #005092 70% );
 }
 
+.custom-scroll-pane {
+    -fx-background-color: linear-gradient(to right, #0375AA 0%, #0074D9 21%, #0E63AE 69%, #005092 100%);
+}
+
 /*
 ---------------
 Admin
@@ -207,10 +211,7 @@ OTHERS
 }
 
 
-custom-scroll-pane {
-    -fx-background-color: linear-gradient(to right, #0375AA 0%, #0074D9 21%, #0E63AE 69%, #005092 100%);
 
-}
 
 .scroll-pane {
      -fx-background-color: transparent;

@@ -11,17 +11,15 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<BorderPane fx:controller="GUI.Controller.OrderPageController"
-            xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            stylesheets="@/Css/styles.css">
+
+<BorderPane stylesheets="@/Css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.OrdersController">
 
     <center>
-        <VBox fx:id="ordersBody" spacing="20" VBox.vgrow="ALWAYS" prefWidth="Infinity">
+        <VBox fx:id="ordersBody" maxWidth="1.7976931348623157E308" spacing="20" VBox.vgrow="ALWAYS">
             <!-- Top: Filter Bar -->
             <BorderPane>
                 <left>
-                    <TextField fx:id="searchField" promptText="Search..." styleClass="search-field"/>
+                    <TextField fx:id="searchField" promptText="Search..." styleClass="search-field" />
                 </left>
                 <right>
                     <HBox spacing="10">

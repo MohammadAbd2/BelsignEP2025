@@ -1,6 +1,5 @@
 package GUI.Controller;
 
-import GUI.Model.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -14,13 +13,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.FileChooser;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import java.io.File;
 import java.io.IOException;
-public class OperatorPageController {
+public class OperatorController {
 
     @FXML private ImageView logoImage;
     @FXML private ImageView profileImage;
