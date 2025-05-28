@@ -62,15 +62,18 @@ public class CameraCapture {
 
             Thread cameraThread = new Thread(() -> {
                 Mat frame = new Mat();
+                Mat rgbFrame = new Mat();
                 while (stage.isShowing()) {
                     if (camera.read(frame)) {
-                        Imgproc.cvtColor(frame, frame, COLOR_BGR2RGB);
-                        BufferedImage bufferedImage = matToBufferedImage(frame);
+                        Imgproc.cvtColor(frame, rgbFrame, COLOR_BGR2RGB);
+                        BufferedImage bufferedImage = matToBufferedImage(rgbFrame);
                         WritableImage fxImage = SwingFXUtils.toFXImage(bufferedImage, null);
 
                         Platform.runLater(() -> imageView.setImage(fxImage));
                     }
                 }
+                frame.release();
+                rgbFrame.release();
             });
             cameraThread.setDaemon(true);
             cameraThread.start();
@@ -79,8 +82,10 @@ public class CameraCapture {
                 if (event.getCode() == KeyCode.SPACE) {
                     Mat capturedFrame = new Mat();
                     if (camera.read(capturedFrame)) {
-                        Imgproc.cvtColor(capturedFrame, capturedFrame, COLOR_BGR2RGB);
-                        BufferedImage bufferedImage = matToBufferedImage(capturedFrame);
+                        Mat rgbCapturedFrame = new Mat();
+                        Imgproc.cvtColor(capturedFrame, rgbCapturedFrame, COLOR_BGR2RGB);
+
+                        BufferedImage bufferedImage = matToBufferedImage(rgbCapturedFrame);
                         capturedImage = SwingFXUtils.toFXImage(bufferedImage, null);
 
                         String folderPath = "resources/Img/";
@@ -92,8 +97,10 @@ public class CameraCapture {
                         String fullPath = folderPath + filename;
                         picturePath = fullPath;
 
-                        Imgcodecs.imwrite(fullPath, capturedFrame);
+                        Imgcodecs.imwrite(fullPath, capturedFrame); // save original BGR image
+
                         System.out.println("✅ Image saved to: " + fullPath);
+                        rgbCapturedFrame.release();
                     } else {
                         System.err.println("❌ Failed to capture frame.");
                     }
