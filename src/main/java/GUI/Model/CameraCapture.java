@@ -29,7 +29,8 @@ public class CameraCapture {
     private Image capturedImage;
 
     static {
-        System.load("C:\\Users\\Bruger\\Desktop\\easv\\opencv\\build\\java\\x64\\opencv_java490.dll");
+        String opencvPath = new File("libs/opencv_java490.dll").getAbsolutePath();
+        System.load(opencvPath);
     }
 
     public String getPicturePath() {
