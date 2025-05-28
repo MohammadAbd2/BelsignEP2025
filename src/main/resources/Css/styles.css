@@ -349,16 +349,14 @@ OTHERS
     -fx-pref-width: 35;
 }
 
-.image-pane {
-    -fx-pref-width: 300;
-    -fx-pref-height: 270;
-    -fx-min-height: 130;
+.image-pane {      /* Minimum height with explicit px */
     -fx-border-color: rgba(4, 83, 176, 0.3);
-    -fx-border-width: 2;
+    -fx-border-width: 2px;          /* Border width with explicit px */
     -fx-background-color: rgba(29, 97, 185, 0.48);
-    -fx-border-radius: 8;
+    -fx-border-radius: 8px;         /* Border radius with explicit px */
     -fx-alignment: center;
 }
+
 
 .image-pane:hover {
     -fx-cursor: hand;
