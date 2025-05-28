@@ -1,0 +1,131 @@
+package GUI.Model;
+
+import javafx.application.Platform;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import org.opencv.core.Mat;
+import org.opencv.imgcodecs.Imgcodecs;
+import org.opencv.imgproc.Imgproc;
+import org.opencv.videoio.VideoCapture;
+
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.CountDownLatch;
+
+import static org.opencv.imgproc.Imgproc.COLOR_BGR2RGB;
+
+public class CameraCapture {
+
+    private VideoCapture camera;
+    private String picturePath;
+    private Image capturedImage;
+
+    static {
+        System.load("C:\\Users\\Bruger\\Desktop\\easv\\opencv\\build\\java\\x64\\opencv_java490.dll");
+    }
+
+    public String getPicturePath() {
+        return picturePath;
+    }
+
+    public Image getCapturedImage() {
+        return capturedImage;
+    }
+
+    public void startCameraAndCapture() throws Exception {
+        CountDownLatch latch = new CountDownLatch(1);
+
+        Platform.runLater(() -> {
+            camera = new VideoCapture(0);
+
+            if (!camera.isOpened()) {
+                System.err.println("❌ Error: Cannot open camera.");
+                latch.countDown();
+                return;
+            }
+
+            ImageView imageView = new ImageView();
+            StackPane root = new StackPane(imageView);
+            Scene scene = new Scene(root, 640, 480);
+            Stage stage = new Stage();
+            stage.setTitle("Camera - Press SPACE to capture");
+            stage.setScene(scene);
+            stage.show();
+
+            Thread cameraThread = new Thread(() -> {
+                Mat frame = new Mat();
+                while (stage.isShowing()) {
+                    if (camera.read(frame)) {
+                        Imgproc.cvtColor(frame, frame, COLOR_BGR2RGB);
+                        BufferedImage bufferedImage = matToBufferedImage(frame);
+                        WritableImage fxImage = SwingFXUtils.toFXImage(bufferedImage, null);
+
+                        Platform.runLater(() -> imageView.setImage(fxImage));
+                    }
+                }
+            });
+            cameraThread.setDaemon(true);
+            cameraThread.start();
+
+            scene.setOnKeyPressed(event -> {
+                if (event.getCode() == KeyCode.SPACE) {
+                    Mat capturedFrame = new Mat();
+                    if (camera.read(capturedFrame)) {
+                        Imgproc.cvtColor(capturedFrame, capturedFrame, COLOR_BGR2RGB);
+                        BufferedImage bufferedImage = matToBufferedImage(capturedFrame);
+                        capturedImage = SwingFXUtils.toFXImage(bufferedImage, null);
+
+                        String folderPath = "resources/Img/";
+                        File folder = new File(folderPath);
+                        if (!folder.exists()) folder.mkdirs();
+
+                        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                        String filename = "IMG_" + timestamp + ".jpg";
+                        String fullPath = folderPath + filename;
+                        picturePath = fullPath;
+
+                        Imgcodecs.imwrite(fullPath, capturedFrame);
+                        System.out.println("✅ Image saved to: " + fullPath);
+                    } else {
+                        System.err.println("❌ Failed to capture frame.");
+                    }
+                    stage.close();
+                    release();
+                    latch.countDown();
+                }
+            });
+
+            stage.setOnCloseRequest(e -> {
+                release();
+                latch.countDown();
+            });
+        });
+
+        latch.await();
+    }
+
+    private BufferedImage matToBufferedImage(Mat matrix) {
+        int width = matrix.width();
+        int height = matrix.height();
+        int channels = matrix.channels();
+        byte[] sourcePixels = new byte[width * height * channels];
+        matrix.get(0, 0, sourcePixels);
+        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
+        image.getRaster().setDataElements(0, 0, width, height, sourcePixels);
+        return image;
+    }
+
+    private void release() {
+        if (camera != null && camera.isOpened()) {
+            camera.release();
+        }
+    }
+}
