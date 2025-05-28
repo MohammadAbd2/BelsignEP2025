@@ -95,35 +95,54 @@ Orders
     -fx-background-color: linear-gradient(to right, #0375AA 0%, #0074D9 21%, #0E63AE 69%, #005092 100%);
 }
 
-#ordersNew{
+#ordersNew {
     -fx-background-color: linear-gradient(from 70% 70% to 100% 100%, #0095FF 0%, #0077CC 100%);
 }
-#ordersNew:hover{
+#ordersNew:hover {
     -fx-cursor: hand;
 }
+#ordersNew:selected {
+    -fx-background-color: linear-gradient(from 70% 70% to 100% 100%, #0077CC 0%, #005599 100%); /* Slightly darker */
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.4), 8, 0.5, 0, 0);
+    -fx-text-fill: white;
+}
 
-#ordersApproved{
+#ordersApproved {
     -fx-background-color: linear-gradient(from 70% 70% to 100% 100%, #00DF0B 0%, #00B222 100%);
 }
-#ordersApproved:hover{
+#ordersApproved:hover {
     -fx-cursor: hand;
 }
+#ordersApproved:selected {
+    -fx-background-color: linear-gradient(from 70% 70% to 100% 100%, #00B222 0%, #008A1B 100%);
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.4), 8, 0.5, 0, 0);
+    -fx-text-fill: white;
+}
 
-#ordersPending{
+#ordersPending {
     -fx-background-color: linear-gradient(from 70% 70% to 100% 100%, #FCA000 0%, #DC6919 100%);
 }
-#ordersPending:hover{
+#ordersPending:hover {
     -fx-cursor: hand;
 }
-
+#ordersPending:selected {
+    -fx-background-color: linear-gradient(from 70% 70% to 100% 100%, #DC6919 0%, #B55614 100%);
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.4), 8, 0.5, 0, 0);
+    -fx-text-fill: white;
+}
 
 #ordersRejected {
     -fx-background-color: linear-gradient(from 70% 70% to 100% 100%, #FF4A3D 0%, #F61616 100%);
 }
-
 #ordersRejected:hover {
     -fx-cursor: hand;
 }
+#ordersRejected:selected {
+    -fx-background-color: linear-gradient(from 70% 70% to 100% 100%, #F61616 0%, #C11010 100%);
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.4), 8, 0.5, 0, 0);
+    -fx-text-fill: white;
+}
+
 
 
 #ordersGrid {
