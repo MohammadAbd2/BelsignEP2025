@@ -18,7 +18,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.List;
 
 public class OperatorController {
@@ -40,114 +39,106 @@ public class OperatorController {
 
     private Stage stage;
     private static Order selectedOrder;
-    CameraCapture cameraCapture = new CameraCapture();
-
     private static StackPane targetPFI;
+
+    private final CameraCapture cameraCapture = new CameraCapture();
 
     @FXML
     public void initialize() {
+        // Initialize status options
         if (statusComboBox != null) {
             statusComboBox.getItems().addAll("Pending", "Completed", "In Progress");
         }
-        if(selectedOrder != null){
-            List<String> exampleImages = Arrays.asList(
-                    "resources/Img/IMG_20250529_105549.jpg",
-                    "resources/Img/IMG_20250529_105549.jpg",
-                    "resources/Img/IMG_20250529_105549.jpg",
-                    "resources/Img/IMG_20250529_105549.jpg",
-                    "resources/Img/IMG_20250529_105549.jpg"
-            );
 
-            selectedOrder.setImages(exampleImages);
-            if (selectedOrder.getImages() != null) {
-                imageGrid.getChildren().clear();
-                int column = 0;
-                int row = 0;
+        // Load data into fields if selectedOrder is not null
+        if (selectedOrder != null) {
+            loadOrderData(selectedOrder);
+        }
+    }
 
-                for (String imagePath : selectedOrder.getImages()) {
-                    try {
-                        File imageFile = new File(imagePath);
-                        if (imageFile.exists()) {
-                            Image image = new Image(imageFile.toURI().toString());
+    // Loads the selected order's data into the UI fields
+    private void loadOrderData(Order order) {
+        orderNumberField.setText(order.getOrder_number());
+        notesArea.setText(order.getNotes());
 
-                            StackPane imagePane = new StackPane();
-                            imagePane.setPrefWidth(200);
-                            imagePane.setPrefHeight(200);
-                            imagePane.getChildren().add(new Label("+"));
+        // Display images in grid
+        List<String> imagePaths = order.getImages();
+        if (imagePaths != null) {
+            imageGrid.getChildren().clear();
+            int column = 0;
+            int row = 0;
 
-                            addImageToPane(imagePane, image);
-
-                            imageGrid.add(imagePane, column, row);
-                            column++;
-                            if (column == 2) {
-                                column = 0;
-                                row++;
-                            }
-                        } else {
-                            System.out.println("Image not found: " + imagePath);
-                        }
-                    } catch (Exception e) {
-                        System.out.println("Failed to load image: " + imagePath + " Error: " + e.getMessage());
-                    }
+            for (String path : imagePaths) {
+                File file = new File(path);
+                if (file.exists()) {
+                    Image image = new Image(file.toURI().toString());
+                    StackPane imagePane = createImagePane(image);
+                    imageGrid.add(imagePane, column, row);
+                    column = (column + 1) % 2;
+                    if (column == 0) row++;
                 }
             }
-
-            saveButton.setOnAction(event -> {
-                saveOrder(selectedOrder);
-            });
-
-            orderNumberField.setText(selectedOrder.getOrder_number());
-            notesArea.setText(selectedOrder.getNotes());
-
-            if (selectedOrder.getImages() != null) {
-                for (String imagePath : selectedOrder.getImages()) {
-                    try {
-                        File imageFile = new File(imagePath);
-                        if (imageFile.exists()) {
-                            Image image = new Image(imageFile.toURI().toString());
-                            addImageToPane(targetPFI, image);
-                        } else {
-                            System.out.println("Image not found: " + imagePath);
-                        }
-                    } catch (Exception e) {
-                        System.out.println("Failed to load image: " + imagePath + " Error: " + e.getMessage());
-                    }
-                }
-            }
-
         }
 
+        saveButton.setOnAction(e -> saveOrder(order));
     }
 
+    // Triggered when the user clicks on the image pane
     @FXML
-    public void handleAddImage(MouseEvent event) {
-        StackPane targetPane = (StackPane) event.getSource();
+    private void handleAddImage(MouseEvent event) {
+        Object source = event.getSource();
+        StackPane targetPane;
 
-        Alert choiceAlert = new Alert(Alert.AlertType.CONFIRMATION);
-        choiceAlert.setTitle("Add Image");
-        choiceAlert.setHeaderText("Choose image source:");
+        // Case 1: User clicked directly on the StackPane
+        if (source instanceof StackPane) {
+            targetPane = (StackPane) source;
+        }
 
-        ButtonType cameraButton = new ButtonType("Camera");
-        ButtonType fileButton = new ButtonType("Choose Picture");
-        ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-
-        choiceAlert.getButtonTypes().setAll(cameraButton, fileButton, cancelButton);
-
-        choiceAlert.showAndWait().ifPresent(type -> {
-            if (type == fileButton) {
-                chooseImageFromFile(targetPane);
-            } else if (type == cameraButton) {
-                captureImageFromCamera(targetPane);
+        // Case 2: User clicked on a Label inside the StackPane
+        else if (source instanceof Label) {
+            Label clickedLabel = (Label) source;
+            if (clickedLabel.getParent() instanceof StackPane) {
+                targetPane = (StackPane) clickedLabel.getParent();
+            } else {
+                targetPane = null;
             }
-        });
+        } else {
+            targetPane = null;
+        }
+
+        // If targetPane is identified correctly, proceed
+        if (targetPane != null) {
+            Alert choiceAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            choiceAlert.setTitle("Add Image");
+            choiceAlert.setHeaderText("Choose image source:");
+
+            ButtonType cameraButton = new ButtonType("Camera");
+            ButtonType fileButton = new ButtonType("Choose Picture");
+            ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            choiceAlert.getButtonTypes().setAll(cameraButton, fileButton, cancelButton);
+
+            choiceAlert.showAndWait().ifPresent(type -> {
+                if (type == fileButton) {
+                    chooseImageFromFile(targetPane);
+                } else if (type == cameraButton) {
+                    captureImageFromCamera(targetPane);
+                }
+            });
+
+        } else {
+            System.err.println("Could not determine target StackPane for image insertion.");
+        }
     }
 
+    // Allows the user to select an image from the file system
     private void chooseImageFromFile(StackPane targetPane) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose an Image");
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.jpeg", "*.png", "*.webp")
         );
+
         File file = fileChooser.showOpenDialog(null);
         if (file != null) {
             Image selectedImage = new Image(file.toURI().toString());
@@ -155,12 +146,11 @@ public class OperatorController {
         }
     }
 
+    // Captures an image from the connected camera
     private void captureImageFromCamera(StackPane targetPane) {
         new Thread(() -> {
             try {
-
-                cameraCapture.startCameraAndCapture(); // Blocking call
-
+                cameraCapture.startCameraAndCapture();
                 Image capturedImage = cameraCapture.getCapturedImage();
                 if (capturedImage != null) {
                     Platform.runLater(() -> addImageToPane(targetPane, capturedImage));
@@ -173,36 +163,27 @@ public class OperatorController {
         }).start();
     }
 
+    // Adds an image to the specified StackPane with delete icon functionality
     private void addImageToPane(StackPane targetPane, Image image) {
         ImageView imageView = new ImageView(image);
-
-
         imageView.fitWidthProperty().bind(targetPane.widthProperty());
         imageView.fitHeightProperty().bind(targetPane.heightProperty());
         imageView.setPreserveRatio(true);
-        imageView.setSmooth(true);
-        imageView.setCache(true);
-
-        targetPane.setMinWidth(400);
-        targetPane.setMinHeight(300);
-        targetPane.setPrefHeight(300);
 
         ImageView trashIcon = new ImageView(new Image(getClass().getResourceAsStream("/Img/trash.png")));
         trashIcon.setFitWidth(25);
         trashIcon.setFitHeight(20);
-        StackPane.setAlignment(trashIcon, Pos.TOP_RIGHT);
-        StackPane.setMargin(trashIcon, new Insets(5));
         trashIcon.setOpacity(0);
         trashIcon.setMouseTransparent(true);
 
-        StackPane imageContainer = new StackPane(imageView, trashIcon);
-        StackPane.setAlignment(imageView, Pos.CENTER);
+        StackPane.setAlignment(trashIcon, Pos.TOP_RIGHT);
+        StackPane.setMargin(trashIcon, new Insets(5));
 
+        StackPane imageContainer = new StackPane(imageView, trashIcon);
         imageContainer.setOnMouseEntered(e -> {
             trashIcon.setOpacity(0.9);
             trashIcon.setMouseTransparent(false);
         });
-
         imageContainer.setOnMouseExited(e -> {
             trashIcon.setOpacity(0);
             trashIcon.setMouseTransparent(true);
@@ -211,28 +192,41 @@ public class OperatorController {
         trashIcon.setOnMouseClicked(e -> {
             e.consume();
             targetPane.getChildren().clear();
-            targetPane.getChildren().add(new Label("+"));
-
-            targetPane.setPrefWidth(Region.USE_COMPUTED_SIZE);
-            targetPane.setPrefHeight(Region.USE_COMPUTED_SIZE);
-            targetPane.setMinWidth(Region.USE_COMPUTED_SIZE);
-            targetPane.setMinHeight(Region.USE_COMPUTED_SIZE);
+            targetPane.getChildren().add(createPlusLabel());
         });
 
         targetPane.getChildren().clear();
         targetPane.getChildren().add(imageContainer);
     }
 
+    // Helper method to create a StackPane with the plus sign
+    private StackPane createImagePane(Image image) {
+        StackPane pane = new StackPane();
+        pane.setPrefSize(200, 200);
+        pane.getChildren().add(createPlusLabel());
+        pane.setOnMouseClicked(this::handleAddImage);
+        addImageToPane(pane, image);
+        return pane;
+    }
 
+    // Creates a plus label for empty image placeholders
+    private Label createPlusLabel() {
+        Label plus = new Label("+");
+        plus.setStyle("-fx-font-size: 48; -fx-text-fill: #999;");
+        plus.setOnMouseClicked(this::handleAddImage);
+        return plus;
+    }
+
+    // Saves the order data
     public void saveOrder(Order order) {
         OrderService orderService = new OrderService();
         order.setStatus("New");
         order.setNotes(notesArea.getText());
         cameraCapture.saveCapturedImage();
         orderService.updateOrder(order);
-
     }
 
+    // Shows an alert with a title and message
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -258,6 +252,4 @@ public class OperatorController {
     public static void setTargetPFI(StackPane targetPane) {
         targetPFI = targetPane;
     }
-
-
 }
