@@ -1,5 +1,7 @@
 package GUI.Controller;
 
+import BE.Order;
+import BLL.OrderService;
 import GUI.Model.CameraCapture;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -16,10 +18,13 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 
 public class OperatorController {
 
     @FXML private ImageView logoImage;
+    @FXML private Button saveButton;
     @FXML private ImageView profileImage;
     @FXML private Button editButton;
     @FXML private TextField searchField;
@@ -34,12 +39,84 @@ public class OperatorController {
     @FXML private BorderPane operatorAnchorPane;
 
     private Stage stage;
+    private static Order selectedOrder;
+    CameraCapture cameraCapture = new CameraCapture();
+
+    private static StackPane targetPFI;
 
     @FXML
     public void initialize() {
         if (statusComboBox != null) {
             statusComboBox.getItems().addAll("Pending", "Completed", "In Progress");
         }
+        if(selectedOrder != null){
+            List<String> exampleImages = Arrays.asList(
+                    "resources/Img/IMG_20250529_105549.jpg",
+                    "resources/Img/IMG_20250529_105549.jpg",
+                    "resources/Img/IMG_20250529_105549.jpg",
+                    "resources/Img/IMG_20250529_105549.jpg",
+                    "resources/Img/IMG_20250529_105549.jpg"
+            );
+
+            selectedOrder.setImages(exampleImages);
+            if (selectedOrder.getImages() != null) {
+                imageGrid.getChildren().clear(); // تنظيف الشبكة من أي عناصر قديمة
+                int column = 0;
+                int row = 0;
+
+                for (String imagePath : selectedOrder.getImages()) {
+                    try {
+                        File imageFile = new File(imagePath);
+                        if (imageFile.exists()) {
+                            Image image = new Image(imageFile.toURI().toString());
+
+                            StackPane imagePane = new StackPane();
+                            imagePane.setPrefWidth(200);
+                            imagePane.setPrefHeight(200);
+                            imagePane.getChildren().add(new Label("+")); // سيتم استبداله داخل addImageToPane
+
+                            addImageToPane(imagePane, image);
+
+                            imageGrid.add(imagePane, column, row);
+                            column++;
+                            if (column == 2) { // صف فيه عمودين
+                                column = 0;
+                                row++;
+                            }
+                        } else {
+                            System.out.println("Image not found: " + imagePath);
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Failed to load image: " + imagePath + " Error: " + e.getMessage());
+                    }
+                }
+            }
+
+            saveButton.setOnAction(event -> {
+                saveOrder(selectedOrder);
+            });
+
+            orderNumberField.setText(selectedOrder.getOrder_number());
+            notesArea.setText(selectedOrder.getNotes());
+
+            if (selectedOrder.getImages() != null) {
+                for (String imagePath : selectedOrder.getImages()) {
+                    try {
+                        File imageFile = new File(imagePath);
+                        if (imageFile.exists()) {
+                            Image image = new Image(imageFile.toURI().toString());
+                            addImageToPane(targetPFI, image);
+                        } else {
+                            System.out.println("Image not found: " + imagePath);
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Failed to load image: " + imagePath + " Error: " + e.getMessage());
+                    }
+                }
+            }
+
+        }
+
     }
 
     @FXML
@@ -81,7 +158,7 @@ public class OperatorController {
     private void captureImageFromCamera(StackPane targetPane) {
         new Thread(() -> {
             try {
-                CameraCapture cameraCapture = new CameraCapture();
+
                 cameraCapture.startCameraAndCapture(); // Blocking call
 
                 Image capturedImage = cameraCapture.getCapturedImage();
@@ -99,19 +176,17 @@ public class OperatorController {
     private void addImageToPane(StackPane targetPane, Image image) {
         ImageView imageView = new ImageView(image);
 
-        // اربط fitWidth و fitHeight بحجم targetPane مع المحافظة على النسبة
+
         imageView.fitWidthProperty().bind(targetPane.widthProperty());
         imageView.fitHeightProperty().bind(targetPane.heightProperty());
         imageView.setPreserveRatio(true);
         imageView.setSmooth(true);
         imageView.setCache(true);
 
-        // لا تقيد حجم targetPane هنا بحجم ثابت ليتمكن من التغير تلقائياً مع النافذة
-        // يمكن وضع حد أدنى مثلاً فقط
         targetPane.setMinWidth(400);
         targetPane.setMinHeight(300);
         targetPane.setPrefHeight(300);
-        // باقي الكود كما هو
+
         ImageView trashIcon = new ImageView(new Image(getClass().getResourceAsStream("/Img/trash.png")));
         trashIcon.setFitWidth(25);
         trashIcon.setFitHeight(20);
@@ -148,6 +223,16 @@ public class OperatorController {
         targetPane.getChildren().add(imageContainer);
     }
 
+
+    public void saveOrder(Order order) {
+        OrderService orderService = new OrderService();
+        order.setStatus("New");
+        order.setNotes(notesArea.getText());
+        cameraCapture.saveCapturedImage();
+        orderService.updateOrder(order);
+
+    }
+
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -165,4 +250,14 @@ public class OperatorController {
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setIconified(true);
     }
+
+    public static void setSelectedOrder(Order order) {
+        selectedOrder = order;
+    }
+
+    public static void setTargetPFI(StackPane targetPane) {
+        targetPFI = targetPane;
+    }
+
+
 }

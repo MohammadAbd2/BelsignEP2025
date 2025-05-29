@@ -5,6 +5,7 @@ import DAL.Interfaces.IOrderDB;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class OrderDB implements IOrderDB {
@@ -18,7 +19,6 @@ public class OrderDB implements IOrderDB {
 
     private void initializeStatusConstraint() {
         try (Connection conn = dbConnector.getConnection()) {
-            // First check if the column exists
             String checkColumnSQL =
                     "IF NOT EXISTS (SELECT * FROM sys.columns " +
                             "WHERE Name = 'status' AND Object_ID = Object_ID('QC_Belsign_schema.[order]')) " +
@@ -26,7 +26,6 @@ public class OrderDB implements IOrderDB {
                             "    ALTER TABLE QC_Belsign_schema.[order] ADD status VARCHAR(10) NOT NULL DEFAULT 'New'; " +
                             "END";
 
-            // Then ensure the constraint exists
             String checkConstraintSQL =
                     "IF NOT EXISTS (SELECT * FROM sys.check_constraints " +
                             "WHERE OBJECT_NAME(parent_object_id) = 'order' AND name = 'CHK_Order_Status') " +
@@ -36,7 +35,6 @@ public class OrderDB implements IOrderDB {
                             "    CHECK (status IN ('New', 'Approved', 'Pending', 'Rejected')); " +
                             "END";
 
-            // Update any null values to 'New'
             String updateNullSQL =
                     "UPDATE QC_Belsign_schema.[order] " +
                             "SET status = 'New' " +
@@ -54,7 +52,6 @@ public class OrderDB implements IOrderDB {
         }
     }
 
-
     private String normalizeStatus(String status) {
         if (status == null) return "New";
         return status.substring(0, 1).toUpperCase() + status.substring(1).toLowerCase();
@@ -70,7 +67,7 @@ public class OrderDB implements IOrderDB {
             System.out.println("Creating order with status: " + normalizedStatus);
 
             stmt.setString(1, order.getOrder_number());
-            stmt.setString(2, order.getImage());
+            stmt.setString(2, String.join(";", order.getImages()));
             stmt.setString(3, order.getNotes());
             stmt.setString(4, normalizedStatus);
             stmt.setString(5, order.getOrder_name());
@@ -101,13 +98,14 @@ public class OrderDB implements IOrderDB {
             stmt.setInt(1, orderId);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
+                List<String> images = Arrays.asList(rs.getString("image").split(";"));
                 Order order = new Order(
-                    rs.getInt("id"),
-                    rs.getString("order_number"),
-                    rs.getString("image"),
-                    rs.getString("notes"),
-                    rs.getString("status"),
-                    rs.getString("order_name")
+                        rs.getInt("id"),
+                        rs.getString("order_number"),
+                        images,
+                        rs.getString("notes"),
+                        rs.getString("status"),
+                        rs.getString("order_name")
                 );
                 System.out.println("Retrieved order " + orderId + " with status: " + order.getStatus());
                 return order;
@@ -129,13 +127,17 @@ public class OrderDB implements IOrderDB {
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                orders.add(new Order(
-                    rs.getInt("id"),
-                    rs.getString("order_number"),
-                    rs.getString("image"),
-                    rs.getString("notes"),
-                    rs.getString("status"),
-                    rs.getString("order_name")
+                String imageStr = rs.getString("image");
+                List<String> images = imageStr != null && !imageStr.isEmpty()
+                        ? Arrays.asList(imageStr.split(";"))
+                        : new ArrayList<>();
+                        orders.add(new Order(
+                        rs.getInt("id"),
+                        rs.getString("order_number"),
+                        images,
+                        rs.getString("notes"),
+                        rs.getString("status"),
+                        rs.getString("order_name")
                 ));
             }
             System.out.println("Retrieved " + orders.size() + " orders from database");
@@ -149,7 +151,7 @@ public class OrderDB implements IOrderDB {
 
     @Override
     public void updateOrder(Order order) {
-        String sql = "UPDATE QC_Belsign_schema.[order] SET status = ?, notes = ? WHERE id = ?";
+        String sql = "UPDATE QC_Belsign_schema.[order] SET status = ?, notes = ?, image = ? WHERE id = ?";
         try (Connection conn = dbConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -158,7 +160,8 @@ public class OrderDB implements IOrderDB {
 
             stmt.setString(1, normalizedStatus);
             stmt.setString(2, order.getNotes());
-            stmt.setInt(3, order.getId());
+            stmt.setString(3, String.join(";", order.getImages()));
+            stmt.setInt(4, order.getId());
 
             int rowsAffected = stmt.executeUpdate();
             System.out.println("Rows affected by update: " + rowsAffected);
@@ -168,7 +171,6 @@ public class OrderDB implements IOrderDB {
             e.printStackTrace();
         }
     }
-
 
     @Override
     public void deleteOrder(int orderId) {
@@ -185,13 +187,12 @@ public class OrderDB implements IOrderDB {
             e.printStackTrace();
         }
     }
-    
-    // Add this new method to OrderDB class
+
     public int countOrdersByStatus(String status) {
         String sql = "SELECT COUNT(*) FROM QC_Belsign_schema.[order] WHERE status = ?";
         try (Connection conn = dbConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
-            
+
             stmt.setString(1, normalizeStatus(status));
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {

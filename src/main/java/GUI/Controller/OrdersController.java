@@ -292,6 +292,7 @@ public class OrdersController {
                             case "Operator": {
                                 try {
                                     System.out.println("Operator Clicked on order card");
+                                    OperatorController.setSelectedOrder(order);
                                     SceneManager.loadScene("navbar", "/View/Navbar.fxml");
                                     SceneManager.loadScene("operatorPage", "/View/Operator.fxml");
                                     SceneManager.loadScene("QA", "/View/QA.fxml");

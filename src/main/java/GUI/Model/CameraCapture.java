@@ -27,6 +27,7 @@ public class CameraCapture {
     private VideoCapture camera;
     private String picturePath;
     private Image capturedImage;
+    private Mat capturedFrame; // store for later save
 
     static {
         String opencvPath = new File("libs/opencv_java490.dll").getAbsolutePath();
@@ -81,7 +82,7 @@ public class CameraCapture {
 
             scene.setOnKeyPressed(event -> {
                 if (event.getCode() == KeyCode.SPACE) {
-                    Mat capturedFrame = new Mat();
+                    capturedFrame = new Mat();
                     if (camera.read(capturedFrame)) {
                         Mat rgbCapturedFrame = new Mat();
                         Imgproc.cvtColor(capturedFrame, rgbCapturedFrame, COLOR_BGR2RGB);
@@ -89,19 +90,8 @@ public class CameraCapture {
                         BufferedImage bufferedImage = matToBufferedImage(rgbCapturedFrame);
                         capturedImage = SwingFXUtils.toFXImage(bufferedImage, null);
 
-                        String folderPath = "resources/Img/";
-                        File folder = new File(folderPath);
-                        if (!folder.exists()) folder.mkdirs();
-
-                        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-                        String filename = "IMG_" + timestamp + ".jpg";
-                        String fullPath = folderPath + filename;
-                        picturePath = fullPath;
-
-                        Imgcodecs.imwrite(fullPath, capturedFrame); // save original BGR image
-
-                        System.out.println("✅ Image saved to: " + fullPath);
                         rgbCapturedFrame.release();
+                        System.out.println("✅ Image captured. Call saveCapturedImage() to save.");
                     } else {
                         System.err.println("❌ Failed to capture frame.");
                     }
@@ -118,6 +108,31 @@ public class CameraCapture {
         });
 
         latch.await();
+    }
+
+    public boolean saveCapturedImage() {
+        if (capturedFrame == null || capturedFrame.empty()) {
+            System.err.println("❌ No image captured to save.");
+            return false;
+        }
+
+        String folderPath = "resources/Img/";
+        File folder = new File(folderPath);
+        if (!folder.exists()) folder.mkdirs();
+
+        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String filename = "IMG_" + timestamp + ".jpg";
+        String fullPath = folderPath + filename;
+
+        boolean success = Imgcodecs.imwrite(fullPath, capturedFrame);
+        if (success) {
+            picturePath = fullPath;
+            System.out.println("✅ Image saved to: " + fullPath);
+        } else {
+            System.err.println("❌ Failed to save image.");
+        }
+
+        return success;
     }
 
     private BufferedImage matToBufferedImage(Mat matrix) {
