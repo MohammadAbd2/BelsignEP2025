@@ -95,6 +95,9 @@ Orders
     -fx-background-color: linear-gradient(to right, #0375AA 0%, #0074D9 21%, #0E63AE 69%, #005092 100%);
 }
 
+/*
+Filter Buttons Option 1
+ */
 #ordersNew {
     -fx-background-color: linear-gradient(from 70% 70% to 100% 100%, #0095FF 0%, #0077CC 100%);
 }
@@ -143,6 +146,36 @@ Orders
     -fx-text-fill: white;
 }
 
+/*
+Filter Buttons Option 2
+ */
+
+/*!* Default (unselected) - grey *!*/
+/*#ordersNew, #ordersApproved, #ordersPending, #ordersRejected {*/
+/*    -fx-background-color: linear-gradient(from 70% 70% to 100% 100%, #B0B0B0 0%, #8E8E8E 100%);*/
+/*    -fx-text-fill: black;*/
+/*}*/
+/*#ordersNew:hover, #ordersApproved:hover, #ordersPending:hover, #ordersRejected:hover {*/
+/*    -fx-cursor: hand;*/
+/*}*/
+
+/*!* Selected states with specific colors *!*/
+/*#ordersNew:selected {*/
+/*    -fx-background-color: linear-gradient(from 70% 70% to 100% 100%, #0095FF 0%, #0077CC 100%);*/
+/*    -fx-text-fill: white;*/
+/*}*/
+/*#ordersApproved:selected {*/
+/*    -fx-background-color: linear-gradient(from 70% 70% to 100% 100%, #00DF0B 0%, #00B222 100%);*/
+/*    -fx-text-fill: white;*/
+/*}*/
+/*#ordersPending:selected {*/
+/*    -fx-background-color: linear-gradient(from 70% 70% to 100% 100%, #FCA000 0%, #DC6919 100%);*/
+/*    -fx-text-fill: white;*/
+/*}*/
+/*#ordersRejected:selected {*/
+/*    -fx-background-color: linear-gradient(from 70% 70% to 100% 100%, #FF4A3D 0%, #F61616 100%);*/
+/*    -fx-text-fill: white;*/
+/*}*/
 
 
 #ordersGrid {
