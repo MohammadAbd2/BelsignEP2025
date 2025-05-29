@@ -60,7 +60,7 @@ public class OperatorController {
 
             selectedOrder.setImages(exampleImages);
             if (selectedOrder.getImages() != null) {
-                imageGrid.getChildren().clear(); // تنظيف الشبكة من أي عناصر قديمة
+                imageGrid.getChildren().clear();
                 int column = 0;
                 int row = 0;
 
@@ -73,13 +73,13 @@ public class OperatorController {
                             StackPane imagePane = new StackPane();
                             imagePane.setPrefWidth(200);
                             imagePane.setPrefHeight(200);
-                            imagePane.getChildren().add(new Label("+")); // سيتم استبداله داخل addImageToPane
+                            imagePane.getChildren().add(new Label("+"));
 
                             addImageToPane(imagePane, image);
 
                             imageGrid.add(imagePane, column, row);
                             column++;
-                            if (column == 2) { // صف فيه عمودين
+                            if (column == 2) {
                                 column = 0;
                                 row++;
                             }
