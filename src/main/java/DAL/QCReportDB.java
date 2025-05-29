@@ -17,18 +17,20 @@ public class QCReportDB implements IQCReportDB {
 
     @Override
     public QCReport createQCReport(QCReport report) {
-        String sql = "INSERT INTO QC_Belsign_schema.qc_report (orderNumber, email, frontImage, backImage, leftImage, rightImage, topImage, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO QC_Belsign_schema.qc_report (orderNumber, qaName, status, email, frontImage, backImage, leftImage, rightImage, topImage, notes) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = dbConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             stmt.setString(1, report.getOrderNumber());
-            stmt.setString(2, report.getEmail());
-            stmt.setString(3, report.getFrontImage());
-            stmt.setString(4, report.getBackImage());
-            stmt.setString(5, report.getLeftImage());
-            stmt.setString(6, report.getRightImage());
-            stmt.setString(7, report.getTopImage());
-            stmt.setString(8, report.getNotes());
+            stmt.setString(2, report.getQaName());
+            stmt.setString(3, report.getStatus());
+            stmt.setString(4, report.getEmail());
+            stmt.setString(5, report.getFrontImage());
+            stmt.setString(6, report.getBackImage());
+            stmt.setString(7, report.getLeftImage());
+            stmt.setString(8, report.getRightImage());
+            stmt.setString(9, report.getTopImage());
+            stmt.setString(10, report.getNotes());
             stmt.executeUpdate();
 
             ResultSet rs = stmt.getGeneratedKeys();
@@ -55,6 +57,8 @@ public class QCReportDB implements IQCReportDB {
                 return new QCReport(
                         rs.getInt("id"),
                         rs.getString("orderNumber"),
+                        rs.getString("qaName"),
+                        rs.getString("status"),
                         rs.getString("email"),
                         rs.getString("frontImage"),
                         rs.getString("backImage"),
@@ -83,6 +87,8 @@ public class QCReportDB implements IQCReportDB {
                 reports.add(new QCReport(
                         rs.getInt("id"),
                         rs.getString("orderNumber"),
+                        rs.getString("qaName"),
+                        rs.getString("status"),
                         rs.getString("email"),
                         rs.getString("frontImage"),
                         rs.getString("backImage"),
@@ -101,25 +107,28 @@ public class QCReportDB implements IQCReportDB {
 
     @Override
     public void updateQCReport(QCReport report) {
-        String sql = "UPDATE QC_Belsign_schema.qc_report SET orderNumber = ?, email = ?, frontImage = ?, backImage = ?, leftImage = ?, rightImage = ?, topImage = ?, notes = ? WHERE id = ?";
+        String sql = "UPDATE QC_Belsign_schema.qc_report SET orderNumber = ?, qaName = ?, status = ?, email = ?, frontImage = ?, backImage = ?, leftImage = ?, rightImage = ?, topImage = ?, notes = ? WHERE id = ?";
         try (Connection conn = dbConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, report.getOrderNumber());
-            stmt.setString(2, report.getEmail());
-            stmt.setString(3, report.getFrontImage());
-            stmt.setString(4, report.getBackImage());
-            stmt.setString(5, report.getLeftImage());
-            stmt.setString(6, report.getRightImage());
-            stmt.setString(7, report.getTopImage());
-            stmt.setString(8, report.getNotes());
-            stmt.setInt(9, report.getId());
+            stmt.setString(2, report.getQaName());
+            stmt.setString(3, report.getStatus());
+            stmt.setString(4, report.getEmail());
+            stmt.setString(5, report.getFrontImage());
+            stmt.setString(6, report.getBackImage());
+            stmt.setString(7, report.getLeftImage());
+            stmt.setString(8, report.getRightImage());
+            stmt.setString(9, report.getTopImage());
+            stmt.setString(10, report.getNotes());
+            stmt.setInt(11, report.getId());
             stmt.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
 
     @Override
     public void deleteQCReport(int id) {

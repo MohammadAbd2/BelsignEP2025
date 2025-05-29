@@ -1,6 +1,8 @@
 package GUI.Controller;
 
 import BE.Order;
+import BE.QCReport;
+import Utils.PDFGenerator;
 import DAL.OrderDB;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -176,8 +178,40 @@ public class QAController {
         
         File file = fileChooser.showSaveDialog(downloadButton.getScene().getWindow());
         if (file != null) {
-            // TODO: Implement PDF generation
-            showInfo("Download", "Report download started");
+            try {
+                generateAndSaveQCReport(file);
+                showInfo("Download", "Report successfully downloaded");
+            } catch (Exception e) {
+                showError("Error", "Failed to generate and save the report: " + e.getMessage());
+            }
+
+        }
+    }
+
+    private void generateAndSaveQCReport(File outputFile) throws IOException {
+        if (selectedOrder == null) {
+            throw new IllegalArgumentException("No order is selected");
+        }
+
+        QCReport report = new QCReport();
+        report.setOrderNumber(selectedOrder.getOrder_number());
+        report.setQaName(qaNameField.getText());
+        report.setStatus(selectedOrder.getStatus());
+        report.setNotes(selectedOrder.getNotes());
+
+        String basePath = selectedOrder.getImage();
+        if (basePath != null) {
+            report.setFrontImage(basePath + "/front.png");
+            report.setBackImage(basePath + "/back.png");
+            report.setRightImage(basePath + "/right.png");
+            report.setLeftImage(basePath + "/left.png");
+            report.setTopImage(basePath + "/top.png");
+        }
+        try {
+            PDFGenerator pdfGenerator = new PDFGenerator();
+            pdfGenerator.generateQCReport(report, outputFile.getAbsolutePath());
+        } catch (Exception e) {
+            throw new IOException("Failed to generate PDF: " + e.getMessage());
         }
     }
 

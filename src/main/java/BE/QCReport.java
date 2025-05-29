@@ -3,6 +3,8 @@ package BE;
 public class QCReport {
     private int id;
     private String orderNumber;
+    private String qaName;
+    private String status;
     private String email;
     private String frontImage;
     private String backImage;
@@ -11,12 +13,15 @@ public class QCReport {
     private String topImage;
     private String notes;
 
-    public QCReport(int id, String orderNumber, String email,
+    public QCReport(int id, String orderNumber, String qaName,
+                    String status, String email,
                     String frontImage, String backImage,
                     String leftImage, String rightImage,
                     String topImage, String notes) {
         this.id = id;
         this.orderNumber = orderNumber;
+        this.qaName = qaName;
+        this.status = status;
         this.email = email;
         this.frontImage = frontImage;
         this.backImage = backImage;
@@ -29,6 +34,8 @@ public class QCReport {
     // Getters
     public int getId() { return id; }
     public String getOrderNumber() { return orderNumber; }
+    public String getQaName() { return qaName; }
+    public String getStatus() { return status; }
     public String getEmail() { return email; }
     public String getFrontImage() { return frontImage; }
     public String getBackImage() { return backImage; }
@@ -40,6 +47,8 @@ public class QCReport {
     // Setters
     public void setId(int id) { this.id = id; }
     public void setOrderNumber(String orderNumber) { this.orderNumber = orderNumber; }
+    public void setQaName(String qaName) { this.qaName = qaName; }
+    public void setStatus(String status) { this.status = status; }
     public void setEmail(String email) { this.email = email; }
     public void setFrontImage(String frontImage) { this.frontImage = frontImage; }
     public void setBackImage(String backImage) { this.backImage = backImage; }
