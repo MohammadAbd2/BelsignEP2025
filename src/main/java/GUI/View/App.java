@@ -1,6 +1,7 @@
 package GUI.View;
 
 import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -9,6 +10,7 @@ public class App extends Application {
     public void start(Stage primaryStage) throws Exception {
         // Set the stage globally
         SceneManager.setStage(primaryStage);
+
 
 
         // Load your scenes normally (only the ones you actually use)
@@ -32,10 +34,19 @@ public class App extends Application {
         }
 
         primaryStage.setTitle("QC_Belsign Application");
+        IconUtil.addAppIconToStage(primaryStage);
         primaryStage.show();
     }
 
     public static void main(String[] args) {
         launch(args);
+    }
+    public class IconUtil {
+
+        private static final Image APP_ICON = new Image("/Img/BELMAN_Logo.png");
+
+        public static void addAppIconToStage(Stage stage) {
+            stage.getIcons().add(APP_ICON);
+        }
     }
 }

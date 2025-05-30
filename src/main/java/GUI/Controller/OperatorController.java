@@ -80,8 +80,15 @@ public class OperatorController {
         // Load selected order data if available
         if (selectedOrder != null) {
             loadOrderData(selectedOrder);
+
         }
+
+        // setting the saving method to the buttons
+        saveButton.setOnAction(event -> {
+            saveOrder(selectedOrder);
+        });
     }
+
 
     private void loadOrderData(Order order) {
         orderNumberField.setText(order.getOrder_number());
@@ -96,18 +103,30 @@ public class OperatorController {
 
         for (int i = 0; i < MAX_SLOTS; i++) {
             StackPane pane;
+
             if (i < images.size()) {
                 String path = images.get(i).trim();
-                File file = new File(path);
-                if (file.exists()) {
-                    Image image = new Image(file.toURI().toString());
-                    pane = createResponsiveImagePane(image);
-                } else {
+
+                // تأكد من بناء المسار بشكل صحيح، يمكن استخدام المسار النسبي مع ClassLoader
+                // مثال: الحصول على ملف الموارد عبر ClassLoader إذا الصور في مجلد الموارد
+                try {
+                    // يمكنك تعديل هذا حسب مكان حفظ الصور
+                    File file = new File(path);
+                    if (file.exists()) {
+                        Image image = new Image(file.toURI().toString(), true);
+                        pane = createResponsiveImagePane(image);
+                    } else {
+                        // الصورة غير موجودة فعلاً، نعرض زر الإضافة
+                        pane = createPlusPane();
+                    }
+                } catch (Exception e) {
+                    // في حال وجود أي استثناء، عرض زر الإضافة بدلاً من تعطل التطبيق
                     pane = createPlusPane();
                 }
             } else {
                 pane = createPlusPane();
             }
+
             int col = i % MAX_COLUMNS;
             int row = i / MAX_COLUMNS;
             imageGrid.add(pane, col, row);
@@ -261,7 +280,7 @@ public class OperatorController {
 
     public void saveOrder(Order order) {
         OrderService orderService = new OrderService();
-        order.setStatus("New");
+        order.setStatus("Pending");
         order.setNotes(notesArea.getText());
         cameraCapture.saveCapturedImage();
         orderService.updateOrder(order);
