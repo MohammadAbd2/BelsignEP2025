@@ -168,52 +168,60 @@ public class QAController {
             e.printStackTrace();
         }
     }
-
+    @FXML
     private void handleDownload() {
+        if (selectedOrder == null || qaNameField.getText().trim().isEmpty()) {
+            showError("Error", "Please ensure order is selected and QA name is filled in");
+            return;
+        }
+
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save QC Report");
         fileChooser.getExtensionFilters().add(
-            new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf")
+                new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf")
         );
-        
+
         File file = fileChooser.showSaveDialog(downloadButton.getScene().getWindow());
         if (file != null) {
             try {
                 generateAndSaveQCReport(file);
-                showInfo("Download", "Report successfully downloaded");
+                showInfo("Success", "Report successfully downloaded");
             } catch (Exception e) {
                 showError("Error", "Failed to generate and save the report: " + e.getMessage());
             }
-
         }
     }
+
 
     private void generateAndSaveQCReport(File outputFile) throws IOException {
         if (selectedOrder == null) {
             throw new IllegalArgumentException("No order is selected");
         }
 
-        QCReport report = new QCReport();
-        report.setOrderNumber(selectedOrder.getOrder_number());
-        report.setQaName(qaNameField.getText());
-        report.setStatus(selectedOrder.getStatus());
-        report.setNotes(selectedOrder.getNotes());
+        // Create QCReport with all required parameters
+        QCReport report = new QCReport(
+                selectedOrder.getId(),
+                selectedOrder.getOrder_number(),
+                qaNameField.getText().trim(),
+                selectedOrder.getStatus(),
+                "", // email field - if you have it in the UI, get it from there
+                selectedOrder.getImage() + "/front.png",
+                selectedOrder.getImage() + "/back.png",
+                selectedOrder.getImage() + "/left.png",
+                selectedOrder.getImage() + "/right.png",
+                selectedOrder.getImage() + "/top.png",
+                notesArea.getText()
+        );
 
-        String basePath = selectedOrder.getImage();
-        if (basePath != null) {
-            report.setFrontImage(basePath + "/front.png");
-            report.setBackImage(basePath + "/back.png");
-            report.setRightImage(basePath + "/right.png");
-            report.setLeftImage(basePath + "/left.png");
-            report.setTopImage(basePath + "/top.png");
-        }
         try {
             PDFGenerator pdfGenerator = new PDFGenerator();
             pdfGenerator.generateQCReport(report, outputFile.getAbsolutePath());
         } catch (Exception e) {
+            e.printStackTrace();
             throw new IOException("Failed to generate PDF: " + e.getMessage());
         }
     }
+
 
     private void handleApprove() {
         if (selectedOrder != null) {

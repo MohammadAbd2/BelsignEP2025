@@ -20,7 +20,7 @@ import java.time.format.DateTimeFormatter;
 
 public class PDFGenerator {
     
-    public void generateQCReportPDF(QCReport report, String outputPath) throws IOException {
+    public void generateQCReport(QCReport report, String outputPath) throws IOException {
         // Initialize PDF writer and document
         PdfWriter writer = new PdfWriter(outputPath);
         PdfDocument pdf = new PdfDocument(writer);
