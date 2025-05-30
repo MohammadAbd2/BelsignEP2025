@@ -10,8 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,40 +26,28 @@ public class OrdersController {
 
     @FXML
     private TextField searchField;
-
     @FXML
-    private ToggleButton ordersNew;
-
-    @FXML
-    private ToggleButton ordersApproved;
-
-    @FXML
-    private ToggleButton ordersPending;
-
-    @FXML
-    private ToggleButton ordersRejected;
-
+    private ToggleButton ordersNew, ordersApproved, ordersPending, ordersRejected;
     @FXML
     private Button prevButton;
-
     @FXML
     private Button nextButton;
-
     @FXML
     private Button page1Button;
-
     @FXML
     private Button page2Button;
-
     @FXML
     private Button page3Button;
-
     @FXML
     private GridPane ordersGrid;
+    @FXML
+    private HBox buttonContainer;
+
 
     public OrdersController() {
         orderDB = new OrderDB();
     }
+
 
     private void updateStatusLabels() {
         int newCount = orderDB.countOrdersByStatus("New");
@@ -73,18 +61,15 @@ public class OrdersController {
         ordersRejected.setText("Rejected : " + rejectedCount);
     }
 
-    public void initialize() {
-        System.out.println("OrdersController initialized!");
 
-        // Update status labels with actual counts
-        updateStatusLabels();
+    public void initialize() {
+        checkURole();
 
         // Hook up filter actions
         ordersNew.setOnAction(e -> applyFilters());
         ordersApproved.setOnAction(e -> applyFilters());
         ordersPending.setOnAction(e -> applyFilters());
         ordersRejected.setOnAction(e -> applyFilters());
-
 
         searchField.setOnKeyReleased(e -> filterByText(searchField.getText()));
 
@@ -95,21 +80,86 @@ public class OrdersController {
         page2Button.setOnAction(e -> goToPage(2));
         page3Button.setOnAction(e -> goToPage(3));
 
-
-        // Debug print before loading orders
         System.out.println("About to load orders...");
         loadOrders();
         System.out.println("Orders loaded and displayed");
     }
 
+    public void checkURole(){
+        System.out.println("OrdersController initialized!");
+        System.out.println(LoggedInUser.getLoggedInRole() != null ? LoggedInUser.getLoggedInRole() : "No logged in user");
+        if (LoggedInUser.getLoggedInRole() != null) {
+            setButtonVisibility(buttonContainer, ordersNew, LoggedInUser.getLoggedInRole().equals("Operator") || LoggedInUser.getLoggedInRole().equals("Admin"));
+            setButtonVisibility(buttonContainer, ordersApproved, LoggedInUser.getLoggedInRole().equals("QA") || LoggedInUser.getLoggedInRole().equals("Admin"));
+            setButtonVisibility(buttonContainer, ordersPending, LoggedInUser.getLoggedInRole().equals("QA") || LoggedInUser.getLoggedInRole().equals("Admin"));
+            setButtonVisibility(buttonContainer, ordersRejected, LoggedInUser.getLoggedInRole().equals("Operator") || LoggedInUser.getLoggedInRole().equals("Admin"));
+        }
+
+        // Filter which buttons are visible and usable based on role
+        if ("Operator".equalsIgnoreCase(LoggedInUser.getLoggedInRole())) {
+            // Show only 'New' and 'Rejected'
+            ordersApproved.setVisible(false);
+            ordersPending.setVisible(false);
+            System.out.println(LoggedInUser.getLoggedInRole());
+        } else if ("QA".equalsIgnoreCase(LoggedInUser.getLoggedInRole())) {
+            // Show only 'Pending' and 'Approved'
+            ordersNew.setVisible(false);
+            ordersRejected.setVisible(false);
+            System.out.println(LoggedInUser.getLoggedInRole());
+        } else if ("Admin".equalsIgnoreCase(LoggedInUser.getLoggedInRole())) {
+            // Admin Role showing all the filter
+            ordersNew.setVisible(true);
+            ordersApproved.setVisible(true);
+            ordersPending.setVisible(true);
+            ordersRejected.setVisible(true);
+            System.out.println(LoggedInUser.getLoggedInRole());
+        }
+        // Update status labels with actual counts
+        updateStatusLabels();
+    }
+
     private void applyFilters() {
+        checkURole();
         List<Order> allOrders = orderDB.getAllOrders();
         List<Order> filteredOrders = new ArrayList<>();
 
         if (!ordersNew.isSelected() && !ordersApproved.isSelected() &&
                 !ordersPending.isSelected() && !ordersRejected.isSelected()) {
             // No filter selected: show all
-            filteredOrders = allOrders;
+            switch (LoggedInUser.getLoggedInRole()){
+                case "Admin" : {
+                    for (Order order : allOrders) {
+                        if ((ordersNew.isSelected() && order.getStatus().equalsIgnoreCase("new")) ||
+                                (ordersApproved.isSelected() && order.getStatus().equalsIgnoreCase("approved")) ||
+                                (ordersPending.isSelected() && order.getStatus().equalsIgnoreCase("pending")) ||
+                                (ordersRejected.isSelected() && order.getStatus().equalsIgnoreCase("rejected"))) {
+                            filteredOrders.add(order);
+                        } else if (((!ordersNew.isSelected() && order.getStatus().equalsIgnoreCase("new")) ||
+                                (!ordersApproved.isSelected() && order.getStatus().equalsIgnoreCase("approved")) ||
+                                (!ordersPending.isSelected() && order.getStatus().equalsIgnoreCase("pending")) ||
+                                (!ordersRejected.isSelected() && order.getStatus().equalsIgnoreCase("rejected")))) {
+                            filteredOrders.add(order);
+                        }
+                    }
+                }
+                case "Operator" : {
+                    for (Order order : allOrders) {
+                        if ((!ordersNew.isSelected() && order.getStatus().equalsIgnoreCase("new")) ||
+                                (!ordersRejected.isSelected() && order.getStatus().equalsIgnoreCase("rejected"))) {
+                            filteredOrders.add(order);
+                        }
+                    }
+                }
+                case "QA" : {
+                    for (Order order : allOrders) {
+                        if ((!ordersPending.isSelected() && order.getStatus().equalsIgnoreCase("pending")) ||
+                                (!ordersApproved.isSelected() && order.getStatus().equalsIgnoreCase("approved"))) {
+                            filteredOrders.add(order);
+                        }
+                    }
+                }
+            }
+
         } else {
             for (Order order : allOrders) {
                 if ((ordersNew.isSelected() && order.getStatus().equalsIgnoreCase("new")) ||
@@ -127,7 +177,20 @@ public class OrdersController {
         displayCurrentPage();
     }
 
+
+    private void setButtonVisibility(HBox container, ToggleButton button, boolean shouldBeVisible) {
+        if (shouldBeVisible) {
+            if (!container.getChildren().contains(button)) {
+                container.getChildren().add(button);
+            }
+        } else {
+            container.getChildren().remove(button);
+        }
+    }
+
+
     private void loadOrders() {
+        checkURole();
         List<Order> allOrders = orderDB.getAllOrders();
         String userRole = LoggedInUser.getLoggedInRole();
 
@@ -154,13 +217,20 @@ public class OrdersController {
                 // QA can see Pending and Approved orders
                 currentOrders = allOrders.stream()
                         .filter(order ->
-                                order.getStatus().equalsIgnoreCase("Pending") ||
-                                        order.getStatus().equalsIgnoreCase("Approved"))
+                                order.getStatus().equalsIgnoreCase("Approved") ||
+                                        order.getStatus().equalsIgnoreCase("Pending"))
                         .collect(Collectors.toList());
             }
             case "Admin" -> {
                 // Admin can see all orders
-                currentOrders = allOrders;
+                currentOrders = allOrders.stream()
+                        .filter(order ->
+                                order.getStatus().equalsIgnoreCase("New") ||
+                                        order.getStatus().equalsIgnoreCase("Approved") ||
+                                        order.getStatus().equalsIgnoreCase("Pending") ||
+                                        order.getStatus().equalsIgnoreCase("Rejected")
+                        )
+                        .collect(Collectors.toList());
             }
             default -> currentOrders = new ArrayList<>();
         }
@@ -180,9 +250,8 @@ public class OrdersController {
     }
 
 
-
-
     private void populateOrdersGrid(List<Order> orders) {
+        checkURole();
         try {
             System.out.println("Starting to populate grid");
             ordersGrid.getChildren().clear();
@@ -223,6 +292,7 @@ public class OrdersController {
                             case "Operator": {
                                 try {
                                     System.out.println("Operator Clicked on order card");
+                                    OperatorController.setSelectedOrder(order);
                                     SceneManager.loadScene("navbar", "/View/Navbar.fxml");
                                     SceneManager.loadScene("operatorPage", "/View/Operator.fxml");
                                     SceneManager.loadScene("QA", "/View/QA.fxml");
@@ -276,6 +346,7 @@ public class OrdersController {
 
 
     private void updatePaginationControls() {
+        checkURole();
         int totalPages = (int) Math.ceil((double) currentOrders.size() / ordersPerPage);
 
         prevButton.setDisable(currentPage <= 1);
@@ -300,7 +371,9 @@ public class OrdersController {
         page3Button.setVisible(totalPages >= 3);
     }
 
+
     private void displayCurrentPage() {
+        checkURole();
         int startIndex = (currentPage - 1) * ordersPerPage;
         int endIndex = Math.min(startIndex + ordersPerPage, currentOrders.size());
 
@@ -313,6 +386,7 @@ public class OrdersController {
                 " of " + currentOrders.size() + ")");
     }
 
+
     private void goToPage(int page) {
         int totalPages = (int) Math.ceil((double) currentOrders.size() / ordersPerPage);
         if (page >= 1 && page <= totalPages) {
@@ -322,6 +396,7 @@ public class OrdersController {
         }
     }
 
+
     private void goToPreviousPage() {
         if (currentPage > 1) {
             currentPage--;
@@ -329,6 +404,7 @@ public class OrdersController {
             displayCurrentPage();
         }
     }
+
 
     private void goToNextPage() {
         int totalPages = (int) Math.ceil((double) currentOrders.size() / ordersPerPage);
@@ -338,6 +414,7 @@ public class OrdersController {
             displayCurrentPage();
         }
     }
+
 
     private void filterByStatus(String status) {
         System.out.println("Filtering by status: " + status);

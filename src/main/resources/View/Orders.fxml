@@ -23,7 +23,7 @@
                     <TextField fx:id="searchField" promptText="Search..." styleClass="search-field" />
                 </left>
                 <right>
-                    <HBox spacing="10">
+                    <HBox fx:id="buttonContainer" spacing="10">
                         <Label maxHeight="1.7976931348623157E308" styleClass="status-label" text="Status:" />
                         <ToggleButton fx:id="ordersNew" styleClass="order-button" text="New : 13">
                             <font><Font name="Helvetica" size="11.0" /></font>

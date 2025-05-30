@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public class QAController {
     @FXML private TextField orderNumberField;
@@ -119,7 +120,7 @@ public class QAController {
             notesArea.setText(selectedOrder.getNotes());
         }
         
-        updateImages(selectedOrder.getImage());
+        updateImages(selectedOrder.getImages());
 
         // Update button states based on order status
         boolean isFinalized = "Approved".equalsIgnoreCase(selectedOrder.getStatus()) 
@@ -128,7 +129,7 @@ public class QAController {
         if (rejectButton != null) rejectButton.setDisable(isFinalized);
     }
 
-    private void updateImages(String basePath) {
+    private void updateImages(List<String> basePath) {
         if (basePath == null) return;
         
         try {

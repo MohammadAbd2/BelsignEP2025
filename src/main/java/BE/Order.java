@@ -1,18 +1,20 @@
 package BE;
 
+import java.util.List;
+
 public class Order {
     private int id;
     private String order_number;
-    private String image;
+    private List<String> images; // Changed from single image to list of images
     private String notes;
     private String status;
     private String order_name;
     private String statusIcon;
 
-    public Order(int id, String order_number, String image, String notes, String status, String order_name) {
+    public Order(int id, String order_number, List<String> images, String notes, String status, String order_name) {
         this.id = id;
         this.order_number = order_number;
-        this.image = image;
+        this.images = images;
         this.notes = notes;
         this.status = status;
         this.order_name = order_name;
@@ -22,10 +24,10 @@ public class Order {
         this.id = id;
     }
 
-    public Order(int id, String order_number, String image, String notes, String status) {
+    public Order(int id, String order_number, List<String> images, String notes, String status) {
         this.id = id;
         this.order_number = order_number;
-        this.image = image;
+        this.images = images;
         this.notes = notes;
         this.status = status;
     }
@@ -38,8 +40,8 @@ public class Order {
         return order_number;
     }
 
-    public String getImage() {
-        return image;
+    public List<String> getImages() {
+        return images;
     }
 
     public String getNotes() {
@@ -62,8 +64,8 @@ public class Order {
         this.order_number = order_number;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImages(List<String> images) {
+        this.images = images;
     }
 
     public void setNotes(String notes) {
@@ -80,7 +82,7 @@ public class Order {
 
     public String getStatusIcon() {
         if (status == null || status.isEmpty() || status.equalsIgnoreCase("new")) {
-            return null; // This will trigger the "NEW" label creation in setOrderData
+            return null;
         }
 
         switch (status.toLowerCase()) {
@@ -95,10 +97,13 @@ public class Order {
         }
     }
 
-
     @Override
     public String toString() {
-        return "Order [id=" + id + ", orderNumber=" + order_number + ", image=" + image + ", notes=" + notes
-                + ", status=" + status + ", orderName=" + order_name + "]";
+        return "Order [id=" + id +
+                ", orderNumber=" + order_number +
+                ", images=" + images +
+                ", notes=" + notes +
+                ", status=" + status +
+                ", orderName=" + order_name + "]";
     }
 }
