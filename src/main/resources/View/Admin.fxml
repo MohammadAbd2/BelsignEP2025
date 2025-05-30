@@ -7,6 +7,8 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -18,8 +20,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="body" stylesheets="@../Css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
-fx:controller="GUI.Controller.AdminController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="body" stylesheets="@../Css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.AdminController">
    <center>
       <VBox prefHeight="500.0" prefWidth="800.0" spacing="10.0" styleClass="body">
          <BorderPane>
@@ -44,20 +45,20 @@ fx:controller="GUI.Controller.AdminController">
                      <ColumnConstraints percentWidth="15.0" />
                      <ColumnConstraints percentWidth="30.0" />
                   </columnConstraints>
-      
+
                   <!-- Row Constraints (optional equal heights) -->
                   <rowConstraints>
                      <RowConstraints percentHeight="50" />
                      <RowConstraints percentHeight="50" />
                   </rowConstraints>
-      
+
                   <!-- Top Row (0) -->
                   <Label text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="0">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Label>
-      
+
                   <!-- Bottom Row (1) -->
                   <Label text="ID:" GridPane.columnIndex="0" GridPane.rowIndex="1">
                      <font>
@@ -172,353 +173,13 @@ fx:controller="GUI.Controller.AdminController">
             </BorderPane>
          </VBox>
          <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" prefWidth="800.0" styleClass="custom-scroll-pane" VBox.vgrow="ALWAYS">
-            <GridPane alignment="CENTER" gridLinesVisible="true" styleClass="body">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" />
-                  <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" />
-                  <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" />
-                  <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" />
-                  <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" />
-                  <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" />
-                  <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" />
-                  <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" />
-                  <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" />
-                  <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" />
-                  <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" />
-                  <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" />
-                  <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" />
-               </rowConstraints>
-               <Label text="ID" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-               <Label text="Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-               <Label text="Role" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-               <Label text="7362481" GridPane.rowIndex="1">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-               <Label text="Liam Carter Johnson" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-               <Label text="Admin" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-               <Label text="1829476" GridPane.rowIndex="2">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-               <Label text="Ava Marie Thompson" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-               <Label text="QA" GridPane.columnIndex="2" GridPane.rowIndex="2">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-               <!-- Existing rows ... -->
-      
-               <!-- New Rows Start -->
-               <Label text="2938475" GridPane.rowIndex="3">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-               <Label text="Sophia Grace Bennett" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-               <Label text="Operator" GridPane.columnIndex="2" GridPane.rowIndex="3">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-      
-               <Label text="9876543" GridPane.rowIndex="4">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-               <Label text="Noah James Wilson" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-               <Label text="QA" GridPane.columnIndex="2" GridPane.rowIndex="4">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-      
-               <Label text="5647382" GridPane.rowIndex="5">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-               <Label text="Oliver Jack Robinson" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-               <Label text="Admin" GridPane.columnIndex="2" GridPane.rowIndex="5">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-      
-               <Label text="7482910" GridPane.rowIndex="6">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-               <Label text="Emily Rose Anderson" GridPane.columnIndex="1" GridPane.rowIndex="6">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-               <Label text="Operator" GridPane.columnIndex="2" GridPane.rowIndex="6">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-      
-               <Label text="1597536" GridPane.rowIndex="7">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-               <Label text="Mason Elijah Clark" GridPane.columnIndex="1" GridPane.rowIndex="7">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-               <Label text="QA" GridPane.columnIndex="2" GridPane.rowIndex="7">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-      
-               <Label text="3141592" GridPane.rowIndex="8">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-               <Label text="Isabella Harper Mitchell" GridPane.columnIndex="1" GridPane.rowIndex="8">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-               <Label text="Admin" GridPane.columnIndex="2" GridPane.rowIndex="8">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-      
-               <Label text="7539514" GridPane.rowIndex="9">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-               <Label text="Lucas Owen Murphy" GridPane.columnIndex="1" GridPane.rowIndex="9">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-               <Label text="Operator" GridPane.columnIndex="2" GridPane.rowIndex="9">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-      
-               <Label text="6204827" GridPane.rowIndex="10">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-               <Label text="Amelia Scarlett Hughes" GridPane.columnIndex="1" GridPane.rowIndex="10">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-               <Label text="QA" GridPane.columnIndex="2" GridPane.rowIndex="10">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-      
-               <Label text="4826395" GridPane.rowIndex="11">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-               <Label text="Ethan Wyatt Parker" GridPane.columnIndex="1" GridPane.rowIndex="11">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-               <Label text="Admin" GridPane.columnIndex="2" GridPane.rowIndex="11">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-      
-               <Label text="8675309" GridPane.rowIndex="12">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-               <Label text="Mia Aria Richardson" GridPane.columnIndex="1" GridPane.rowIndex="12">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-               <Label text="Operator" GridPane.columnIndex="2" GridPane.rowIndex="12">
-                  <GridPane.margin>
-                     <Insets bottom="7.0" left="7.0" right="7.0" top="7.0" />
-                  </GridPane.margin>
-                  <font>
-                     <Font size="16.0" />
-                  </font>
-               </Label>
-               <!-- New Rows End -->
-            </GridPane>
+            <TableView fx:id="tblUsers" styleClass="body" stylesheets="@../Css/styles.css" VBox.vgrow="ALWAYS">
+               <columns>
+                  <TableColumn fx:id="colId" editable="false" prefWidth="200.0" resizable="false" sortable="false" styleClass="body" text="ID" />
+                  <TableColumn fx:id="colName" editable="false" prefWidth="400.0" resizable="false" sortable="false" styleClass="body" text="Name" />
+                  <TableColumn fx:id="colRole" editable="false" prefWidth="200.0" resizable="false" sortable="false" styleClass="body" text="Role" />
+               </columns>
+            </TableView>
          </ScrollPane>
       </VBox>
    </center>

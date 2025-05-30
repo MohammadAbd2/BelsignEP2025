@@ -59,6 +59,27 @@ public class UserDB implements IUserDB {
         return null;
     }
 
+    public List<User> getAllUsers() {
+        List<User> users = new ArrayList<>();
+        String sql = "SELECT * FROM QC_Belsign_schema.[user]";
+
+        try (Connection conn = dbConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String role = rs.getString("role");
+                users.add(createSpecificUser(id, name, role));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return users;
+    }
+
     public List<User> getAllUsersByRole(String role) {
         List<User> users = new ArrayList<>();
         String sql = "SELECT * FROM QC_Belsign_schema.[user] WHERE role = ?";
