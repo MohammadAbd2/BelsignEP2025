@@ -19,8 +19,6 @@ public class LoginController {
 
 
 
-
-
     @FXML
     public void initialize() {
         // Set up button actions
@@ -47,7 +45,6 @@ public class LoginController {
             }
         });
 
-
     }
 
     @FXML
@@ -65,9 +62,6 @@ public class LoginController {
         SceneManager.switchScene("operator");
 
     }
-
-
-
 
 
 }
