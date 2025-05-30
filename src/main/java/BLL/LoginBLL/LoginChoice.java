@@ -24,7 +24,7 @@ public class LoginChoice {
 
         // Load all required components
         SceneManager.loadScene("navbar", "/View/Navbar.fxml");
-        SceneManager.loadScene("orderPage", "/View/Orders.fxml");
+        SceneManager.loadScene("orderPage", "/View/Admin.fxml");
 
         // Compose them in order
         List<String> loginScenes = List.of(

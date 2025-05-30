@@ -23,11 +23,11 @@ public class AdminController {
     private TableColumn<User, String> colRole;
 
     @FXML
-    private Label lblId;
+    private Label lblId;               // Label for displaying user ID
     @FXML
-    private TextField txtName;
+    private TextField txtName;        // TextField for displaying/editing the user name
     @FXML
-    private Label lblAvatar;
+    private ComboBox<String> cmbRole; // ComboBox for user role
 
     private final UserManager userManager = new UserManager();
     private ObservableList<User> usersObservable;
@@ -44,6 +44,9 @@ public class AdminController {
         // Load all users from DB
         loadUsers();
 
+        // Initialize ComboBox items (if you want predefined roles)
+        cmbRole.setItems(FXCollections.observableArrayList("Admin", "QA", "Operator"));
+
         // Add listener for row click
         tblUsers.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
@@ -59,8 +62,8 @@ public class AdminController {
     }
 
     private void displayUserDetails(User user) {
-        lblId.setText(String.valueOf(user.getId()));
-        txtName.setText(user.getName());
-        lblAvatar.setText(user.getName().substring(0, 1).toUpperCase());
+        lblId.setText(String.valueOf(user.getId()));  // Display user ID
+        txtName.setText(user.getName());             // Display user name
+        cmbRole.setValue(user.getRole());            // Set selected role in ComboBox
     }
 }
