@@ -8,10 +8,10 @@ import javafx.stage.Stage;
 public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
+
+
         // Set the stage globally
         SceneManager.setStage(primaryStage);
-
-
 
         // Load your scenes normally (only the ones you actually use)
         SceneManager.loadScene("loginPage", "/View/Login.fxml");

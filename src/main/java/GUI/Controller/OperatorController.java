@@ -107,20 +107,18 @@ public class OperatorController {
             if (i < images.size()) {
                 String path = images.get(i).trim();
 
-                // تأكد من بناء المسار بشكل صحيح، يمكن استخدام المسار النسبي مع ClassLoader
-                // مثال: الحصول على ملف الموارد عبر ClassLoader إذا الصور في مجلد الموارد
                 try {
-                    // يمكنك تعديل هذا حسب مكان حفظ الصور
+                    
                     File file = new File(path);
                     if (file.exists()) {
                         Image image = new Image(file.toURI().toString(), true);
                         pane = createResponsiveImagePane(image);
                     } else {
-                        // الصورة غير موجودة فعلاً، نعرض زر الإضافة
+                       
                         pane = createPlusPane();
                     }
                 } catch (Exception e) {
-                    // في حال وجود أي استثناء، عرض زر الإضافة بدلاً من تعطل التطبيق
+                    
                     pane = createPlusPane();
                 }
             } else {
@@ -164,6 +162,7 @@ public class OperatorController {
         return pane;
     }
 
+
     @FXML
     private void handleAddImage(MouseEvent event) {
         Node source = (Node) event.getSource();
@@ -185,6 +184,12 @@ public class OperatorController {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Add Image");
         alert.setHeaderText("Choose image source:");
+
+        // Set stage icon
+        Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
+        alertStage.getIcons().add(new Image("/Img/info_icon.png")); // <-- adjust this path as needed
+
+        // Add buttons
         ButtonType cameraBtn = new ButtonType("Camera");
         ButtonType fileBtn = new ButtonType("Choose Picture");
         ButtonType cancelBtn = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -291,6 +296,10 @@ public class OperatorController {
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
+
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image("/Img/Error_icon.png")); // Use the correct path to your icon
+
         alert.showAndWait();
     }
 
