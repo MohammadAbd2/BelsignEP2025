@@ -24,12 +24,12 @@ public class LoginChoice {
 
         // Load all required components
         SceneManager.loadScene("navbar", "/View/Navbar.fxml");
-        SceneManager.loadScene("orderPage", "/View/Admin.fxml");
+        SceneManager.loadScene("admin", "/View/Admin.fxml");
 
         // Compose them in order
         List<String> loginScenes = List.of(
                 "navbar",
-                "orderPage"
+                "admin"
         );
         SceneManager.composeScene(loginScenes, "ComposedAdmin");
         SceneManager.switchScene("ComposedAdmin");
