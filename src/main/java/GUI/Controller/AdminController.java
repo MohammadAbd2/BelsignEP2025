@@ -44,7 +44,7 @@ public class AdminController {
         // Load all users from DB
         loadUsers();
 
-        // Trying out
+        // Add listener for row click
         tblUsers.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 displayUserDetails(newSelection);
