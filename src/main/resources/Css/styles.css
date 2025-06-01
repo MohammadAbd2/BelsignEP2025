@@ -42,7 +42,12 @@ Admin
     -fx-background-color: linear-gradient(from 0% 70% to 100% 30%, #F61616 0%, #fb7575 100%);
 }
 
-
+.adminTableView {
+    -fx-background-color: #005092FF;
+    -fx-border-color: #2e2e2e;
+    -fx-border-width: 1px;
+    -fx-padding: 10;
+}
 
 /*
 ---------------
