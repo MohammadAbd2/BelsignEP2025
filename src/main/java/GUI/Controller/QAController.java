@@ -129,39 +129,32 @@ public class QAController {
         if (rejectButton != null) rejectButton.setDisable(isFinalized);
     }
 
-    private void updateImages(List<String> basePath) {
-        if (basePath == null) return;
-        
+    private void updateImages(List<String> images) {
+        if (images == null || images.isEmpty()) return;
+
         try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            
-            if (frontImage != null) {
-                String frontPath = basePath + "/front.png";
-                Image frontImg = new Image(classLoader.getResourceAsStream(frontPath));
+            if (frontImage != null && images.size() > 0) {
+                Image frontImg = new Image(images.get(0));
                 frontImage.setImage(frontImg);
             }
-            
-            if (backImage != null) {
-                String backPath = basePath + "/back.png";
-                Image backImg = new Image(classLoader.getResourceAsStream(backPath));
+
+            if (backImage != null && images.size() > 1) {
+                Image backImg = new Image(images.get(1));
                 backImage.setImage(backImg);
             }
-            
-            if (rightImage != null) {
-                String rightPath = basePath + "/right.png";
-                Image rightImg = new Image(classLoader.getResourceAsStream(rightPath));
+
+            if (rightImage != null && images.size() > 2) {
+                Image rightImg = new Image(images.get(2));
                 rightImage.setImage(rightImg);
             }
-            
-            if (leftImage != null) {
-                String leftPath = basePath + "/left.png";
-                Image leftImg = new Image(classLoader.getResourceAsStream(leftPath));
+
+            if (leftImage != null && images.size() > 3) {
+                Image leftImg = new Image(images.get(3));
                 leftImage.setImage(leftImg);
             }
-            
-            if (topImage != null) {
-                String topPath = basePath + "/top.png";
-                Image topImg = new Image(classLoader.getResourceAsStream(topPath));
+
+            if (topImage != null && images.size() > 4) {
+                Image topImg = new Image(images.get(4));
                 topImage.setImage(topImg);
             }
         } catch (Exception e) {
@@ -169,6 +162,7 @@ public class QAController {
             e.printStackTrace();
         }
     }
+
     @FXML
     private void handleDownload() {
         if (selectedOrder == null || qaNameField.getText().trim().isEmpty()) {
@@ -199,6 +193,8 @@ public class QAController {
             throw new IllegalArgumentException("No order is selected");
         }
 
+        List<String> images = selectedOrder.getImages();
+
         // Create QCReport with all required parameters
         QCReport report = new QCReport(
                 selectedOrder.getId(),
@@ -206,11 +202,11 @@ public class QAController {
                 qaNameField.getText().trim(),
                 selectedOrder.getStatus(),
                 "", // email field - if you have it in the UI, get it from there
-                selectedOrder.getImage() + "/front.png",
-                selectedOrder.getImage() + "/back.png",
-                selectedOrder.getImage() + "/left.png",
-                selectedOrder.getImage() + "/right.png",
-                selectedOrder.getImage() + "/top.png",
+                images != null && images.size() > 0 ? images.get(0) : "", // front
+                images != null && images.size() > 1 ? images.get(1) : "", // back
+                images != null && images.size() > 2 ? images.get(2) : "", // left
+                images != null && images.size() > 3 ? images.get(3) : "", // right
+                images != null && images.size() > 4 ? images.get(4) : "", // top
                 notesArea.getText()
         );
 
@@ -222,6 +218,7 @@ public class QAController {
             throw new IOException("Failed to generate PDF: " + e.getMessage());
         }
     }
+
 
 
     private void handleApprove() {
