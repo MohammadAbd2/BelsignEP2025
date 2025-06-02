@@ -1808,7 +1808,3 @@ May 29, 2025 2:24:10 P.M. BLL.LoggerBLL.loggerManager logInfo
 INFO: Order updated: ID = 34, by user: Utils.LoggedInUser@37dd5ed8
 May 30, 2025 10:12:01 A.M. BLL.LoggerBLL.loggerManager logInfo
 INFO: Order updated: ID = 32, by user: Utils.LoggedInUser@1d44c95c
-Jun 02, 2025 4:47:59 AM BLL.LoggerBLL.loggerManager logInfo
-INFO: Order updated: ID = 35, by user: Utils.LoggedInUser@5432a2da
-Jun 02, 2025 4:48:12 AM BLL.LoggerBLL.loggerManager logInfo
-INFO: Order updated: ID = 35, by user: Utils.LoggedInUser@5432a2da

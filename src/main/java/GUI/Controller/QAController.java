@@ -1,6 +1,8 @@
 package GUI.Controller;
 
 import BE.Order;
+import BE.QCReport;
+import Utils.PDFGenerator;
 import DAL.OrderDB;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,8 +17,11 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.util.Base64;
 import java.util.List;
 
 public class QAController {
@@ -127,60 +132,120 @@ public class QAController {
         if (rejectButton != null) rejectButton.setDisable(isFinalized);
     }
 
-    private void updateImages(List<String> basePath) {
-        if (basePath == null) return;
-        
+    private void updateImages(List<String> images) {
+        if (images == null || images.isEmpty()) {
+            loadDefaultImages();
+            return;
+        }
+
         try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            
-            if (frontImage != null) {
-                String frontPath = basePath + "/front.png";
-                Image frontImg = new Image(classLoader.getResourceAsStream(frontPath));
-                frontImage.setImage(frontImg);
-            }
-            
-            if (backImage != null) {
-                String backPath = basePath + "/back.png";
-                Image backImg = new Image(classLoader.getResourceAsStream(backPath));
-                backImage.setImage(backImg);
-            }
-            
-            if (rightImage != null) {
-                String rightPath = basePath + "/right.png";
-                Image rightImg = new Image(classLoader.getResourceAsStream(rightPath));
-                rightImage.setImage(rightImg);
-            }
-            
-            if (leftImage != null) {
-                String leftPath = basePath + "/left.png";
-                Image leftImg = new Image(classLoader.getResourceAsStream(leftPath));
-                leftImage.setImage(leftImg);
-            }
-            
-            if (topImage != null) {
-                String topPath = basePath + "/top.png";
-                Image topImg = new Image(classLoader.getResourceAsStream(topPath));
-                topImage.setImage(topImg);
-            }
+            // Set each image if available in the list
+            if (images.size() > 0 && !images.get(0).isEmpty()) setImageFromBase64(frontImage, images.get(0));
+            if (images.size() > 1 && !images.get(1).isEmpty()) setImageFromBase64(backImage, images.get(1));
+            if (images.size() > 2 && !images.get(2).isEmpty()) setImageFromBase64(rightImage, images.get(2));
+            if (images.size() > 3 && !images.get(3).isEmpty()) setImageFromBase64(leftImage, images.get(3));
+            if (images.size() > 4 && !images.get(4).isEmpty()) setImageFromBase64(topImage, images.get(4));
         } catch (Exception e) {
             System.err.println("Error loading images: " + e.getMessage());
-            e.printStackTrace();
+            loadDefaultImages();
         }
     }
 
+    private void setImageFromBase64(ImageView imageView, String base64String) {
+        try {
+            if (base64String != null && !base64String.isEmpty()) {
+                byte[] imageData = Base64.getDecoder().decode(base64String);
+                Image image = new Image(new ByteArrayInputStream(imageData));
+                imageView.setImage(image);
+            } else {
+                loadDefaultImage(imageView);
+            }
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error decoding Base64 image: " + e.getMessage());
+            loadDefaultImage(imageView);
+        }
+    }
+
+    private void loadDefaultImages() {
+        loadDefaultImage(frontImage);
+        loadDefaultImage(backImage);
+        loadDefaultImage(rightImage);
+        loadDefaultImage(leftImage);
+        loadDefaultImage(topImage);
+    }
+
+    private void loadDefaultImage(ImageView imageView) {
+        try {
+            String defaultImagePath = "/View/Img/example/example" +
+                    imageView.getId().substring(0, 1).toUpperCase() +
+                    imageView.getId().substring(1) + ".png";
+            URL imageUrl = getClass().getResource(defaultImagePath);
+            if (imageUrl != null) {
+                imageView.setImage(new Image(imageUrl.toString()));
+            }
+        } catch (Exception e) {
+            System.err.println("Error loading default image: " + e.getMessage());
+        }
+    }
+
+
+    @FXML
     private void handleDownload() {
+        if (selectedOrder == null || qaNameField.getText().trim().isEmpty()) {
+            showError("Error", "Please ensure order is selected and QA name is filled in");
+            return;
+        }
+
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save QC Report");
         fileChooser.getExtensionFilters().add(
-            new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf")
+                new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf")
         );
-        
+
         File file = fileChooser.showSaveDialog(downloadButton.getScene().getWindow());
         if (file != null) {
-            // TODO: Implement PDF generation
-            showInfo("Download", "Report download started");
+            try {
+                generateAndSaveQCReport(file);
+                showInfo("Success", "Report successfully downloaded");
+            } catch (Exception e) {
+                showError("Error", "Failed to generate and save the report: " + e.getMessage());
+            }
         }
     }
+
+
+    private void generateAndSaveQCReport(File outputFile) throws IOException {
+        if (selectedOrder == null) {
+            throw new IllegalArgumentException("No order is selected");
+        }
+
+        List<String> images = selectedOrder.getImages();
+
+        // Create QCReport with all required parameters
+        QCReport report = new QCReport(
+                selectedOrder.getId(),
+                selectedOrder.getOrder_number(),
+                qaNameField.getText().trim(),
+                selectedOrder.getStatus(),
+                "", // email field - if you have it in the UI, get it from there
+                images != null && images.size() > 0 ? images.get(0) : "", // front
+                images != null && images.size() > 1 ? images.get(1) : "", // back
+                images != null && images.size() > 2 ? images.get(2) : "", // left
+                images != null && images.size() > 3 ? images.get(3) : "", // right
+                images != null && images.size() > 4 ? images.get(4) : "", // top
+                notesArea.getText()
+        );
+
+        try {
+            PDFGenerator pdfGenerator = new PDFGenerator();
+            pdfGenerator.generateQCReport(report, outputFile.getAbsolutePath());
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new IOException("Failed to generate PDF: " + e.getMessage());
+        }
+    }
+
+
 
     private void handleApprove() {
         if (selectedOrder != null) {

@@ -10,13 +10,17 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import org.opencv.core.Mat;
+import org.opencv.core.MatOfByte;
+import org.opencv.core.MatOfInt;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 import org.opencv.videoio.VideoCapture;
 
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Date;
 import java.util.concurrent.CountDownLatch;
 
@@ -116,23 +120,40 @@ public class CameraCapture {
             return false;
         }
 
-        String folderPath = "resources/Img/";
-        File folder = new File(folderPath);
-        if (!folder.exists()) folder.mkdirs();
+        try {
+            // Convert BGR to RGB format
+            Mat rgbFrame = new Mat();
+            Imgproc.cvtColor(capturedFrame, rgbFrame, Imgproc.COLOR_BGR2RGB);
 
-        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String filename = "IMG_" + timestamp + ".jpg";
-        String fullPath = folderPath + filename;
+            // Create parameters for JPEG encoding
+            MatOfInt params = new MatOfInt();
+            params.fromArray(Imgcodecs.IMWRITE_JPEG_QUALITY, 95);
 
-        boolean success = Imgcodecs.imwrite(fullPath, capturedFrame);
-        if (success) {
-            picturePath = fullPath;
-            System.out.println("✅ Image saved to: " + fullPath);
-        } else {
-            System.err.println("❌ Failed to save image.");
+            // Create a temporary file to store the image
+            File tempFile = File.createTempFile("capture", ".jpg");
+            tempFile.deleteOnExit();
+
+            // Save the image to the temporary file
+            Imgcodecs.imwrite(tempFile.getAbsolutePath(), rgbFrame);
+
+            // Read the file into a byte array
+            byte[] imageBytes = java.nio.file.Files.readAllBytes(tempFile.toPath());
+
+            // Convert to Base64
+            picturePath = Base64.getEncoder().encodeToString(imageBytes);
+
+            // Clean up
+            rgbFrame.release();
+            params.release();
+            tempFile.delete();
+
+            System.out.println("✅ Image saved successfully");
+            return true;
+        } catch (Exception e) {
+            System.err.println("❌ Error saving image: " + e.getMessage());
+            e.printStackTrace();
+            return false;
         }
-
-        return success;
     }
 
     private BufferedImage matToBufferedImage(Mat matrix) {
@@ -141,10 +162,27 @@ public class CameraCapture {
         int channels = matrix.channels();
         byte[] sourcePixels = new byte[width * height * channels];
         matrix.get(0, 0, sourcePixels);
-        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
-        image.getRaster().setDataElements(0, 0, width, height, sourcePixels);
+        BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+
+        // Direct pixel manipulation for TYPE_INT_RGB
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                int baseIndex = (y * width + x) * channels;
+                int r = sourcePixels[baseIndex + 2] & 0xFF;  // R component
+                int g = sourcePixels[baseIndex + 1] & 0xFF;  // G component
+                int b = sourcePixels[baseIndex] & 0xFF;      // B component
+
+                // Combine RGB components
+                int rgb = (r << 16) | (g << 8) | b;
+                image.setRGB(x, y, rgb);
+            }
+        }
+
         return image;
     }
+
+
+
 
     private void release() {
         if (camera != null && camera.isOpened()) {

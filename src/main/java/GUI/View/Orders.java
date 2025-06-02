@@ -18,6 +18,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import java.net.URL;
 import java.util.List;
 
 
@@ -108,9 +109,36 @@ public class Orders {
             System.out.println("order Clicked" + order);
 
         });
-        ImageView orderImage = new ImageView(new Image("/img/logo.png"));
+        ImageView orderImage = new ImageView();
         orderImage.setFitWidth(160);
         orderImage.setFitHeight(120);
+
+        // Try to load the order's image
+        if (order.getImages() != null && !order.getImages().isEmpty()) {
+            String imagePath = order.getImages().get(0);
+            try {
+                // Try loading as resource
+                URL resourceUrl = Orders.class.getResource("/" + imagePath);
+                if (resourceUrl != null) {
+                    orderImage.setImage(new Image(resourceUrl.toString()));
+                } else {
+                    // Try without "resources/" prefix
+                    resourceUrl = Orders.class.getResource("/" + imagePath.replace("resources/", ""));
+                    if (resourceUrl != null) {
+                        orderImage.setImage(new Image(resourceUrl.toString()));
+                    } else {
+                        // Fallback to logo
+                        orderImage.setImage(new Image("/img/logo.png"));
+                    }
+                }
+            } catch (Exception e) {
+                System.err.println("Error loading image for order " + order.getId() + ": " + e.getMessage());
+                orderImage.setImage(new Image("/img/logo.png"));
+            }
+        } else {
+            orderImage.setImage(new Image("/img/logo.png"));
+        }
+
         Text orderDescription = new Text("Description : " + order.getId() + order.getOrder_number());
         orderCard.getChildren().addAll(orderImage, orderDescription);
         return orderCard;

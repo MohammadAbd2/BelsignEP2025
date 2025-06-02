@@ -1,5 +1,7 @@
 package BE;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Order {
@@ -67,6 +69,17 @@ public class Order {
     public void setImages(List<String> images) {
         this.images = images;
     }
+
+    public void updateImages(int position, String base64Image) {
+        if (images == null) {
+            images = new ArrayList<>(Arrays.asList("", "", "", "", "")); // Initialize with empty strings
+        }
+        while (images.size() <= position) {
+            images.add("");
+        }
+        images.set(position, base64Image);
+    }
+
 
     public void setNotes(String notes) {
         this.notes = notes;

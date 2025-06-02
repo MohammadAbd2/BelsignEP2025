@@ -2,7 +2,9 @@ package GUI.Controller;
 
 import BE.Order;
 import BLL.OrderService;
+import DAL.OrderDB;
 import GUI.Model.CameraCapture;
+import Utils.ImageHandler;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +20,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -235,6 +238,15 @@ public class OperatorController {
     }
 
     private void addImageToPane(StackPane pane, Image image) {
+        if (selectedOrder == null) return;
+
+        try {
+            String base64Image = ImageHandler.saveImageToDatabase(image);
+            int index = GridPane.getColumnIndex(pane) +
+                    GridPane.getRowIndex(pane) * MAX_COLUMNS;
+
+            selectedOrder.updateImages(index, base64Image);
+
         ImageView imageView = new ImageView(image);
         imageView.setPreserveRatio(true);
         imageView.setSmooth(true);
@@ -272,6 +284,12 @@ public class OperatorController {
 
         pane.getChildren().clear();
         pane.getChildren().add(imageContainer);
+
+        OrderDB orderDB = new OrderDB();
+        orderDB.updateOrder(selectedOrder);
+        } catch (IOException e) {
+        showAlert("Save Error", "Failed to save Image: " + e.getMessage());
+        }
     }
 
     private Label createPlusLabel() {

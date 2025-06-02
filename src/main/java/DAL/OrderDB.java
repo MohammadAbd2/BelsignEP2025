@@ -98,7 +98,17 @@ public class OrderDB implements IOrderDB {
             stmt.setInt(1, orderId);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
-                List<String> images = Arrays.asList(rs.getString("image").split(";"));
+                String imageStr = rs.getString("image");
+                System.out.println("Retrieved image string: " +
+                        (imageStr == null ? "null" :
+                                (imageStr.length() > 100 ?
+                                        imageStr.substring(0, 100) + "..." :
+                                        imageStr)));
+
+                List<String> images = imageStr != null && !imageStr.isEmpty()
+                        ? Arrays.asList(imageStr.split(";"))
+                        : new ArrayList<>();
+
                 Order order = new Order(
                         rs.getInt("id"),
                         rs.getString("order_number"),
@@ -107,16 +117,17 @@ public class OrderDB implements IOrderDB {
                         rs.getString("status"),
                         rs.getString("order_name")
                 );
-                System.out.println("Retrieved order " + orderId + " with status: " + order.getStatus());
+                System.out.println("Retrieved order " + orderId +
+                        " with " + images.size() + " images");
                 return order;
             }
-
         } catch (SQLException e) {
             System.err.println("Error retrieving order: " + e.getMessage());
             e.printStackTrace();
         }
         return null;
     }
+
 
     @Override
     public List<Order> getAllOrders() {
