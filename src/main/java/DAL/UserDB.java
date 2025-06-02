@@ -132,7 +132,7 @@ public class UserDB implements IUserDB {
     }
 
     private User createSpecificUser(int id, String name, String role) {
-        switch (role.toLowerCase()) {
+        switch (role) {
             case "admin":
                 return new Admin(id, name);
             case "operator":

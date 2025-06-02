@@ -5,11 +5,12 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -27,7 +28,7 @@
             <left>
                <HBox alignment="CENTER" spacing="20.0" BorderPane.alignment="CENTER">
                   <ImageView fitHeight="133.0" pickOnBounds="true" preserveRatio="true">
-                     <Image url="@../Img/letter-j.png" />
+                     <Image url="@../Img/contact.png" />
                   </ImageView>
                   <Separator orientation="VERTICAL">
                      <padding>
@@ -97,7 +98,10 @@
                      <padding>
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </padding>
-                     <Button mnemonicParsing="false" prefWidth="90.0" styleClass="adminSeButtons" text="Edit">
+                     <Button fx:id="btnEdit" onAction="#handleEdit" prefWidth="90.0" styleClass="adminButton" text="Edit">
+                        <tooltip>
+                           <Tooltip text="Edit a user" />
+                        </tooltip>
                         <graphic>
                            <ImageView fitHeight="11.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
                               <Image url="@../Img/editing.png" />
@@ -110,7 +114,7 @@
                            <Cursor fx:constant="HAND" />
                         </cursor>
                      </Button>
-                     <Button mnemonicParsing="false" prefWidth="90.0" styleClass="adminSeButtons" text="Save">
+                     <Button fx:id="btnSave" mnemonicParsing="false" onAction="#handleSave" prefWidth="90.0" styleClass="adminButton" text="Save">
                         <graphic>
                            <ImageView fitHeight="11.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
                               <Image url="@../Img/diskette.png" />
@@ -131,7 +135,7 @@
             <Separator prefWidth="200.0" />
             <BorderPane>
                <left>
-                  <TextField fx:id="searchBox" prefWidth="200.0" promptText="Search...">
+                  <TextField fx:id="searchBox" prefWidth="200.0" promptText="Search by Name">
                      <font>
                         <Font size="12.0" />
                      </font>
@@ -144,35 +148,34 @@
                            <Font size="13.0" />
                         </font>
                      </Label>
-                     <Button style="-fx-background-radius: 5;" styleClass="inline-button" text="Admin">
+                     <ToggleButton fx:id="btnFilterAdmin" style="-fx-background-radius: 5;" styleClass="inline-button" text="Admin">
                         <font>
                            <Font size="13.0" />
                         </font>
                         <cursor>
                            <Cursor fx:constant="HAND" />
                         </cursor>
-                     </Button>
-                     <Button style="-fx-background-radius: 5;" styleClass="inline-button" text="QA">
+                     </ToggleButton>
+                     <ToggleButton fx:id="btnFilterQA" style="-fx-background-radius: 5;" styleClass="inline-button" text="QA">
                         <font>
                            <Font size="13.0" />
                         </font>
                         <cursor>
                            <Cursor fx:constant="HAND" />
                         </cursor>
-                     </Button>
-                     <Button style="-fx-background-radius: 5;" styleClass="inline-button" text="Operator">
+                     </ToggleButton>
+                     <ToggleButton fx:id="btnFilterOperator" style="-fx-background-radius: 5;" styleClass="inline-button" text="Operator">
                         <font>
                            <Font size="13.0" />
                         </font>
                         <cursor>
                            <Cursor fx:constant="HAND" />
                         </cursor>
-                     </Button>
+                     </ToggleButton>
                   </HBox>
                </right>
             </BorderPane>
          </VBox>
-         <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="custom-scroll-pane" VBox.vgrow="ALWAYS">
             <TableView fx:id="tblUsers" styleClass="body" stylesheets="@../Css/styles.css" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                <columns>
                   <TableColumn fx:id="colId" editable="false" sortable="false" styleClass="adminTableView" text="ID" />
@@ -183,7 +186,6 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-         </ScrollPane>
       </VBox>
    </center>
    <padding>

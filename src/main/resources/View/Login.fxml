@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="body" alignment="CENTER" spacing="10" style="-fx-padding: 0;" styleClass="vbox" stylesheets="@/Css/styles.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="GUI.Controller.LoginController">
+<VBox fx:id="body" alignment="CENTER" spacing="10" style="-fx-padding: 0;" styleClass="loginVBox" stylesheets="@/Css/styles.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="GUI.Controller.LoginController">
 
 
     <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
