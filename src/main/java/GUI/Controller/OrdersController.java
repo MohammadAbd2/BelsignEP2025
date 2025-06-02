@@ -251,6 +251,16 @@ public class OrdersController {
 
 
     private void populateOrdersGrid(List<Order> orders) {
+        if (orders != null) {
+            for (Order order : orders) {
+                System.out.println("Order " + order.getId() + " has " +
+                        (order.getImages() == null ? "null" : order.getImages().size()) + " images");
+                if (order.getImages() != null && !order.getImages().isEmpty()) {
+                    System.out.println("First image: " + order.getImages().get(0).substring(0, Math.min(50, order.getImages().get(0).length())) + "...");
+                }
+            }
+        }
+
         checkURole();
         try {
             System.out.println("Starting to populate grid");

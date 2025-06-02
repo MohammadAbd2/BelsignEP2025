@@ -1,5 +1,8 @@
 package BE;
 
+import java.util.List;
+import java.util.ArrayList;
+
 public class QCReport {
     private int id;
     private String orderNumber;

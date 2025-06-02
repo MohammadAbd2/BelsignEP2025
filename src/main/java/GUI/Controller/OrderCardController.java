@@ -9,6 +9,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
+import java.io.ByteArrayInputStream;
+import java.net.URL;
+import java.util.Base64;
+import java.util.List;
+
 public class OrderCardController {
     @FXML
     private ImageView productImage;
@@ -30,13 +35,21 @@ public class OrderCardController {
     }
 
     public void setOrderData(Order order) {
-        if (order == null) {
+        if (order == null) return;
+        {
             // Clear all fields for empty space
             productName.setText("");
             productId.setText("");
             productImage.setImage(null);
             statusIcon.setVisible(false);
-            return;
+
+            // Get the first image if available
+            if (order.getImages() != null && !order.getImages().isEmpty()) {
+                setOrderImage(order.getImages().get(0));
+            } else {
+                // Load default logo if no images
+                loadDefaultLogo();
+            }
         }
 
         // Set the product name, order number and ID
@@ -102,8 +115,30 @@ public class OrderCardController {
         }
     }
 
-    @FXML
-    private void handleClick(javafx.scene.input.MouseEvent event) {
-        // TODO: Implement navigation to OperatorPage with the selected order
+    public void setOrderImage(String base64Image) {
+        try {
+            if (base64Image != null && !base64Image.isEmpty()) {
+                byte[] imageData = Base64.getDecoder().decode(base64Image);
+                Image image = new Image(new ByteArrayInputStream(imageData));
+                productImage.setImage(image);
+            } else {
+                loadDefaultLogo();
+            }
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error decoding Base64 image: " + e.getMessage());
+            loadDefaultLogo();
+        }
     }
+
+    private void loadDefaultLogo() {
+        try {
+            URL logoUrl = getClass().getResource("/View/Img/BELMAN_Logo.png");
+            if (logoUrl != null) {
+                productImage.setImage(new Image(logoUrl.toString()));
+            }
+        } catch (Exception e) {
+            System.err.println("Error loading default logo: " + e.getMessage());
+        }
+    }
+
 }

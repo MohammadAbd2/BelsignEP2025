@@ -17,8 +17,11 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.util.Base64;
 import java.util.List;
 
 public class QAController {
@@ -130,38 +133,61 @@ public class QAController {
     }
 
     private void updateImages(List<String> images) {
-        if (images == null || images.isEmpty()) return;
+        if (images == null || images.isEmpty()) {
+            loadDefaultImages();
+            return;
+        }
 
         try {
-            if (frontImage != null && images.size() > 0) {
-                Image frontImg = new Image(images.get(0));
-                frontImage.setImage(frontImg);
-            }
-
-            if (backImage != null && images.size() > 1) {
-                Image backImg = new Image(images.get(1));
-                backImage.setImage(backImg);
-            }
-
-            if (rightImage != null && images.size() > 2) {
-                Image rightImg = new Image(images.get(2));
-                rightImage.setImage(rightImg);
-            }
-
-            if (leftImage != null && images.size() > 3) {
-                Image leftImg = new Image(images.get(3));
-                leftImage.setImage(leftImg);
-            }
-
-            if (topImage != null && images.size() > 4) {
-                Image topImg = new Image(images.get(4));
-                topImage.setImage(topImg);
-            }
+            // Set each image if available in the list
+            if (images.size() > 0 && !images.get(0).isEmpty()) setImageFromBase64(frontImage, images.get(0));
+            if (images.size() > 1 && !images.get(1).isEmpty()) setImageFromBase64(backImage, images.get(1));
+            if (images.size() > 2 && !images.get(2).isEmpty()) setImageFromBase64(rightImage, images.get(2));
+            if (images.size() > 3 && !images.get(3).isEmpty()) setImageFromBase64(leftImage, images.get(3));
+            if (images.size() > 4 && !images.get(4).isEmpty()) setImageFromBase64(topImage, images.get(4));
         } catch (Exception e) {
             System.err.println("Error loading images: " + e.getMessage());
-            e.printStackTrace();
+            loadDefaultImages();
         }
     }
+
+    private void setImageFromBase64(ImageView imageView, String base64String) {
+        try {
+            if (base64String != null && !base64String.isEmpty()) {
+                byte[] imageData = Base64.getDecoder().decode(base64String);
+                Image image = new Image(new ByteArrayInputStream(imageData));
+                imageView.setImage(image);
+            } else {
+                loadDefaultImage(imageView);
+            }
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error decoding Base64 image: " + e.getMessage());
+            loadDefaultImage(imageView);
+        }
+    }
+
+    private void loadDefaultImages() {
+        loadDefaultImage(frontImage);
+        loadDefaultImage(backImage);
+        loadDefaultImage(rightImage);
+        loadDefaultImage(leftImage);
+        loadDefaultImage(topImage);
+    }
+
+    private void loadDefaultImage(ImageView imageView) {
+        try {
+            String defaultImagePath = "/View/Img/example/example" +
+                    imageView.getId().substring(0, 1).toUpperCase() +
+                    imageView.getId().substring(1) + ".png";
+            URL imageUrl = getClass().getResource(defaultImagePath);
+            if (imageUrl != null) {
+                imageView.setImage(new Image(imageUrl.toString()));
+            }
+        } catch (Exception e) {
+            System.err.println("Error loading default image: " + e.getMessage());
+        }
+    }
+
 
     @FXML
     private void handleDownload() {
