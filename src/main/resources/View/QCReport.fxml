@@ -15,141 +15,132 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane fx:controller="GUI.Controller.QCReportController" maxHeight="-Infinity" maxWidth="-Infinity"
-            minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/23.0.1"
-            xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.QCReportController">
     <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
     <VBox prefHeight="1123.0" prefWidth="794.0" spacing="20.0">
         <BorderPane>
             <left>
                 <HBox BorderPane.alignment="CENTER">
                     <ImageView fitHeight="75.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
-                        <Image url="@../Img/BELMAN_Logo.png"/>
+                        <Image url="@../Img/BELMAN_Logo.png" />
                     </ImageView>
-                    <Region prefWidth="100.0"/>
+                    <Region prefWidth="100.0" />
                 </HBox>
             </left>
             <center>
-                <Label fx:id="orderNumberLabel" alignment="CENTER" contentDisplay="CENTER"
-                       text="Order 295-5930 Report" BorderPane.alignment="CENTER">
+                <Label fx:id="orderNumberLabel" alignment="CENTER" contentDisplay="CENTER" text="Order 295-5930 Report" BorderPane.alignment="CENTER">
                     <font>
-                        <Font name="Helvetica" size="20.0"/>
+                        <Font name="Helvetica" size="20.0" />
                     </font>
                 </Label>
             </center>
             <right>
                 <GridPane alignment="CENTER" hgap="20.0" vgap="10" BorderPane.alignment="CENTER">
                     <columnConstraints>
-                        <ColumnConstraints/>
-                        <ColumnConstraints/>
+                        <ColumnConstraints />
+                        <ColumnConstraints />
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints/>
-                        <RowConstraints/>
+                        <RowConstraints />
+                        <RowConstraints />
                     </rowConstraints>
 
                     <Label text="Date Sent:" GridPane.columnIndex="0">
                         <font>
-                            <Font name="Helvetica" size="12.0"/>
+                            <Font name="Helvetica" size="12.0" />
                         </font>
                     </Label>
                     <Label fx:id="dateSentLabel" GridPane.columnIndex="1">
                         <font>
-                            <Font name="Helvetica" size="12.0"/>
+                            <Font name="Helvetica" size="12.0" />
                         </font>
                     </Label>
 
                     <Label text="Quality Assurance:" GridPane.columnIndex="0" GridPane.rowIndex="1">
                         <font>
-                            <Font name="Helvetica" size="12.0"/>
+                            <Font name="Helvetica" size="12.0" />
                         </font>
                     </Label>
                     <Label fx:id="qaLabel" GridPane.columnIndex="1" GridPane.rowIndex="1">
                         <font>
-                            <Font name="Helvetica" size="12.0"/>
+                            <Font name="Helvetica" size="12.0" />
                         </font>
                     </Label>
                 </GridPane>
             </right>
         </BorderPane>
-        <Separator prefWidth="200.0"/>
+        <Separator prefWidth="200.0" />
         <VBox spacing="20.0" VBox.vgrow="SOMETIMES">
             <GridPane hgap="20.0" vgap="20.0">
                 <!-- Front & Back labels -->
                 <Label text="Front" GridPane.columnIndex="0" GridPane.rowIndex="0">
                     <font>
-                        <Font name="Helvetica" size="14.0"/>
+                        <Font name="Helvetica" size="14.0" />
                     </font>
                 </Label>
                 <Label text="Back" GridPane.columnIndex="1" GridPane.rowIndex="0">
                     <font>
-                        <Font name="Helvetica" size="14.0"/>
+                        <Font name="Helvetica" size="14.0" />
                     </font>
                 </Label>
 
                 <!-- Front & Back images -->
-                <ImageView fx:id="frontImage" fitHeight="250.0" fitWidth="250.0" GridPane.columnIndex="0"
-                           GridPane.halignment="CENTER" GridPane.rowIndex="1">
-                    <Image url="@../Img/example/exampleFront.png"/>
+                <ImageView fx:id="frontImage" fitHeight="250.0" fitWidth="250.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                    <Image url="@../Img/example/exampleFront.png" />
                 </ImageView>
-                <ImageView fx:id="backImage" fitHeight="250.0" fitWidth="250.0" GridPane.columnIndex="1"
-                           GridPane.halignment="CENTER" GridPane.rowIndex="1">
-                    <Image url="@../Img/example/exampleBack.png"/>
+                <ImageView fx:id="backImage" fitHeight="250.0" fitWidth="250.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                    <Image url="@../Img/example/exampleBack.png" />
                 </ImageView>
 
                 <!-- Left & Right labels -->
                 <Label text="Left" GridPane.columnIndex="0" GridPane.rowIndex="2">
                     <font>
-                        <Font name="Helvetica" size="14.0"/>
+                        <Font name="Helvetica" size="14.0" />
                     </font>
                 </Label>
                 <Label text="Right" GridPane.columnIndex="1" GridPane.rowIndex="2">
                     <font>
-                        <Font name="Helvetica" size="14.0"/>
+                        <Font name="Helvetica" size="14.0" />
                     </font>
                 </Label>
 
                 <!-- Left & Right images -->
-                <ImageView fx:id="leftImage" fitHeight="250.0" fitWidth="250.0" GridPane.columnIndex="0"
-                           GridPane.halignment="CENTER" GridPane.rowIndex="3">
-                    <Image url="@../Img/example/exampleLeft.png"/>
+                <ImageView fx:id="leftImage" fitHeight="250.0" fitWidth="250.0" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                    <Image url="@../Img/example/exampleLeft.png" />
                 </ImageView>
-                <ImageView fx:id="rightImage" fitHeight="250.0" fitWidth="250.0" GridPane.columnIndex="1"
-                           GridPane.halignment="CENTER" GridPane.rowIndex="3">
-                    <Image url="@../Img/example/exampleRight.png"/>
+                <ImageView fx:id="rightImage" fitHeight="250.0" fitWidth="250.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                    <Image url="@../Img/example/exampleRight.png" />
                 </ImageView>
 
                 <!-- Top label -->
                 <Label text="Top" GridPane.rowIndex="4">
                     <font>
-                        <Font name="Helvetica" size="14.0"/>
+                        <Font name="Helvetica" size="14.0" />
                     </font>
                 </Label>
 
                 <!-- Top image -->
-                <ImageView fx:id="topImage" fitHeight="250.0" fitWidth="250.0" GridPane.halignment="CENTER"
-                           GridPane.rowIndex="5">
-                    <Image url="@../Img/example/exampleTop.png"/>
+                <ImageView fx:id="topImage" fitHeight="250.0" fitWidth="250.0" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+                    <Image url="@../Img/example/exampleTop.png" />
                 </ImageView>
 
                 <!-- Notes area in the last cell -->
-                <Label text="Notes:" style="-fx-font-weight: bold"/>
-                <Label fx:id="notesLabel" prefHeight="200.0" prefWidth="250.0" wrapText="true"
-                       GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                <Label style="-fx-font-weight: bold" text="Notes:" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <Label fx:id="notesLabel" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
 
                 <columnConstraints>
-                    <ColumnConstraints percentWidth="50.0"/>
-                    <ColumnConstraints percentWidth="50.0"/>
+                    <ColumnConstraints percentWidth="50.0" />
+                    <ColumnConstraints percentWidth="50.0" />
                 </columnConstraints>
                 <rowConstraints>
-                    <RowConstraints/>
-                    <RowConstraints/>
-                    <RowConstraints/>
-                    <RowConstraints/>
-                    <RowConstraints/>
-                    <RowConstraints/>
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
                 </rowConstraints>
             </GridPane>
         </VBox>
