@@ -43,8 +43,6 @@ public class AdminController {
     // ========================
     @FXML
     public void initialize() throws IOException {
-        // Set the logged-in role for context
-        LoggedInUser.setLoggedInRole("Admin");
 
         // Initialize table columns with User properties
         colId.setCellValueFactory(data -> new javafx.beans.property.SimpleIntegerProperty(data.getValue().getId()).asObject());

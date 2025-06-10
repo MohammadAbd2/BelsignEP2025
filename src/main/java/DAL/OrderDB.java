@@ -151,7 +151,6 @@ public class OrderDB implements IOrderDB {
                         rs.getString("order_name")
                 ));
             }
-            System.out.println("Retrieved " + orders.size() + " orders from database");
 
         } catch (SQLException e) {
             System.err.println("Error retrieving all orders: " + e.getMessage());
@@ -175,7 +174,6 @@ public class OrderDB implements IOrderDB {
             stmt.setInt(4, order.getId());
 
             int rowsAffected = stmt.executeUpdate();
-            System.out.println("Rows affected by update: " + rowsAffected);
 
         } catch (SQLException e) {
             System.err.println("Error updating order: " + e.getMessage());
@@ -191,7 +189,6 @@ public class OrderDB implements IOrderDB {
 
             stmt.setInt(1, orderId);
             int rowsAffected = stmt.executeUpdate();
-            System.out.println("Deleted order " + orderId + ". Rows affected: " + rowsAffected);
 
         } catch (SQLException e) {
             System.err.println("Error deleting order: " + e.getMessage());

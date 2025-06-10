@@ -2,9 +2,7 @@ package GUI.Controller;
 
 import BE.Order;
 import BLL.OrderService;
-import DAL.OrderDB;
 import GUI.Model.CameraCapture;
-import Utils.ImageHandler;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,7 +18,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -83,15 +81,11 @@ public class OperatorController {
         // Load selected order data if available
         if (selectedOrder != null) {
             loadOrderData(selectedOrder);
-
         }
-
-        // setting the saving method to the buttons
         saveButton.setOnAction(event -> {
             saveOrder(selectedOrder);
         });
     }
-
 
     private void loadOrderData(Order order) {
         orderNumberField.setText(order.getOrder_number());
@@ -106,28 +100,18 @@ public class OperatorController {
 
         for (int i = 0; i < MAX_SLOTS; i++) {
             StackPane pane;
-
             if (i < images.size()) {
                 String path = images.get(i).trim();
-
-                try {
-                    
-                    File file = new File(path);
-                    if (file.exists()) {
-                        Image image = new Image(file.toURI().toString(), true);
-                        pane = createResponsiveImagePane(image);
-                    } else {
-                       
-                        pane = createPlusPane();
-                    }
-                } catch (Exception e) {
-                    
+                File file = new File(path);
+                if (file.exists()) {
+                    Image image = new Image(file.toURI().toString());
+                    pane = createResponsiveImagePane(image);
+                } else {
                     pane = createPlusPane();
                 }
             } else {
                 pane = createPlusPane();
             }
-
             int col = i % MAX_COLUMNS;
             int row = i / MAX_COLUMNS;
             imageGrid.add(pane, col, row);
@@ -165,7 +149,6 @@ public class OperatorController {
         return pane;
     }
 
-
     @FXML
     private void handleAddImage(MouseEvent event) {
         Node source = (Node) event.getSource();
@@ -187,12 +170,6 @@ public class OperatorController {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Add Image");
         alert.setHeaderText("Choose image source:");
-
-        // Set stage icon
-        Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
-        alertStage.getIcons().add(new Image("/Img/info_icon.png")); // <-- adjust this path as needed
-
-        // Add buttons
         ButtonType cameraBtn = new ButtonType("Camera");
         ButtonType fileBtn = new ButtonType("Choose Picture");
         ButtonType cancelBtn = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -238,15 +215,6 @@ public class OperatorController {
     }
 
     private void addImageToPane(StackPane pane, Image image) {
-        if (selectedOrder == null) return;
-
-        try {
-            String base64Image = ImageHandler.saveImageToDatabase(image);
-            int index = GridPane.getColumnIndex(pane) +
-                    GridPane.getRowIndex(pane) * MAX_COLUMNS;
-
-            selectedOrder.updateImages(index, base64Image);
-
         ImageView imageView = new ImageView(image);
         imageView.setPreserveRatio(true);
         imageView.setSmooth(true);
@@ -284,12 +252,6 @@ public class OperatorController {
 
         pane.getChildren().clear();
         pane.getChildren().add(imageContainer);
-
-        OrderDB orderDB = new OrderDB();
-        orderDB.updateOrder(selectedOrder);
-        } catch (IOException e) {
-        showAlert("Save Error", "Failed to save Image: " + e.getMessage());
-        }
     }
 
     private Label createPlusLabel() {
@@ -303,10 +265,11 @@ public class OperatorController {
 
     public void saveOrder(Order order) {
         OrderService orderService = new OrderService();
-        order.setStatus("Pending");
+        order.setStatus("New");
         order.setNotes(notesArea.getText());
         cameraCapture.saveCapturedImage();
         orderService.updateOrder(order);
+        cameraCapture.saveCapturedImage();
     }
 
     private void showAlert(String title, String message) {
@@ -314,10 +277,6 @@ public class OperatorController {
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
-
-        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-        stage.getIcons().add(new Image("/Img/Error_icon.png")); // Use the correct path to your icon
-
         alert.showAndWait();
     }
 

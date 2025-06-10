@@ -66,8 +66,6 @@ public class OrderCardController {
         productImage.setImage(new Image(getClass().getResource("/Img/BELMAN_Logo.png").toExternalForm()));
 
         String status = order.getStatus();
-        System.out.println("Setting status for order " + order.getId() + ": " + status); // Debug log
-
         if (status == null || status.isEmpty() || status.equalsIgnoreCase("new")) {
             // Create a "NEW" label
             Label newLabel = new Label("NEW");
