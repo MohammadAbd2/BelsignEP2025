@@ -18,8 +18,10 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class OperatorController {
@@ -90,33 +92,54 @@ public class OperatorController {
     private void loadOrderData(Order order) {
         orderNumberField.setText(order.getOrder_number());
         notesArea.setText(order.getNotes());
-
         imageGrid.getChildren().clear();
 
-        String imagesStr = String.valueOf(order.getImages());
-        List<String> images = (imagesStr == null || imagesStr.trim().isEmpty())
-                ? List.of()
-                : Arrays.asList(imagesStr.split(";"));
+        List<?> outerList = order.getImages(); // images as nested or flat list
+        List<String> imagePaths = new ArrayList<>();
 
-        for (int i = 0; i < MAX_SLOTS; i++) {
-            StackPane pane;
-            if (i < images.size()) {
-                String path = images.get(i).trim();
-                File file = new File(path);
-                if (file.exists()) {
-                    Image image = new Image(file.toURI().toString());
-                    pane = createResponsiveImagePane(image);
-                } else {
-                    pane = createPlusPane();
+        // Flatten the list safely
+        if (outerList != null) {
+            for (Object item : outerList) {
+                if (item instanceof List<?>) {
+                    for (Object subItem : (List<?>) item) {
+                        if (subItem != null) {
+                            imagePaths.add(subItem.toString().trim());
+                        }
+                    }
+                } else if (item != null) {
+                    imagePaths.add(item.toString().trim());
                 }
-            } else {
-                pane = createPlusPane();
             }
+        }
+
+        int imageCount = 0;
+
+        // Load existing images
+        for (String path : imagePaths) {
+            if (imageCount >= MAX_SLOTS) break;
+
+            File file = new File(path);
+            if (file.exists()) {
+                Image image = new Image(file.toURI().toString());
+                int col = imageCount % MAX_COLUMNS;
+                int row = imageCount / MAX_COLUMNS;
+                imageGrid.add(createResponsiveImagePane(image), col, row);
+                imageCount++;
+            } else {
+                System.out.println("File not found: " + path);
+            }
+        }
+
+        // Fill remaining slots with plus panes
+        for (int i = imageCount; i < MAX_SLOTS; i++) {
             int col = i % MAX_COLUMNS;
             int row = i / MAX_COLUMNS;
-            imageGrid.add(pane, col, row);
+            imageGrid.add(createPlusPane(), col, row);
         }
     }
+
+
+
 
     private StackPane createPlusPane() {
         StackPane plusPane = new StackPane();
