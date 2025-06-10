@@ -300,9 +300,10 @@ public class OrdersController {
                     orderCard.setOnMouseClicked(e -> {
                         switch (LoggedInUser.getLoggedInRole()){
                             case "Operator": {
+                                OperatorController operatorController = new OperatorController();
                                 try {
                                     System.out.println("Operator Clicked on order card");
-                                    OperatorController.setSelectedOrder(order);
+                                    operatorController.setSelectedOrder(order);
                                     SceneManager.loadScene("navbar", "/View/Navbar.fxml");
                                     SceneManager.loadScene("operatorPage", "/View/Operator.fxml");
                                     SceneManager.loadScene("QA", "/View/QA.fxml");

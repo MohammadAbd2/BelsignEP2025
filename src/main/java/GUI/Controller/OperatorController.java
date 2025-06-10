@@ -265,11 +265,10 @@ public class OperatorController {
 
     public void saveOrder(Order order) {
         OrderService orderService = new OrderService();
-        order.setStatus("New");
+        order.setStatus("Pending");
         order.setNotes(notesArea.getText());
         cameraCapture.saveCapturedImage();
         orderService.updateOrder(order);
-        cameraCapture.saveCapturedImage();
     }
 
     private void showAlert(String title, String message) {

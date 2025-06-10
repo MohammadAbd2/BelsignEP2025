@@ -1,3 +1,4 @@
+// CameraCapture.java
 package GUI.Model;
 
 import javafx.application.Platform;
