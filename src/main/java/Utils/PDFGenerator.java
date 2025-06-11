@@ -3,15 +3,15 @@ package Utils;
 import BE.QCReport;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.kernel.pdf.canvas.draw.SolidLine;
 import com.itextpdf.layout.Document;
-import com.itextpdf.layout.element.Cell;
-import com.itextpdf.layout.element.Image;
-import com.itextpdf.layout.element.Paragraph;
-import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.borders.Border;
+import com.itextpdf.layout.element.*;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.layout.properties.TextAlignment;
 import com.itextpdf.layout.properties.UnitValue;
+import com.itextpdf.layout.properties.VerticalAlignment;
 
 import java.io.IOException;
 import java.net.URL;
@@ -21,6 +21,7 @@ import java.time.format.DateTimeFormatter;
 public class PDFGenerator {
     
     public void generateQCReport(QCReport report, String outputPath) throws IOException {
+
         // Initialize PDF writer and document
         PdfWriter writer = new PdfWriter(outputPath);
         PdfDocument pdf = new PdfDocument(writer);
@@ -46,22 +47,38 @@ public class PDFGenerator {
             document.close();
         }
     }
-    
+
     private void addHeader(Document document, QCReport report) {
-        Paragraph header = new Paragraph("Quality Control Report")
-                .setFontSize(24)
-                .setTextAlignment(TextAlignment.CENTER)
-                .setBold();
-        document.add(header);
-        
+        Table headerTable = new Table(new float[]{1, 2, 1});
+        headerTable.setWidth(UnitValue.createPercentValue(100));
+
         try {
             Image logo = new Image(ImageDataFactory.create(
-                getClass().getClassLoader().getResource("View/Img/BELMAN_Logo.png")));
+                    getClass().getClassLoader().getResource("View/Img/BELMAN_Logo.png")));
             logo.setWidth(75);
-            document.add(logo);
+            logo.setAutoScale(true);
+            Cell logoCell = new Cell().add(logo).setBorder(Border.NO_BORDER);
+            headerTable.addCell(logoCell);
         } catch (Exception e) {
-            // Handle logo loading error silently
+            headerTable.addCell(new Cell().add(new Paragraph("")).setBorder(Border.NO_BORDER));
         }
+
+        Paragraph title = new Paragraph("Order " + report.getOrderNumber() + " Report")
+                .setFontSize(20)
+                .setTextAlignment(TextAlignment.CENTER)
+                .setBold();
+        headerTable.addCell(new Cell().add(title).setVerticalAlignment(VerticalAlignment.MIDDLE).setBorder(Border.NO_BORDER));
+
+        Table rightInfo = new Table(2).setFontSize(10);
+        rightInfo.addCell("Date Sent:").addCell(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+        rightInfo.addCell("Quality Assurance:").addCell(report.getQaName());
+
+        Cell infoCell = new Cell().add(rightInfo).setBorder(Border.NO_BORDER);
+        headerTable.addCell(infoCell);
+
+        document.add(headerTable);
+        LineSeparator ls = new LineSeparator(new SolidLine());
+        document.add(ls);
     }
     
     private void addOrderInformation(Document document, QCReport report) {
@@ -76,36 +93,43 @@ public class PDFGenerator {
         document.add(table);
         document.add(new Paragraph("\n"));
     }
-    
+
     private void addImages(Document document, QCReport report) throws IOException {
-        // Create a 3x2 table for images
+        document.add(new Paragraph("Images").setBold().setFontSize(14).setMarginBottom(10));
+
         Table imageTable = new Table(2).useAllAvailableWidth();
-        
-        // Add images if they exist
-        addImageToTable(imageTable, report.getFrontImage(), "Front View");
-        addImageToTable(imageTable, report.getBackImage(), "Back View");
-        addImageToTable(imageTable, report.getLeftImage(), "Left View");
-        addImageToTable(imageTable, report.getRightImage(), "Right View");
-        addImageToTable(imageTable, report.getTopImage(), "Top View");
-        
+
+        addImageToTable(imageTable, report.getFrontImage(), "Front");
+        addImageToTable(imageTable, report.getBackImage(), "Back");
+        addImageToTable(imageTable, report.getLeftImage(), "Left");
+        addImageToTable(imageTable, report.getRightImage(), "Right");
+
+        // Full-width for top image (span across two columns)
+        Cell topImageCell = new Cell(1, 2);
+        if (report.getTopImage() != null && !report.getTopImage().isEmpty()) {
+            Image img = new Image(ImageDataFactory.create(
+                    getClass().getClassLoader().getResource(report.getTopImage())))
+                    .setAutoScale(true)
+                    .setWidth(UnitValue.createPercentValue(60));
+            topImageCell.add(img).add(new Paragraph("Top").setTextAlignment(TextAlignment.CENTER));
+        } else {
+            topImageCell.add(new Paragraph("No Top image"));
+        }
+        imageTable.addCell(topImageCell);
+
         document.add(imageTable);
-        document.add(new Paragraph("\n"));
     }
     
     private void addImageToTable(Table table, String imagePath, String caption) throws IOException {
         if (imagePath != null && !imagePath.isEmpty()) {
             try {
-                ClassLoader classLoader = getClass().getClassLoader();
-                URL imageUrl = classLoader.getResource(imagePath);
-                if (imageUrl != null) {
-                    Image img = new Image(ImageDataFactory.create(imageUrl));
-                    img.setAutoScale(true);
-                    img.setWidth(UnitValue.createPercentValue(90));
-                    
-                    Cell cell = new Cell().add(img)
-                            .add(new Paragraph(caption).setTextAlignment(TextAlignment.CENTER));
-                    table.addCell(cell);
-                }
+                Image img = new Image(ImageDataFactory.create(imagePath));
+                img.setAutoScale(true);
+                img.setWidth(UnitValue.createPercentValue(90));
+
+                Cell cell = new Cell().add(img)
+                        .add(new Paragraph(caption).setTextAlignment(TextAlignment.CENTER));
+                table.addCell(cell);
             } catch (Exception e) {
                 Cell cell = new Cell().add(new Paragraph("Image not available"));
                 table.addCell(cell);
@@ -115,10 +139,16 @@ public class PDFGenerator {
             table.addCell(cell);
         }
     }
-    
+
     private void addNotes(Document document, QCReport report) {
-        document.add(new Paragraph("Notes:").setBold());
-        document.add(new Paragraph(report.getNotes() != null ? report.getNotes() : "No notes provided"));
+        document.add(new Paragraph("Notes:")
+                .setBold()
+                .setFontSize(12)
+                .setMarginTop(20));
+        document.add(new Paragraph(report.getNotes() != null && !report.getNotes().isEmpty()
+                ? report.getNotes()
+                : "No notes provided")
+                .setTextAlignment(TextAlignment.LEFT));
     }
     
     private void addFooter(Document document, QCReport report) {
