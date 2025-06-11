@@ -303,7 +303,7 @@ public class OrdersController {
                                 OperatorController operatorController = new OperatorController();
                                 try {
                                     System.out.println("Operator Clicked on order card");
-                                    operatorController.setSelectedOrder(order);
+                                    OperatorController.setSelectedOrder(order);
                                     SceneManager.loadScene("navbar", "/View/Navbar.fxml");
                                     SceneManager.loadScene("operatorPage", "/View/Operator.fxml");
                                     SceneManager.loadScene("QA", "/View/QA.fxml");
