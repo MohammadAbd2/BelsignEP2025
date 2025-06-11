@@ -253,11 +253,58 @@ public class OperatorController {
 
     public void saveOrder(Order order) {
         OrderService orderService = new OrderService();
+
+        // Collect current image paths from imageGrid
+        List<String> currentImagePaths = new ArrayList<>();
+
+        for (Node node : imageGrid.getChildren()) {
+            if (node instanceof StackPane) {
+                StackPane pane = (StackPane) node;
+                for (Node child : pane.getChildren()) {
+                    if (child instanceof ImageView) {
+                        ImageView imageView = (ImageView) child;
+                        Image img = imageView.getImage();
+
+                        if (img != null && img.getUrl() != null
+                                && !img.getUrl().startsWith("file:/+")
+                                && !img.getUrl().contains("trash.png")) {
+
+                            // Extract file path from URL
+                            String url = img.getUrl();
+                            // URL format is like file:/C:/path/to/image.jpg
+                            // Remove "file:/" prefix to get system path
+                            if (url.startsWith("file:/")) {
+                                String path = url.substring(6); // Adjust if needed per OS
+                                currentImagePaths.add(path);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Update order images list
+        if (currentImagePaths.isEmpty()) {
+            List<String> emptyImagePaths = new ArrayList<>();
+            order.setImages(emptyImagePaths); // or new ArrayList<>() depending on Order class design
+        } else {
+            order.setImages(currentImagePaths);
+        }
+
+        // Set order status to Pending
         order.setStatus("Pending");
+
+        // Set order notes from the input text area
         order.setNotes(notesArea.getText());
+
+        // Save any captured image from the camera
         cameraCapture.saveCapturedImage();
+
+        // Update the order in the database or backend service
         orderService.updateOrder(order);
     }
+
+
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);

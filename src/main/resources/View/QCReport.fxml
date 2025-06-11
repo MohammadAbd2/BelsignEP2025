@@ -72,6 +72,10 @@
             </right>
         </BorderPane>
         <Separator prefWidth="200.0" />
+        <!-- Notes area in the last cell -->
+        <Label style="-fx-font-weight: bold" text="Notes:" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <Label fx:id="notesLabel" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
         <VBox spacing="20.0" VBox.vgrow="SOMETIMES">
             <GridPane hgap="20.0" vgap="20.0">
                 <!-- Front & Back labels -->
@@ -126,9 +130,6 @@
                     <Image url="@../Img/example/exampleTop.png" />
                 </ImageView>
 
-                <!-- Notes area in the last cell -->
-                <Label style="-fx-font-weight: bold" text="Notes:" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <Label fx:id="notesLabel" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
 
                 <columnConstraints>
                     <ColumnConstraints percentWidth="50.0" />
