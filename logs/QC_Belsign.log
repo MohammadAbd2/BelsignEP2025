@@ -1840,3 +1840,63 @@ Jun 10, 2025 1:19:55 P.M. BLL.LoggerBLL.loggerManager logInfo
 INFO: Order updated: ID = 43, by user: Utils.LoggedInUser@1b176848
 Jun 10, 2025 1:36:00 P.M. BLL.LoggerBLL.loggerManager logInfo
 INFO: Order updated: ID = 43, by user: Utils.LoggedInUser@5a61cbf6
+Jun 11, 2025 10:40:36 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: Load Order By ID: 42, by user: Utils.LoggedInUser@735378e9
+Jun 11, 2025 10:40:38 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: Load Order By ID: 43, by user: Utils.LoggedInUser@735378e9
+Jun 11, 2025 10:40:40 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: Load Order By ID: 34, by user: Utils.LoggedInUser@735378e9
+Jun 11, 2025 10:40:43 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: Load Order By ID: 32, by user: Utils.LoggedInUser@735378e9
+Jun 11, 2025 10:52:58 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: Load Order By ID: 34, by user: Utils.LoggedInUser@6fef8a0d
+Jun 11, 2025 10:54:32 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: Load Order By ID: 42, by user: Utils.LoggedInUser@60a19839
+Jun 11, 2025 10:55:57 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: Load Order By ID: 42, by user: Utils.LoggedInUser@7b12df6d
+Jun 11, 2025 10:56:18 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: Load Order By ID: 2, by user: Utils.LoggedInUser@7b12df6d
+Jun 11, 2025 10:57:13 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: Order updated: ID = 2, by user: Utils.LoggedInUser@7b12df6d
+Jun 11, 2025 10:57:13 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: Order updated: ID = 2, by user: Utils.LoggedInUser@7b12df6d
+Jun 11, 2025 10:57:13 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: Order updated: ID = 2, by user: Utils.LoggedInUser@7b12df6d
+Jun 11, 2025 10:57:14 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: Order updated: ID = 2, by user: Utils.LoggedInUser@7b12df6d
+Jun 11, 2025 10:57:14 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: Order updated: ID = 2, by user: Utils.LoggedInUser@7b12df6d
+Jun 11, 2025 10:57:14 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: Order updated: ID = 2, by user: Utils.LoggedInUser@7b12df6d
+Jun 11, 2025 10:57:14 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: Order updated: ID = 2, by user: Utils.LoggedInUser@7b12df6d
+Jun 11, 2025 10:57:14 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: Order updated: ID = 2, by user: Utils.LoggedInUser@7b12df6d
+Jun 11, 2025 10:57:15 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: Order updated: ID = 2, by user: Utils.LoggedInUser@7b12df6d
+Jun 11, 2025 10:57:15 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: Order updated: ID = 2, by user: Utils.LoggedInUser@7b12df6d
+Jun 11, 2025 10:57:15 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: Order updated: ID = 2, by user: Utils.LoggedInUser@7b12df6d
+Jun 11, 2025 10:57:15 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: Order updated: ID = 2, by user: Utils.LoggedInUser@7b12df6d
+Jun 11, 2025 10:57:15 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: Order updated: ID = 2, by user: Utils.LoggedInUser@7b12df6d
+Jun 11, 2025 10:57:15 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: Order updated: ID = 2, by user: Utils.LoggedInUser@7b12df6d
+Jun 11, 2025 10:57:16 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: Order updated: ID = 2, by user: Utils.LoggedInUser@7b12df6d
+Jun 11, 2025 10:57:33 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: Load Order By ID: 2, by user: Utils.LoggedInUser@7b12df6d
+Jun 11, 2025 11:11:13 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: Load Order By ID: 35, by user: Utils.LoggedInUser@221ff08
+Jun 11, 2025 11:11:13 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: Order updated: ID = 35, by user: Utils.LoggedInUser@221ff08
+Jun 11, 2025 11:11:29 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: Load Order By ID: 42, by user: Utils.LoggedInUser@221ff08
+Jun 11, 2025 11:11:29 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: Order updated: ID = 42, by user: Utils.LoggedInUser@221ff08
+Jun 11, 2025 11:11:32 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: Load Order By ID: 43, by user: Utils.LoggedInUser@221ff08
+Jun 11, 2025 11:11:32 A.M. BLL.LoggerBLL.loggerManager logInfo
+INFO: Order updated: ID = 43, by user: Utils.LoggedInUser@221ff08

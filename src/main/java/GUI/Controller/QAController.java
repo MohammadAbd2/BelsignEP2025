@@ -2,8 +2,8 @@ package GUI.Controller;
 
 import BE.Order;
 import BE.QCReport;
+import BLL.OrderService;
 import Utils.PDFGenerator;
-import DAL.OrderDB;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,11 +17,10 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Base64;
+import java.util.Arrays;
 import java.util.List;
 
 public class QAController {
@@ -34,7 +33,7 @@ public class QAController {
     @FXML private ImageView rightImage;
     @FXML private ImageView leftImage;
     @FXML private ImageView topImage;
-    
+
     @FXML private Button previewButton;
     @FXML private Button downloadButton;
     @FXML private Button approveButton;
@@ -43,52 +42,39 @@ public class QAController {
 
     private static Order selectedOrder;
     private static String qaName;
-    private OrderDB orderDB;
+    private OrderService orderService;
 
     @FXML
     public void initialize() {
-        orderDB = new OrderDB();
-        
+        orderService = new OrderService();
+
         if (selectedOrder != null) {
             updateView();
         }
-        
+
         setupButtonHandlers();
         setupTextListeners();
     }
 
     private void setupButtonHandlers() {
         previewButton.setOnAction(event -> {
-            qaName = qaNameField.getText().trim(); // Store the QA name before opening preview
+            qaName = qaNameField.getText().trim();
             openQCReport();
         });
-        
-        if (downloadButton != null) {
-            downloadButton.setOnAction(event -> handleDownload());
-        }
-        
-        if (approveButton != null) {
-            approveButton.setOnAction(event -> handleApprove());
-        }
-        
-        if (rejectButton != null) {
-            rejectButton.setOnAction(event -> handleReject());
-        }
-        
-        if (sendButton != null) {
-            sendButton.setOnAction(event -> handleSend());
-        }
+
+        downloadButton.setOnAction(event -> handleDownload());
+        approveButton.setOnAction(event -> handleApprove());
+        rejectButton.setOnAction(event -> handleReject());
+        sendButton.setOnAction(event -> handleSend());
     }
 
     private void setupTextListeners() {
-        if (notesArea != null) {
-            notesArea.textProperty().addListener((observable, oldValue, newValue) -> {
-                if (selectedOrder != null) {
-                    selectedOrder.setNotes(newValue);
-                    orderDB.updateOrder(selectedOrder);
-                }
-            });
-        }
+        notesArea.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (selectedOrder != null) {
+                selectedOrder.setNotes(newValue);
+                orderService.updateOrder(selectedOrder);
+            }
+        });
     }
 
     private void openQCReport() {
@@ -109,69 +95,47 @@ public class QAController {
     private void updateView() {
         if (selectedOrder == null) return;
 
-        System.out.println("Updating view with order: " + selectedOrder.getOrder_number());
-        
-        if (orderNumberField != null) {
-            orderNumberField.setText(selectedOrder.getOrder_number());
-        }
-        
-        if (orderStatusField != null) {
-            orderStatusField.setText(selectedOrder.getStatus());
-        }
-        
-        if (notesArea != null) {
-            notesArea.setText(selectedOrder.getNotes());
-        }
-        
-        updateImages(selectedOrder.getImages());
+        orderNumberField.setText(selectedOrder.getOrder_number());
+        orderStatusField.setText(selectedOrder.getStatus());
+        notesArea.setText(selectedOrder.getNotes());
 
-        // Update button states based on order status
-        boolean isFinalized = "Approved".equalsIgnoreCase(selectedOrder.getStatus()) 
-                         || "Rejected".equalsIgnoreCase(selectedOrder.getStatus());
-        if (approveButton != null) approveButton.setDisable(isFinalized);
-        if (rejectButton != null) rejectButton.setDisable(isFinalized);
+        List<String> imagePaths = selectedOrder.getImages();
+        updateImages(imagePaths);
+
+        boolean isFinalized = "Approved".equalsIgnoreCase(selectedOrder.getStatus())
+                || "Rejected".equalsIgnoreCase(selectedOrder.getStatus());
+        approveButton.setDisable(isFinalized);
+        rejectButton.setDisable(isFinalized);
     }
 
-    private void updateImages(List<String> images) {
-        if (images == null || images.isEmpty()) {
-            loadDefaultImages();
-            return;
-        }
-
+    private void updateImages(List<String> paths) {
         try {
-            // Set each image if available in the list
-            if (images.size() > 0 && !images.get(0).isEmpty()) setImageFromBase64(frontImage, images.get(0));
-            if (images.size() > 1 && !images.get(1).isEmpty()) setImageFromBase64(backImage, images.get(1));
-            if (images.size() > 2 && !images.get(2).isEmpty()) setImageFromBase64(rightImage, images.get(2));
-            if (images.size() > 3 && !images.get(3).isEmpty()) setImageFromBase64(leftImage, images.get(3));
-            if (images.size() > 4 && !images.get(4).isEmpty()) setImageFromBase64(topImage, images.get(4));
+            setImageFromPath(frontImage, getPath(paths, 0));
+            setImageFromPath(backImage, getPath(paths, 1));
+            setImageFromPath(rightImage, getPath(paths, 2));
+            setImageFromPath(leftImage, getPath(paths, 3));
+            setImageFromPath(topImage, getPath(paths, 4));
         } catch (Exception e) {
             System.err.println("Error loading images: " + e.getMessage());
-            loadDefaultImages();
         }
     }
 
-    private void setImageFromBase64(ImageView imageView, String base64String) {
+    private String getPath(List<String> paths, int index) {
+        return (paths.size() > index) ? paths.get(index) : null;
+    }
+
+    private void setImageFromPath(ImageView imageView, String path) {
         try {
-            if (base64String != null && !base64String.isEmpty()) {
-                byte[] imageData = Base64.getDecoder().decode(base64String);
-                Image image = new Image(new ByteArrayInputStream(imageData));
+            if (path != null && !path.isEmpty()) {
+                Image image = new Image("file:" + path);
                 imageView.setImage(image);
             } else {
                 loadDefaultImage(imageView);
             }
-        } catch (IllegalArgumentException e) {
-            System.err.println("Error decoding Base64 image: " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("Error loading image from path: " + e.getMessage());
             loadDefaultImage(imageView);
         }
-    }
-
-    private void loadDefaultImages() {
-        loadDefaultImage(frontImage);
-        loadDefaultImage(backImage);
-        loadDefaultImage(rightImage);
-        loadDefaultImage(leftImage);
-        loadDefaultImage(topImage);
     }
 
     private void loadDefaultImage(ImageView imageView) {
@@ -188,8 +152,6 @@ public class QAController {
         }
     }
 
-
-    @FXML
     private void handleDownload() {
         if (selectedOrder == null || qaNameField.getText().trim().isEmpty()) {
             showError("Error", "Please ensure order is selected and QA name is filled in");
@@ -213,7 +175,6 @@ public class QAController {
         }
     }
 
-
     private void generateAndSaveQCReport(File outputFile) throws IOException {
         if (selectedOrder == null) {
             throw new IllegalArgumentException("No order is selected");
@@ -221,36 +182,28 @@ public class QAController {
 
         List<String> images = selectedOrder.getImages();
 
-        // Create QCReport with all required parameters
         QCReport report = new QCReport(
                 selectedOrder.getId(),
                 selectedOrder.getOrder_number(),
                 qaNameField.getText().trim(),
                 selectedOrder.getStatus(),
-                "", // email field - if you have it in the UI, get it from there
-                images != null && images.size() > 0 ? images.get(0) : "", // front
-                images != null && images.size() > 1 ? images.get(1) : "", // back
-                images != null && images.size() > 2 ? images.get(2) : "", // left
-                images != null && images.size() > 3 ? images.get(3) : "", // right
-                images != null && images.size() > 4 ? images.get(4) : "", // top
+                "", // email placeholder
+                getPath(images, 0),
+                getPath(images, 1),
+                getPath(images, 2),
+                getPath(images, 3),
+                getPath(images, 4),
                 notesArea.getText()
         );
 
-        try {
-            PDFGenerator pdfGenerator = new PDFGenerator();
-            pdfGenerator.generateQCReport(report, outputFile.getAbsolutePath());
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new IOException("Failed to generate PDF: " + e.getMessage());
-        }
+        PDFGenerator pdfGenerator = new PDFGenerator();
+        pdfGenerator.generateQCReport(report, outputFile.getAbsolutePath());
     }
-
-
 
     private void handleApprove() {
         if (selectedOrder != null) {
             selectedOrder.setStatus("Approved");
-            orderDB.updateOrder(selectedOrder);
+            orderService.updateOrder(selectedOrder);
             orderStatusField.setText("Approved");
             updateView();
             showInfo("Status Updated", "Order has been approved");
@@ -260,7 +213,7 @@ public class QAController {
     private void handleReject() {
         if (selectedOrder != null) {
             selectedOrder.setStatus("Rejected");
-            orderDB.updateOrder(selectedOrder);
+            orderService.updateOrder(selectedOrder);
             orderStatusField.setText("Rejected");
             updateView();
             showInfo("Status Updated", "Order has been rejected");
@@ -268,7 +221,6 @@ public class QAController {
     }
 
     private void handleSend() {
-        // TODO: Implement sending functionality
         showInfo("Order Sent", "Order has been sent successfully");
     }
 
@@ -286,7 +238,6 @@ public class QAController {
         alert.showAndWait();
     }
 
-    // Move the getters to the bottom
     public static Order getSelectedOrder() {
         return selectedOrder;
     }

@@ -16,6 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.layout.StackPane?>
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="body" stylesheets="@../Css/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller.QAController">
    <center>
       <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="5.0">
@@ -25,37 +26,47 @@
             </padding>
             <VBox alignment="CENTER" spacing="5.0">
                <Label text="Front" />
-               <ImageView fx:id="frontImage" fitHeight="200.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
-                  <Image url="@../Img/example/exampleFront.png" />
-               </ImageView>
+               <StackPane>
+                  <ImageView fx:id="frontImage" fitHeight="200.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
+                     <Image url="@../Img/example/exampleFront.png" />
+                  </ImageView>
+               </StackPane>
             </VBox>
             <Separator orientation="VERTICAL" prefHeight="200.0" />
             <VBox alignment="CENTER" spacing="5.0">
                <Label text="Back" />
+               <StackPane>
                <ImageView fx:id="backImage" fitHeight="200.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
                   <Image url="@../Img/example/exampleBack.png" />
                </ImageView>
+               </StackPane>
             </VBox>
             <Separator orientation="VERTICAL" prefHeight="200.0" />
             <VBox alignment="CENTER" spacing="5.0">
                <Label text="Right" />
+               <StackPane>
                <ImageView fx:id="rightImage" fitHeight="200.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
                   <Image url="@../Img/example/exampleRight.png" />
                </ImageView>
+               </StackPane>
             </VBox>
             <Separator orientation="VERTICAL" prefHeight="200.0" />
             <VBox alignment="CENTER" spacing="5.0">
                <Label text="Left" />
+               <StackPane>
                <ImageView fx:id="leftImage" fitHeight="200.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
                   <Image url="@../Img/example/exampleLeft.png" />
                </ImageView>
+               </StackPane>
             </VBox>
             <Separator orientation="VERTICAL" prefHeight="200.0" />
             <VBox alignment="CENTER" spacing="5.0">
                <Label text="Top" />
+               <StackPane>
                <ImageView fx:id="topImage" fitHeight="200.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
                   <Image url="@../Img/example/exampleTop.png" />
                </ImageView>
+               </StackPane>
             </VBox>
          </HBox>
          <Separator />
@@ -165,7 +176,7 @@
             </VBox>
             <Separator orientation="VERTICAL" />
             <VBox alignment="CENTER" spacing="15.0" HBox.hgrow="ALWAYS">
-               <Button mnemonicParsing="false" prefWidth="125.0" styleClass="inline-button" text="Send">
+               <Button fx:id="sendButton" mnemonicParsing="false" prefWidth="125.0" styleClass="inline-button" text="Send">
                   <graphic>
                      <ImageView fitHeight="11.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
                         <Image url="@../Img/send.png" />
