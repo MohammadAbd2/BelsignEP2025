@@ -123,7 +123,6 @@ public class OrderCardController {
                 loadDefaultLogo();
             }
         } catch (IllegalArgumentException e) {
-            System.err.println("Error decoding Base64 image: " + e.getMessage());
             loadDefaultLogo();
         }
     }

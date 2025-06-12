@@ -4,6 +4,7 @@ import BE.Order;
 import BE.QCReport;
 import BLL.OrderService;
 import Utils.PDFGenerator;
+import com.itextpdf.kernel.pdf.canvas.parser.util.InlineImageParsingUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -128,32 +129,13 @@ public class QAController {
     }
 
     private void setImageFromPath(ImageView imageView, String path) {
-        try {
             if (path != null && !path.isEmpty()) {
                 Image image = new Image("file:" + path);
                 imageView.setImage(image);
-            } else {
-                loadDefaultImage(imageView);
             }
-        } catch (Exception e) {
-            System.err.println("Error loading image from path: " + e.getMessage());
-            loadDefaultImage(imageView);
-        }
     }
 
-    private void loadDefaultImage(ImageView imageView) {
-        try {
-            String defaultImagePath = "/View/Img/example/example" +
-                    imageView.getId().substring(0, 1).toUpperCase() +
-                    imageView.getId().substring(1) + ".png";
-            URL imageUrl = getClass().getResource(defaultImagePath);
-            if (imageUrl != null) {
-                imageView.setImage(new Image(imageUrl.toString()));
-            }
-        } catch (Exception e) {
-            System.err.println("Error loading default image: " + e.getMessage());
-        }
-    }
+
 
     private void handleDownload() {
         if (selectedOrder == null || qaNameField.getText().trim().isEmpty()) {

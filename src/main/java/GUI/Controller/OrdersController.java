@@ -100,19 +100,16 @@ public class OrdersController {
             // Show only 'New' and 'Rejected'
             ordersApproved.setVisible(false);
             ordersPending.setVisible(false);
-            System.out.println(LoggedInUser.getLoggedInRole());
         } else if ("QA".equalsIgnoreCase(LoggedInUser.getLoggedInRole())) {
             // Show only 'Pending' and 'Approved'
             ordersNew.setVisible(false);
             ordersRejected.setVisible(false);
-            System.out.println(LoggedInUser.getLoggedInRole());
         } else if ("Admin".equalsIgnoreCase(LoggedInUser.getLoggedInRole())) {
             // Admin Role showing all the filter
             ordersNew.setVisible(true);
             ordersApproved.setVisible(true);
             ordersPending.setVisible(true);
             ordersRejected.setVisible(true);
-            System.out.println(LoggedInUser.getLoggedInRole());
         }
         // Update status labels with actual counts
         updateStatusLabels();
@@ -255,9 +252,6 @@ public class OrdersController {
             for (Order order : orders) {
                 System.out.println("Order " + order.getId() + " has " +
                         (order.getImages() == null ? "null" : order.getImages().size()) + " images");
-                if (order.getImages() != null && !order.getImages().isEmpty()) {
-                    System.out.println("First image: " + order.getImages().get(0).substring(0, Math.min(50, order.getImages().get(0).length())) + "...");
-                }
             }
         }
 
