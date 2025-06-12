@@ -47,7 +47,7 @@ public class OrderCardController {
             if (order.getImages() != null && !order.getImages().isEmpty()) {
                 setOrderImage(order.getImages().get(0));
             } else {
-                // Load default logo if no images
+                // Load default logo if there is no images
                 loadDefaultLogo();
             }
         }
@@ -67,7 +67,7 @@ public class OrderCardController {
 
         String status = order.getStatus();
         if (status == null || status.isEmpty() || status.equalsIgnoreCase("new")) {
-            // Create a "NEW" label
+            // Creating the "NEW" label
             Label newLabel = new Label("NEW");
             newLabel.setStyle(
                     "-fx-background-color: linear-gradient(from 70% 70% to 100% 100%, #0095FF 0%, #0077CC 100%); " + // Green background

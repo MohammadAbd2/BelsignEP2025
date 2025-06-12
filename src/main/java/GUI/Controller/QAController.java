@@ -3,10 +3,14 @@ package GUI.Controller;
 import BE.Order;
 import BE.QCReport;
 import BLL.OrderService;
+import GUI.View.SceneManager;
 import Utils.PDFGenerator;
 import com.itextpdf.kernel.pdf.canvas.parser.util.InlineImageParsingUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -15,7 +19,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -80,21 +86,53 @@ public class QAController {
             }
         });
     }
-
     private void openQCReport() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/QCReport.fxml"));
-            Parent root = loader.load();
+        try{
+            if (selectedOrder == null) {
+                throw new IllegalArgumentException("No order is selected");
+            }
+            List<String> images = selectedOrder.getImages();
+            QCReport report = new QCReport(
+                    selectedOrder.getId(),
+                    selectedOrder.getOrder_number(),
+                    qaNameField.getText().trim(),
+                    selectedOrder.getStatus(),
+                    qaEmailField.getText().trim(),
+                    getPath(images, 0),
+                    getPath(images, 1),
+                    getPath(images, 2),
+                    getPath(images, 3),
+                    getPath(images, 4),
+                    notesArea.getText()
+            );
 
-            Stage stage = new Stage();
-            stage.setTitle("QC Report Preview - Order " + selectedOrder.getOrder_number());
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-            showError("Error", "Could not open QC Report: " + e.getMessage());
+            PDFGenerator pdfGenerator = new PDFGenerator();
+            pdfGenerator.setReport(report);
+
+
+            Node reportView = pdfGenerator.getReportView();
+
+            Stage reportStage = new Stage();
+            reportStage.setTitle("QC Report Preview");
+
+            double width = 595;
+            double height = 842;
+
+            StackPane root = new StackPane(reportView);
+            root.setAlignment(Pos.CENTER);
+            root.setPadding(new Insets(10));
+
+            Scene scene = new Scene(root, width, height);
+            reportStage.setScene(scene);
+            reportStage.initModality(Modality.APPLICATION_MODAL);
+            reportStage.show();
+        }catch (Exception e){
+            System.out.println("Error in Preview QC Report : " + e.getMessage());
         }
+
     }
+
+
 
     private void updateView() {
         if (selectedOrder == null) return;
