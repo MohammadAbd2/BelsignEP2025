@@ -27,10 +27,10 @@ public class App extends Application {
         double screenWidth = Screen.getPrimary().getBounds().getWidth();
         double screenHeight = Screen.getPrimary().getBounds().getHeight();
 
-        
+
         primaryStage.setTitle("QC_Belsign Application");
         IconUtil.addAppIconToStage(primaryStage);
-        primaryStage.setFullScreen(true);
+        primaryStage.setMaximized(true);
         primaryStage.show();
     }
 
