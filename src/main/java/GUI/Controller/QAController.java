@@ -116,7 +116,7 @@ public class QAController {
             reportStage.setTitle("QC Report Preview");
 
             double width = 595;
-            double height = 842;
+            double height = 600;
 
             StackPane root = new StackPane(reportView);
             root.setAlignment(Pos.CENTER);
@@ -125,6 +125,7 @@ public class QAController {
             Scene scene = new Scene(root, width, height);
             reportStage.setScene(scene);
             reportStage.initModality(Modality.APPLICATION_MODAL);
+            reportStage.setMaximized(true);
             reportStage.show();
         }catch (Exception e){
             System.out.println("Error in Preview QC Report : " + e.getMessage());

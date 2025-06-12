@@ -35,11 +35,12 @@ ALL
 }
 
 .inline-button {
-    -fx-pref-width: 100px; /* Can be adjusted based on design needs */
+    -fx-pref-width: 150px; /* Can be adjusted based on design needs */
     -fx-background-color: #434242;
 }
 .inline-button:hover{
     -fx-effect: dropshadow(gaussian, white, 10, 0, 0, 0);
+    -fx-cursor: hand;
 }
 
 /*
