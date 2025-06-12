@@ -3,15 +3,16 @@ package GUI.Controller;
 import BE.Order;
 import BE.QCReport;
 import BLL.OrderService;
-import GUI.View.SceneManager;
+import jakarta.mail.*;
+import jakarta.mail.internet.*;
+import java.io.File;
+import java.util.Properties;
+import javafx.concurrent.Task;
 import Utils.PDFGenerator;
-import com.itextpdf.kernel.pdf.canvas.parser.util.InlineImageParsingUtils;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -24,12 +25,10 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
-import java.net.URL;
+import jakarta.mail.PasswordAuthentication;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.List;
 
 public class QAController {
@@ -53,6 +52,7 @@ public class QAController {
     private static Order selectedOrder;
     private static String qaName;
     private OrderService orderService;
+    PDFGenerator pdfGenerator = new PDFGenerator();
 
     @FXML
     public void initialize() {
@@ -175,6 +175,7 @@ public class QAController {
 
 
 
+
     private void handleDownload() {
         if (selectedOrder == null || qaNameField.getText().trim().isEmpty()) {
             showError("Error", "Please ensure order is selected and QA name is filled in");
@@ -227,7 +228,6 @@ public class QAController {
                 notesArea.getText()
         );
 
-        PDFGenerator pdfGenerator = new PDFGenerator();
         pdfGenerator.generateQCReport(report, outputFile.getAbsolutePath());
     }
 
@@ -250,9 +250,91 @@ public class QAController {
             showInfo("Status Updated", "Order has been rejected");
         }
     }
+    public void sendEmail(String recipientEmail, String subject, String content, File PDFfile) {
+        final String fromEmail = "Mohammad.abd.dk@gmail.com"; // Replace with your sender email
+        final String password = "jfeq buiw bbjw rljw";          // Replace with your email app password
+
+        Task<Void> emailTask = new Task<>() {
+            @Override
+            protected Void call() {
+                try {
+                    Properties props = new Properties();
+                    props.put("mail.smtp.host", "smtp.gmail.com");
+                    props.put("mail.smtp.port", "465");
+                    props.put("mail.smtp.auth", "true");
+                    props.put("mail.smtp.ssl.enable", "true");
+                    props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+
+                    Session session = Session.getInstance(props, new Authenticator() {
+                        @Override
+                        protected jakarta.mail.PasswordAuthentication getPasswordAuthentication() {
+                            return new PasswordAuthentication(fromEmail, password);
+                        }
+                    });
+
+                    Message message = new MimeMessage(session);
+                    message.setFrom(new InternetAddress(fromEmail));
+                    message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
+                    message.setSubject(subject);
+
+                    // Create the text part of the email
+                    MimeBodyPart textPart = new MimeBodyPart();
+                    textPart.setText(content, "utf-8");
+
+                    // Create the attachment part for the PDF file
+                    MimeBodyPart attachmentPart = new MimeBodyPart();
+                    attachmentPart.attachFile(PDFfile);
+
+                    // Combine parts into a multipart message
+                    Multipart multipart = new MimeMultipart();
+                    multipart.addBodyPart(textPart);
+                    multipart.addBodyPart(attachmentPart);
+
+                    // Set the multipart content to the message
+                    message.setContent(multipart);
+
+                    // Send the email
+                    Transport.send(message);
+                    System.out.println("Email sent successfully to " + recipientEmail);
+
+                } catch (Exception e) {
+                    System.err.println("Failed to send email: " + e.getMessage());
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        };
+
+        // Start the email sending task on a new thread
+        new Thread(emailTask).start();
+    }
 
     private void handleSend() {
-        showInfo("Order Sent", "Order has been sent successfully");
+        List<String> images = selectedOrder.getImages();
+        QCReport report = new QCReport(
+                selectedOrder.getId(),
+                selectedOrder.getOrder_number(),
+                qaNameField.getText().trim(),
+                selectedOrder.getStatus(),
+                qaEmailField.getText().trim(),
+                getPath(images, 0),
+                getPath(images, 1),
+                getPath(images, 2),
+                getPath(images, 3),
+                getPath(images, 4),
+                notesArea.getText()
+        );
+
+        try{
+            sendEmail(qaEmailField.getText(), "QC Report from Bellsign for order" + orderNumberField.getText(), notesArea.getText(), pdfGenerator.getReportFile(report)  );
+            showInfo("Order Sent", "Order has been sent successfully");
+
+        }catch (Exception e) {
+            System.err.println("Failed to send email: " + e.getMessage());
+            showError("Error", "Failed to send email to: " + qaEmailField.getText());
+
+        }
+
     }
 
     private void showError(String title, String content) {

@@ -37,6 +37,7 @@ import java.util.List;
 
 public class PDFGenerator {
     private QCReport report;
+    private File pdfFile;
 
     public void setReport(QCReport report) {
         this.report = report;
@@ -218,4 +219,21 @@ public class PDFGenerator {
         // Return ScrollPane containing all page images with responsive sizing and scrolling
         return scrollPane;
     }
+    public File getReportFile(QCReport report) {
+        try {
+            // Create a temporary PDF file based on the order number
+            File tempFile = File.createTempFile("QC_Report_" + report.getOrderNumber(), ".pdf");
+            tempFile.deleteOnExit(); // Automatically delete the file when the program exits
+
+            // Generate the PDF report and write it to the temporary file
+            generateQCReport(report, tempFile.getAbsolutePath());
+
+            // Return the generated PDF file
+            return tempFile;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null; // Alternatively, throw a RuntimeException to handle it externally
+        }
+    }
+
 }
