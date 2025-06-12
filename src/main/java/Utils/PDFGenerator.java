@@ -57,8 +57,7 @@ public class PDFGenerator {
                     getClass().getClassLoader().getResource("View/Img/BELMAN_Logo.png")));
             logo.setWidth(75);
             logo.setAutoScale(true);
-            Cell logoCell = new Cell().add(logo).setBorder(Border.NO_BORDER);
-            headerTable.addCell(logoCell);
+            headerTable.addCell(new Cell().add(logo).setBorder(Border.NO_BORDER));
         } catch (Exception e) {
             headerTable.addCell(new Cell().add(new Paragraph("")).setBorder(Border.NO_BORDER));
         }
@@ -67,29 +66,25 @@ public class PDFGenerator {
                 .setFontSize(20)
                 .setTextAlignment(TextAlignment.CENTER)
                 .setBold();
-        headerTable.addCell(new Cell().add(title).setVerticalAlignment(VerticalAlignment.MIDDLE).setBorder(Border.NO_BORDER));
+        headerTable.addCell(new Cell().add(title)
+                .setVerticalAlignment(VerticalAlignment.MIDDLE)
+                .setTextAlignment(TextAlignment.CENTER)
+                .setBorder(Border.NO_BORDER));
 
-        Table rightInfo = new Table(2).setFontSize(10);
-        rightInfo.addCell("Date Sent:").addCell(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-        rightInfo.addCell("Quality Assurance:").addCell(report.getQaName());
-
-        Cell infoCell = new Cell().add(rightInfo).setBorder(Border.NO_BORDER);
-        headerTable.addCell(infoCell);
+        headerTable.addCell(new Cell().setBorder(Border.NO_BORDER)); // empty right cell
 
         document.add(headerTable);
-        LineSeparator ls = new LineSeparator(new SolidLine());
-        document.add(ls);
+        document.add(new LineSeparator(new SolidLine()));
     }
-    
+
     private void addOrderInformation(Document document, QCReport report) {
         Table table = new Table(2).useAllAvailableWidth();
-        
-        // Add order details
+
         table.addCell(createCell("Order Number:")).addCell(createCell(report.getOrderNumber()));
-        table.addCell(createCell("Contact Email:")).addCell(createCell(report.getEmail()));
         table.addCell(createCell("Date:")).addCell(createCell(
-                LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))));
-        
+                LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))));
+        table.addCell(createCell("Quality Assurance:")).addCell(createCell(report.getQaName()));
+
         document.add(table);
         document.add(new Paragraph("\n"));
     }
@@ -155,7 +150,7 @@ public class PDFGenerator {
         document.add(new Paragraph("\n"));
         Table footerTable = new Table(2).useAllAvailableWidth();
         footerTable.addCell(createCell("Generated on:"))
-                .addCell(createCell(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))));
+                .addCell(createCell(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"))));
         footerTable.addCell(createCell("Contact Email:"))
                 .addCell(createCell(report.getEmail()));
         

@@ -133,7 +133,7 @@
                   <Font size="13.0" />
                </font>
             </TextField>
-            <TextField promptText="JohnDoe123@mail.com" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <TextField fx:id="qaEmailField" promptText="JohnDoe123@mail.com" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <font>
                   <Font size="13.0" />
                </font>

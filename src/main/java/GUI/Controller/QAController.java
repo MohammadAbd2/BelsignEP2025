@@ -20,12 +20,15 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 
 public class QAController {
     @FXML private TextField orderNumberField;
     @FXML private TextField qaNameField;
+    @FXML private TextField qaEmailField;
     @FXML private TextField orderStatusField;
     @FXML private TextArea notesArea;
     @FXML private ImageView frontImage;
@@ -158,13 +161,21 @@ public class QAController {
             return;
         }
 
+        // Create dynamic file name
+        String formattedDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("ddMMyyyy_HHmm"));
+        String fileName = "QC_Report_Order_" + selectedOrder.getOrder_number() + "_" + formattedDate + ".pdf";
+
+        // Configure FileChooser with default name
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Save QC Report");
+        fileChooser.setInitialFileName(fileName);  // Set the suggested file name
         fileChooser.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf")
         );
 
+        // Show save dialog
         File file = fileChooser.showSaveDialog(downloadButton.getScene().getWindow());
+
         if (file != null) {
             try {
                 generateAndSaveQCReport(file);
@@ -187,7 +198,7 @@ public class QAController {
                 selectedOrder.getOrder_number(),
                 qaNameField.getText().trim(),
                 selectedOrder.getStatus(),
-                "", // email placeholder
+                qaEmailField.getText().trim(),
                 getPath(images, 0),
                 getPath(images, 1),
                 getPath(images, 2),
